@@ -1,3 +1,156 @@
+def get_handcrafted_level_1():
+    return """const augustaL1 = yr({
+  layoutVersion: 1,
+  name: "Salviamo il Verde di Augusta: I Giardini Pubblici",
+  short: "Villa Comunale",
+  label: "Ficus secolari, Duomo barocco e la rinascita verde",
+  biome: "citadel",
+  intro: "Benvenuto alla Villa Comunale di Augusta! Fondata nel 1850 sulla spianata di Piazza d'Armi, ospita i monumentali Ficus secolari minacciati da abbattimenti sconsiderati. Con la tua paletta e i germogli di Ficus, supera le motoseghe impazzite, disattiva le bolle di calore e raggiungi il sagrato barocco della Chiesa Madre per piantare il futuro verde di Augusta!",
+  sky: "#1c6498",
+  fog: "#3b82b0",
+  spawn: {x: 1.5, y: 13},
+  end: 245,
+  previousDistance: 1100,
+  cameraY: 2,
+  sections: [
+    {x: -8, name: "1. L'Ingresso della Villa & Il Cartello Civico", landmark: "beacon"},
+    {x: 48, name: "2. I Ficus Secolari (1850) & La Difesa dei Rami", landmark: "pulsedrum"},
+    {x: 104, name: "3. Il Belvedere Panoramico sul Golfo Xifonio", landmark: "bannerarch"},
+    {x: 165, name: "4. Il Viale delle Palme & L'Arresto delle Motoseghe", landmark: "sandwheel"},
+    {x: 215, name: "5. Il Sagrato Barocco della Chiesa Madre", landmark: "bellgate"}
+  ],
+  platforms: [
+    // Section 1: Ingresso della Villa & Cartello
+    S("start", -8, 16, 13, "stone", {landmark: "beacon"}),
+    S("plat-ficus-step1", 10, 4.0, 13.6, "stone"),
+    S("plat-ficus-step2", 16, 6.5, 14.5, "stone"),
+    S("step-roots", 24, 3.6, 15.6, "ledge"),
+    S("lift-canopy", 29, 3.5, 14.8, "lift", {moveX: 2.8, period: 4.5}),
+    S("plat-avenue", 34, 7.5, 15.2, "stone"),
+    S("pit-spikes-1", 7, 38, 2.0, "stone", {spiked: !0}),
+
+    // Section 2: Ficus Secolari & Chiome
+    S("opt-sprout1", 42, 3.5, 18.0, "ledge", {optional: !0}),
+    S("spring-branch1", 43, 2.0, 15.2, "spring"),
+    S("dock-ficus-main", 48, 7, 15.2, "stone", {checkpoint: 50, depth: 22, landmark: "pulsedrum"}),
+    S("crumble-bark", 57, 4.2, 14.8, "crumble"),
+    S("plat-shaded", 63, 6, 14.2, "stone"),
+    S("ferry-breeze", 71, 4.5, 13.8, "ferry", {travel: 18, speed: 3.2}),
+    S("plat-seawall", 91, 7, 13.8, "stone"),
+    S("pit-spikes-2", 50, 52, 2.0, "stone", {spiked: !0}),
+
+    // Section 3: Belvedere sul Golfo Xifonio & Balustrata
+    S("dock-belvedere", 104, 7, 11.2, "stone", {checkpoint: 106, depth: 22, landmark: "bannerarch"}),
+    S("balance-terrace", 113, 7, 11.8, "balance"),
+    S("step-parapet", 122, 3.8, 12.8, "ledge"),
+    S("step-baluster", 126, 3.2, 15.5, "ledge"),
+    S("balance-lookout", 128, 7.5, 13.8, "balance"),
+    S("opt-sprout2", 133, 3.5, 18.8, "ledge", {optional: !0}),
+    S("lift-gulf", 138, 3.6, 13.5, "lift", {moveY: 2.6, period: 4.0}),
+    S("plat-irrigation", 145, 22, 16.2, "stone", {landmark: "beacon"}),
+    S("switch-water", 153, 2.2, 16.35, "switch", {channel: "garden-water", latch: !0}),
+    S("gate-duomo", 160, 1.8, 20.2, "gate", {channel: "garden-water", h: 4}),
+
+    // Section 4: Viale delle Palme & Stop Motoseghe
+    S("dock-palms", 165, 7, 16.2, "stone", {checkpoint: 167, depth: 22, landmark: "sandwheel"}),
+    S("pulse-stump1", 174, 3.8, 15.6, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-stump2", 180, 3.8, 15.6, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-fountain", 186, 6, 14.8, "stone"),
+    S("step-piazza1", 197, 3.2, 18.2, "ledge"),
+    S("lift-pergola", 194, 3.6, 14.2, "lift", {moveX: 2.6, moveY: 1.8, period: 5.0}),
+    S("opt-sprout3", 202, 3.5, 20.8, "ledge", {optional: !0}),
+    S("spring-piazza", 203, 2.0, 15.8, "spring"),
+    S("plat-terrace-piazza", 201, 8, 15.8, "stone", {landmark: "sandwheel"}),
+    S("pit-spikes-3", 167, 45, 4.0, "stone", {spiked: !0}),
+
+    // Section 5: Piazza Duomo & Sagrato della Chiesa Madre Barocca
+    S("dock-duomo-approach", 213, 7, 15.8, "stone", {checkpoint: 215, depth: 22, landmark: "bellgate"}),
+    S("step-duomo1", 222, 3.8, 16.8, "ledge"),
+    S("step-duomo2", 228, 4.2, 17.8, "ledge"),
+    S("goal-duomo", 234, 15, 18.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 236})
+  ],
+  decor: [
+    // Entrance: Signpost "SALVIAMO IL VERDE DI AUGUSTA", benches, agaves, palms
+    {kind: "cartello-salviamo-verde", x: 4.5, y: 13.0, size: 4.0, z: -1.8},
+    {kind: "panchina-villa", x: 9.0, y: 13.0, size: 3.0, z: -1.5},
+    {kind: "vaso-terracotta-agave", x: 14.0, y: 14.5, size: 2.2, z: -1.2},
+    {kind: "palma-augusta", x: 20.0, y: 14.5, size: 8.5, z: -3.5},
+
+    // Grand Ficus trees with aerial roots & chainsaw/stump hazards
+    {kind: "ficus-centenario", x: 54.0, y: 15.2, size: 14.0, z: -4.0},
+    {kind: "cut-stump", x: 62.0, y: 14.2, size: 3.0, z: -2.0},
+    {kind: "chainsaw", x: 66.0, y: 14.2, size: 2.5, z: -1.8},
+    {kind: "panchina-villa", x: 74.0, y: 13.8, size: 3.0, z: -1.5},
+    {kind: "ficus-centenario", x: 88.0, y: 13.8, size: 13.0, z: -4.2},
+
+    // Gulf of Xifonio Belvedere: balustrade, agaves, and fishing boats on the sea
+    {kind: "balustrata-xifonio", x: 108.0, y: 11.2, size: 4.5, z: -2.5},
+    {kind: "gozzo-xifonio", x: 118.0, y: 8.0, size: 5.5, z: -10.0},
+    {kind: "vaso-terracotta-agave", x: 124.0, y: 12.8, size: 2.2, z: -1.2},
+    {kind: "palma-augusta", x: 130.0, y: 13.8, size: 8.5, z: -3.5},
+    {kind: "gozzo-xifonio", x: 142.0, y: 7.5, size: 5.0, z: -12.0},
+
+    // Palms Avenue, irrigation switch & heat wave
+    {kind: "cut-stump", x: 168.0, y: 16.2, size: 3.0, z: -2.0},
+    {kind: "chainsaw", x: 172.0, y: 16.2, size: 2.5, z: -1.8},
+    {kind: "heat-wave", x: 178.0, y: 15.6, size: 3.5, z: -1.5},
+    {kind: "fountain-augusta", x: 190.0, y: 14.8, size: 4.0, z: -2.5},
+    {kind: "palma-augusta", x: 196.0, y: 15.8, size: 9.0, z: -3.5},
+    {kind: "cartello-salviamo-verde", x: 206.0, y: 15.8, size: 3.8, z: -1.8},
+
+    // Grand Baroque Piazza Duomo Finish: Chiesa Madre, benches, agaves, new saplings
+    {kind: "barocco-duomo", x: 236.0, y: 18.8, size: 18.0, z: -4.5},
+    {kind: "vaso-terracotta-agave", x: 226.0, y: 17.8, size: 2.5, z: -1.5},
+    {kind: "panchina-villa", x: 230.0, y: 18.8, size: 3.0, z: -1.5},
+    {kind: "tree-sapling", x: 242.0, y: 18.8, size: 2.5, z: -1.5}
+  ],
+  stamps: [
+    {x: 42.5, y: 19.5},
+    {x: 133.5, y: 20.5},
+    {x: 202.5, y: 22.5}
+  ],
+  coins: [
+    {x: 12, y: 15.2},
+    {x: 18, y: 16.0},
+    {x: 25, y: 17.0},
+    {x: 35, y: 16.8},
+    {x: 43, y: 16.5},
+    {x: 60, y: 16.2},
+    {x: 65, y: 15.6},
+    {x: 75, y: 15.2},
+    {x: 82, y: 15.2},
+    {x: 94, y: 15.2},
+    {x: 115, y: 13.2},
+    {x: 124, y: 14.2},
+    {x: 130, y: 15.2},
+    {x: 135, y: 15.2},
+    {x: 150, y: 17.6},
+    {x: 157, y: 17.6},
+    {x: 176, y: 17.2},
+    {x: 182, y: 17.2},
+    {x: 188, y: 16.2},
+    {x: 205, y: 17.2},
+    {x: 224, y: 18.2},
+    {x: 230, y: 19.2}
+  ],
+  hazards: [
+    {x: 57, y: 14.8, w: 4.2, h: 0.5, kind: "crumble"},
+    {x: 174, y: 15.6, w: 3.8, h: 0.5, kind: "pulse"},
+    {x: 180, y: 15.6, w: 3.8, h: 0.5, kind: "pulse"}
+  ],
+  hints: [
+    {x: 0, end: 18, title: "Villa Comunale di Augusta (1850)", text: "Fondata dal generale Micheroux sulla Piazza d'Armi. I grandi Ficus secolari proteggono la citta dalle bolle di calore!", icon: "walk"},
+    {x: 48, end: 68, title: "I Ficus Monumentali", text: "Le radici aeree del Ficus formano una cattedrale viva. Salta sui rami ed evita le motoseghe che abbattono gli alberi!", icon: "sink"},
+    {x: 104, end: 125, title: "Belvedere sul Golfo Xifonio", text: "Dalla balconata della Villa si scorge il mare ionico e i gozzi dei pescatori. Raccogli il secondo germoglio dorato!", icon: "knead"},
+    {x: 148, end: 165, title: "La Valvola Idraulica dei Giardini", text: "Premi l'interruttore della condotta per innaffiare le radici secolari e aprire la cancellata di Piazza Duomo!", icon: "walk"},
+    {x: 215, end: 242, title: "Piazza Duomo & Chiesa Madre (1769)", text: "Sei arrivato al Duomo barocco di Santa Maria Assunta! Pianta il germoglio al centro del sagrato per celebrare la rinascita verde!", icon: "bell"}
+  ],
+  shaping: [],
+  enemies: [],
+  crushers: []
+});"""
+
+
 # tools/generate_gta_game.py
 """
 Builds GTA: Giuseppe Taglia Alberi
@@ -9,154 +162,254 @@ import os
 import re
 
 def get_character_customization_code():
-    return """
-function applyGiuseppeCustomization(scene, choice) {
+    return """function applyGiuseppeCustomization(scene, choice) {
   if (!choice || (choice.id !== "giuseppe" && choice.id !== "baldu" && choice.id !== "explorer")) return;
   const head = scene.getObjectByName("Head");
   if (!head || head.getObjectByName("giuseppe-head-features")) return;
 
+  // 1. Flatten backpack and shrink spiky hair into smooth bald scalp
+  scene.traverse(p => {
+    if (p.isMesh && p.geometry && p.name === "explorer") {
+      const pos = p.geometry.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        let x = pos.getX(i);
+        let y = pos.getY(i);
+        let z = pos.getZ(i);
+        // Flatten backpack against back of shirt
+        if (z < -0.12 && y > 0.80 && y < 1.38) {
+          pos.setZ(i, -0.11);
+        }
+        // Pull spiky hair vertices inward into the scalp sphere
+        if (y > 1.38) {
+          const dy = y - 1.48;
+          const dist = Math.hypot(x, dy, z);
+          if (dist > 0.16) {
+            const factor = 0.155 / dist;
+            pos.setX(i, x * factor);
+            pos.setY(i, 1.48 + dy * factor);
+            pos.setZ(i, z * factor);
+          }
+        }
+      }
+      pos.needsUpdate = true;
+      p.geometry.computeVertexNormals();
+    }
+  });
+
+  // 2. Load custom Giuseppe sky-blue shirt and clay skin texture
+  try {
+    const tl = new Kc();
+    tl.load(Na("giuseppe-color.jpg"), t => {
+      t.colorSpace = xn;
+      t.flipY = !1;
+      scene.traverse(p => {
+        if (p.isMesh && p.material) {
+          for (const m of (Array.isArray(p.material) ? p.material : [p.material])) {
+            m.map = t;
+            m.needsUpdate = !0;
+          }
+        }
+      });
+    });
+  } catch(e) { console.warn("Giuseppe tex", e); }
+
   const features = new U();
   features.name = "giuseppe-head-features";
 
-  // Materials for Giuseppe (from reference portrait)
+  // Materials for Giuseppe (from reference artwork)
   const skinMat = new Ce({color: 0xf1be9c, roughness: 0.88, metalness: 0});
   const scalpMat = new Ce({color: 0xf3c2a2, roughness: 0.90, metalness: 0});
   const frameMat = new Ce({color: 0x111111, roughness: 0.22, metalness: 0.15}); // Black glossy frames
-  const lensMat = new Ce({color: 0xffffff, roughness: 0.05, metalness: 0.1, transparent: true, opacity: 0.4});
+  const lensMat = new Ce({color: 0xffffff, roughness: 0.05, metalness: 0.1, transparent: true, opacity: 0.45});
   const teethMat = new Ce({color: 0xffffff, roughness: 0.4, metalness: 0});
   const lipsMat = new Ce({color: 0xd67d73, roughness: 0.7, metalness: 0});
-  const shirtMat = new Ce({color: 0x82b4dc, roughness: 0.92, metalness: 0}); // Light blue dress shirt
-  const collarDark = new Ce({color: 0x2b3848, roughness: 0.85, metalness: 0}); // Dark inner collar band
-  const buttonMat = new Ce({color: 0xf7f7f7, roughness: 0.3, metalness: 0.4}); // Pearl white buttons
-  const sashGreen = new Ce({color: 0x008c45, roughness: 0.8, metalness: 0}); // Italian tricolor sash
-  const sashWhite = new Ce({color: 0xf4f5f0, roughness: 0.8, metalness: 0});
-  const sashRed = new Ce({color: 0xcd212a, roughness: 0.8, metalness: 0});
+  const shirtMat = new Ce({color: 0x78abdc, roughness: 0.90, metalness: 0}); // Sky-blue dress shirt
+  const collarDark = new Ce({color: 0x223040, roughness: 0.85, metalness: 0});
+  const buttonMat = new Ce({color: 0xf7f7f7, roughness: 0.3, metalness: 0.4});
+  const woodMat = new Ce({color: 0xb57842, roughness: 0.85, metalness: 0});
+  const metalMat = new Ce({color: 0xd0d5dd, roughness: 0.25, metalness: 0.7});
+  const leafMat = new Ce({color: 0x3a9d23, roughness: 0.8, metalness: 0});
+  const leatherMat = new Ce({color: 0x4a2c16, roughness: 0.85, metalness: 0});
+  const dialMat = new Ce({color: 0xffffff, roughness: 0.3, metalness: 0.2});
+  const beltMat = new Ce({color: 0x251c16, roughness: 0.8, metalness: 0});
+  const buckleMat = new Ce({color: 0xcccccc, roughness: 0.25, metalness: 0.8});
 
-  // 1. Bald Scalp volume (smooth, cheerful, rounded cranium)
-  const scalp = new De(new $t(1, 16, 14), scalpMat);
-  scalp.position.set(0, 0.30, -0.02);
-  scalp.scale.set(0.185, 0.155, 0.19);
+  // 1. Bald Scalp volume (smooth, cheerful, rounded cranium completely covering hair)
+  const scalp = new De(new $t(1, 18, 16), scalpMat);
+  scalp.position.set(0, 0.48, -0.01);
+  scalp.scale.set(0.245, 0.21, 0.25);
   features.add(scalp);
 
-  const forehead = new De(new $t(1, 14, 12), skinMat);
-  forehead.position.set(0, 0.24, 0.10);
-  forehead.scale.set(0.165, 0.13, 0.15);
+  const forehead = new De(new $t(1, 16, 14), skinMat);
+  forehead.position.set(0, 0.42, 0.10);
+  forehead.scale.set(0.22, 0.17, 0.19);
   features.add(forehead);
 
-  // 2. Black glasses frames (matching portrait)
+  // 2. Black glasses frames matching reference portrait (positioned on eyes at y=0.36, z=0.21)
   const glasses = new U();
   glasses.name = "giuseppe-glasses";
-  glasses.position.set(0, 0.145, 0.225);
+  glasses.position.set(0, 0.36, 0.215);
 
-  // Left frame rim (rounded rectangle)
-  const rimL = new De(new os(0.068, 0.052, 0.012, 3, 0.016), frameMat);
-  rimL.position.set(-0.068, 0, 0);
-  glasses.add(rimL);
+  const rimL = new De(new os(0.075, 0.058, 0.014, 3, 0.018), frameMat);
+  rimL.position.set(-0.072, 0, 0);
+  const lensL = new De(new os(0.062, 0.045, 0.004, 2, 0.012), lensMat);
+  lensL.position.set(-0.072, 0, 0.003);
+  glasses.add(rimL, lensL);
 
-  // Left lens
-  const lensL = new De(new os(0.056, 0.040, 0.004, 2, 0.01), lensMat);
-  lensL.position.set(-0.068, 0, 0.003);
-  glasses.add(lensL);
+  const rimR = new De(new os(0.075, 0.058, 0.014, 3, 0.018), frameMat);
+  rimR.position.set(0.072, 0, 0);
+  const lensR = new De(new os(0.062, 0.045, 0.004, 2, 0.012), lensMat);
+  lensR.position.set(0.072, 0, 0.003);
+  glasses.add(rimR, lensR);
 
-  // Right frame rim (rounded rectangle)
-  const rimR = new De(new os(0.068, 0.052, 0.012, 3, 0.016), frameMat);
-  rimR.position.set(0.068, 0, 0);
-  glasses.add(rimR);
-
-  // Right lens
-  const lensR = new De(new os(0.056, 0.040, 0.004, 2, 0.01), lensMat);
-  lensR.position.set(0.068, 0, 0.003);
-  glasses.add(lensR);
-
-  // Nose bridge
-  const bridge = new De(new os(0.028, 0.010, 0.012, 2, 0.003), frameMat);
+  const bridge = new De(new os(0.030, 0.012, 0.014, 2, 0.004), frameMat);
   bridge.position.set(0, 0.008, 0.001);
   glasses.add(bridge);
 
-  // Left temple arm (going back to ear)
-  const armL = new De(new os(0.008, 0.010, 0.20, 2, 0.002), frameMat);
-  armL.position.set(-0.112, 0.006, -0.095);
+  const armL = new De(new os(0.008, 0.012, 0.24, 2, 0.002), frameMat);
+  armL.position.set(-0.118, 0.006, -0.115);
   armL.rotation.y = 0.08;
-  glasses.add(armL);
-
-  // Right temple arm (going back to ear)
-  const armR = new De(new os(0.008, 0.010, 0.20, 2, 0.002), frameMat);
-  armR.position.set(0.112, 0.006, -0.095);
+  const armR = new De(new os(0.008, 0.012, 0.24, 2, 0.002), frameMat);
+  armR.position.set(0.118, 0.006, -0.115);
   armR.rotation.y = -0.08;
-  glasses.add(armR);
+  glasses.add(armL, armR);
 
   features.add(glasses);
 
   // 3. Wide cheerful smile with white teeth
   const mouth = new U();
-  mouth.position.set(0, 0.058, 0.218);
-
-  const lips = new De(new os(0.075, 0.022, 0.018, 3, 0.008), lipsMat);
+  mouth.position.set(0, 0.22, 0.205);
+  const lips = new De(new os(0.080, 0.024, 0.018, 3, 0.008), lipsMat);
   mouth.add(lips);
-
-  const teeth = new De(new os(0.060, 0.012, 0.014, 2, 0.004), teethMat);
+  const teeth = new De(new os(0.065, 0.014, 0.014, 2, 0.004), teethMat);
   teeth.position.set(0, 0.002, 0.003);
   mouth.add(teeth);
-
   features.add(mouth);
 
-  // 4. Mayoral Light Blue Shirt Collar & Buttons
+  // 4. Sky-Blue Shirt Collar & Front Buttons (no sash)
   const collarGroup = new U();
-  collarGroup.position.set(0, -0.11, 0.12);
-
-  // Inner contrast collar band (like in photo)
-  const innerBand = new De(new os(0.16, 0.04, 0.08, 2, 0.01), collarDark);
+  collarGroup.position.set(0, 0.04, 0.09);
+  const innerBand = new De(new os(0.18, 0.045, 0.09, 2, 0.01), collarDark);
   innerBand.position.set(0, 0.02, -0.02);
   collarGroup.add(innerBand);
 
-  // Left collar wing
-  const collarL = new De(new os(0.07, 0.06, 0.025, 2, 0.01), shirtMat);
-  collarL.position.set(-0.065, 0, 0.035);
+  const collarL = new De(new os(0.080, 0.070, 0.025, 2, 0.01), shirtMat);
+  collarL.position.set(-0.072, 0, 0.038);
   collarL.rotation.set(0.3, 0.2, -0.3);
-  collarGroup.add(collarL);
-
-  // Right collar wing
-  const collarR = new De(new os(0.07, 0.06, 0.025, 2, 0.01), shirtMat);
-  collarR.position.set(0.065, 0, 0.035);
+  const collarR = new De(new os(0.080, 0.070, 0.025, 2, 0.01), shirtMat);
+  collarR.position.set(0.072, 0, 0.038);
   collarR.rotation.set(0.3, -0.2, 0.3);
-  collarGroup.add(collarR);
+  collarGroup.add(collarL, collarR);
 
-  // Small white buttons on placket
   for (let b = 0; b < 3; b++) {
-    const btn = new De(new $t(0.008, 8, 8), buttonMat);
-    btn.position.set(0, -0.04 - b * 0.06, 0.048);
+    const btn = new De(new $t(0.009, 8, 8), buttonMat);
+    btn.position.set(0, -0.04 - b * 0.06, 0.052);
     btn.rotation.x = Math.PI / 2;
     collarGroup.add(btn);
   }
-
-  // 5. Tricolor Mayoral Sash (fascia tricolore da sindaco)
-  const sash = new U();
-  sash.position.set(0, -0.15, 0.05);
-  const bandG = new De(new os(0.022, 0.32, 0.015, 2, 0.004), sashGreen);
-  bandG.position.set(-0.025, -0.10, 0.03);
-  bandG.rotation.z = 0.42;
-  const bandW = new De(new os(0.022, 0.32, 0.015, 2, 0.004), sashWhite);
-  bandW.position.set(0, -0.10, 0.032);
-  bandW.rotation.z = 0.42;
-  const bandR = new De(new os(0.022, 0.32, 0.015, 2, 0.004), sashRed);
-  bandR.position.set(0.025, -0.10, 0.03);
-  bandR.rotation.z = 0.42;
-  sash.add(bandG, bandW, bandR);
-  collarGroup.add(sash);
-
   features.add(collarGroup);
-
   head.add(features);
 
-  // Recolor clothes of base mesh to light blue mayoral shirt and dark trousers
+  // 5. Right Hand: Gardening Trowel with Living Green Clay Sapling
+  const rightHand = scene.getObjectByName("RightHand");
+  if (rightHand && !rightHand.getObjectByName("giuseppe-trowel")) {
+    const trowel = new U();
+    trowel.name = "giuseppe-trowel";
+    trowel.scale.setScalar(1.5);
+    trowel.position.set(0.03, -0.03, 0.04);
+    trowel.rotation.set(Math.PI / 3, 0, -Math.PI / 5);
+
+    // Wooden handle
+    const handle = new De(new os(0.020, 0.10, 0.020, 2, 0.006), woodMat);
+    handle.position.set(0, 0, 0);
+    trowel.add(handle);
+
+    // Metal neck and scoop
+    const neck = new De(new os(0.010, 0.045, 0.010, 2, 0.002), metalMat);
+    neck.position.set(0, 0.07, 0.01);
+    neck.rotation.x = -0.3;
+    trowel.add(neck);
+
+    const scoop = new De(new os(0.055, 0.09, 0.012, 2, 0.003), metalMat);
+    scoop.position.set(0, 0.12, 0.028);
+    scoop.rotation.x = -0.2;
+    trowel.add(scoop);
+
+    // Sprouting green twig with leaves (Il Germoglio di Ficus)
+    const twig = new De(new os(0.010, 0.09, 0.010, 2, 0.002), woodMat);
+    twig.position.set(0, 0.17, 0.038);
+    trowel.add(twig);
+
+    const leaf1 = new De(new $t(0.022, 8, 8), leafMat);
+    leaf1.scale.set(1.5, 0.35, 0.9);
+    leaf1.position.set(-0.025, 0.18, 0.045);
+    leaf1.rotation.set(0.3, -0.4, 0.5);
+
+    const leaf2 = new De(new $t(0.022, 8, 8), leafMat);
+    leaf2.scale.set(1.5, 0.35, 0.9);
+    leaf2.position.set(0.025, 0.20, 0.045);
+    leaf2.rotation.set(-0.3, 0.4, -0.5);
+
+    const leafTop = new De(new $t(0.018, 8, 8), leafMat);
+    leafTop.scale.set(1.3, 0.3, 0.8);
+    leafTop.position.set(0, 0.23, 0.045);
+    leafTop.rotation.set(0.2, 0, 0);
+
+    trowel.add(leaf1, leaf2, leafTop);
+    rightHand.add(trowel);
+  }
+
+  // 6. Left Wrist: Leather Wristwatch with Round Dial Face
+  const leftWrist = scene.getObjectByName("LeftForeArm") || scene.getObjectByName("LeftHand");
+  if (leftWrist && !leftWrist.getObjectByName("giuseppe-watch")) {
+    const watch = new U();
+    watch.name = "giuseppe-watch";
+    watch.position.set(0.01, -0.16, 0.03);
+
+    const band = new De(new os(0.052, 0.028, 0.052, 2, 0.005), leatherMat);
+    watch.add(band);
+
+    const caseMesh = new De(new $t(0.025, 12, 10), metalMat);
+    caseMesh.scale.set(1, 0.3, 1);
+    caseMesh.position.set(0, 0, 0.028);
+    caseMesh.rotation.x = Math.PI / 2;
+    watch.add(caseMesh);
+
+    const dial = new De(new $t(0.020, 12, 8), dialMat);
+    dial.scale.set(1, 0.05, 1);
+    dial.position.set(0, 0, 0.031);
+    dial.rotation.x = Math.PI / 2;
+    watch.add(dial);
+
+    leftWrist.add(watch);
+  }
+
+  // 7. Waist Belt with Silver Buckle
+  const spine = scene.getObjectByName("Hips") || scene.getObjectByName("Spine");
+  if (spine && !spine.getObjectByName("giuseppe-belt")) {
+    const beltGroup = new U();
+    beltGroup.name = "giuseppe-belt";
+    beltGroup.position.set(0, 0.04, 0);
+
+    const strap = new De(new os(0.24, 0.042, 0.18, 3, 0.01), beltMat);
+    beltGroup.add(strap);
+
+    const buckle = new De(new os(0.058, 0.046, 0.018, 2, 0.004), buckleMat);
+    buckle.position.set(0, 0, 0.092);
+    beltGroup.add(buckle);
+
+    spine.add(beltGroup);
+  }
+
+  // 8. Clothing Recolor: Sky-Blue Shirt & Dark Trousers
   scene.traverse(p => {
     if (p.isMesh && p.material) {
       for (const m of (Array.isArray(p.material) ? p.material : [p.material])) {
-        if (m.name && m.name.toLowerCase().includes("top") || m.name.toLowerCase().includes("shirt") || m.name.toLowerCase().includes("jacket")) {
-          m.color.setHex(0x82b4dc);
+        if (m.name && (m.name.toLowerCase().includes("top") || m.name.toLowerCase().includes("shirt") || m.name.toLowerCase().includes("jacket"))) {
+          m.color.setHex(0x78abdc);
           m.needsUpdate = true;
-        } else if (m.name && m.name.toLowerCase().includes("bottom") || m.name.toLowerCase().includes("pant")) {
-          m.color.setHex(0x22262b);
+        } else if (m.name && (m.name.toLowerCase().includes("bottom") || m.name.toLowerCase().includes("pant"))) {
+          m.color.setHex(0x242830);
           m.needsUpdate = true;
         }
       }
@@ -167,48 +420,216 @@ function applyGiuseppeCustomization(scene, choice) {
 
 def get_gta_3d_decor_builders():
     return """
+,"ficus-centenario"(t,e,n){
+  const o=oo(e,n,14.0);
+  // Monumental Ficus macrophylla of Villa Comunale di Augusta (1850)
+  // Main ancient fluted trunk
+  t.cylinder(2.2,5.5,"rope",o,0,2.75,0);
+  // 4 massive buttress pillar roots
+  t.cylinder(0.9,5.0,"rope",o,-1.8,2.5,0.9);
+  t.cylinder(0.8,5.2,"rope",o,1.7,2.6,-0.8);
+  t.cylinder(0.7,4.8,"rope",o,0.9,2.4,1.6);
+  t.cylinder(0.75,4.9,"rope",o,-1.5,2.4,-1.4);
+  // Spreading root flare base
+  t.ball(3.2,0.8,3.2,"rope",o,0,0.4,0);
+  // Hanging aerial roots descending to soil
+  t.cylinder(0.12,4.2,"rope",o,-3.2,4.2,1.2);
+  t.cylinder(0.10,4.0,"rope",o,3.0,4.1,-1.2);
+  t.cylinder(0.14,4.5,"rope",o,-1.2,4.3,2.8);
+  t.cylinder(0.11,4.1,"rope",o,2.4,4.1,2.2);
+  // Magnificent layered cathedral canopy
+  t.ball(5.8,2.6,5.8,"foliage",o,0,7.2,0);
+  t.ball(4.2,2.2,4.2,"moss",o,-3.2,7.8,1.5);
+  t.ball(4.4,2.3,4.4,"foliage",o,3.0,7.6,-1.4);
+  t.ball(3.6,2.0,3.6,"moss",o,0.8,8.4,2.2);
+  t.ball(3.8,2.1,3.8,"foliage",o,-1.6,8.2,-2.6);
+  t.ball(3.0,1.8,3.0,"foliage",o,0,9.6,0.4);
+}
 ,"secular-ficus"(t,e,n){
-  const o=oo(e,n,12.0);
-  // Massive ancient ficus tree of Villa Comunale di Augusta
-  // Twisted trunk & aerial roots
-  t.cylinder(1.8,5.0,"rope",o,0,2.5,0);
-  t.cylinder(0.6,4.5,"rope",o,-1.4,2.2,0.6);
-  t.cylinder(0.5,4.5,"rope",o,1.3,2.2,-0.5);
-  t.cylinder(0.4,4.2,"rope",o,0.8,2.1,1.1);
-  // Lush expansive green shade canopy
-  t.ball(4.8,2.2,4.8,"foliage",o,0,5.8,0);
-  t.ball(3.5,1.8,3.5,"foliage",o,-2.2,6.4,1.2);
-  t.ball(3.6,1.9,3.6,"foliage",o,2.0,6.2,-1.0);
-  t.ball(2.8,1.6,2.8,"foliage",o,0,7.2,0.8);
-  // Hanging aerial roots
-  t.cylinder(0.08,3.2,"rope",o,-2.2,3.5,1.0);
-  t.cylinder(0.08,3.0,"rope",o,1.8,3.5,-0.8);
+  // Alias for ficus-centenario
+  _D["ficus-centenario"](t,e,n);
+}
+,"barocco-duomo"(t,e,n){
+  const o=oo(e,n,18.0);
+  // Chiesa Madre di Augusta (Santa Maria Assunta in Cielo, 1693-1769)
+  // Ground Floor (First Order) - warm Sicilian limestone
+  t.box(14.0,1.2,3.0,"cream",o,0,0.6,0);
+  t.box(15.0,0.4,3.6,"top",o,0,0.2,0.2); // steps
+  t.box(12.5,7.5,2.4,"cream",o,0,4.95,0);
+  // 4 Corinthian pilasters
+  t.cylinder(0.45,7.6,"cream",o,-5.2,5.0,1.25);
+  t.cylinder(0.45,7.6,"cream",o,-2.4,5.0,1.25);
+  t.cylinder(0.45,7.6,"cream",o,2.4,5.0,1.25);
+  t.cylinder(0.45,7.6,"cream",o,5.2,5.0,1.25);
+  // Column capitals
+  t.box(1.2,0.6,1.2,"gold",o,-5.2,8.9,1.25);
+  t.box(1.2,0.6,1.2,"gold",o,-2.4,8.9,1.25);
+  t.box(1.2,0.6,1.2,"gold",o,2.4,8.9,1.25);
+  t.box(1.2,0.6,1.2,"gold",o,5.2,8.9,1.25);
+  // Central Main Portal: arched recessed entrance & broken pediment
+  t.box(2.8,5.2,1.2,"dark",o,0,3.8,0.8);
+  t.cylinder(1.4,1.2,"dark",o,0,6.4,0.8);
+  t.box(3.4,0.4,0.6,"gold",o,0,7.4,1.3);
+  // Side niches with carved statues
+  t.box(1.4,3.2,0.6,"dark",o,-3.8,4.5,1.15);
+  t.box(1.4,3.2,0.6,"dark",o,3.8,4.5,1.15);
+  t.cylinder(0.3,1.8,"cream",o,-3.8,4.2,1.2);
+  t.cylinder(0.3,1.8,"cream",o,3.8,4.2,1.2);
+  // Intermediate entablature separating orders
+  t.box(13.6,1.0,2.8,"cream",o,0,9.2,0);
+  t.box(14.2,0.4,3.0,"gold",o,0,9.7,0);
+  // Second Order (Upper tier)
+  t.box(8.2,6.0,2.2,"cream",o,0,12.7,-0.1);
+  // Baroque S-curved scroll volutes (ampie volute a ricciolo)
+  t.cylinder(1.8,2.0,"cream",o,-5.2,11.2,0.8);
+  t.cylinder(1.8,2.0,"cream",o,5.2,11.2,0.8);
+  t.ball(1.2,1.2,1.2,"gold",o,-5.8,12.6,0.9);
+  t.ball(1.2,1.2,1.2,"gold",o,5.8,12.6,0.9);
+  // Upper pilasters
+  t.cylinder(0.4,5.8,"cream",o,-2.8,12.6,1.05);
+  t.cylinder(0.4,5.8,"cream",o,2.8,12.6,1.05);
+  // Central Baroque upper window with pediment
+  t.box(2.2,3.6,0.8,"dark",o,0,12.8,1.0);
+  t.cylinder(1.1,0.8,"dark",o,0,14.6,1.0);
+  t.box(2.8,0.4,0.6,"gold",o,0,15.3,1.1);
+  // Top Entablature & Bell Gable (Cella campanaria)
+  t.box(9.2,0.8,2.4,"cream",o,0,16.1,-0.1);
+  t.box(5.4,3.4,1.8,"cream",o,0,18.2,-0.2);
+  // Belfry arched openings
+  t.box(1.2,2.0,1.9,"dark",o,-1.3,18.0,-0.2);
+  t.box(1.2,2.0,1.9,"dark",o,1.3,18.0,-0.2);
+  // Bronze bells
+  t.cylinder(0.35,0.8,"gold",o,-1.3,18.2,-0.2);
+  t.cylinder(0.35,0.8,"gold",o,1.3,18.2,-0.2);
+  // Triangular pediment
+  t.box(6.0,0.6,2.0,"cream",o,0,20.2,-0.2);
+  // Elevated Latin Stone Cross at top summit
+  t.box(0.3,2.4,0.3,"gold",o,0,21.6,-0.2);
+  t.box(1.6,0.3,0.3,"gold",o,0,22.1,-0.2);
+  // Flanking historic townhouses with balconies (from artwork)
+  t.box(7.0,12.0,5.0,"top",o,-10.0,6.0,-1.5);
+  t.box(2.4,0.3,1.2,"dark",o,-9.5,7.0,1.2);
+  t.cylinder(0.06,0.9,"dark",o,-9.5,7.5,1.7);
+  t.box(7.0,12.0,5.0,"top",o,10.0,6.0,-1.5);
+  t.box(2.4,0.3,1.2,"dark",o,9.5,7.0,1.2);
+  t.cylinder(0.06,0.9,"dark",o,9.5,7.5,1.7);
+}
+,"duomo-facade"(t,e,n){
+  _D["barocco-duomo"](t,e,n);
+}
+,"cartello-salviamo-verde"(t,e,n){
+  const o=oo(e,n,4.0);
+  // The wooden signpost from the reference artwork
+  // Stone base & small agave
+  t.box(2.6,0.4,1.4,"cream",o,0,0.2,0);
+  t.ball(0.5,0.3,0.5,"foliage",o,-0.9,0.4,0.4);
+  // Two dark wooden upright posts
+  t.box(0.18,2.8,0.18,"dark",o,-0.85,1.4,0);
+  t.box(0.18,2.8,0.18,"dark",o,0.85,1.4,0);
+  // Horizontal wooden sign board (dark timber planks)
+  t.box(2.8,1.4,0.16,"rope",o,0,2.3,0.08);
+  t.box(2.7,0.06,0.18,"dark",o,0,2.75,0.09);
+  t.box(2.7,0.06,0.18,"dark",o,0,2.3,0.09);
+  t.box(2.7,0.06,0.18,"dark",o,0,1.85,0.09);
+  // White embossed letters: "SALVIAMO" / "IL VERDE" / "DI AUGUSTA"
+  t.box(2.2,0.28,0.08,"cream",o,0,2.62,0.18);
+  t.box(1.9,0.26,0.08,"foliage",o,0,2.28,0.18);
+  t.box(2.1,0.24,0.08,"cream",o,0,1.94,0.18);
+}
+,"palma-augusta"(t,e,n){
+  const o=oo(e,n,8.0);
+  // Curved ringed Mediterranean palm trunk
+  t.cylinder(0.42,6.0,"rope",o,0,3.0,0);
+  for(let r=1;r<6;r++){
+    t.cylinder(0.48,0.12,"dark",o,0,r*1.0,0);
+  }
+  // Fan fronds canopy
+  t.ball(2.4,0.6,2.4,"foliage",o,0,6.2,0);
+  t.ball(3.4,0.4,1.4,"foliage",o,1.2,6.0,0);
+  t.ball(3.4,0.4,1.4,"foliage",o,-1.2,6.0,0);
+  t.ball(1.4,0.4,3.4,"foliage",o,0,6.0,1.2);
+  t.ball(1.4,0.4,3.4,"foliage",o,0,6.0,-1.2);
+  // Golden dates
+  t.ball(0.5,0.7,0.5,"gold",o,0.4,5.7,0.3);
+  t.ball(0.4,0.6,0.4,"gold",o,-0.4,5.7,-0.3);
+}
+,"panchina-villa"(t,e,n){
+  const o=oo(e,n,3.0);
+  // Park bench with green cast-iron legs and wooden slats
+  t.box(0.12,1.0,0.9,"moss",o,-1.2,0.5,0);
+  t.box(0.12,1.0,0.9,"moss",o,1.2,0.5,0);
+  t.cylinder(0.08,0.8,"dark",o,-1.2,0.85,0);
+  t.cylinder(0.08,0.8,"dark",o,1.2,0.85,0);
+  t.box(2.4,0.08,0.22,"rope",o,0,0.52,0.2);
+  t.box(2.4,0.08,0.22,"rope",o,0,0.52,-0.05);
+  t.box(2.4,0.18,0.08,"rope",o,0,0.82,-0.32);
+  t.box(2.4,0.18,0.08,"rope",o,0,1.08,-0.36);
+}
+,"balustrata-xifonio"(t,e,n){
+  const o=oo(e,n,4.0);
+  // Coastal stone balustrade on the Gulf of Augusta
+  t.box(3.8,0.35,0.6,"cream",o,0,0.18,0);
+  for(let b=-2;b<=2;b++){
+    t.cylinder(0.15,0.9,"cream",o,b*0.75,0.8,0);
+    t.ball(0.22,0.22,0.22,"cream",o,b*0.75,0.7,0);
+  }
+  t.box(3.9,0.25,0.7,"cream",o,0,1.35,0);
+}
+,"vaso-terracotta-agave"(t,e,n){
+  const o=oo(e,n,2.0);
+  // Terracotta urn with succulent agave
+  t.cylinder(0.5,0.8,"coral",o,0,0.4,0);
+  t.cylinder(0.6,0.15,"orange",o,0,0.85,0);
+  t.cylinder(0.52,0.08,"dark",o,0,0.88,0);
+  t.ball(0.2,0.7,0.2,"foliage",o,0,1.3,0);
+  t.ball(0.18,0.6,0.18,"foliage",o,0.35,1.15,0.2);
+  t.ball(0.18,0.6,0.18,"foliage",o,-0.35,1.15,-0.2);
+  t.ball(0.18,0.6,0.18,"foliage",o,-0.2,1.15,0.35);
+  t.ball(0.18,0.6,0.18,"foliage",o,0.2,1.15,-0.35);
+}
+,"gozzo-xifonio"(t,e,n){
+  const o=oo(e,n,5.0);
+  // Sicilian wooden fishing boat on Golfo Xifonio
+  t.box(3.8,1.0,1.6,"cream",o,0,0.5,0);
+  t.box(3.85,0.3,1.65,"blue",o,0,0.85,0);
+  t.box(3.9,0.15,0.15,"coral",o,0,0.2,0);
+  t.cylinder(0.8,1.0,"cream",o,-1.9,0.5,0);
+  t.cylinder(0.8,1.0,"cream",o,1.9,0.5,0);
+  t.box(0.3,0.1,1.5,"rope",o,0,0.75,0);
+  t.cylinder(0.06,3.2,"rope",o,0.3,1.0,0.5);
+}
+,"paletta-germoglio"(t,e,n){
+  const o=oo(e,n,1.8);
+  // Collectible golden trowel with sprouting green twig
+  t.ball(0.9,0.9,0.9,"gold",o,0,0.6,0);
+  t.box(0.35,0.5,0.08,"top",o,0,0.45,0);
+  t.cylinder(0.08,0.5,"rope",o,0,0.1,0);
+  t.cylinder(0.05,0.6,"rope",o,0,0.8,0);
+  t.ball(0.2,0.12,0.25,"foliage",o,0.2,0.95,0.1);
+  t.ball(0.2,0.12,0.25,"foliage",o,-0.2,1.05,-0.1);
+  t.ball(0.18,0.10,0.22,"foliage",o,0,1.2,0);
 }
 ,"cut-stump"(t,e,n){
   const o=oo(e,n,2.5);
-  // Freshly cut tree stump (satirical symbol of deforestation)
+  // Freshly cut tree stump
   t.cylinder(1.2,1.2,"rope",o,0,0.6,0);
-  t.cylinder(1.15,0.06,"top",o,0,1.21,0); // Growth rings top
-  // Yellow wood chips & sawdust
+  t.cylinder(1.15,0.06,"top",o,0,1.21,0);
   t.ball(1.6,0.15,1.6,"gold",o,0,0.08,0);
 }
 ,"chainsaw"(t,e,n){
   const o=oo(e,n,2.0);
-  // Orange/yellow motorized chainsaw
+  // Motorized chainsaw hazard
   t.box(0.9,0.55,0.5,"orange",o,0,0.4,0);
-  t.cylinder(0.06,0.6,"dark",o,-0.4,0.6,0); // Rear handle
-  t.box(1.2,0.22,0.06,"dark",o,0.9,0.35,0); // Guide bar
-  t.box(1.22,0.24,0.08,"gold",o,0.9,0.35,0); // Chain teeth
+  t.cylinder(0.06,0.6,"dark",o,-0.4,0.6,0);
+  t.box(1.2,0.22,0.06,"dark",o,0.9,0.35,0);
+  t.box(1.22,0.24,0.08,"gold",o,0.9,0.35,0);
 }
 ,"waste-bin"(t,e,n){
   const o=oo(e,n,2.2);
-  // Cluster of recycling bins (mastelli della differenziata)
-  // Brown (organico), Blue (carta), Yellow (plastica), Green (vetro)
-  t.box(0.5,0.8,0.5,"rope",o,-0.8,0.4,0); // Umido
-  t.box(0.5,0.8,0.5,"blue",o,-0.25,0.4,0); // Carta
-  t.box(0.5,0.8,0.5,"gold",o,0.3,0.4,0); // Plastica
-  t.box(0.5,0.8,0.5,"foliage",o,0.85,0.4,0); // Vetro
-  // Open lids
+  t.box(0.5,0.8,0.5,"rope",o,-0.8,0.4,0);
+  t.box(0.5,0.8,0.5,"blue",o,-0.25,0.4,0);
+  t.box(0.5,0.8,0.5,"gold",o,0.3,0.4,0);
+  t.box(0.5,0.8,0.5,"foliage",o,0.85,0.4,0);
   t.box(0.52,0.08,0.52,"dark",o,-0.8,0.84,0);
   t.box(0.52,0.08,0.52,"dark",o,-0.25,0.84,0);
   t.box(0.52,0.08,0.52,"dark",o,0.3,0.84,0);
@@ -216,17 +637,14 @@ def get_gta_3d_decor_builders():
 }
 ,"sewer-manhole"(t,e,n){
   const o=oo(e,n,2.2);
-  // Overflowing flooded cast-iron manhole (Lungomare Rossini)
-  t.cylinder(0.9,0.12,"dark",o,0,0.06,0); // Manhole rim
-  t.cylinder(0.75,0.08,"dark",o,0.1,0.25,0.1); // Displaced lid
-  t.cylinder(1.2,0.05,"blueLight",o,0,0.03,0); // Puddle of sewage overflow
-  t.ball(0.4,0.5,0.4,"foliage",o,0,0.35,0); // Bubbling green foam
+  t.cylinder(0.9,0.12,"dark",o,0,0.06,0);
+  t.cylinder(0.75,0.08,"dark",o,0.1,0.25,0.1);
+  t.cylinder(1.2,0.05,"blueLight",o,0,0.03,0);
+  t.ball(0.4,0.5,0.4,"foliage",o,0,0.35,0);
 }
 ,"stage-speaker"(t,e,n){
   const o=oo(e,n,4.5);
-  // Giant concert festival speaker stack (propaganda mega-concert)
   t.box(1.4,3.2,1.2,"dark",o,0,1.6,0);
-  // 4 Speaker woofers
   for(let y of[0.6,1.3,2.0,2.7]){
     t.cylinder(0.24,0.05,"cream",o,0,y,0.61);
     t.cylinder(0.12,0.06,"dark",o,0,y,0.62);
@@ -234,7 +652,6 @@ def get_gta_3d_decor_builders():
 }
 ,"stage-light"(t,e,n){
   const o=oo(e,n,3.5);
-  // Concert truss with colorful rotating spotlights
   t.box(0.12,3.0,0.12,"dark",o,0,1.5,0);
   t.box(1.5,0.15,0.15,"dark",o,0,2.9,0);
   t.cylinder(0.2,0.35,"gold",o,-0.5,2.7,0.1);
@@ -242,51 +659,34 @@ def get_gta_3d_decor_builders():
 }
 ,"burning-tire"(t,e,n){
   const o=oo(e,n,2.8);
-  // Burning pile of toxic waste & tires (discariche abusive)
   t.cylinder(0.7,0.35,"dark",o,0,0.18,0);
   t.cylinder(0.65,0.35,"dark",o,0.4,0.45,0.1);
-  // Orange flames
   t.ball(0.5,0.8,0.5,"gold",o,0.2,0.8,0);
   t.ball(0.35,0.6,0.35,"orange",o,-0.1,0.7,0.1);
-  // Billowing black smoke plume
   t.ball(0.8,0.7,0.8,"dark",o,0.1,1.5,0);
   t.ball(1.1,0.9,1.1,"dark",o,0.3,2.3,0);
 }
 ,"cement-mixer"(t,e,n){
   const o=oo(e,n,4.0);
-  // Concrete cement mixer pouring wet gray cement over soil
   t.box(1.6,1.4,1.4,"orange",o,-0.6,0.7,0);
   t.cylinder(0.9,1.8,"cream",o,0.7,1.2,0);
-  // Wet cement pool on ground
   t.box(2.2,0.1,1.8,"terrain2",o,0.5,0.05,0);
-}
-,"duomo-facade"(t,e,n){
-  const o=oo(e,n,14.0);
-  // Sicilian Baroque Chiesa Madre facade in Piazza Duomo
-  t.box(10,8.5,2.0,"cream",o,0,4.25,0,0.2);
-  t.box(7.5,4.5,1.8,"cream",o,0,10.5,0,0.2);
-  t.box(2.2,3.5,0.4,"rope",o,0,1.75,1.02); // Main wooden door
-  t.box(3.2,0.8,0.6,"cream",o,0,3.6,1.05); // Portal pediment
-  t.cylinder(0.7,1.4,"gold",o,0,13.5,0); // Cross pediment
 }
 ,"fountain-augusta"(t,e,n){
   const o=oo(e,n,3.2);
-  // Historic stone fountain with splashing clear water
-  t.cylinder(1.6,0.6,"terrain",o,0,0.3,0);
-  t.cylinder(1.45,0.1,"blueLight",o,0,0.55,0); // Water surface
-  t.cylinder(0.4,1.2,"terrain2",o,0,0.8,0);
-  t.ball(0.6,0.3,0.6,"terrain",o,0,1.4,0);
+  t.cylinder(1.6,0.6,"cream",o,0,0.3,0);
+  t.cylinder(1.45,0.1,"blueLight",o,0,0.55,0);
+  t.cylinder(0.4,1.2,"cream",o,0,0.8,0);
+  t.ball(0.6,0.3,0.6,"cream",o,0,1.4,0);
 }
 ,"tree-sapling"(t,e,n){
   const o=oo(e,n,2.0);
-  // Young leafy tree sapling with wooden stake support
   t.cylinder(0.06,1.8,"rope",o,0,0.9,0);
-  t.cylinder(0.04,1.4,"top",o,0.12,0.7,0); // Wooden stake
-  t.ball(0.5,0.7,0.5,"foliage",o,0,1.7,0); // Green foliage crown
+  t.cylinder(0.04,1.4,"top",o,0.12,0.7,0);
+  t.ball(0.5,0.7,0.5,"foliage",o,0,1.7,0);
 }
 ,"heat-wave"(t,e,n){
   const o=oo(e,n,3.5);
-  // Shimmering orange heat bubble aura
   t.ball(1.8,1.4,1.8,"orangeLight",o,0,1.0,0);
   t.ball(1.2,1.8,1.2,"gold",o,0,1.4,0);
 }
@@ -310,21 +710,8 @@ def generate_gta_levels_code():
     
     levels = []
     
-    # Level 1
-    l1 = get_level_1()
-    l1 = l1.replace("Il Polo Petrolchimico di Augusta", "I Giardini Pubblici & La Strage degli Alberi")
-    l1 = l1.replace('"Petrolchimico"', '"Villa Comunale"')
-    l1 = l1.replace("Ciminiere, torce e fumi industriali", "Ficus secolari, motoseghe e bolle di calore")
-    l1 = l1.replace("Benvenuto al polo petrolchimico di Augusta-Priolo. Tra ciminiere fumanti, valvole di pressione e tubature di greggio, scappa dalla raffineria prima che la pressione salga al massimo!",
-                    "Benvenuto ai Giardini Pubblici di Augusta! Gli alberi secolari vengono abbattuti senza sosta, lasciando piazze di cemento rovente e asfissianti bolle di calore. Schiva le motoseghe, difendi i ficus e raccogli i germogli per ripiantare il verde!")
-    l1 = l1.replace('biome: "desert"', 'biome: "citadel"')
-    l1 = l1.replace('sky: "#2d2016"', 'sky: "#2e5a38"')
-    l1 = l1.replace('fog: "#453225"', 'fog: "#3d7048"')
-    l1 = l1.replace('{kind: "flare-stack", x: 54, y: 15.2, size: 12, z: -4}', '{kind: "secular-ficus", x: 54, y: 15.2, size: 12, z: -4}')
-    l1 = l1.replace('{kind: "oil-tank", x: 120, y: 11.8, size: 5, z: -4}', '{kind: "cut-stump", x: 120, y: 11.8, size: 3, z: -2}')
-    l1 = l1.replace('{kind: "oil-tank", x: 172, y: 16.2, size: 5.5, z: -4}', '{kind: "chainsaw", x: 172, y: 16.2, size: 2.5, z: -2}')
-    l1 = l1.replace('{kind: "furnace", x: 60, y: 10, size: 6, z: -4}', '{kind: "secular-ficus", x: 60, y: 14.0, size: 10, z: -4}')
-    l1 = l1.replace('{kind: "furnace", x: 185, y: 13, size: 6, z: -4}', '{kind: "tree-sapling", x: 185, y: 14.8, size: 2.2, z: -1.5}')
+    # Level 1 Handcrafted
+    l1 = get_handcrafted_level_1()
     levels.append(l1)
 
     # Level 2
@@ -462,12 +849,13 @@ def main():
         print("Injected applyGiuseppeCustomization definition!")
 
     # 3. Inject GTA 3D environmental decor models into _D
-    d_marker = 'castle(t,e,n){sx(t,e,0,0,0,n)}};'
+    d_marker = '};function kre(t,e){'
     pos_d_end = content.find(d_marker)
     if pos_d_end != -1:
-        inject_pos = pos_d_end + len('castle(t,e,n){sx(t,e,0,0,0,n)}')
-        content = content[:inject_pos] + get_gta_3d_decor_builders() + content[inject_pos:]
+        content = content[:pos_d_end] + get_gta_3d_decor_builders() + content[pos_d_end:]
         print("Injected GTA 3D environmental models into _D!")
+    else:
+        print("WARNING: Could not find _D closing marker!")
 
     # 4. Replace levels with the 10 GTA bespoke levels
     start_marker = "// --- AUGUSTA LEVELS (PROVINCIA DI SIRACUSA) ---"

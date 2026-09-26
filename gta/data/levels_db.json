@@ -1,0 +1,203 @@
+{
+  "project": "GTA: Giuseppe Taglia Alberi — Edizione Augusta",
+  "version": "2.0.0",
+  "theme": "Satira Civica & Salvaguardia Ecologica del Territorio di Augusta (SR)",
+  "art_style": "Stop-Motion Claymation / Barocco Siciliano Calcareo / Argilla Naturale",
+  "protagonist": {
+    "name": "Giuseppe",
+    "description": "Giardiniere civico e protettore degli alberi storici di Augusta. Indossa camicia celeste a maniche corte, pantaloni scuri, cintura con fibbia d'argento, orologio da polso con cinturino in cuoio, e impugna una paletta da giardinaggio con un germoglio verde splendente di Ficus.",
+    "tools": [
+      { "id": "trowel-sapling", "name": "Paletta con Germoglio di Ficus", "purpose": "Piantare nuovi alberi e curare le radici secolari" },
+      { "id": "watch", "name": "Orologio del Tempo Ecologico", "purpose": "Monitorare le bolle di calore prima che sia troppo tardi" }
+    ]
+  },
+  "levels": [
+    {
+      "id": "gta-l1",
+      "index": 0,
+      "number": 1,
+      "title": "Salviamo il Verde di Augusta: I Giardini Pubblici & La Strage degli Alberi",
+      "subtitle": "Villa Comunale Orso Mario Corbino & Piazza Duomo Barocca",
+      "location": {
+        "name": "Villa Comunale di Augusta (Giardini Pubblici)",
+        "address": "Via Cristoforo Colombo / Piazza Castello, 96011 Augusta SR",
+        "coordinates": { "latitude": 37.2348, "longitude": 15.2212 },
+        "elevation_m": 14,
+        "historical_origin": "Fondata nel 1850 per iniziativa del generale borbonico Micheroux sulla spianata dell'antica Piazza d'Armi tra il Castello Svevo federiciano e la rada del Golfo Xifonio."
+      },
+      "architectural_heritage": [
+        {
+          "monument": "Chiesa Madre — Duomo di Santa Maria Assunta in Cielo",
+          "period": "1693-1769 (Ricostruzione post-terremoto del Val di Noto)",
+          "style": "Tardo Barocco Siciliano in tufo calcareo dorato",
+          "details": "Facciata a due ordini raccordati da ampie volute laterali, paraste corinzie, tre portali scolpiti, cella campanaria con campane bronzee e croce sommitale."
+        },
+        {
+          "monument": "Castello Svevo di Augusta",
+          "period": "1232-1242",
+          "founder": "Imperatore Federico II di Svevia",
+          "details": "Fortezza quadrilatera con torri angolari a controllo dell'istmo tra terraferma e isola."
+        },
+        {
+          "monument": "Palco della Musica (Chiosco Musicale)",
+          "period": "Fine XIX secolo",
+          "style": "Ferro battuto liberty / ghisa traforata con basamento in pietra di Modica."
+        },
+        {
+          "monument": "Cartello Civico 'SALVIAMO IL VERDE DI AUGUSTA'",
+          "period": "Contemporaneo",
+          "details": "Targa lignea artigianale posta dai cittadini e comitati a difesa degli alberi monumentali."
+        }
+      ],
+      "botanical_heritage": [
+        {
+          "species": "Ficus macrophylla subsp. columnaris (Ficus magnolioides)",
+          "common_name": "Ficus magnolioide / Ficus delle alture australiane",
+          "age_years": 140,
+          "features": "Imponente albero secolare con monumentali radici aeree a colonna che formano una cattedrale vegetale viva, chioma estesa fino a 30 metri di diametro che abbassa la temperatura al suolo di 8-12°C."
+        },
+        {
+          "species": "Chamaerops humilis",
+          "common_name": "Palma nana di Sicilia / Giummarra",
+          "features": "Unica palma autoctona europea, simbolo di resilienza alla siccità e alla brezza marina ionica."
+        },
+        {
+          "species": "Pinus halepensis",
+          "common_name": "Pino d'Aleppo della Villa",
+          "features": "Conifere storiche mediterranee con aghi aromatici e resina balsamica che purificano l'aria salmastra."
+        },
+        {
+          "species": "Agave americana & Aloe arborescens",
+          "common_name": "Agave e Piante Grasse Siciliane",
+          "features": "Ospitate in vasi monumentali di terracotta decorata a festoni."
+        }
+      ],
+      "civic_issue": {
+        "problem": "La strage degli alberi e le capitozzature selvagge",
+        "description": "Negli ultimi anni, tagli indiscriminati e potature distruttive hanno privato Augusta di ombra vitale. La proposta di abbattere esemplari secolari per allargare via Colombo ha scatenato la ribellione pacifica dei cittadini con cortei e striscioni.",
+        "scientific_consequence": "Isola di Calore Urbana (Urban Heat Island): l'asfalto esposto supera i 50°C in estate, mentre sotto la chioma del Ficus la temperatura si mantiene a 28°C.",
+        "educational_takeaway": "Gli alberi maturi non sono arredo sacrificabile, ma infrastruttura vitale contro il cambiamento climatico e l'inquinamento industriale."
+      },
+      "in_game_mission": {
+        "objective": "Difendi la Villa Comunale, raccogli i 3 Germogli Dorati di Ficus, disattiva le motoseghe impazzite, rinfresca le radici sofferenti e raggiungi il sagrato della Chiesa Madre per piantare il futuro verde di Augusta.",
+        "collectibles": [
+          { "id": "trowel-sprout-1", "name": "Germoglio del Ficus Micheroux", "x": 16.5, "y": 14.5, "lore": "Nato dalle radici aeree piantate nel 1850." },
+          { "id": "trowel-sprout-2", "name": "Germoglio della Palma Nana", "x": 48.0, "y": 17.5, "lore": "Resistente al salmastro del Golfo Xifonio." },
+          { "id": "trowel-sprout-3", "name": "Germoglio della Rinascita Barocca", "x": 76.5, "y": 16.0, "lore": "Da piantare ai piedi della facciata del Duomo." }
+        ],
+        "hazards": [
+          { "type": "motosega-nemico", "description": "Motoseghe automatiche fuori controllo che tagliano rami preziosi." },
+          { "type": "heat-wave", "description": "Bolla di calore asfissiante sull'asfalto privo di ombra." }
+        ]
+      }
+    },
+    {
+      "id": "gta-l2",
+      "index": 1,
+      "number": 2,
+      "title": "Lungomare Rossini & Il Diluvio Fognario",
+      "subtitle": "La riviera di levante e gli sversamenti a mare",
+      "location": { "name": "Lungomare Rossini", "coordinates": { "latitude": 37.2312, "longitude": 15.2255 } },
+      "civic_issue": {
+        "problem": "Allagamenti fognari cronici e liquami a cielo aperto ad ogni pioggia",
+        "description": "L'assenza di separazione tra acque bianche e nere provoca la fuoriuscita dai tombini di liquami che finiscono direttamente nella baia balneabile."
+      }
+    },
+    {
+      "id": "gta-l3",
+      "index": 2,
+      "number": 3,
+      "title": "Il Golfo Xifonio & Il Depuratore Che Non C'è",
+      "subtitle": "Decenni di promesse e sanzioni comunitarie",
+      "location": { "name": "Golfo Xifonio & Baia di Augusta", "coordinates": { "latitude": 37.2285, "longitude": 15.2180 } },
+      "civic_issue": {
+        "problem": "Mancata depurazione delle acque reflue urbane",
+        "description": "Augusta è soggetta da decenni a procedura d'infrazione europea per la mancanza del depuratore cittadino, con conseguente danno ecologico marino."
+      }
+    },
+    {
+      "id": "gta-l4",
+      "index": 3,
+      "number": 4,
+      "title": "La Giungla dei Mastelli (Raccolta Differenziata)",
+      "subtitle": "Il labirinto dei rifiuti nei vicoli del centro storico",
+      "location": { "name": "I Ronchi e i Vicoli di Augusta Isola", "coordinates": { "latitude": 37.2330, "longitude": 15.2205 } },
+      "civic_issue": {
+        "problem": "Caos nella raccolta differenziata porta a porta",
+        "description": "Mastelli accatastati, calendari non rispettati e micro-discariche abusive negli angoli storici dell'isola."
+      }
+    },
+    {
+      "id": "gta-l5",
+      "index": 4,
+      "number": 5,
+      "title": "I Roghi Tossici delle Discariche Abusive",
+      "subtitle": "Fumi neri e pneumatici bruciati nelle campagne periferiche",
+      "location": { "name": "Contrada Gisira / San Cusumano", "coordinates": { "latitude": 37.2510, "longitude": 15.2050 } },
+      "civic_issue": {
+        "problem": "Smaltimento illegale e combustione di scarti industriali e copertoni",
+        "description": "Roghi serali che rilasciano diossine e polveri sottili sulle abitazioni dei cittadini."
+      }
+    },
+    {
+      "id": "gta-l6",
+      "index": 5,
+      "number": 6,
+      "title": "Il Monte Tauro & La Colata di Cemento",
+      "subtitle": "Sbancamento della collina e consumo del suolo",
+      "location": { "name": "Monte Tauro", "coordinates": { "latitude": 37.2615, "longitude": 15.2140 } },
+      "civic_issue": {
+        "problem": "Cementificazione selvaggia della collina panoramica",
+        "description": "Lottizzazioni continue che erodono la macchia mediterranea naturale e aumentano il rischio idrogeologico."
+      }
+    },
+    {
+      "id": "gta-l7",
+      "index": 6,
+      "number": 7,
+      "title": "Piazza Castello & Il Gran Concerto Propaganda",
+      "subtitle": "Musica a palla per coprire i buchi dell'amministrazione",
+      "location": { "name": "Piazza Castello Svevo", "coordinates": { "latitude": 37.2360, "longitude": 15.2215 } },
+      "civic_issue": {
+        "problem": "Feste e concertoni milionari per distrarre dai problemi strutturali",
+        "description": "Grandi palchi ed eventi estivi effimeri a fronte di parchi abbandonati e servizi essenziali al collasso."
+      }
+    },
+    {
+      "id": "gta-l8",
+      "index": 7,
+      "number": 8,
+      "title": "Il Porto Megarese & La Bonifica Fantasma",
+      "subtitle": "La rada di Augusta contaminata da mercurio e idrocarburi",
+      "location": { "name": "Rada del Porto Megarese", "coordinates": { "latitude": 37.2150, "longitude": 15.1950 } },
+      "civic_issue": {
+        "problem": "Mancata bonifica dei fondali e delle banchine industriali",
+        "description": "Fondi stanziati e mai spesi per risanare i fondali contaminati da decenni di scarichi chimici."
+      }
+    },
+    {
+      "id": "gta-l9",
+      "index": 8,
+      "number": 9,
+      "title": "Le Saline Mulinello Sotto Fuoco",
+      "subtitle": "La zona umida protetta tra fenicotteri e incendi dolosi",
+      "location": { "name": "Saline del Fiume Mulinello", "coordinates": { "latitude": 37.2405, "longitude": 15.1850 } },
+      "civic_issue": {
+        "problem": "Incendi dolosi nei canneti e minaccia agli habitat protetti",
+        "description": "Un'oasi naturale preziosa per l'avifauna migratoria minacciata da incuria e roghi estivi."
+      }
+    },
+    {
+      "id": "gta-l10",
+      "index": 9,
+      "number": 10,
+      "title": "La Rinascita Verde di Augusta (Gran Finale Barocco)",
+      "subtitle": "Il trionfo della cultura ecologica e della riforestazione urbana",
+      "location": { "name": "Piazza Duomo & Centro Storico Rinato", "coordinates": { "latitude": 37.2340, "longitude": 15.2210 } },
+      "civic_issue": {
+        "problem": "La redenzione e la vittoria civica",
+        "description": "La città riscopre il valore dell'armonia tra il barocco siciliano e il verde urbano, piantando mille nuovi alberi e tutelando i giganti secolari per sempre."
+      }
+    }
+  ]
+}
