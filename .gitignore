@@ -12,3 +12,7 @@ screenshot_*.png
 __pycache__/
 *.py[cod]
 .DS_Store
+node_modules/
+scratch_*
+test_screen.png
+shot_*.png
