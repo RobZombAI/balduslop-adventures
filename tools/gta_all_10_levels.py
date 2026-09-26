@@ -39,7 +39,10 @@ def get_level_1():
     S("dock-ficus-main", 48, 7, 15.2, "stone", {checkpoint: 50, depth: 22, landmark: "pulsedrum"}),
     S("crumble-bark", 57, 4.2, 14.8, "crumble"),
     S("plat-shaded", 63, 6, 14.2, "stone"),
-    S("ferry-breeze", 71, 4.5, 13.8, "ferry", {travel: 18, speed: 3.2}),
+    S("switch-cato-rope", 65.5, 2.2, 14.35, "switch", {channel: "ficus-water", latch: !0}),
+    S("ficus-canopy-step1", 70.0, 5.0, 14.2, "timed", {channel: "ficus-water"}),
+    S("ficus-canopy-bridge", 76.0, 8.5, 14.4, "timed", {channel: "ficus-water"}),
+    S("ficus-canopy-step2", 85.5, 4.5, 14.0, "timed", {channel: "ficus-water"}),
     S("plat-seawall", 91, 7, 13.8, "stone"),
     S("pit-spikes-2", 50, 52, 2.0, "stone", {spiked: !0}),
 
@@ -99,7 +102,9 @@ def get_level_1():
     {kind: "fumo-petrolchimico-nube", x: 120.0, y: 26.0, size: 14.0, z: -15.0},
     {kind: "scarico-fogna-liquami", x: 148.0, y: 16.0, size: 4.5, z: -2.5},
     {kind: "liquame-tossico-pozza", x: 156.0, y: 16.0, size: 3.5, z: -1.2},
-    {kind: "ciminiera-fumo-animata", x: 180.0, y: 14.0, size: 20.0, z: -20.0}
+    {kind: "cato-carrucola-acqua", x: 65.0, y: 14.2, size: 7.0, z: -1.5},
+    {kind: "ficus-chioma-attraversabile", x: 78.0, y: 2.8, size: 13.5, z: -2.6},
+    {kind: "ficus-germoglio-irrigato", x: 68.5, y: 14.2, size: 3.0, z: -1.2}
   ],
   stamps: [{x: 42.5, y: 19.5}, {x: 133.5, y: 20.5}, {x: 202.5, y: 22.5}],
   coins: [
@@ -117,7 +122,7 @@ def get_level_1():
   ],
   hints: [
     {x: 0, end: 18, title: "Villa Comunale di Augusta (1850)", text: "Fondata dal generale Micheroux sulla Piazza d'Armi. I grandi Ficus secolari proteggono la citta dalle bolle di calore!", icon: "walk"},
-    {x: 48, end: 68, title: "I Ficus Monumentali", text: "Le radici aeree del Ficus formano una cattedrale viva. Salta sui rami ed evita le motoseghe che abbattono gli alberi!", icon: "sink"},
+    {x: 48, end: 68, title: "I Ficus Monumentali & Il Cato d'Acqua", text: "In alto c'è un cato d'acqua legato alla carrucola! Tira la corda per rovesciarlo e innaffiare il Ficus: la sua chioma crescera formando un ponte sopra gli spuntoni!", icon: "sink"},
     {x: 104, end: 125, title: "Belvedere sul Golfo Xifonio", text: "Dalla balconata della Villa si scorge il mare ionico e i gozzi dei pescatori. Raccogli il secondo germoglio dorato!", icon: "knead"},
     {x: 148, end: 165, title: "La Valvola Idraulica dei Giardini", text: "Cammina o salta sopra la valvola a terra per irrigare le radici secolari e aprire la cancellata di Piazza Duomo!", icon: "walk"},
     {x: 215, end: 242, title: "Piazza Duomo & Chiesa Madre (1769)", text: "Sei arrivato al Duomo barocco di Santa Maria Assunta! Pianta il germoglio al centro del sagrato per celebrare la rinascita verde!", icon: "bell"}

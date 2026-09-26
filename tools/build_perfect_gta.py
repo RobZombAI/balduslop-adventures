@@ -90,6 +90,7 @@ function showLiberationToast(channel, levelName) {
 
     const msgs = {
       "garden-water": "🌿 OASI IRRIGATA! Le radici secolari bevono acqua pulita e aprono Piazza Duomo!",
+      "ficus-water": "🌿 CATO D'ACQUA ROVESCIATO! L'acqua nutre il Ficus che cresce rigoglioso: attraversa la chioma verde sopra gli spuntoni!",
       "dock-lock": "🌊 PARATIA MARINA APERTA! Drenaggio fognario completato sul Lungomare Rossini!",
       "ash-lock": "🌊 DEPURAZIONE AVVIATA! Filtri marini attivati contro gli scarichi abusivi nel Golfo Xifonio!",
       "flare-lock": "🏭 FILTRI PETROLCHIMICI ATTIVATI! Emissioni di benzene e fumi neri abbattuti dalla raffineria!",
@@ -243,9 +244,128 @@ function flashGiuseppeSprout() {
   } catch(e) {}
 }
 
+function playWaterCascadeSound() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    const bufferSize = Math.floor(ctx.sampleRate * 1.6);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.95));
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(650, now);
+    filter.frequency.exponentialRampToValueAtTime(1200, now + 0.9);
+    filter.Q.value = 2.5;
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.01, now);
+    gain.gain.linearRampToValueAtTime(0.35, now + 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 1.5);
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    noise.start(now);
+
+    const notes = [392.0, 523.25, 659.25, 783.99, 1046.5];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const og = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, now + 0.35 + idx * 0.14);
+      og.gain.setValueAtTime(0.001, now + 0.35 + idx * 0.14);
+      og.gain.exponentialRampToValueAtTime(0.22, now + 0.35 + idx * 0.14 + 0.03);
+      og.gain.exponentialRampToValueAtTime(0.001, now + 0.35 + idx * 0.14 + 0.55);
+      osc.connect(og);
+      og.connect(ctx.destination);
+      osc.start(now + 0.35 + idx * 0.14);
+      osc.stop(now + 0.35 + idx * 0.14 + 0.6);
+    });
+  } catch(e) {}
+}
+
+function triggerFicusWaterContraption() {
+  try {
+    const scene = getWorldScene();
+    if (!scene) return;
+
+    scene.traverse(o => {
+      if (o.name && o.name.includes("cato-carrucola-acqua")) {
+        o.rotation.z = 0.28;
+      }
+    });
+
+    const streamGroup = new U();
+    streamGroup.name = "cato-water-cascade-burst";
+    streamGroup.position.set(67.2, 19.2, 0.4);
+    scene.add(streamGroup);
+
+    const dropMat = new Ce({color: 0x38bdf8, roughness: 0.15, metalness: 0.1, transparent: true, opacity: 0.9});
+    const foamMat = new Ce({color: 0xffffff, roughness: 0.2, metalness: 0});
+    const drops = [];
+    for (let i = 0; i < 48; i++) {
+      const d = new De(new $t(0.16, 8, 6), (i % 3 === 0) ? foamMat : dropMat);
+      d.scale.set(0.14, 0.36, 0.14);
+      d.position.set((Math.random() - 0.5) * 0.8, -Math.random() * 6.5, (Math.random() - 0.5) * 0.5);
+      streamGroup.add(d);
+      drops.push({
+        mesh: d,
+        vy: -9.0 - Math.random() * 5.0,
+        vx: 3.5 + Math.random() * 2.0
+      });
+    }
+
+    let ficusMesh = null;
+    scene.traverse(o => {
+      if (o.name && o.name.includes("ficus-chioma-attraversabile")) {
+        ficusMesh = o;
+      }
+    });
+
+    const startTime = performance.now();
+    const duration = 2400;
+
+    function stepStream(now) {
+      const progress = Math.min(1.0, (now - startTime) / duration);
+
+      for (let d of drops) {
+        d.mesh.position.y += d.vy * 0.016;
+        d.mesh.position.x += d.vx * 0.016;
+        if (d.mesh.position.y < -7.0) {
+          d.mesh.position.y = 0;
+          d.mesh.position.x = (Math.random() - 0.5) * 0.5;
+        }
+      }
+
+      if (ficusMesh) {
+        const t = progress;
+        const scale = t >= 1 ? 1 : (0.2 + 0.8 * Math.sin(t * Math.PI * 0.5));
+        ficusMesh.scale.set(scale, scale, scale);
+      }
+
+      if (progress < 1.0) {
+        requestAnimationFrame(stepStream);
+      } else {
+        setTimeout(() => { scene.remove(streamGroup); }, 1200);
+      }
+    }
+    requestAnimationFrame(stepStream);
+  } catch(e) {}
+}
+
 function triggerAugustaLiberation(channel, x, y, engine) {
   console.log("[🌿 AUGUSTA LIBERATION]", channel, "at x:", x, "y:", y);
-  try { playLiberationChime(); } catch(e) {}
+  if (channel === "ficus-water") {
+    try { playWaterCascadeSound(); } catch(e) {}
+    try { triggerFicusWaterContraption(); } catch(e) {}
+  } else {
+    try { playLiberationChime(); } catch(e) {}
+  }
   try { showLiberationToast(channel, engine?.level?.name); } catch(e) {}
   try { spawnLiberationParticles(x, y); } catch(e) {}
   try { flashGiuseppeSprout(); } catch(e) {}
@@ -254,6 +374,8 @@ window.triggerAugustaLiberation = triggerAugustaLiberation;
 window.showLiberationToast = showLiberationToast;
 window.spawnLiberationParticles = spawnLiberationParticles;
 window.playLiberationChime = playLiberationChime;
+window.playWaterCascadeSound = playWaterCascadeSound;
+window.triggerFicusWaterContraption = triggerFicusWaterContraption;
 
 // --- GIUSEPPE CUSTOMIZATION (HEAD, BODY, ACCESSORIES) ---
 function applyGiuseppeCustomization(scene, choice) {

@@ -429,5 +429,66 @@ def get_all_augusta_decor_models():
   t.ball(0.7,0.7,0.7,"rope",o,1.1,1.1,-0.5);
   t.cylinder(0.3,1.2,"dark",o,0.2,1.0,0.6);
 }
+,"cato-carrucola-acqua"(t,e,n){
+  const o=oo(e,n,7.5);
+  // Sturdy vertical wooden timber post
+  t.cylinder(0.24,6.2,"rope",o,0,3.1,0);
+  // Heavy timber base support blocks
+  t.box(1.2,0.5,1.2,"rope",o,0,0.25,0);
+  // Horizontal cantilever beam reaching over
+  t.box(3.2,0.32,0.32,"rope",o,1.2,5.9,0);
+  // Diagonal brace strut
+  t.box(1.8,0.22,0.22,"rope",o,0.7,5.0,0,-0.78);
+  // Iron pulley housing & grooved wheel
+  t.cylinder(0.40,0.18,"dark",o,2.4,5.7,0);
+  t.cylinder(0.48,0.06,"gold",o,2.4,5.7,0);
+  // Hanging hemp rope with wooden pull handle at player reach height
+  t.cylinder(0.04,4.2,"rope",o,1.6,3.6,0);
+  t.ball(0.25,0.25,0.25,"orange",o,1.6,1.5,0);
+  t.cylinder(0.12,0.28,"gold",o,1.6,1.4,0);
+  // The 'Cato' (Wooden Water Bucket) suspended from the pulley
+  t.cylinder(0.68,1.2,"orange",o,2.4,4.4,0);
+  t.cylinder(0.72,0.12,"dark",o,2.4,4.8,0);
+  t.cylinder(0.70,0.12,"dark",o,2.4,4.0,0);
+  // Surface of pure blue water inside the cato
+  t.cylinder(0.62,0.08,"cream",o,2.4,4.9,0);
+  t.ball(0.2,0.2,0.2,"cream",o,2.3,5.0,0.1);
+}
+,"ficus-chioma-attraversabile"(t,e,n){
+  const o=oo(e,n,14.0);
+  // Giant multi-pillar gnarled ficus trunk
+  t.cylinder(1.4,11.5,"bark",o,0,5.75,0);
+  // Characteristic aerial roots hanging down into the spike pit
+  t.cylinder(0.24,11.2,"vine",o,-3.2,5.6,0.5);
+  t.cylinder(0.22,10.8,"vine",o,3.4,5.4,-0.4);
+  t.cylinder(0.26,10.5,"vine",o,-1.6,5.25,-0.6);
+  t.cylinder(0.22,11.0,"vine",o,1.7,5.5,0.5);
+  t.cylinder(0.18,9.5,"vine",o,-4.8,4.75,0.2);
+  t.cylinder(0.18,9.5,"vine",o,4.9,4.75,-0.2);
+  // Massive undulating walkable green canopy (chioma di ficus)
+  t.ball(7.2,2.0,3.6,"foliage",o,0,11.4,0);
+  t.ball(4.8,1.8,3.2,"cityHerb",o,-4.2,11.2,0.2);
+  t.ball(5.0,1.9,3.4,"cityHerb",o,4.2,11.2,-0.2);
+  t.ball(4.4,1.6,2.8,"foliage",o,-1.6,11.0,0.8);
+  t.ball(4.4,1.6,2.8,"cityHerb",o,1.6,11.0,-0.8);
+  // Ripening golden figs / gemme di ficus
+  t.ball(0.25,0.25,0.25,"gold",o,-2.2,12.0,1.2);
+  t.ball(0.25,0.25,0.25,"gold",o,2.4,12.1,1.1);
+  t.ball(0.25,0.25,0.25,"gold",o,0.4,12.3,-1.2);
+}
+,"ficus-germoglio-irrigato"(t,e,n){
+  const o=oo(e,n,3.2);
+  // Clay terracotta pot
+  t.cylinder(0.65,0.8,"orange",o,0,0.4,0);
+  t.cylinder(0.72,0.18,"orange",o,0,0.75,0);
+  // Dry earth
+  t.cylinder(0.60,0.1,"dark",o,0,0.72,0);
+  // Young ficus stem and spreading roots
+  t.cylinder(0.10,1.4,"rope",o,0,1.3,0);
+  // Sprouting green leaves
+  t.ball(0.45,0.25,0.35,"gold",o,0,1.9,0);
+  t.ball(0.35,0.20,0.28,"orange",o,-0.3,1.7,0.2);
+  t.ball(0.35,0.20,0.28,"orange",o,0.3,1.6,-0.2);
+}
 '''
 
