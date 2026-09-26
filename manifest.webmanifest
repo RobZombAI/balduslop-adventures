@@ -17,6 +17,7 @@
     {"src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
   ],
   "screenshots": [
-    {"src": "./og-card.jpg", "sizes": "1200x630", "type": "image/jpeg", "form_factor": "wide", "label": "Claybound — the Sunbaked Canyon"}
+    {"src": "./og-preview.png", "sizes": "1200x630", "type": "image/png", "form_factor": "wide", "label": "BalduSlop Adventures — Home Screen"},
+    {"src": "./og-card.jpg", "sizes": "1200x630", "type": "image/jpeg", "form_factor": "wide", "label": "BalduSlop Adventures — Home Screen"}
   ]
 }
