@@ -727,15 +727,35 @@ if pos_apply_baldu != -1:
     bundle = bundle[:pos_apply_baldu] + liberation_and_char_code + "\n" + bundle[pos_apply_baldu:]
     print("[✓] Injected Liberation System and applyGiuseppeCustomization definition!")
 
-# 4. Inject 60 Augusta Themed Models into _D
+# 4. Inject 83 Augusta Themed Models into _D
 d_marker = '};function kre(t,e){'
 pos_d_end = bundle.find(d_marker)
 if pos_d_end != -1:
     decor_code = get_all_augusta_decor_models()
     bundle = bundle[:pos_d_end] + decor_code + bundle[pos_d_end:]
-    print("[✓] Injected 60 Augusta Themed 3D Decor Models into _D!")
+    print("[✓] Injected 83 Augusta Themed 3D Decor Models into _D!")
 else:
     print("[!] ERROR: Could not find _D closing marker!")
+
+# 4b. Material Safety & Fallback in mesh
+mesh_target = 'mesh(e,n,o,i=0,a=0,s=0){const r=typeof n=="string"?this.mat[n]:n;'
+mesh_replacement = 'mesh(e,n,o,i=0,a=0,s=0){const r=(typeof n=="string"?(this.mat[n]||(n==="moss"||n==="green"?this.mat.foliage:n==="coral"||n==="terracotta"?this.mat.orange:n==="wood"?this.mat.rope:this.mat.foliage||this.mat.cream)):n)||this.mat.cream;'
+bundle = bundle.replace(mesh_target, mesh_replacement)
+print("[✓] Injected resilient material fallback into mesh builder!")
+
+# 4c. Authentic Sicilian Botanical Palette & Material Aliases in _m(t, e)
+m_target = 't.caveKey=null,t.mat.flame||(t.mat.flame=new Ce({color:16767858,emissive:16758595,emissiveIntensity:1.2,roughness:1})),'
+m_replacement = 't.mat.foliage.color.setHex(3706428),t.mat.leafLight.color.setHex(6732650),t.mat.vine.color.setHex(2120750),t.mat.bark.color.setHex(6111287),t.mat.barkLight.color.setHex(9268835),t.mat.moss=t.mat.foliage,t.mat.coral=t.mat.orange,t.mat.terracotta=t.mat.orange,t.mat.wood=t.mat.bark,t.mat.green=t.mat.foliage,t.caveKey=null,t.mat.flame||(t.mat.flame=new Ce({color:16767858,emissive:16758595,emissiveIntensity:1.2,roughness:1})),'
+bundle = bundle.replace(m_target, m_replacement)
+print("[✓] Injected authentic Sicilian botanical green and wood palette into _m!")
+
+
+# 4d. Log decor errors if any occur
+decor_err_target = 'try{_D[e.kind]?.(t,o,Kr(e))}catch(i){o.userData.decorError=i.message}'
+decor_err_replacement = 'try{_D[e.kind]?.(t,o,Kr(e))}catch(i){o.userData.decorError=i.message;console.error("Decor error on "+e.kind+":", i)}'
+bundle = bundle.replace(decor_err_target, decor_err_replacement)
+print("[✓] Injected decor error logging!")
+
 
 # 5. Hook window.__WORLD_SCENE__ in kne(t, e)
 bundle = bundle.replace("function kne(t,e){const n=t.mat;", "function kne(t,e){window.__WORLD_SCENE__=t.scene;const n=t.mat;")
