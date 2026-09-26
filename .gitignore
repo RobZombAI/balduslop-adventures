@@ -9,5 +9,6 @@ dev_*.png
 angle_*.png
 test_*.png
 screenshot_*.png
-logo_img_*.jpg
+__pycache__/
+*.py[cod]
 .DS_Store

@@ -1,0 +1,21 @@
+{
+  "name": "GTA: Giuseppe Taglia Alberi — Edizione Augusta",
+  "short_name": "GTA Augusta",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1b3a24",
+  "theme_color": "#2d8a4e",
+  "description": "GTA: Giuseppe Taglia Alberi. Platform 3D d'azione satirico e di sensibilizzazione ecologica ambientato ad Augusta (SR). Salva il verde pubblico, gli alberi secolari e le piazze contro le isole di calore e la cementificazione!",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
