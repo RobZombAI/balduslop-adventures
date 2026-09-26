@@ -94,7 +94,12 @@ def get_level_1():
     {kind: "barocco-duomo", x: 236.0, y: 18.8, size: 18.0, z: -4.5},
     {kind: "vaso-terracotta-agave", x: 226.0, y: 17.8, size: 2.5, z: -1.5},
     {kind: "panchina-villa", x: 230.0, y: 18.8, size: 3.0, z: -1.5},
-    {kind: "tree-sapling", x: 242.0, y: 18.8, size: 2.5, z: -1.5}
+    {kind: "tree-sapling", x: 242.0, y: 18.8, size: 2.5, z: -1.5},
+    {kind: "discarica-abusiva", x: 78.0, y: 13.8, size: 5.5, z: -2.8},
+    {kind: "fumo-petrolchimico-nube", x: 120.0, y: 26.0, size: 14.0, z: -15.0},
+    {kind: "scarico-fogna-liquami", x: 148.0, y: 16.0, size: 4.5, z: -2.5},
+    {kind: "liquame-tossico-pozza", x: 156.0, y: 16.0, size: 3.5, z: -1.2},
+    {kind: "ciminiera-fumo-animata", x: 180.0, y: 14.0, size: 20.0, z: -20.0}
   ],
   stamps: [{x: 42.5, y: 19.5}, {x: 133.5, y: 20.5}, {x: 202.5, y: 22.5}],
   coins: [
@@ -114,7 +119,7 @@ def get_level_1():
     {x: 0, end: 18, title: "Villa Comunale di Augusta (1850)", text: "Fondata dal generale Micheroux sulla Piazza d'Armi. I grandi Ficus secolari proteggono la citta dalle bolle di calore!", icon: "walk"},
     {x: 48, end: 68, title: "I Ficus Monumentali", text: "Le radici aeree del Ficus formano una cattedrale viva. Salta sui rami ed evita le motoseghe che abbattono gli alberi!", icon: "sink"},
     {x: 104, end: 125, title: "Belvedere sul Golfo Xifonio", text: "Dalla balconata della Villa si scorge il mare ionico e i gozzi dei pescatori. Raccogli il secondo germoglio dorato!", icon: "knead"},
-    {x: 148, end: 165, title: "La Valvola Idraulica dei Giardini", text: "Premi l'interruttore della condotta per innaffiare le radici secolari e aprire la cancellata di Piazza Duomo!", icon: "walk"},
+    {x: 148, end: 165, title: "La Valvola Idraulica dei Giardini", text: "Cammina o salta sopra la valvola a terra per irrigare le radici secolari e aprire la cancellata di Piazza Duomo!", icon: "walk"},
     {x: 215, end: 242, title: "Piazza Duomo & Chiesa Madre (1769)", text: "Sei arrivato al Duomo barocco di Santa Maria Assunta! Pianta il germoglio al centro del sagrato per celebrare la rinascita verde!", icon: "bell"}
   ],
   shaping: [], enemies: [], crushers: []
@@ -128,8 +133,8 @@ def get_level_2():
   label: "Tombini che esplodono, liquami in strada e crisi climatica",
   biome: "nightfall",
   intro: "Le bombe d'acqua della crisi climatica travolgono Augusta! La rete fognaria obsoleta cede e i tombini del lungomare Rossini saltano via sparando getti di liquami e melma. Salta sulle passerelle di soccorso e chiudi le paratoie di spurgo!",
-  sky: "#131f2b",
-  fog: "#1f3142",
+  sky: "#141e28",
+  fog: "#223140",
   spawn: {x: 1.5, y: 11},
   end: 242,
   previousDistance: 1100,
@@ -206,7 +211,14 @@ def get_level_2():
     {kind: "salvagente-rossini", x: 166.0, y: 16.0, size: 1.8, z: -1.2},
     {kind: "chiatta-megara", x: 188.0, y: 12.0, size: 14.0, z: -6.0},
     {kind: "sewer-manhole", x: 215.0, y: 15.6, size: 2.5, z: -1.5},
-    {kind: "valvola-spurgo", x: 224.0, y: 16.6, size: 2.2, z: -1.2}
+    {kind: "valvola-spurgo", x: 224.0, y: 16.6, size: 2.2, z: -1.2},
+    {kind: "scarico-fogna-liquami", x: 22.0, y: 12.6, size: 5.0, z: -2.5},
+    {kind: "fusto-tossico-sversato", x: 38.0, y: 13.8, size: 3.0, z: -1.2},
+    {kind: "discarica-abusiva", x: 80.0, y: 12.6, size: 6.0, z: -3.0},
+    {kind: "liquame-tossico-pozza", x: 146.0, y: 16.0, size: 4.0, z: -1.2},
+    {kind: "rifiuti-plastica-costa", x: 172.0, y: 15.0, size: 4.5, z: -2.0},
+    {kind: "fumo-petrolchimico-nube", x: 95.0, y: 24.0, size: 15.0, z: -14.0},
+    {kind: "ciminiera-fumo-animata", x: 200.0, y: 14.0, size: 22.0, z: -18.0}
   ],
   shaping: [],
   hints: [
@@ -237,8 +249,8 @@ def get_level_3():
   label: "Bagnanti tra divieti di balneazione e scarichi a mare",
   biome: "nightfall",
   intro: "Il paradosso del golfo Xifonio: le famiglie fanno il bagno tra splendide acque e cartelli di divieto di balneazione ignorati, mentre scarichi fognari abusivi riversano reflui in mare senza depuratore. Salta tra le boe e attiva i filtri marini!",
-  sky: "#183852",
-  fog: "#244c6e",
+  sky: "#193246",
+  fog: "#284660",
   spawn: {x: 1.5, y: 12},
   end: 240,
   previousDistance: 1100,
@@ -317,7 +329,13 @@ def get_level_3():
     {kind: "cartello-divieto-balneazione", x: 165.0, y: 16.0, size: 3.2, z: -1.6},
     {kind: "tubo-scarico-mare", x: 186.0, y: 13.5, size: 4.0, z: -2.5},
     {kind: "boa-filtrante", x: 202.0, y: 14.0, size: 3.5, z: -3.0},
-    {kind: "campanello-sos-costa", x: 216.0, y: 15.8, size: 3.0, z: -1.2}
+    {kind: "campanello-sos-costa", x: 216.0, y: 15.8, size: 3.0, z: -1.2},
+    {kind: "scarico-fogna-liquami", x: 34.0, y: 13.0, size: 5.5, z: -2.8},
+    {kind: "rifiuti-plastica-costa", x: 60.0, y: 12.5, size: 4.8, z: -2.2},
+    {kind: "fumo-petrolchimico-nube", x: 105.0, y: 25.0, size: 15.0, z: -15.0},
+    {kind: "torcia-petrolchimico-fiamma", x: 155.0, y: 14.0, size: 22.0, z: -18.0},
+    {kind: "discarica-abusiva", x: 178.0, y: 15.0, size: 6.0, z: -3.0},
+    {kind: "fusto-tossico-sversato", x: 194.0, y: 13.5, size: 3.0, z: -1.5}
   ],
   shaping: [],
   hints: [
@@ -348,8 +366,8 @@ def get_level_4():
   label: "Fumi industriali, idrocarburi e la richiesta di bonifica",
   biome: "nightfall",
   intro: "Il polo industriale Priolo-Augusta-Melilli: ciminiere fumanti, serbatoi e fiaccole accese giorno e notte. Gli abitanti respirano miasmi e chiedono bonifiche mai arrivate. Raggiungi le torri di monitoraggio e riduci le emissioni!",
-  sky: "#21151e",
-  fog: "#361f30",
+  sky: "#261713",
+  fog: "#42281e",
   spawn: {x: 1.5, y: 11},
   end: 240,
   previousDistance: 1100,
@@ -424,7 +442,14 @@ def get_level_4():
     {kind: "oil-tank", x: 172.0, y: 16.0, size: 12.0, z: -5.0},
     {kind: "manometro-pressione", x: 188.0, y: 15.0, size: 1.8, z: -1.0},
     {kind: "fusto-tossico", x: 202.0, y: 15.8, size: 1.8, z: -1.2},
-    {kind: "traliccio-tubi", x: 218.0, y: 15.8, size: 7.5, z: -3.0}
+    {kind: "traliccio-tubi", x: 218.0, y: 15.8, size: 7.5, z: -3.0},
+    {kind: "ciminiera-fumo-animata", x: 42.0, y: 13.8, size: 22.0, z: -8.0},
+    {kind: "torcia-petrolchimico-fiamma", x: 75.0, y: 12.6, size: 24.0, z: -7.0},
+    {kind: "fusto-tossico-sversato", x: 92.0, y: 12.6, size: 3.2, z: -1.2},
+    {kind: "liquame-tossico-pozza", x: 114.0, y: 14.0, size: 4.5, z: -1.4},
+    {kind: "discarica-abusiva", x: 160.0, y: 16.0, size: 6.5, z: -3.5},
+    {kind: "fumo-petrolchimico-nube", x: 60.0, y: 26.0, size: 16.0, z: -12.0},
+    {kind: "fumo-petrolchimico-nube", x: 180.0, y: 27.0, size: 18.0, z: -14.0}
   ],
   shaping: [],
   hints: [
@@ -455,8 +480,8 @@ def get_level_5():
   label: "Capolavoro in cemento armato del 1917 e macerie tossiche",
   biome: "nightfall",
   intro: "L'incredibile Hangar per Dirigibili del 1917: una meraviglia ingegneristica in cemento armato abbandonata all'incuria, circondata da onduline di amianto frantumate dal vento. Scala le titaniche centine paraboliche ed esponi lo scandalo!",
-  sky: "#19222d",
-  fog: "#253443",
+  sky: "#1a232e",
+  fog: "#2a3746",
   spawn: {x: 1.5, y: 23},
   end: 240,
   previousDistance: 1100,
@@ -531,7 +556,13 @@ def get_level_5():
     {kind: "faro-cantiere", x: 148.0, y: 27.8, size: 3.5, z: -1.5},
     {kind: "hangar-arch", x: 170.0, y: 27.0, size: 28.0, z: -5.0},
     {kind: "dirigibile-relique", x: 190.0, y: 27.0, size: 15.0, z: -4.0},
-    {kind: "cartello-bonifica", x: 216.0, y: 27.6, size: 2.8, z: -1.2}
+    {kind: "cartello-bonifica", x: 216.0, y: 27.6, size: 2.8, z: -1.2},
+    {kind: "discarica-abusiva", x: 26.0, y: 24.5, size: 6.5, z: -3.0},
+    {kind: "scarico-fogna-liquami", x: 70.0, y: 24.0, size: 5.0, z: -2.5},
+    {kind: "fusto-tossico-sversato", x: 110.0, y: 25.4, size: 3.2, z: -1.2},
+    {kind: "fumo-petrolchimico-nube", x: 130.0, y: 35.0, size: 16.0, z: -15.0},
+    {kind: "rifiuti-plastica-costa", x: 175.0, y: 27.0, size: 4.8, z: -2.0},
+    {kind: "ciminiera-fumo-animata", x: 210.0, y: 26.0, size: 22.0, z: -18.0}
   ],
   shaping: [],
   hints: [
@@ -562,8 +593,8 @@ def get_level_6():
   label: "Fortezza federiciana del 1242 tra crepe, sterpaglie e promesse",
   biome: "nightfall",
   intro: "Voluto da Federico II di Svevia nel 1242 sulla punta estrema dell'isola: una magnifica roccaforte chiusa al pubblico, soffocata da transenne eterne e crolli parziali. Esplora le cortine e i bastioni per risvegliare la storia imperiale di Augusta!",
-  sky: "#24191a",
-  fog: "#382326",
+  sky: "#24181a",
+  fog: "#392226",
   spawn: {x: 1.5, y: 14},
   end: 240,
   previousDistance: 1100,
@@ -637,7 +668,12 @@ def get_level_6():
     {kind: "cannone-antico", x: 150.0, y: 19.0, size: 3.2, z: -1.5},
     {kind: "catapulta-antica", x: 172.0, y: 19.0, size: 4.5, z: -2.0},
     {kind: "torre-sveva", x: 200.0, y: 18.8, size: 16.0, z: -5.0},
-    {kind: "stemma-federico", x: 220.0, y: 19.8, size: 3.0, z: -1.5}
+    {kind: "stemma-federico", x: 220.0, y: 19.8, size: 3.0, z: -1.5},
+    {kind: "scarico-fogna-liquami", x: 35.0, y: 16.6, size: 5.0, z: -2.5},
+    {kind: "discarica-abusiva", x: 80.0, y: 15.4, size: 6.0, z: -3.0},
+    {kind: "fusto-tossico-sversato", x: 120.0, y: 17.0, size: 3.0, z: -1.2},
+    {kind: "fumo-petrolchimico-nube", x: 150.0, y: 28.0, size: 15.0, z: -15.0},
+    {kind: "torcia-petrolchimico-fiamma", x: 190.0, y: 17.0, size: 22.0, z: -18.0}
   ],
   shaping: [],
   hints: [
@@ -666,7 +702,7 @@ def get_level_7():
   name: "Capo Santa Croce & Il Santuario della Posidonia",
   short: "Capo Santa Croce",
   label: "Faro bianco, falesie calcaree e le praterie sottomarine",
-  biome: "nightfall",
+  biome: "citadel",
   intro: "Il promontorio di Capo Santa Croce: falesie calcaree a picco sullo Ionio, il faro borbonico e le preziose praterie di Posidonia oceanica che ossigenano il mare e frenano l'erosione costiera. Proteggi le scogliere dagli sversamenti!",
   sky: "#122a44",
   fog: "#1c3c5e",
@@ -743,7 +779,13 @@ def get_level_7():
     {kind: "ancora-ammiragliato", x: 150.0, y: 20.0, size: 3.8, z: -1.8},
     {kind: "falesia-calcarea", x: 176.0, y: 19.4, size: 12.0, z: -4.0},
     {kind: "lighthouse-tower", x: 200.0, y: 19.8, size: 16.0, z: -5.0},
-    {kind: "campana-nebbia", x: 218.0, y: 20.8, size: 2.6, z: -1.2}
+    {kind: "campana-nebbia", x: 218.0, y: 20.8, size: 2.6, z: -1.2},
+    {kind: "rifiuti-plastica-costa", x: 24.0, y: 16.6, size: 4.8, z: -2.0},
+    {kind: "fusto-tossico-sversato", x: 60.0, y: 16.4, size: 3.2, z: -1.2},
+    {kind: "rifiuti-plastica-costa", x: 110.0, y: 17.0, size: 5.0, z: -2.0},
+    {kind: "discarica-abusiva", x: 150.0, y: 20.0, size: 6.5, z: -3.2},
+    {kind: "fumo-petrolchimico-nube", x: 140.0, y: 30.0, size: 16.0, z: -16.0},
+    {kind: "torcia-petrolchimico-fiamma", x: 195.0, y: 18.0, size: 22.0, z: -18.0}
   ],
   shaping: [],
   hints: [
@@ -851,7 +893,12 @@ def get_level_8():
     {kind: "salt-pyramid", x: 170.0, y: 17.0, size: 4.0, z: -1.8},
     {kind: "fenicottero-rosa", x: 188.0, y: 16.0, size: 2.8, z: -1.2},
     {kind: "carrello-sale", x: 202.0, y: 16.8, size: 3.0, z: -1.5},
-    {kind: "salt-windmill", x: 218.0, y: 16.8, size: 6.5, z: -3.5}
+    {kind: "salt-windmill", x: 218.0, y: 16.8, size: 6.5, z: -3.5},
+    {kind: "liquame-tossico-pozza", x: 65.0, y: 13.4, size: 4.0, z: -1.5},
+    {kind: "scarico-fogna-liquami", x: 112.0, y: 15.0, size: 5.0, z: -2.5},
+    {kind: "discarica-abusiva", x: 155.0, y: 17.0, size: 6.0, z: -3.0},
+    {kind: "fumo-petrolchimico-nube", x: 170.0, y: 28.0, size: 16.0, z: -15.0},
+    {kind: "ciminiera-fumo-animata", x: 215.0, y: 15.0, size: 22.0, z: -18.0}
   ],
   shaping: [],
   hints: [
@@ -882,8 +929,8 @@ def get_level_9():
   label: "Fortificazioni rinascimentali del 1567 in mezzo al porto industriale",
   biome: "nightfall",
   intro: "Eretti nel 1567 dal viceré spagnolo Garcia de Toledo al centro della rada megarese: due forti marittimi gemelli un tempo collegati da pesanti catene sommerse per sbarrare il porto. Salta sui bastioni storici e ricongiungi i guardiani!",
-  sky: "#151e28",
-  fog: "#243242",
+  sky: "#161f2a",
+  fog: "#263546",
   spawn: {x: 1.5, y: 15},
   end: 240,
   previousDistance: 1100,
@@ -957,7 +1004,13 @@ def get_level_9():
     {kind: "bastione-spagnolo", x: 150.0, y: 20.0, size: 8.0, z: -4.0},
     {kind: "bandiera-sicilia", x: 174.0, y: 19.4, size: 5.5, z: -2.0},
     {kind: "garitta-vedetta", x: 200.0, y: 19.8, size: 5.0, z: -2.5},
-    {kind: "cannone-borbonico", x: 220.0, y: 20.8, size: 3.5, z: -1.6}
+    {kind: "cannone-borbonico", x: 220.0, y: 20.8, size: 3.5, z: -1.6},
+    {kind: "ciminiera-fumo-animata", x: 30.0, y: 16.6, size: 22.0, z: -16.0},
+    {kind: "fumo-petrolchimico-nube", x: 70.0, y: 30.0, size: 17.0, z: -14.0},
+    {kind: "torcia-petrolchimico-fiamma", x: 115.0, y: 17.0, size: 24.0, z: -18.0},
+    {kind: "discarica-abusiva", x: 145.0, y: 20.0, size: 6.0, z: -3.0},
+    {kind: "liquame-tossico-pozza", x: 175.0, y: 19.0, size: 4.2, z: -1.4},
+    {kind: "fusto-tossico-sversato", x: 205.0, y: 19.8, size: 3.2, z: -1.2}
   ],
   shaping: [],
   hints: [
@@ -986,10 +1039,10 @@ def get_level_10():
   name: "Porta Spagnola & La Grande Rinascita Verde",
   short: "Porta Spagnola",
   label: "La porta barocca del 1692, la differenziata e il trionfo ecologico",
-  biome: "nightfall",
+  biome: "citadel",
   intro: "Il gran finale: varca la celebre Porta Spagnola del 1692, simbolo imperituro di Augusta fondata dal viceré Benavides. Raccogli tutti i rifiuti, pianta i giovani alberi e raggiungi Piazza Duomo per celebrare la rinascita ecologica e culturale della citta!",
-  sky: "#19283e",
-  fog: "#2b4060",
+  sky: "#1a6faa",
+  fog: "#449cd6",
   spawn: {x: 1.5, y: 16},
   end: 240,
   previousDistance: 1100,
@@ -1063,7 +1116,12 @@ def get_level_10():
     {kind: "palina-raccolta-differenziata", x: 172.0, y: 21.0, size: 2.2, z: -1.0},
     {kind: "arco-trionfale-verde", x: 196.0, y: 20.8, size: 9.0, z: -2.5},
     {kind: "barocco-duomo", x: 216.0, y: 20.8, size: 18.0, z: -4.5},
-    {kind: "vaso-caltagirone", x: 230.0, y: 21.8, size: 3.2, z: -1.2}
+    {kind: "vaso-caltagirone", x: 230.0, y: 21.8, size: 3.2, z: -1.2},
+    {kind: "discarica-abusiva", x: 24.0, y: 17.6, size: 5.0, z: -3.0},
+    {kind: "rifiuti-plastica-costa", x: 60.0, y: 17.4, size: 4.2, z: -2.2},
+    {kind: "ficus-centenario", x: 130.0, y: 20.0, size: 14.0, z: -4.5},
+    {kind: "fountain-augusta", x: 180.0, y: 20.0, size: 4.5, z: -2.5},
+    {kind: "ficus-centenario", x: 225.0, y: 20.8, size: 15.0, z: -5.0}
   ],
   shaping: [],
   hints: [

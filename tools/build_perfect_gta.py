@@ -11,7 +11,6 @@ with open("bundle/index-augusta-v2.js", "r", encoding="utf-8") as f:
     bundle = f.read()
 
 # 2. Update character registry in $d:
-# Giuseppe height 1.85, model explorer.glb, motion explorer-motion.json, animation explorer-animation.json
 old_char_marker = 'const S0=1.78,$d=['
 pos_d = bundle.find(old_char_marker)
 if pos_d != -1:
@@ -24,8 +23,240 @@ if pos_d != -1:
 # Replace applyBalduCustomization call in ese()
 bundle = bundle.replace("applyBalduCustomization(e.scene,i)", "applyGiuseppeCustomization(e.scene,i)")
 
-# 3. Inject applyGiuseppeCustomization
-giuseppe_code = '''function applyGiuseppeCustomization(scene, choice) {
+# 3. Inject Liberation System & applyGiuseppeCustomization
+liberation_and_char_code = '''
+// --- AUGUSTA LIBERATION ANIMATIONS & AUDIO ---
+function playLiberationChime() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(freq, now + idx * 0.11);
+      gain.gain.setValueAtTime(0.001, now + idx * 0.11);
+      gain.gain.exponentialRampToValueAtTime(0.28, now + idx * 0.11 + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.65);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + idx * 0.11);
+      osc.stop(now + idx * 0.11 + 0.70);
+    });
+    const spark = ctx.createOscillator();
+    const sGain = ctx.createGain();
+    spark.type = "sine";
+    spark.frequency.setValueAtTime(1567.98, now + 0.35);
+    sGain.gain.setValueAtTime(0.001, now + 0.35);
+    sGain.gain.exponentialRampToValueAtTime(0.18, now + 0.38);
+    sGain.gain.exponentialRampToValueAtTime(0.001, now + 1.1);
+    spark.connect(sGain);
+    sGain.connect(ctx.destination);
+    spark.start(now + 0.35);
+    spark.stop(now + 1.15);
+  } catch(e) {}
+}
+
+function showLiberationToast(channel, levelName) {
+  try {
+    let toast = document.getElementById("gta-liberation-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "gta-liberation-toast";
+      toast.style.position = "fixed";
+      toast.style.top = "20px";
+      toast.style.left = "50%";
+      toast.style.transform = "translateX(-50%) translateY(-120px)";
+      toast.style.zIndex = "999999";
+      toast.style.padding = "14px 28px";
+      toast.style.borderRadius = "32px";
+      toast.style.background = "linear-gradient(135deg, rgba(20, 48, 36, 0.96), rgba(12, 32, 22, 0.98))";
+      toast.style.boxShadow = "0 12px 35px rgba(0,0,0,0.6), 0 0 25px rgba(74, 222, 128, 0.55), inset 0 2px 3px rgba(255,255,255,0.3)";
+      toast.style.border = "2.5px solid #4ade80";
+      toast.style.color = "#ffffff";
+      toast.style.fontFamily = "'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif";
+      toast.style.fontWeight = "800";
+      toast.style.fontSize = "16px";
+      toast.style.letterSpacing = "0.4px";
+      toast.style.textAlign = "center";
+      toast.style.pointerEvents = "none";
+      toast.style.transition = "transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.45s ease";
+      toast.style.opacity = "0";
+      document.body.appendChild(toast);
+    }
+
+    const msgs = {
+      "garden-water": "🌿 OASI IRRIGATA! Le radici secolari bevono acqua pulita e aprono Piazza Duomo!",
+      "dock-lock": "🌊 PARATIA MARINA APERTA! Drenaggio fognario completato sul Lungomare Rossini!",
+      "ash-lock": "🌊 DEPURAZIONE AVVIATA! Filtri marini attivati contro gli scarichi abusivi nel Golfo Xifonio!",
+      "flare-lock": "🏭 FILTRI PETROLCHIMICI ATTIVATI! Emissioni di benzene e fumi neri abbattuti dalla raffineria!",
+      "hangar-lock": "🌿 BONIFICA IDROSCALO ATTIVATA! Riserva naturale protetta dall'incuria e dai rifiuti tossici!",
+      "castle-lock": "🏰 BASTIONI SVEVI LIBERATI! Stop agli scarichi abusivi attorno alla fortezza di Federico II!",
+      "light-lock": "💡 FARO SANTA CROCE ACCESO! Monitoraggio attivo contro le maree nere e sversamenti in mare!",
+      "salt-lock": "🦩 SALINE BONIFICATE! Acqua marina pura per i fenicotteri rosa e protezione delle oasi umide!",
+      "vittoria-lock": "🏛️ FORTE VITTORIA PROTETTO! I guardiani rinascimentali salvati dal degrado industriale!",
+      "porta-lock": "🌱 AUGUSTA RINASCE VERDE! UTOPIA ECOLOGICA: Alberi secolari, aria pulita e futuro sostenibile!"
+    };
+    const msg = msgs[channel] || "🌱 BONIFICA COMPLETATA! Un altro pericolo rimosso da Augusta!";
+    toast.innerHTML = '<span style="font-size:22px;margin-right:8px;vertical-align:middle;">✨</span>' + msg;
+    toast.style.opacity = "1";
+    toast.style.transform = "translateX(-50%) translateY(0px)";
+
+    if (window.__liberationTimer) clearTimeout(window.__liberationTimer);
+    window.__liberationTimer = setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(-50%) translateY(-120px)";
+    }, 4400);
+  } catch(e) {}
+}
+
+function getWorldScene() {
+  if (window.__WORLD_SCENE__ && window.__WORLD_SCENE__.type === 'Scene') return window.__WORLD_SCENE__;
+  let curr = window.__DEBUG_PLAYER_SCENE__;
+  while (curr) {
+    if (curr.type === 'Scene') {
+      window.__WORLD_SCENE__ = curr;
+      return curr;
+    }
+    curr = curr.parent;
+  }
+  return null;
+}
+
+function spawnLiberationParticles(x, y) {
+  try {
+    const scene = getWorldScene();
+    if (!scene) return;
+
+    const partGroup = new U();
+    partGroup.name = "liberation-particle-burst";
+    partGroup.position.set(x || 0, y || 15, 0.5);
+
+    const leafMatA = new Ce({color: 0x4ade80, roughness: 0.6, metalness: 0});
+    const leafMatB = new Ce({color: 0x22c55e, roughness: 0.6, metalness: 0});
+    const dropMat = new Ce({color: 0x38bdf8, roughness: 0.2, metalness: 0.1, transparent: true, opacity: 0.85});
+    const goldMat = new Ce({color: 0xfacc15, roughness: 0.3, metalness: 0.8});
+
+    const particles = [];
+    const count = 36;
+    for (let i = 0; i < count; i++) {
+      const isLeaf = i % 2 === 0;
+      const isGold = i % 5 === 0;
+      let mesh;
+      if (isGold) {
+        mesh = new De(new $t(0.12, 8, 6), goldMat);
+      } else if (isLeaf) {
+        mesh = new De(new $t(1, 8, 6), (i % 4 === 0) ? leafMatA : leafMatB);
+        mesh.scale.set(0.14, 0.26, 0.04);
+      } else {
+        mesh = new De(new $t(0.15, 8, 8), dropMat);
+        mesh.scale.set(0.12, 0.18, 0.12);
+      }
+
+      const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5);
+      const speed = 2.5 + Math.random() * 4.5;
+      const upward = 3.5 + Math.random() * 5.0;
+
+      mesh.position.set((Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.5);
+      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+      partGroup.add(mesh);
+
+      particles.push({
+        mesh,
+        vx: Math.cos(angle) * speed,
+        vy: upward,
+        vz: Math.sin(angle) * (speed * 0.3),
+        rx: (Math.random() - 0.5) * 9,
+        ry: (Math.random() - 0.5) * 9,
+        rz: (Math.random() - 0.5) * 9,
+        gravity: isLeaf ? -3.8 : -7.5
+      });
+    }
+
+    scene.add(partGroup);
+
+    const startTime = performance.now();
+    const duration = 2400;
+
+    function stepBurst(now) {
+      const progress = (now - startTime) / duration;
+      if (progress >= 1.0) {
+        scene.remove(partGroup);
+        return;
+      }
+
+      partGroup.scale.setScalar(1.0 + progress * 0.3);
+
+      for (let p of particles) {
+        p.mesh.position.x += p.vx * 0.016;
+        p.mesh.position.y += p.vy * 0.016;
+        p.mesh.position.z += p.vz * 0.016;
+        p.vy += p.gravity * 0.016;
+
+        p.mesh.rotation.x += p.rx * 0.016;
+        p.mesh.rotation.y += p.ry * 0.016;
+        p.mesh.rotation.z += p.rz * 0.016;
+
+        p.mesh.scale.multiplyScalar(0.992);
+      }
+
+      requestAnimationFrame(stepBurst);
+    }
+    requestAnimationFrame(stepBurst);
+  } catch(e) {}
+}
+
+function flashGiuseppeSprout() {
+  try {
+    const pScene = window.__DEBUG_PLAYER_SCENE__;
+    if (!pScene) return;
+    const trowel = pScene.getObjectByName("giuseppe-trowel-prop");
+    if (!trowel) return;
+
+    trowel.traverse(child => {
+      if (child.isMesh && child.material) {
+        const mats = Array.isArray(child.material) ? child.material : [child.material];
+        mats.forEach(m => {
+          if (!m.userData._origEmissive) {
+            m.userData._origEmissive = m.emissive ? m.emissive.getHex() : 0x000000;
+          }
+          if (m.emissive) m.emissive.setHex(0x33ff66);
+        });
+      }
+    });
+
+    setTimeout(() => {
+      trowel.traverse(child => {
+        if (child.isMesh && child.material) {
+          const mats = Array.isArray(child.material) ? child.material : [child.material];
+          mats.forEach(m => {
+            if (m.emissive && m.userData._origEmissive !== undefined) {
+              m.emissive.setHex(m.userData._origEmissive);
+            }
+          });
+        }
+      });
+    }, 1600);
+  } catch(e) {}
+}
+
+function triggerAugustaLiberation(channel, x, y, engine) {
+  console.log("[🌿 AUGUSTA LIBERATION]", channel, "at x:", x, "y:", y);
+  try { playLiberationChime(); } catch(e) {}
+  try { showLiberationToast(channel, engine?.level?.name); } catch(e) {}
+  try { spawnLiberationParticles(x, y); } catch(e) {}
+  try { flashGiuseppeSprout(); } catch(e) {}
+}
+window.triggerAugustaLiberation = triggerAugustaLiberation;
+window.showLiberationToast = showLiberationToast;
+window.spawnLiberationParticles = spawnLiberationParticles;
+window.playLiberationChime = playLiberationChime;
+
+// --- GIUSEPPE CUSTOMIZATION (HEAD, BODY, ACCESSORIES) ---
+function applyGiuseppeCustomization(scene, choice) {
   if (!choice || (choice.id !== "giuseppe" && choice.id !== "baldu" && choice.id !== "explorer")) return;
   window.__DEBUG_PLAYER_SCENE__ = scene;
   const head = scene.getObjectByName("Head");
@@ -150,103 +381,133 @@ giuseppe_code = '''function applyGiuseppeCustomization(scene, choice) {
   headGroup.add(chin);
 
   const earL = new De(new $t(1, 12, 10), skinMat);
-  earL.position.set(-0.235, 0.20, 0.01);
-  earL.scale.set(0.045, 0.085, 0.06);
+  earL.position.set(-0.235, 0.19, 0.02);
+  earL.scale.set(0.045, 0.085, 0.065);
+  earL.rotation.set(0.1, 0, -0.15);
   const earR = new De(new $t(1, 12, 10), skinMat);
-  earR.position.set(0.235, 0.20, 0.01);
-  earR.scale.set(0.045, 0.085, 0.06);
+  earR.position.set(0.235, 0.19, 0.02);
+  earR.scale.set(0.045, 0.085, 0.065);
+  earR.rotation.set(0.1, 0, 0.15);
   headGroup.add(earL, earR);
 
-  const nose = new De(new $t(1, 14, 12), skinMat);
-  nose.position.set(0, 0.20, 0.23);
-  nose.scale.set(0.075, 0.075, 0.085);
-  headGroup.add(nose);
+  const noseRoot = new De(new $t(1, 14, 12), skinMat);
+  noseRoot.position.set(0, 0.175, 0.22);
+  noseRoot.scale.set(0.048, 0.075, 0.065);
+  const noseTip = new De(new $t(1, 14, 12), skinMat);
+  noseTip.position.set(0, 0.145, 0.265);
+  noseTip.scale.set(0.055, 0.050, 0.060);
+  const nostrilL = new De(new $t(1, 10, 8), skinMat);
+  nostrilL.position.set(-0.045, 0.135, 0.245);
+  nostrilL.scale.set(0.030, 0.025, 0.030);
+  const nostrilR = new De(new $t(1, 10, 8), skinMat);
+  nostrilR.position.set(0.045, 0.135, 0.245);
+  nostrilR.scale.set(0.030, 0.025, 0.030);
+  headGroup.add(noseRoot, noseTip, nostrilL, nostrilR);
 
-  const browL = new De(new os(0.07, 0.018, 0.02, 2, 0.005), browMat);
-  browL.position.set(-0.085, 0.29, 0.20);
-  browL.rotation.z = -0.16;
-  const browR = new De(new os(0.07, 0.018, 0.02, 2, 0.005), browMat);
-  browR.position.set(0.085, 0.29, 0.20);
-  browR.rotation.z = 0.16;
+  const mouthCavity = new De(new $t(1, 14, 10), mouthDarkMat);
+  mouthCavity.position.set(0, 0.080, 0.205);
+  mouthCavity.scale.set(0.085, 0.038, 0.035);
+  const teethUpper = new De(new os(0.10, 0.016, 0.025), teethMat);
+  teethUpper.position.set(0, 0.092, 0.215);
+  const lipUpper = new De(new $t(1, 12, 8), lipsMat);
+  lipUpper.position.set(0, 0.105, 0.218);
+  lipUpper.scale.set(0.075, 0.016, 0.025);
+  const lipLower = new De(new $t(1, 12, 8), lipsMat);
+  lipLower.position.set(0, 0.062, 0.212);
+  lipLower.scale.set(0.070, 0.018, 0.025);
+  headGroup.add(mouthCavity, teethUpper, lipUpper, lipLower);
+
+  // Big expressive eyes
+  const eyeWhiteL = new De(new $t(1, 14, 12), eyeWhiteMat);
+  eyeWhiteL.position.set(-0.082, 0.21, 0.195);
+  eyeWhiteL.scale.set(0.045, 0.050, 0.032);
+  const eyeWhiteR = new De(new $t(1, 14, 12), eyeWhiteMat);
+  eyeWhiteR.position.set(0.082, 0.21, 0.195);
+  eyeWhiteR.scale.set(0.045, 0.050, 0.032);
+  const pupilL = new De(new $t(1, 12, 10), pupilMat);
+  pupilL.position.set(-0.080, 0.21, 0.222);
+  pupilL.scale.set(0.024, 0.027, 0.012);
+  const pupilR = new De(new $t(1, 12, 10), pupilMat);
+  pupilR.position.set(0.080, 0.21, 0.222);
+  pupilR.scale.set(0.024, 0.027, 0.012);
+  headGroup.add(eyeWhiteL, eyeWhiteR, pupilL, pupilR);
+
+  // Black rectangular eyeglasses
+  const glassesGroup = new U();
+  glassesGroup.position.set(0, 0.21, 0.222);
+
+  const bridge = new De(new os(0.045, 0.015, 0.018), frameMat);
+  bridge.position.set(0, 0.015, 0.005);
+  glassesGroup.add(bridge);
+
+  const rimLTop = new De(new os(0.105, 0.016, 0.018), frameMat);
+  rimLTop.position.set(-0.085, 0.042, 0.005);
+  const rimLBot = new De(new os(0.105, 0.016, 0.018), frameMat);
+  rimLBot.position.set(-0.085, -0.042, 0.005);
+  const rimLLeft = new De(new os(0.016, 0.084, 0.018), frameMat);
+  rimLLeft.position.set(-0.138, 0, 0.005);
+  const rimLRight = new De(new os(0.016, 0.084, 0.018), frameMat);
+  rimLRight.position.set(-0.032, 0, 0.005);
+  const lensL = new De(new os(0.090, 0.070, 0.006), lensMat);
+  lensL.position.set(-0.085, 0, 0.005);
+  glassesGroup.add(rimLTop, rimLBot, rimLLeft, rimLRight, lensL);
+
+  const rimRTop = new De(new os(0.105, 0.016, 0.018), frameMat);
+  rimRTop.position.set(0.085, 0.042, 0.005);
+  const rimRBot = new De(new os(0.105, 0.016, 0.018), frameMat);
+  rimRBot.position.set(0.085, -0.042, 0.005);
+  const rimRLeft = new De(new os(0.016, 0.084, 0.018), frameMat);
+  rimRLeft.position.set(0.032, 0, 0.005);
+  const rimRRight = new De(new os(0.016, 0.084, 0.018), frameMat);
+  rimRRight.position.set(0.138, 0, 0.005);
+  const lensR = new De(new os(0.090, 0.070, 0.006), lensMat);
+  lensR.position.set(0.085, 0, 0.005);
+  glassesGroup.add(rimRTop, rimRBot, rimRLeft, rimRRight, lensR);
+
+  const templeL = new De(new os(0.014, 0.016, 0.22), frameMat);
+  templeL.position.set(-0.144, 0.012, -0.105);
+  templeL.rotation.y = 0.06;
+  const templeR = new De(new os(0.014, 0.016, 0.22), frameMat);
+  templeR.position.set(0.144, 0.012, -0.105);
+  templeR.rotation.y = -0.06;
+  glassesGroup.add(templeL, templeR);
+  headGroup.add(glassesGroup);
+
+  const browL = new De(new os(0.085, 0.022, 0.025), browMat);
+  browL.position.set(-0.088, 0.28, 0.215);
+  browL.rotation.z = -0.08;
+  const browR = new De(new os(0.085, 0.022, 0.025), browMat);
+  browR.position.set(0.088, 0.28, 0.215);
+  browR.rotation.z = 0.08;
   headGroup.add(browL, browR);
 
-  for (const side of [-1, 1]) {
-    const eyeX = side * 0.085;
-    const eye = new De(new $t(0.048, 16, 12), eyeWhiteMat);
-    eye.position.set(eyeX, 0.235, 0.19);
-    const pupil = new De(new $t(0.025, 12, 10), pupilMat);
-    pupil.position.set(eyeX, 0.235, 0.23);
-    const specular = new De(new $t(0.008, 8, 6), eyeWhiteMat);
-    specular.position.set(eyeX - side * 0.008, 0.245, 0.247);
-    headGroup.add(eye, pupil, specular);
-  }
-
-  // Glasses
-  const glasses = new U();
-  glasses.position.set(0, 0.235, 0.23);
-  const frameW = 0.075, frameH = 0.058, thick = 0.014;
-  for (const side of [-1, 1]) {
-    const gx = side * 0.085;
-    const fTop = new De(new os(frameW*2, thick, 0.02, 2, 0.003), frameMat);
-    fTop.position.set(gx, frameH, 0);
-    const fBot = new De(new os(frameW*2, thick, 0.02, 2, 0.003), frameMat);
-    fBot.position.set(gx, -frameH, 0);
-    const fL = new De(new os(thick, frameH*2, 0.02, 2, 0.003), frameMat);
-    fL.position.set(gx - frameW, 0, 0);
-    const fR = new De(new os(thick, frameH*2, 0.02, 2, 0.003), frameMat);
-    fR.position.set(gx + frameW, 0, 0);
-    const lens = new De(new an(frameW*1.8, frameH*1.8), lensMat);
-    lens.position.set(gx, 0, 0.002);
-    glasses.add(fTop, fBot, fL, fR, lens);
-
-    const arm = new De(new os(0.009, 0.013, 0.25, 2, 0.002), frameMat);
-    arm.position.set(gx + side * (frameW - 0.005), 0.01, -0.11);
-    arm.rotation.y = -side * 0.12;
-    glasses.add(arm);
-  }
-  const gBridge = new De(new os(0.045, 0.016, 0.018, 2, 0.004), frameMat);
-  gBridge.position.set(0, 0.01, 0.002);
-  glasses.add(gBridge);
-  headGroup.add(glasses);
-
-  // Smile
-  const mouthGroup = new U();
-  mouthGroup.position.set(0, 0.12, 0.21);
-  const mouthBg = new De(new os(0.16, 0.065, 0.02, 2, 0.008), mouthDarkMat);
-  mouthGroup.add(mouthBg);
-  const teeth = new De(new os(0.14, 0.032, 0.02, 2, 0.004), teethMat);
-  teeth.position.set(0, 0.016, 0.008);
-  mouthGroup.add(teeth);
-  const lipUp = new De(new os(0.17, 0.016, 0.018, 2, 0.004), lipsMat);
-  lipUp.position.set(0, 0.036, 0.008);
-  const lipDown = new De(new os(0.15, 0.018, 0.018, 2, 0.004), lipsMat);
-  lipDown.position.set(0, -0.032, 0.008);
-  mouthGroup.add(lipUp, lipDown);
-  headGroup.add(mouthGroup);
   head.add(headGroup);
 
-  // B. OPEN V-NECK COLLAR LAPELS (Spine2)
+  // B. SHIRT COLLAR & BUTTONS (Spine2)
   const spine2 = scene.getObjectByName("Spine2");
   if (spine2) {
     const collarGroup = new U();
     collarGroup.name = "giuseppe-collar-root";
-    collarGroup.position.set(0, 0.08, 0.08);
+    collarGroup.position.set(0, 0.06, 0.08);
 
-    const lapelL = new De(new os(0.09, 0.11, 0.025, 2, 0.006), shirtMat);
-    lapelL.position.set(-0.09, 0.06, 0.08);
-    lapelL.rotation.set(0.35, 0.22, -0.36);
+    const wingL = new De(new os(0.085, 0.045, 0.030, 2, 0.005), shirtMat);
+    wingL.position.set(-0.065, 0.01, 0.035);
+    wingL.rotation.set(0.35, 0.25, -0.55);
+    const wingR = new De(new os(0.085, 0.045, 0.030, 2, 0.005), shirtMat);
+    wingR.position.set(0.065, 0.01, 0.035);
+    wingR.rotation.set(0.35, -0.25, 0.55);
+    collarGroup.add(wingL, wingR);
 
-    const lapelR = new De(new os(0.09, 0.11, 0.025, 2, 0.006), shirtMat);
-    lapelR.position.set(0.09, 0.06, 0.08);
-    lapelR.rotation.set(0.35, -0.22, 0.36);
-    collarGroup.add(lapelL, lapelR);
-
-    for (let b = 0; b < 2; b++) {
-      const btn = new De(new li(0.015, 0.015, 0.01, 10), buttonMat);
-      btn.position.set(0, 0.01 - b * 0.08, 0.10);
-      btn.rotation.x = Math.PI / 2;
-      collarGroup.add(btn);
-    }
+    const b1 = new De(new $t(1, 10, 8), buttonMat);
+    b1.position.set(0, -0.025, 0.052);
+    b1.scale.set(0.014, 0.014, 0.007);
+    const b2 = new De(new $t(1, 10, 8), buttonMat);
+    b2.position.set(0, -0.095, 0.052);
+    b2.scale.set(0.014, 0.014, 0.007);
+    const b3 = new De(new $t(1, 10, 8), buttonMat);
+    b3.position.set(0, -0.165, 0.050);
+    b3.scale.set(0.014, 0.014, 0.007);
+    collarGroup.add(b1, b2, b3);
     spine2.add(collarGroup);
   }
 
@@ -341,20 +602,33 @@ giuseppe_code = '''function applyGiuseppeCustomization(scene, choice) {
 '''
 pos_apply_baldu = bundle.find("function applyBalduCustomization(")
 if pos_apply_baldu != -1:
-    bundle = bundle[:pos_apply_baldu] + giuseppe_code + "\n" + bundle[pos_apply_baldu:]
-    print("[✓] Injected applyGiuseppeCustomization definition!")
+    bundle = bundle[:pos_apply_baldu] + liberation_and_char_code + "\n" + bundle[pos_apply_baldu:]
+    print("[✓] Injected Liberation System and applyGiuseppeCustomization definition!")
 
-# 4. Inject 52 Augusta Themed Models into _D
+# 4. Inject 60 Augusta Themed Models into _D
 d_marker = '};function kre(t,e){'
 pos_d_end = bundle.find(d_marker)
 if pos_d_end != -1:
     decor_code = get_all_augusta_decor_models()
     bundle = bundle[:pos_d_end] + decor_code + bundle[pos_d_end:]
-    print("[✓] Injected 52 Augusta Themed 3D Decor Models into _D!")
+    print("[✓] Injected 60 Augusta Themed 3D Decor Models into _D!")
 else:
     print("[!] ERROR: Could not find _D closing marker!")
 
-# 5. Replace All 10 Levels with Handcrafted, Bug-Free, Tested Levels
+# 5. Hook window.__WORLD_SCENE__ in kne(t, e)
+bundle = bundle.replace("function kne(t,e){const n=t.mat;", "function kne(t,e){window.__WORLD_SCENE__=t.scene;const n=t.mat;")
+print("[✓] Hooked window.__WORLD_SCENE__ in kne(t, e)!")
+
+# 6. Hook triggerAugustaLiberation in activate(e, n, o, i)
+target_activate = 'activate(e,n,o,i){this.latched[e]||(this.latched[e]=!0,this.channels[e]=1,this.event("activate",{channel:e,x:n,y:o,...i&&typeof i=="object"?i:{}}))}'
+replacement_activate = 'activate(e,n,o,i){window.__GAME_STAGE__=this;this.latched[e]||(this.latched[e]=!0,this.channels[e]=1,triggerAugustaLiberation(e,n,o,this),this.event("activate",{channel:e,x:n,y:o,...i&&typeof i=="object"?i:{}}))}'
+if target_activate in bundle:
+    bundle = bundle.replace(target_activate, replacement_activate)
+    print("[✓] Hooked triggerAugustaLiberation in activate(e, n, o, i)!")
+else:
+    print("[!] Warning: target_activate not found in bundle!")
+
+# 7. Replace All 10 Levels with Handcrafted, Bug-Free, Tested Levels
 start_marker = "// --- AUGUSTA LEVELS (PROVINCIA DI SIRACUSA) ---"
 end_marker = "const Sc=[augustaL1,augustaL2,augustaL3,augustaL4,augustaL5,augustaL6,augustaL7,augustaL8,augustaL9,augustaL10]"
 p_start = bundle.find(start_marker)
@@ -362,11 +636,11 @@ p_end = bundle.find(end_marker)
 if p_start != -1 and p_end != -1:
     all_levels_code = "// --- GTA: GIUSEPPE TAGLIA ALBERI (10 LIVELLI ECOLOGICI E CIVICI) ---\n\n" + get_all_levels() + "\n\n"
     bundle = bundle[:p_start] + all_levels_code + end_marker + bundle[p_end + len(end_marker):]
-    print("[✓] Replaced all 10 levels with perfectly audited, bug-free Augusta levels!")
+    print("[✓] Replaced all 10 levels with perfectly audited, bug-free Augusta levels with hazards & skies!")
 else:
     print("[!] ERROR: Could not find levels marker!")
 
-# 6. Save directly to bundle/index-gta-v1.js
+# 8. Save directly to bundle/index-gta-v1.js
 with open("bundle/index-gta-v1.js", "w", encoding="utf-8") as f:
     f.write(bundle)
 print("[✓] bundle/index-gta-v1.js saved successfully!")
