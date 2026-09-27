@@ -386,6 +386,28 @@ window.playLiberationChime = playLiberationChime;
 window.playWaterCascadeSound = playWaterCascadeSound;
 window.triggerFicusWaterContraption = triggerFicusWaterContraption;
 
+function playHeadBumpSound(x, y) {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.exponentialRampToValueAtTime(50, now + 0.08);
+    gain.gain.setValueAtTime(0.35, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  } catch(e) {}
+}
+window.playHeadBumpSound = playHeadBumpSound;
+
+
 // --- GIUSEPPE CUSTOMIZATION (HEAD, BODY, ACCESSORIES) ---
 function applyGiuseppeCustomization(scene, choice) {
   if (!choice || (choice.id !== "giuseppe" && choice.id !== "baldu" && choice.id !== "explorer")) return;
@@ -784,6 +806,105 @@ bundle = bundle.replace('Wt=new m0e(me("world")', 'window.__WORLD__=Wt=new m0e(m
 bundle = bundle.replace('const Ade=10,sh=t=>!!te.labUnlocked||t<Ade&&!kn[t]?.hidden', 'window.__START_LEVEL__=nl;window.__GAME_TE__=te;window.__GAME_CE__=ce;const Ade=10,sh=t=>!0')
 bundle = bundle.replace('_u=t=>!!te.labUnlocked||t<Ade||!!kn[t]?.bench||bde(t-1)', '_u=t=>!0')
 print("[✓] Unlocked all 10 chapters & hooked window.__START_LEVEL__, window.__WORLD__!")
+
+# 6c. Solid Platform Collision & Ceiling Limit
+old_l1 = 'function l1(t){return t.kind==="wall"?j3(t)?{x:t.x,w:t.w,top:t.y,bottom:t.y-X3(t)}:null:t.kind==="fold"&&c9(t)?mL(t):null}'
+new_l1 = '''function l1(t){
+  if(!t||t.active===!1||t.broken)return null;
+  if(t.kind==="wall")return j3(t)?{x:t.x,w:t.w,top:t.y,bottom:t.y-X3(t)}:null;
+  if(t.kind==="fold"&&c9(t))return mL(t);
+  if(t.kind==="gate")return(t.open>0)?null:{x:t.x,w:t.w,top:t.y,bottom:t.y-(t.h||10)};
+  if(t.kind==="switch"||t.kind==="hazard"||t.spiked)return null;
+  const th=Number.isFinite(t.h)&&t.h>0?t.h:(Number.isFinite(t.thickness)&&t.thickness>0?t.thickness:0.65);
+  return{x:t.x,w:t.w,top:t.y,bottom:t.y-th}
+}'''
+if old_l1 in bundle:
+    bundle = bundle.replace(old_l1, new_l1)
+    print("[✓] Injected solid platform bounding box into l1(t)!")
+else:
+    print("[!] Warning: old_l1 not found in bundle!")
+
+old_ceil = 'for(const B of i.platforms){const T=l1(B);if(!T||!(o.x+ht.radius>T.x&&o.x-ht.radius<T.x+T.w))continue;const L=T.bottom;o.vy>0&&x+ht.height<=L+1e-7&&o.y+ht.height>=L&&(o.y=L-ht.height,o.vy=0,o.springing=!1)}'
+new_ceil = '''for(const B of i.platforms){
+  const T=l1(B);
+  if(!T||!(o.x+ht.radius>T.x+0.04&&o.x-ht.radius<T.x+T.w-0.04))continue;
+  const L=T.bottom;
+  if(o.vy>0&&(x+ht.height<=L+0.18||(o.y+ht.height>=L&&o.y<T.top-0.2))){
+    o.y=L-ht.height;
+    o.vy=Math.min(0,-0.6);
+    o.springing=!1;
+    try{window.playHeadBumpSound?.(o.x,L)}catch(e){}
+  }
+}'''
+if old_ceil in bundle:
+    bundle = bundle.replace(old_ceil, new_ceil)
+    print("[✓] Injected head bump ceiling collision & downward velocity clamp!")
+else:
+    print("[!] Warning: old_ceil not found in bundle!")
+
+old_wall = 'for(const B of i.platforms){const T=l1(B);if(!T)continue;const L=T.bottom,R=T.x-ht.radius,F=T.x+T.w+ht.radius;x<T.top-1e-7&&x+ht.height>L+1e-7&&(w<=R&&o.x>R?(o.x=R,o.vx=Math.min(0,o.vx)):w>=F&&o.x<F?(o.x=F,o.vx=Math.max(0,o.vx)):o.x>R&&o.x<F&&(o.x=w<(R+F)/2?R:F,o.vx=0))}'
+new_wall = '''for(const B of i.platforms){
+  const T=l1(B);
+  if(!T)continue;
+  const L=T.bottom,R=T.x-ht.radius,F=T.x+T.w+ht.radius;
+  if(x<T.top-0.12&&x+ht.height>L+0.05){
+    if(w<=R&&o.x>R){o.x=R;o.vx=Math.min(0,o.vx);}
+    else if(w>=F&&o.x<F){o.x=F;o.vx=Math.max(0,o.vx);}
+    else if(o.x>R&&o.x<F){o.x=w<(R+F)/2?R:F;o.vx=0;}
+  }
+}'''
+if old_wall in bundle:
+    bundle = bundle.replace(old_wall, new_wall)
+    print("[✓] Injected horizontal solid collision for all platform walls!")
+else:
+    print("[!] Warning: old_wall not found in bundle!")
+
+# 6d. Civic Moral Box in B1e & Italian Victory Header
+moral_target = """      <dl class="completion-stats" aria-label="Your chapter results">
+        ${d("bead",`${t.coins}<span class="completion-denominator"> / ${e.coins.length}</span>`,"Clay beads")}
+        ${u(t.stamps,e.stamps.length)}
+        ${d("timer",IB(t.time),"Your time",h)}
+      </dl>
+      <nav class="completion-actions" aria-label="Continue your adventure">"""
+
+moral_replacement = """      <dl class="completion-stats" aria-label="I tuoi risultati di tappa">
+        ${d("bead",`${t.coins}<span class="completion-denominator"> / ${e.coins.length}</span>`,"Monete raccolte")}
+        ${u(t.stamps,e.stamps.length)}
+        ${d("timer",IB(t.time),"Tempo impiegato",h)}
+      </dl>
+      ${(e.moralTitle&&e.moralStory)?`<div class="augusta-moral-box">
+        <div class="augusta-moral-header">
+          <span class="moral-icon">🌿</span>
+          <span class="moral-tag">LA MORALE DI AUGUSTA &bull; SENSIBILIZZAZIONE CIVICA</span>
+        </div>
+        <h3 class="augusta-moral-title">${e.moralTitle}</h3>
+        <p class="augusta-moral-text">${e.moralStory}</p>
+      </div>`:""}
+      <nav class="completion-actions" aria-label="Continua la tua missione">"""
+
+if moral_target in bundle:
+    bundle = bundle.replace(moral_target, moral_replacement)
+    print("[✓] Injected Augusta Civic Moral Box into B1e completion modal!")
+else:
+    print("[!] Warning: moral_target not found in bundle!")
+
+heading_target = '<h2 id="dialog-title"><span>Level</span><span>Complete!</span></h2>'
+heading_replacement = '<h2 id="dialog-title"><span>Livello</span><span>Completato!</span></h2>'
+bundle = bundle.replace(heading_target, heading_replacement)
+
+bundle = bundle.replace(
+    '<button class="completion-button completion-primary" data-action="${l.action}">${np(l.glyph)}<span>${l.label}</span></button>',
+    '<button class="completion-button completion-primary" data-action="${l.action}">${np(l.glyph)}<span>${l.label==="Next Chapter"?"Prossimo Livello":l.label==="Continue"?"Continua":l.label}</span></button>'
+)
+bundle = bundle.replace(
+    '<button class="completion-button" data-action="restart">${np("rotate-cw")}<span>Play Again</span></button>',
+    '<button class="completion-button" data-action="restart">${np("rotate-cw")}<span>Rigioca Livello</span></button>'
+)
+bundle = bundle.replace(
+    '<span>${r||i||s?"Back to Title":"Chapters"}</span>',
+    '<span>${r||i||s?"Menu Principale":"Seleziona Livello"}</span>'
+)
+print("[✓] Localized level completion dialog to Italian!")
 
 # 7. Replace All 10 Levels with Handcrafted, Bug-Free, Tested Levels
 start_marker = "// --- AUGUSTA LEVELS (PROVINCIA DI SIRACUSA) ---"
