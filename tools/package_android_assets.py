@@ -58,8 +58,11 @@ with open("gta/index.html", "r", encoding="utf-8") as f:
 html = html.replace("../bundle/", "./bundle/")
 # Replace ../assets/ with ./assets/
 html = html.replace("../assets/", "./assets/")
-# Remove game switch nav (not needed in standalone GTA app)
-html = html.replace('<div class="game-switch-nav">', '<div class="game-switch-nav" style="display:none;">')
+# Adapt switch link for local acqua directory in Android
+html = html.replace('href="../acqua/index.html"', 'href="./acqua/index.html"')
+# Remove other external web links in standalone app
+html = html.replace('<a href="../augusta/index.html"', '<a href="#" style="display:none;"')
+html = html.replace('<a href="../index.html"', '<a href="#" style="display:none;"')
 
 with open(os.path.join(www_dir, "index.html"), "w", encoding="utf-8") as f:
     f.write(html)
@@ -75,4 +78,21 @@ if os.path.exists(js_file):
     with open(js_file, "w", encoding="utf-8") as f:
         f.write(js)
 
-print("[✓] Successfully packaged all standalone assets in android-app/app/src/main/assets/www!")
+# 6. Copy and adapt Acqua game into Android assets
+print("Copying Acqua puzzle game into Android assets...")
+os.makedirs(os.path.join(www_dir, "acqua"), exist_ok=True)
+with open("acqua/index.html", "r", encoding="utf-8") as f:
+    acqua_html = f.read()
+
+# In standalone Android app: root index.html is GTA
+acqua_html = acqua_html.replace('href="../gta/"', 'href="../index.html"')
+acqua_html = acqua_html.replace('href="../gta/index.html"', 'href="../index.html"')
+acqua_html = acqua_html.replace('href="../index.html"', 'href="../index.html"')
+acqua_html = acqua_html.replace('href="../augusta/"', 'href="../index.html"')
+acqua_html = acqua_html.replace('href="../gta/icon-32.png"', 'href="../icon-32.png"')
+acqua_html = acqua_html.replace('href="../gta/icon-180.png"', 'href="../icon-180.png"')
+
+with open(os.path.join(www_dir, "acqua", "index.html"), "w", encoding="utf-8") as f:
+    f.write(acqua_html)
+
+print("[✓] Successfully packaged all standalone assets (including Acqua) in android-app/app/src/main/assets/www!")

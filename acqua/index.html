@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+  <meta name="theme-color" content="#0369a1">
+  <meta name="description" content="L'Oro Blu di Augusta: Le Cronache dell'Acqua Perduta. Puzzle idraulico in stile Pipe Flow con i dossier satirici di Filippo Ceccarelli (Propaganda Live) sulle tubature colabrodo, fognature, acqua rubata e la rinascita civica di Augusta.">
+  <title>L'Oro Blu di Augusta — Cronache dell'Acqua Perduta</title>
+
+  <!-- Open Graph / Link Previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="L'Oro Blu di Augusta — Cronache dell'Acqua Perduta">
+  <meta property="og:description" content="Collega i tubi, salva l'acqua potabile dalle perdite e dalla petrolchimica e scopri i dossier satirici di Filippo Ceccarelli!">
+  <meta property="og:image" content="../gta/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../gta/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../gta/icon-180.png">
+
+  <style>
+    :root {
+      --bg-dark: #0a1926;
+      --bg-panel: #112538;
+      --border-panel: #1e3a58;
+      --water-blue: #38bdf8;
+      --water-deep: #0284c7;
+      --clay-pipe: #c25e36;
+      --clay-brass: #d97706;
+      --toxic-sludge: #4a044e;
+      --clean-green: #22c55e;
+      --text-main: #f0fdf4;
+      --text-muted: #94a3b8;
+      --gold-moral: #fef08a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 20%, #17324d 0%, #08131e 100%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Switcher Navigation */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(10, 25, 38, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-panel);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .water-drop-icon {
+      font-size: 26px;
+      filter: drop-shadow(0 0 8px #38bdf8);
+      animation: floatDrop 3s ease-in-out infinite;
+    }
+
+    @keyframes floatDrop {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .game-title-text {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #e0f2fe;
+    }
+
+    .game-subtitle-text {
+      font-size: 11px;
+      color: var(--water-blue);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #1e3a58;
+      color: #f1f5f9;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #334155;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: #0284c7;
+      border-color: #38bdf8;
+      transform: translateY(-1px);
+    }
+
+    /* Main Container */
+    .main-container {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Case Information Header Card */
+    .case-card {
+      width: 100%;
+      background: linear-gradient(180deg, #132d47 0%, #0d2134 100%);
+      border: 1px solid #23496d;
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .case-title-area h2 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .case-tag {
+      font-size: 10px;
+      font-weight: 800;
+      background: #0284c7;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .case-desc {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .case-stats {
+      display: flex;
+      gap: 14px;
+      background: rgba(0,0,0,0.3);
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px solid #1e3a58;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .stat-val {
+      font-size: 15px;
+      font-weight: 800;
+      color: #38bdf8;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Hydraulic Board Frame */
+    .board-frame {
+      position: relative;
+      background: #091a29;
+      border: 6px solid #23496d;
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 16px 36px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .board-frame::before {
+      content: "";
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px dashed rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    /* Manometers / Gauges Bar */
+    .gauge-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 8px 12px 8px;
+    }
+
+    .gauge-widget {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 36, 56, 0.8);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #1e3a58;
+    }
+
+    .gauge-dial {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #d97706;
+      background: #1e293b;
+      position: relative;
+    }
+
+    .gauge-needle {
+      position: absolute;
+      width: 2px;
+      height: 9px;
+      background: #ef4444;
+      top: 2px;
+      left: 8px;
+      transform-origin: bottom center;
+      transform: rotate(-45deg);
+      transition: transform 0.4s ease;
+    }
+
+    .gauge-text {
+      font-size: 11px;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    /* The Interactive Pipe Grid Canvas */
+    canvas#pipe-canvas {
+      display: block;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1 / 1;
+      background: #0f2233;
+      border-radius: 12px;
+      box-shadow: inset 0 0 16px rgba(0,0,0,0.6);
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    /* Bottom Action Controls */
+    .actions-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .btn-action {
+      background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+      color: #fff;
+      border: 2px solid #38bdf8;
+      border-radius: 14px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #075985, 0 8px 20px rgba(2, 132, 199, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #075985, 0 12px 24px rgba(2, 132, 199, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .btn-action:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #075985;
+    }
+
+    .btn-secondary {
+      background: #1e3a58;
+      color: #cbd5e1;
+      border: 1px solid #334155;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: #254b73;
+      color: #fff;
+    }
+
+    /* Levels Navigation Pills */
+    .level-pills-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      width: 100%;
+      max-width: 520px;
+      padding-bottom: 4px;
+    }
+
+    .level-pill {
+      flex: 1;
+      min-width: 70px;
+      padding: 8px 6px;
+      background: #132d47;
+      border: 1px solid #23496d;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .level-pill.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    .level-pill-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: #f1f5f9;
+    }
+
+    .level-pill-status {
+      font-size: 10px;
+      color: #94a3b8;
+    }
+
+    .level-pill.active .level-pill-status {
+      color: #e0f2fe;
+    }
+
+    /* FILIPPO CECCARELLI DOSSIER MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 10, 16, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dossier-card {
+      background: #fbf6ec;
+      color: #2b180d;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 3px #c79a5b;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.95) translateY(12px);
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .modal-backdrop.show .dossier-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .dossier-header {
+      background: #eedcc0;
+      border-bottom: 2px dashed #b98e53;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .stamp-classified {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      border: 3px solid #b91c1c;
+      color: #b91c1c;
+      font-family: monospace, monospace;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transform: rotate(6deg);
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.2);
+    }
+
+    .dossier-subhead {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #78350f;
+      text-transform: uppercase;
+    }
+
+    .dossier-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #451a03;
+      margin-top: 2px;
+      font-family: Georgia, serif;
+    }
+
+    .dossier-body {
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #331d0e;
+    }
+
+    .ceccarelli-portrait-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      background: #f4e8d3;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #dfcbb0;
+    }
+
+    .ceccarelli-avatar {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .ceccarelli-quote {
+      font-style: italic;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #713f12;
+      font-family: Georgia, serif;
+    }
+
+    .dossier-text p {
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .highlight-yellow {
+      background: #fef08a;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    /* Civic Moral Card */
+    .moral-badge-card {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #14532d 0%, #052e16 100%);
+      color: #dcfce7;
+      border: 2px solid #22c55e;
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .moral-badge-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #86efac;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .moral-badge-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 6px;
+      font-family: Georgia, serif;
+    }
+
+    .moral-badge-text {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #bbf7d0;
+    }
+
+    .dossier-footer {
+      background: #eedcc0;
+      border-top: 1px solid #dfcbb0;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn-next-case {
+      background: linear-gradient(180deg, #15803d 0%, #166534 100%);
+      color: #fff;
+      border: 2px solid #4ade80;
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #14532d;
+      transition: all 0.15s;
+    }
+
+    .btn-next-case:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    /* Celebratory Banner */
+    .flow-celebration {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(14, 165, 233, 0.95);
+      color: #fff;
+      padding: 16px 28px;
+      border-radius: 20px;
+      border: 3px solid #bae6fd;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      animation: popUp 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      z-index: 30;
+      text-align: center;
+    }
+
+    @keyframes popUp {
+      from { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .game-title-text { font-size: 14px; }
+      .case-card { padding: 10px 14px; }
+      .btn-nav span { display: none; }
+      .btn-action { padding: 10px 18px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="brand-group">
+      <span class="water-drop-icon">💧</span>
+      <div>
+        <div class="game-title-text">L'ORO BLU DI AUGUSTA</div>
+        <div class="game-subtitle-text">Pipe Flow & Dossier di Filippo Ceccarelli</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="../gta/" class="btn-nav" title="Torna a GTA Giuseppe Taglia Alberi">
+        <span>🌳</span> <span>GTA Giuseppe</span>
+      </a>
+      <a href="../augusta/" class="btn-nav" title="Passa ad Augusta Slop Adventures">
+        <span>🏭</span> <span>Augusta Verde</span>
+      </a>
+      <a href="../index.html" class="btn-nav" title="Torna all'Hub Principale">
+        <span>🏃</span> <span>BalduSlop</span>
+      </a>
+      <button id="sound-btn" class="btn-nav" title="Audio on/off">
+        <span id="sound-icon">🔊</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Game Area -->
+  <main class="main-container">
+
+    <!-- Level Selector Bar -->
+    <div class="level-pills-bar" id="level-pills">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Case Information Header -->
+    <section class="case-card" id="case-card">
+      <div class="case-title-area">
+        <h2>
+          <span class="case-tag" id="case-num-tag">CASO I</span>
+          <span id="case-name">Il Mistero del Rubinetto a Secco</span>
+        </h2>
+        <p class="case-desc" id="case-desc">Le tubature in ghisa del 1950 perdono il 54% dell'acqua nel sottosuolo. Collega il serbatoio alle case della Borgata!</p>
+      </div>
+      <div class="case-stats">
+        <div class="stat-item">
+          <span class="stat-label">Mosse</span>
+          <span class="stat-val" id="move-count">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Pressione</span>
+          <span class="stat-val" id="pressure-val">0%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Conduttura</span>
+          <span class="stat-val" id="status-val">Interrotta</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hydraulic Board Frame -->
+    <section class="board-frame">
+      <div class="gauge-bar">
+        <div class="gauge-widget">
+          <div class="gauge-dial"><div class="gauge-needle" id="gauge-needle"></div></div>
+          <span class="gauge-text" id="gauge-label">Manometro Rete: Normale</span>
+        </div>
+        <span style="font-size: 11px; color: #64748b; font-weight: 700;">TOCCA I TUBI PER RUOTARLI</span>
+      </div>
+
+      <!-- Canvas for pipe flow rendering -->
+      <canvas id="pipe-canvas" width="480" height="480"></canvas>
+
+      <div class="flow-celebration" id="flow-celebration">
+        <div>🌊 CONDOTTA COLLEGATA!</div>
+        <div style="font-size: 13px; font-weight: 600; margin-top: 4px; opacity: 0.9;">L'acqua zampilla nei rubinetti di Augusta!</div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="actions-bar">
+        <button class="btn-action" id="test-flow-btn">
+          <span>💧</span> APRI LA CONDOTTA!
+        </button>
+        <button class="btn-secondary" id="reset-btn" title="Ricomincia il caso">
+          🔄 Riavvia
+        </button>
+        <button class="btn-secondary" id="dossier-preview-btn" title="Leggi il dossier">
+          📜 Bignami Ceccarelli
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FILIPPO CECCARELLI DOSSIER MODAL -->
+  <div class="modal-backdrop" id="dossier-modal">
+    <div class="dossier-card">
+      <header class="dossier-header">
+        <div>
+          <span class="dossier-subhead" id="modal-dossier-num">FASCICOLO ISTRUTTORIO 78/A</span>
+          <h3 class="dossier-title" id="modal-dossier-title">L'Acquedotto Colabrodo e la Delibera Sommersa</h3>
+        </div>
+        <div class="stamp-classified">ARCHIVIO CECCARELLI</div>
+      </header>
+
+      <div class="dossier-body">
+        <div class="ceccarelli-portrait-bar">
+          <div class="ceccarelli-avatar">📂</div>
+          <div class="ceccarelli-quote" id="modal-dossier-quote">
+            "Badate bene, signori di Propaganda Live: la crisi idrica ad Augusta non è un caso della natura, è una commedia all'italiana in cinque atti parlamentari!"
+          </div>
+        </div>
+
+        <div class="dossier-text" id="modal-dossier-text">
+          <!-- Text inserted dynamically -->
+        </div>
+
+        <!-- Moral Card -->
+        <div class="moral-badge-card">
+          <div class="moral-badge-header">
+            <span>🌿</span> LA MORALE CIVICA DI AUGUSTA
+          </div>
+          <div class="moral-badge-title" id="modal-moral-title">
+            Riparare i Tubi è la Vera Grande Opera
+          </div>
+          <div class="moral-badge-text" id="modal-moral-text">
+            Perdere metà dell'acqua potabile nel sottosuolo è un furto silenzioso ai danni delle famiglie. Prima delle cattedrali nel deserto, una comunità civile ripara le condutture che portano la vita nelle case.
+          </div>
+        </div>
+      </div>
+
+      <footer class="dossier-footer">
+        <button class="btn-secondary" id="modal-close-btn">Chiudi Dossier</button>
+        <button class="btn-next-case" id="modal-next-btn">Prossimo Caso ➡️</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // --- AUDIO SYSTEM (WEB AUDIO API SYNTHESIZER) ---
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+      playRotate() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(180, now + 0.08);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.09);
+      }
+      playWaterRush() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        // Harmonic bubbly chimes
+        [440, 554.37, 659.25, 880].forEach((freq, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(freq, now + i * 0.08);
+          gain.gain.setValueAtTime(0.001, now + i * 0.08);
+          gain.gain.linearRampToValueAtTime(0.2, now + i * 0.08 + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.4);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + i * 0.08);
+          osc.stop(now + i * 0.08 + 0.45);
+        });
+      }
+      playVictory() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const fanfare = [523.25, 659.25, 783.99, 1046.50];
+        fanfare.forEach((f, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(f, now + i * 0.12);
+          gain.gain.setValueAtTime(0.25, now + i * 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.55);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + i * 0.12);
+          osc.stop(now + i * 0.12 + 0.6);
+        });
+      }
+    }
+    const audio = new SoundEngine();
+
+    // Toggle sound
+    document.getElementById('sound-btn').addEventListener('click', () => {
+      audio.enabled = !audio.enabled;
+      document.getElementById('sound-icon').innerText = audio.enabled ? '🔊' : '🔇';
+    });
+
+    // --- GAME DATA: 5 CASI INVESTIGATIVI DI FILIPPO CECCARELLI ---
+    const CASES = [
+      {
+        id: 0,
+        tag: "CASO I",
+        dossierNum: "FASCICOLO 78/A • ARCHIVIO PROPAGANDA LIVE",
+        name: "Il Mistero del Rubinetto a Secco & La Rete Colabrodo",
+        desc: "Nel quartiere Borgata e in centro storico, le tubature di ghisa del dopoguerra perdono oltre il 50% dell'acqua nel sottosuolo prima che tocchi i rubinetti. Ricollega i tubi per far sgorgare l'acqua fresca!",
+        quote: "«Badate bene, signori miei: ad Augusta la dispersione idrica non è un guasto tecnico, è un genere letterario tragicomico!»",
+        dossierText: `
+          <p>Dalla mia fidata cartella in pelle marrone spunta una delibera consiliare straordinaria del <span class="highlight-yellow">novembre 1978</span>: approvata all'unanimità con formula di "somma urgenza per salvare l'acquedotto cittadino dal collasso imminente".</p>
+          <p>Ebbene, signori di Propaganda Live, sapete dove finirono quei fondi stanziati dalla Cassa per il Mezzogiorno? Negli atti risulta l'acquisto di ventiquattro chilometri di carta carbone e tre scrivanie in noce biondo per la "Commissione Straordinaria sulle Falle Invisibili". Nel frattempo, il <strong>54% dell'acqua potabile</strong> continua imperterrito a perdersi nelle cavità carsiche del sottosuolo di Augusta!</p>
+          <p>I residenti si sono dovuti laureare con lode in idraulica applicata: chi compra l'autoclave a tre pistoni, chi accumula recipienti nei balconi, e chi riceve bollette astronomiche pagando a peso d'oro l'aria compressa che sibila nei contatori quando l'acqua non c'è!</p>
+        `,
+        moralTitle: "Riparare i Tubi è la Vera Grande Opera",
+        moralText: "L'incuria delle condotte è una tassa occulta che colpisce le famiglie e prosciuga le casse comunali. Prima di promettere opere faraoniche, il primo dovere civico della politica è riparare le falle che abbiamo sotto i piedi e garantire l'acqua corrente in ogni casa.",
+        gridSize: [4, 4],
+        source: { r: 0, c: 0, dir: 1, label: "Serbatoio" }, // outputs right
+        target: { r: 3, c: 3, dir: 0, label: "Case Borgata" }, // receives from top
+        // Grid tiles: each has ports [top, right, bottom, left]
+        // Solution path: (0,0)->(0,1)->(0,2)->(1,2)->(2,2)->(2,3)->(3,3)
+        tiles: [
+          [
+            { type: "source", ports: [0, 1, 0, 0], rot: 0, fixed: true },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 }, // starts rotated
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 3 },
+            { type: "cross", ports: [1, 1, 1, 1], rot: 0 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 2 }
+          ],
+          [
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 0 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 3 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 1 }
+          ],
+          [
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 2 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "target", ports: [1, 0, 0, 0], rot: 0, fixed: true }
+          ]
+        ]
+      },
+      {
+        id: 1,
+        tag: "CASO II",
+        dossierNum: "FASCICOLO 12/B • ARCHIVIO PROPAGANDA LIVE",
+        name: "Il Paradosso del Mare Negato & La Fognatura nel Golfo",
+        desc: "Nel golfo Xifonio e lungo la marina, scarichi fognari abusivi minacciano le acque cristalline. Dirotta le condotte nere verso il Depuratore Biologico prima che finiscano in mare!",
+        quote: "«Guardate questa foto d'epoca: l'inaugurazione del depuratore con la banda municipale e la benedizione solenne... peccato mancassero le pompe!»",
+        dossierText: `
+          <p>Amici della corte, sfogliamo il capitolo memorabile intitolato <span class="highlight-yellow">"Le Acque Reflue della Repubblica"</span>. Anno 1987: su una banchina della rada viene eretto in pompa magna il cartello "Qui sorge il Depuratore Consortile". C'erano tutti: onorevoli, assessori, rinfresco a base di cannoli e banda musicale che suonava l'Aida.</p>
+          <p>Spente le fanfare, cosa accadde? Il collettore fognario principale rimase un tronco monco a cento metri dal mare, e le pompe rimasero per trent'anni staccate dalla rete elettrica! Nel frattempo, gli scarichi di mezza città continuavano a riversarsi nella Cala del Carmine e sotto il Castello Svevo.</p>
+          <p>Si è sfiorato il paradosso metafisico: una città-isola circondata da un mare meraviglioso dove per decenni è stato vietato tuffarsi persino con le scarpe da scoglio! E il custode dell'impianto, persona arguta, nelle vasche di decantazione abbandonate ci coltivava i pomodori ciliegino.</p>
+        `,
+        moralTitle: "Un Mare Libero dai Liquami è Civiltà",
+        moralText: "Il mare di Augusta è la sua identità millenaria, la culla dei suoi pescatori e il futuro del suo turismo. Trattare il golfo come una fogna a cielo aperto è un sacrilegio ecologico. Completare ed estendere la depurazione biologica totale è il primo debito d'onore verso le nuove generazioni.",
+        gridSize: [4, 4],
+        source: { r: 1, c: 0, dir: 1, label: "Scarico Fognario" },
+        target: { r: 2, c: 3, dir: 3, label: "Depuratore" },
+        tiles: [
+          [
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 }
+          ],
+          [
+            { type: "source", ports: [0, 1, 0, 0], rot: 0, fixed: true },
+            { type: "tee", ports: [1, 1, 0, 1], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 3 }
+          ],
+          [
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "target", ports: [0, 0, 0, 1], rot: 0, fixed: true }
+          ],
+          [
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 0 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 }
+          ]
+        ]
+      },
+      {
+        id: 2,
+        tag: "CASO III",
+        dossierNum: "FASCICOLO 91/C • ARCHIVIO PROPAGANDA LIVE",
+        name: "Il Grande Ratto della Falda Industriale",
+        desc: "I colossi petrolchimici assorbono ogni giorno milioni di litri di acqua dolce dalla falda dei Monti Climiti per raffreddare gli impianti, mentre a Brucoli e Monte Tauro le case sono a secco. Riconquista l'acqua pubblica!",
+        quote: "«L'industria promise di dissetare la Sicilia; nei fatti si è scolata tutto il pozzo e ci ha lasciato il conto della cannuccia!»",
+        dossierText: `
+          <p>Prendete nota di questo documento: <span class="highlight-yellow">Commissione Parlamentare d'Inchiesta, anno 1963</span>. Quando i colossi delle Partecipazioni Statali e del petrolio posarono le prime ciminiere nella rada megarese, assicurarono in coro: "L'industria porterà ricchezza, lavoro e l'acqua scorrerà a fiumi nelle case di tutti i siciliani".</p>
+          <p>Sapete com'è andata a finire? Che per oltre cinquant'anni le raffinerie hanno scavato pozzi profondissimi fino a intercettare le falde pure dei Monti Climiti, aspirando <strong>milioni di metri cubi di acqua potabile ogni anno</strong> per raffreddare torri di cracking, forni e scambiatori di calore industriali!</p>
+          <p>E nel frattempo, a due chilometri di distanza, nelle case di Monte Tauro e del borgo marinaro di Brucoli, le famiglie aspettano l'autobotte della Protezione Civile per riempire i bidoni di plastica. L'acqua purissima va nei tubi di ferro dell'acciaio e del greggio, e l'arsura va nei rubinetti dei cittadini!</p>
+        `,
+        moralTitle: "L'Acqua alle Persone Prima che al Profitto",
+        moralText: "L'acqua potabile è un diritto umano inalienabile e universale. L'approvvigionamento civile deve sempre avere la precedenza assoluta sui cicli industriali. Le industrie devono investire in desalinizzazione marina a circuito chiuso e smetterla di depredare le riserve idriche della popolazione.",
+        gridSize: [5, 5],
+        source: { r: 0, c: 2, dir: 2, label: "Falda Climiti" },
+        target: { r: 4, c: 2, dir: 0, label: "Cisterna Civica" },
+        tiles: [
+          [
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 },
+            { type: "source", ports: [0, 0, 1, 0], rot: 0, fixed: true },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 2 }
+          ],
+          [
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 3 },
+            { type: "tee", ports: [1, 1, 1, 0], rot: 2 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 0 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 },
+            { type: "cross", ports: [1, 1, 1, 1], rot: 1 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 3 }
+          ],
+          [
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 0 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 2 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 },
+            { type: "target", ports: [1, 0, 0, 0], rot: 0, fixed: true },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 0 }
+          ]
+        ]
+      },
+      {
+        id: 3,
+        tag: "CASO IV",
+        dossierNum: "FASCICOLO 45/D • ARCHIVIO PROPAGANDA LIVE",
+        name: "Quando l'Acqua diventa Greggio (Le Campagne Avvelenate)",
+        desc: "Tra Augusta, Melilli e Priolo, le infiltrazioni di idrocarburi nel sottosuolo contaminano i pozzi agricoli. Posiziona il filtro di decontaminazione e porta acqua pura agli agrumeti!",
+        quote: "«Verbale peritale del 1993: 'Il fluido estratto dal pozzo manifesta spiccata viscosità bruna e prende fuoco con un cerino... trattasi di acqua arricchita!'»",
+        dossierText: `
+          <p>Questo, signori della giuria televisiva, è il capolavoro assoluto dell'involontaria satira burocratica italiana: <span class="highlight-yellow">Perizia Tecnica del Tribunale di Siracusa, anno 1993</span>.</p>
+          <p>Un contadino di contrada Ogliastro chiama disperato l'Ufficio d'Igiene perché dal pozzo artesiano con cui irriga i limoni non esce acqua, ma un liquido denso e nerastro che odora di benzina super e scioglie le guarnizioni della pompa. Arriva il perito, raccoglie il campione, accende un cerino e la bottiglia fa una fiammata azzurra alta un metro e mezzo!</p>
+          <p>Il burocrate, con la proverbiale prudenza notarile, scrive a macchina: <em>"Il fluido manifesta proprietà infiammabili non canoniche, presumibilmente riconducibili a un arricchimento chimico spontaneo della falda"</em>. Avete capito? Non erano i serbatoi sfondati della raffineria che perdevano greggio nella roccia calcarea... era "acqua arricchita"!</p>
+        `,
+        moralTitle: "La Terra e le Falde non Dimenticano",
+        moralText: "Avvelenare il sottosuolo con idrocarburi e metalli pesanti è un crimine contro la vita che perdura per secoli. Chi inquina deve essere costretto a bonificare fino all'ultima particella, e le campagne di Augusta devono tornare a essere irrigate con acqua sorgiva pulita e incontaminata.",
+        gridSize: [5, 5],
+        source: { r: 0, c: 0, dir: 1, label: "Falda Rurale" },
+        target: { r: 4, c: 4, dir: 0, label: "Agrumeti Bio" },
+        tiles: [
+          [
+            { type: "source", ports: [0, 1, 0, 0], rot: 0, fixed: true },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 1 }
+          ],
+          [
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 3 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 },
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 2 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "cross", ports: [1, 1, 1, 1], rot: 0 }, // Filter node
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 3 }
+          ],
+          [
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 1 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 0 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 3 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "target", ports: [1, 0, 0, 0], rot: 0, fixed: true }
+          ]
+        ]
+      },
+      {
+        id: 4,
+        tag: "CASO V (FINALE)",
+        dossierNum: "FASCICOLO D'ORO • IL TRIONFO DELLA RINASCITA",
+        name: "L'Acquedotto della Rinascita Ecologica",
+        desc: "Il gran finale: ricollega l'intera rete cittadina a circuito chiuso! Alimenta la Villa Comunale, le Scuole e l'Ospedale Muscatello con acqua pura, limpida e a pressione perfetta!",
+        quote: "«E allora guardatela questa mappa, amici miei: perché quando la cittadinanza si sveglia, anche il rubinetto più arrugginito canta la libertà!»",
+        dossierText: `
+          <p>E allora, carissimi amici di Propaganda Live, permettetemi di sfogliare questo ultimo fascicolo con la mano che trema e il cuore ricolmo di sana speranza civica!</p>
+          <p>Dopo sessant'anni di promesse elettorali da bar, delibere dimenticate nelle cantine, veleni taciuti e comitati di madri coraggio che hanno contato ogni singola goccia, guardate cosa abbiamo costruito: <span class="highlight-yellow">la Rete dell'Acqua Rinata</span>!</p>
+          <p>I monumentali Ficus secolari della Villa Comunale tornano a bere linfa fresca e donano ombra alla piazza; all'Ospedale Muscatello i reparti hanno pressione idrica costante e sicura; e nelle scuole i bambini riempiono le borracce di metallo con acqua pura e trasparente come il cielo di Sicilia sopra la Porta Spagnola!</p>
+          <p>La politica, quando vuole, non è l'arte di promettere la luna... è il dovere sacro di far funzionare le cose semplici e vitali: un tubo dritto, una guarnizione che tiene, e l'onestà di considerare l'acqua come l'anima immortale di una comunità!</p>
+        `,
+        moralTitle: "L'Acqua è Libertà, Dignità e Futuro",
+        moralText: "L'acqua è il primo bene comune del pianeta. Difenderla dalle rapine industriali, gestirla con trasparenza pubblica e garantirla a ogni essere vivente è la più nobile delle battaglie civiche. Augusta rinasce dall'acqua pulita e dalla coscienza dei suoi cittadini!",
+        gridSize: [5, 5],
+        source: { r: 0, c: 0, dir: 1, label: "Fonte Purificata" },
+        target: { r: 4, c: 4, dir: 3, label: "Augusta Rinata" },
+        tiles: [
+          [
+            { type: "source", ports: [0, 1, 0, 0], rot: 0, fixed: true },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 2 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 1 }
+          ],
+          [
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 3 },
+            { type: "tee", ports: [1, 1, 1, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 0 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 2 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 0 },
+            { type: "cross", ports: [1, 1, 1, 1], rot: 0 },
+            { type: "elbow", ports: [1, 0, 0, 1], rot: 2 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 }
+          ],
+          [
+            { type: "straight", ports: [1, 0, 1, 0], rot: 0 },
+            { type: "elbow", ports: [0, 1, 1, 0], rot: 1 },
+            { type: "straight", ports: [1, 0, 1, 0], rot: 1 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 3 },
+            { type: "elbow", ports: [0, 0, 1, 1], rot: 2 }
+          ],
+          [
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 1 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "elbow", ports: [1, 1, 0, 0], rot: 0 },
+            { type: "straight", ports: [0, 1, 0, 1], rot: 1 },
+            { type: "target", ports: [0, 0, 0, 1], rot: 0, fixed: true }
+          ]
+        ]
+      }
+    ];
+
+    // --- GAME ENGINE STATE ---
+    let currentCaseIdx = 0;
+    let gridState = [];
+    let moveCount = 0;
+    let isFlowing = false;
+    let isSolved = false;
+    let flowProgress = 0; // 0 to 1
+    let animFrame = null;
+
+    const canvas = document.getElementById('pipe-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Initialize level pills
+    function initPills() {
+      const bar = document.getElementById('level-pills');
+      bar.innerHTML = "";
+      CASES.forEach((c, idx) => {
+        const pill = document.createElement('div');
+        pill.className = `level-pill ${idx === currentCaseIdx ? 'active' : ''}`;
+        pill.innerHTML = `
+          <div class="level-pill-num">${c.tag}</div>
+          <div class="level-pill-status">${idx === 0 ? 'Disponibile' : 'Caso ' + (idx + 1)}</div>
+        `;
+        pill.addEventListener('click', () => {
+          if (!isFlowing) loadCase(idx);
+        });
+        bar.appendChild(pill);
+      });
+    }
+
+    // Load case
+    function loadCase(idx) {
+      currentCaseIdx = idx;
+      const c = CASES[idx];
+      moveCount = 0;
+      isFlowing = false;
+      isSolved = false;
+      flowProgress = 0;
+      document.getElementById('flow-celebration').style.display = 'none';
+
+      // Update UI Header
+      document.getElementById('case-num-tag').innerText = c.tag;
+      document.getElementById('case-name').innerText = c.name;
+      document.getElementById('case-desc').innerText = c.desc;
+      document.getElementById('move-count').innerText = moveCount;
+      document.getElementById('pressure-val').innerText = '0%';
+      document.getElementById('status-val').innerText = 'Interrotta';
+      document.getElementById('gauge-needle').style.transform = 'rotate(-50deg)';
+
+      // Update pills
+      document.querySelectorAll('.level-pill').forEach((p, i) => {
+        p.classList.toggle('active', i === idx);
+      });
+
+      // Deep clone grid tiles
+      const [rows, cols] = c.gridSize;
+      gridState = [];
+      for (let r = 0; r < rows; r++) {
+        const row = [];
+        for (let col = 0; col < cols; col++) {
+          const t = c.tiles[r][col];
+          // Scramble non-fixed tiles initially so puzzle is not pre-solved
+          const initialRot = t.fixed ? 0 : (t.rot !== undefined ? t.rot : Math.floor(Math.random() * 4));
+          row.push({
+            type: t.type,
+            fixed: !!t.fixed,
+            basePorts: [...t.ports],
+            rot: initialRot,
+            connected: false
+          });
+        }
+        gridState.push(row);
+      }
+
+      checkConnectivity();
+      render();
+    }
+
+    // Get current rotated ports of a tile
+    function getPorts(tile) {
+      // Rotation shifts ports clockwise: [top, right, bottom, left]
+      // rot=1: [left, top, right, bottom]
+      const p = tile.basePorts;
+      const r = tile.rot % 4;
+      if (r === 0) return [p[0], p[1], p[2], p[3]];
+      if (r === 1) return [p[3], p[0], p[1], p[2]];
+      if (r === 2) return [p[2], p[3], p[0], p[1]];
+      return [p[1], p[2], p[3], p[0]];
+    }
+
+    // Check connectivity from Source using BFS
+    function checkConnectivity() {
+      const c = CASES[currentCaseIdx];
+      const [rows, cols] = c.gridSize;
+
+      // Reset connected state
+      for (let r = 0; r < rows; r++) {
+        for (let col = 0; col < cols; col++) {
+          gridState[r][col].connected = false;
+        }
+      }
+
+      const q = [[c.source.r, c.source.c]];
+      gridState[c.source.r][c.source.c].connected = true;
+
+      const dirs = [
+        [-1, 0], // 0: Top
+        [0, 1],  // 1: Right
+        [1, 0],  // 2: Bottom
+        [0, -1]  // 3: Left
+      ];
+
+      while (q.length > 0) {
+        const [r, col] = q.shift();
+        const p1 = getPorts(gridState[r][col]);
+
+        for (let d = 0; d < 4; d++) {
+          if (!p1[d]) continue;
+          const nr = r + dirs[d][0];
+          const nc = col + dirs[d][1];
+          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+            const nextTile = gridState[nr][nc];
+            if (!nextTile.connected) {
+              const p2 = getPorts(nextTile);
+              const opp = (d + 2) % 4;
+              if (p2[opp]) {
+                nextTile.connected = true;
+                q.push([nr, nc]);
+              }
+            }
+          }
+        }
+      }
+
+      // Check if target is reached
+      const targetTile = gridState[c.target.r][c.target.c];
+      isSolved = targetTile.connected;
+
+      if (isSolved) {
+        document.getElementById('pressure-val').innerText = '100%';
+        document.getElementById('status-val').innerText = 'CONNESSA!';
+        document.getElementById('gauge-needle').style.transform = 'rotate(45deg)';
+      } else {
+        const connCount = gridState.flat().filter(t => t.connected).length;
+        const total = rows * cols;
+        const pct = Math.round((connCount / total) * 90);
+        document.getElementById('pressure-val').innerText = pct + '%';
+        document.getElementById('status-val').innerText = 'In Corso';
+        document.getElementById('gauge-needle').style.transform = `rotate(${-50 + pct}deg)`;
+      }
+    }
+
+    // Render Grid onto Canvas
+    function render() {
+      const c = CASES[currentCaseIdx];
+      const [rows, cols] = c.gridSize;
+      const w = canvas.width;
+      const h = canvas.height;
+      const cellW = w / cols;
+      const cellH = h / rows;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw background grid cells
+      for (let r = 0; r < rows; r++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * cellW;
+          const y = r * cellH;
+
+          // Tile socket base
+          ctx.fillStyle = (r + col) % 2 === 0 ? "#112538" : "#0d1e2e";
+          ctx.fillRect(x + 2, y + 2, cellW - 4, cellH - 4);
+
+          // Tile border
+          ctx.strokeStyle = "#1b3a58";
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(x + 2, y + 2, cellW - 4, cellH - 4);
+
+          // Draw the clay pipe
+          drawPipeTile(ctx, gridState[r][col], x, y, cellW, cellH, r, col);
+        }
+      }
+    }
+
+    // Draw individual pipe tile with clay styling
+    function drawPipeTile(ctx, tile, x, y, w, h, r, col) {
+      const cx = x + w / 2;
+      const cy = y + h / 2;
+      const ports = getPorts(tile);
+      const isWater = tile.connected;
+      const pipeRadius = Math.min(w, h) * 0.18;
+
+      ctx.save();
+
+      // Draw pipe hub center
+      ctx.beginPath();
+      ctx.arc(cx, cy, pipeRadius, 0, Math.PI * 2);
+      ctx.fillStyle = tile.fixed ? "#d97706" : "#c25e36";
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#7c2d12";
+      ctx.stroke();
+
+      // Draw pipe segments pointing to open ports
+      const dirs = [
+        [cx, cy, cx, y],      // Top
+        [cx, cy, x + w, cy],  // Right
+        [cx, cy, cx, y + h],  // Bottom
+        [cx, cy, x, cy]       // Left
+      ];
+
+      for (let d = 0; d < 4; d++) {
+        if (ports[d]) {
+          const [x1, y1, x2, y2] = dirs[d];
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.lineWidth = pipeRadius * 2;
+          ctx.lineCap = "butt";
+          ctx.strokeStyle = tile.fixed ? "#d97706" : "#c25e36";
+          ctx.stroke();
+
+          // Clay pipe border outline
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = "#7c2d12";
+          ctx.stroke();
+
+          // Pipe flange at edge
+          drawFlange(ctx, x2, y2, d, pipeRadius);
+        }
+      }
+
+      // Draw inner water core if connected
+      if (isWater) {
+        const waterColor = isFlowing ? "#38bdf8" : "rgba(56, 189, 248, 0.6)";
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, pipeRadius * 0.55, 0, Math.PI * 2);
+        ctx.fillStyle = waterColor;
+        ctx.fill();
+
+        for (let d = 0; d < 4; d++) {
+          if (ports[d]) {
+            const [x1, y1, x2, y2] = dirs[d];
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineWidth = pipeRadius * 1.1;
+            ctx.strokeStyle = waterColor;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Source & Target Special Badges
+      if (tile.type === "source") {
+        ctx.beginPath();
+        ctx.arc(cx, cy, pipeRadius * 0.9, 0, Math.PI * 2);
+        ctx.fillStyle = "#0284c7";
+        ctx.fill();
+        ctx.font = `bold ${Math.round(w * 0.22)}px sans-serif`;
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("💧", cx, cy);
+      } else if (tile.type === "target") {
+        ctx.beginPath();
+        ctx.arc(cx, cy, pipeRadius * 0.9, 0, Math.PI * 2);
+        ctx.fillStyle = isWater ? "#22c55e" : "#64748b";
+        ctx.fill();
+        ctx.font = `bold ${Math.round(w * 0.22)}px sans-serif`;
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("🏠", cx, cy);
+      }
+
+      ctx.restore();
+    }
+
+    // Pipe metal flange / collar
+    function drawFlange(ctx, ex, ey, dir, r) {
+      ctx.save();
+      ctx.fillStyle = "#f59e0b";
+      ctx.strokeStyle = "#78350f";
+      ctx.lineWidth = 1.5;
+      const fw = r * 2.4;
+      const fh = 5;
+      if (dir === 0 || dir === 2) {
+        ctx.fillRect(ex - fw / 2, ey - fh / 2, fw, fh);
+        ctx.strokeRect(ex - fw / 2, ey - fh / 2, fw, fh);
+      } else {
+        ctx.fillRect(ex - fh / 2, ey - fw / 2, fh, fw);
+        ctx.strokeRect(ex - fh / 2, ey - fw / 2, fh, fw);
+      }
+      ctx.restore();
+    }
+
+    // Handle user tap / click on a cell
+    canvas.addEventListener('pointerdown', (e) => {
+      if (isFlowing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const c = CASES[currentCaseIdx];
+      const [rows, cols] = c.gridSize;
+      const cellW = rect.width / cols;
+      const cellH = rect.height / rows;
+
+      const col = Math.floor(x / cellW);
+      const r = Math.floor(y / cellH);
+
+      if (r >= 0 && r < rows && col >= 0 && col < cols) {
+        const tile = gridState[r][col];
+        if (!tile.fixed) {
+          tile.rot = (tile.rot + 1) % 4;
+          moveCount++;
+          document.getElementById('move-count').innerText = moveCount;
+          audio.playRotate();
+          checkConnectivity();
+          render();
+
+          // Auto-trigger victory flow when target is connected!
+          if (isSolved) {
+            triggerVictoryFlow();
+          }
+        }
+      }
+    });
+
+    // Test Flow Button click
+    document.getElementById('test-flow-btn').addEventListener('click', () => {
+      checkConnectivity();
+      render();
+      if (isSolved) {
+        triggerVictoryFlow();
+      } else {
+        audio.playRotate();
+        alert("⚠️ La conduttura ha delle falle o dei bivi interrotti! Ruota i raccordi per collegare la sorgente al rubinetto.");
+      }
+    });
+
+    // Reset button
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      loadCase(currentCaseIdx);
+    });
+
+    // Trigger Victory Water Flow
+    function triggerVictoryFlow() {
+      if (isFlowing) return;
+      isFlowing = true;
+      audio.playWaterRush();
+
+      const celebration = document.getElementById('flow-celebration');
+      celebration.style.display = 'block';
+
+      // Pulsing water effect
+      let tick = 0;
+      const interval = setInterval(() => {
+        tick++;
+        render();
+        if (tick > 16) {
+          clearInterval(interval);
+          isFlowing = false;
+          audio.playVictory();
+          // Show Filippo Ceccarelli's dossier modal after celebration
+          setTimeout(() => {
+            showCeccarelliDossier(currentCaseIdx);
+          }, 600);
+        }
+      }, 70);
+    }
+
+    // Show Filippo Ceccarelli Dossier Modal
+    function showCeccarelliDossier(caseIdx) {
+      document.getElementById('flow-celebration').style.display = 'none';
+      const c = CASES[caseIdx];
+      document.getElementById('modal-dossier-num').innerText = c.dossierNum;
+      document.getElementById('modal-dossier-title').innerText = c.name;
+      document.getElementById('modal-dossier-quote').innerText = c.quote;
+      document.getElementById('modal-dossier-text').innerHTML = c.dossierText;
+      document.getElementById('modal-moral-title').innerText = c.moralTitle;
+      document.getElementById('modal-moral-text').innerText = c.moralText;
+
+      const nextBtn = document.getElementById('modal-next-btn');
+      if (caseIdx >= CASES.length - 1) {
+        nextBtn.innerText = "🏆 HAI COMPLETATO TUTTI I CASI!";
+      } else {
+        nextBtn.innerText = `Caso Successivo: ${CASES[caseIdx + 1].tag} ➡️`;
+      }
+
+      document.getElementById('dossier-modal').classList.add('show');
+    }
+
+    // Close dossier modal
+    document.getElementById('modal-close-btn').addEventListener('click', () => {
+      document.getElementById('dossier-modal').classList.remove('show');
+    });
+
+    // Preview dossier button in action bar
+    document.getElementById('dossier-preview-btn').addEventListener('click', () => {
+      showCeccarelliDossier(currentCaseIdx);
+    });
+
+    // Next case button inside modal
+    document.getElementById('modal-next-btn').addEventListener('click', () => {
+      document.getElementById('dossier-modal').classList.remove('show');
+      if (currentCaseIdx < CASES.length - 1) {
+        loadCase(currentCaseIdx + 1);
+      } else {
+        alert("🎉 COMPLIMENTI! Hai riparato l'intero ciclo delle acque di Augusta, sconfitto il sacco industriale e meritato la medaglia di Custode dell'Oro Blu!");
+      }
+    });
+
+    // Handle window resize to ensure crisp canvas resolution
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      render();
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    // Expose for testing & automation
+    window.CASES = CASES;
+    window.loadCase = loadCase;
+    window.checkConnectivity = checkConnectivity;
+    window.render = render;
+    window.triggerVictoryFlow = triggerVictoryFlow;
+    Object.defineProperty(window, 'gridState', { get: () => gridState, set: (v) => { gridState = v; } });
+
+    // Initial startup
+    initPills();
+    loadCase(0);
+    setTimeout(resizeCanvas, 100);
+
+  </script>
+</body>
+</html>
