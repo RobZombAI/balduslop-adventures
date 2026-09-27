@@ -59,25 +59,23 @@ def get_level_1():
     S("balance-lookout", 130, 6.5, 14.8, "balance"),
     S("lift-gulf", 137, 3.6, 14.5, "lift", {moveY: 2.0, period: 4.0}),
     S("step-gulf-reach", 141.5, 3.8, 15.2, "ledge"),
-    S("plat-irrigation", 146, 27.0, 16.0, "stone"),
+    S("plat-irrigation", 146, 18.5, 16.0, "stone"),
     S("switch-water", 153, 2.2, 16.15, "switch", {channel: "garden-water", latch: !0}),
     S("gate-duomo", 158, 1.8, 20.0, "gate", {channel: "garden-water", h: 4}),
 
     S("dock-palms", 165, 8.0, 16.0, "stone", {checkpoint: 167, depth: 22, landmark: "sandwheel"}),
-    S("pulse-stump1", 174, 3.8, 15.6, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-stump2", 180, 4.8, 15.6, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-fountain", 186.0, 8.0, 15.0, "stone"),
-    S("lift-pergola", 194, 3.6, 14.5, "lift", {moveX: 2.4, period: 4.5}),
-    S("spring-piazza", 199.5, 2.0, 15.8, "spring"),
-    S("step-crossing-piazza", 201.2, 3.2, 15.9, "stone"),
-    S("plat-terrace-piazza", 204, 9.0, 16.0, "stone", {landmark: "sandwheel"}),
+    S("plat-palms-walkway1", 174.0, 5.5, 15.8, "stone"),
+    S("plat-palms-walkway2", 180.5, 5.5, 15.5, "stone"),
+    S("plat-fountain", 187.0, 7.5, 15.2, "stone"),
+    S("lift-pergola", 195.5, 4.5, 15.0, "lift", {moveX: 1.8, period: 4.0}),
+    S("plat-terrace-piazza", 202.5, 9.5, 16.0, "stone", {landmark: "sandwheel"}),
     S("pit-spikes-3", 167, 45, 4.0, "stone", {spiked: !0}),
 
     S("dock-duomo-approach", 213, 8.0, 16.5, "stone", {checkpoint: 215, depth: 22, landmark: "bellgate"}),
-    S("step-duomo1", 221, 3.8, 17.2, "ledge"),
+    S("step-duomo1", 222, 3.8, 17.2, "ledge"),
     S("step-duomo2", 227, 4.0, 18.0, "ledge"),
-    S("step-duomo3", 231.5, 3.5, 18.4, "ledge"),
-    S("goal-duomo", 235.5, 16.0, 18.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 236})
+    S("step-duomo3", 232.0, 3.5, 18.4, "ledge"),
+    S("goal-duomo", 236.5, 16.0, 18.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 237})
   ],
       decor: [
     {kind: "ficus-centenario", x: -4.0, y: 13.0, size: 14.0, z: -1.2},
@@ -104,7 +102,10 @@ def get_level_1():
     {kind: "ficus-chioma-attraversabile", x: 76.0, y: 14.4, size: 13.5, z: -2.6},
     {kind: "balustrata-xifonio", x: 106.0, y: 11.2, size: 4.5, z: -2.5},
     {kind: "gozzo-xifonio", x: 118.0, y: 7.5, size: 5.5, z: -10.0},
-    {kind: "fountain-augusta", x: 190.0, y: 15.0, size: 4.0, z: -2.5},
+    {kind: "palma-augusta", x: 176.0, y: 15.8, size: 8.0, z: -1.0},
+    {kind: "vaso-terracotta-agave", x: 182.0, y: 15.5, size: 2.2, z: -1.2},
+    {kind: "fountain-augusta", x: 190.0, y: 15.2, size: 4.0, z: -2.5},
+    {kind: "palma-augusta", x: 206.0, y: 16.0, size: 8.5, z: -1.0},
     {kind: "barocco-duomo", x: 235.0, y: 18.8, size: 18.0, z: -4.5},
     {kind: "fumo-petrolchimico-nube", x: 120.0, y: 26.0, size: 14.0, z: -15.0}
   ],
@@ -117,11 +118,7 @@ def get_level_1():
     {x: 167, y: 17.5}, {x: 187, y: 16.5}, {x: 205, y: 17.5}, {x: 222, y: 18.5},
     {x: 228, y: 19.5}, {x: 236, y: 20.5}
   ],
-  hazards: [
-    {x: 56, y: 14.8, w: 4.0, h: 0.5, kind: "crumble"},
-    {x: 174, y: 15.6, w: 3.8, h: 0.5, kind: "pulse"},
-    {x: 180, y: 15.6, w: 3.8, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Villa Comunale di Augusta (1850)", text: "Fondata sulla spianata di Piazza d'Armi. I monumentali Ficus secolari proteggono la citta dalle isole di calore!", icon: "walk"},
     {x: 48, end: 68, title: "Il Cato d'Acqua & Il Ficus", text: "In alto c'e un secchio d'acqua su carrucola! Tira la corda per innaffiare il Ficus e far crescere un ponte verde sopra gli spuntoni!", icon: "sink"},
@@ -185,8 +182,8 @@ def get_level_2():
     S("gate-dock", 142, 1.8, 17.5, "gate", {channel: "dock-lock", h: 4}),
 
     S("dock-barge", 149, 8.0, 13.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-pier1", 158, 4.0, 13.0, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-pier2", 165, 4.5, 13.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-pier-span1", 158.0, 5.5, 13.0, "stone"),
+    S("plat-pier-span2", 164.5, 6.5, 13.0, "stone"),
     S("plat-tanker-quay", 172, 7.5, 12.8, "stone"),
     S("lift-winch-molo", 180, 3.6, 12.0, "lift", {moveY: 2.2, period: 4.2}),
     S("step-winch-reach-l2", 184.2, 3.6, 12.6, "ledge"),
@@ -236,10 +233,7 @@ def get_level_2():
     {x: 128, y: 15.0}, {x: 138, y: 15.0}, {x: 150, y: 15.0}, {x: 173, y: 14.5},
     {x: 190, y: 14.8}, {x: 205, y: 15.0}, {x: 214, y: 15.5}, {x: 227, y: 16.5}
   ],
-  hazards: [
-    {x: 158, y: 13.0, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 13.0, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Lungomare Rossini", text: "Le mareggiate e i tombini intasati allagano la strada! Salta lungo i blocchi frangiflutti della marina.", icon: "walk"},
     {x: 41, end: 60, title: "Bypass Idraulico", text: "Attiva la valvola di scarico sulla stazione di pompaggio per deviare la piena di liquami e collegare il pontile di soccorso!", icon: "sink"},
@@ -303,8 +297,8 @@ def get_level_3():
     S("gate-flare", 142, 1.8, 26.0, "gate", {channel: "flare-lock", h: 4}),
 
     S("dock-tankfarm", 149, 8.0, 22.0, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-ref1", 158, 4.0, 21.4, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-ref2", 165, 4.5, 21.4, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-pipe-bridge1", 158.0, 5.5, 21.4, "stone"),
+    S("plat-pipe-bridge2", 164.5, 6.5, 21.4, "stone"),
     S("plat-tank-top", 172, 7.5, 21.0, "stone"),
     S("lift-winch-ref", 180, 3.6, 20.0, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l3", 184.2, 3.6, 20.8, "ledge"),
@@ -350,10 +344,7 @@ def get_level_3():
     {x: 130, y: 23.5}, {x: 140, y: 23.5}, {x: 150, y: 23.5}, {x: 173, y: 22.5},
     {x: 190, y: 23.0}, {x: 205, y: 24.0}, {x: 214, y: 24.5}, {x: 227, y: 25.0}
   ],
-  hazards: [
-    {x: 158, y: 21.4, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 21.4, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Polo Petrolchimico di Augusta", text: "Condotte industriali e vapori acri: salta sulle travi metalliche ed evita i gocciolamenti di idrocarburi!", icon: "walk"},
     {x: 43, end: 65, title: "Il Fiume di Greggio Infuocato", text: "Attiva l'erogatore di schiuma antincendio per estinguere le fiamme e distendere la passerella aerea!", icon: "sink"},
@@ -417,8 +408,8 @@ def get_level_4():
     S("gate-hangar", 142, 1.8, 30.5, "gate", {channel: "hangar-lock", h: 4}),
 
     S("dock-hangar-ridge", 149, 8.0, 26.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-hang1", 158, 4.0, 25.8, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-hang2", 165, 4.5, 25.2, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-hangar-deck1", 158.0, 5.5, 25.6, "stone"),
+    S("plat-hangar-deck2", 164.5, 6.5, 25.2, "stone"),
     S("plat-hangar-descend", 172, 7.5, 24.5, "stone"),
     S("lift-winch-hang", 180, 3.6, 23.5, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l4", 184.2, 3.6, 24.2, "ledge"),
@@ -466,10 +457,7 @@ def get_level_4():
     {x: 130, y: 28.0}, {x: 140, y: 28.0}, {x: 150, y: 28.0}, {x: 173, y: 26.0},
     {x: 190, y: 26.5}, {x: 205, y: 27.5}, {x: 214, y: 28.0}, {x: 227, y: 29.0}
   ],
-  hazards: [
-    {x: 158, y: 25.8, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 25.2, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Hangar Dirigibili (1917)", text: "Monumento mondiale di architettura in cemento armato. Evita le onduline deteriorate e sali verso la volta!", icon: "walk"},
     {x: 43, end: 65, title: "La Colata di Cemento Fresco", text: "Tira la leva idraulica per deviare il flusso di malta e far sollevare i blocchi di pietra portante!", icon: "sink"},
@@ -533,8 +521,8 @@ def get_level_5():
     S("gate-castle", 142, 1.8, 23.5, "gate", {channel: "castle-lock", h: 4}),
 
     S("dock-courtyard-svevo", 149, 8.0, 19.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-cas1", 158, 4.0, 19.0, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-cas2", 165, 4.5, 19.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-bastion-span1", 158.0, 5.5, 19.0, "stone"),
+    S("plat-bastion-span2", 164.5, 6.5, 19.0, "stone"),
     S("plat-bastion-terrace", 172, 7.5, 18.8, "stone"),
     S("lift-winch-cas", 180, 3.6, 18.0, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l5", 184.2, 3.6, 19.2, "ledge"),
@@ -580,10 +568,7 @@ def get_level_5():
     {x: 130, y: 21.0}, {x: 140, y: 21.0}, {x: 150, y: 21.0}, {x: 173, y: 20.5},
     {x: 190, y: 21.5}, {x: 205, y: 22.0}, {x: 214, y: 22.5}, {x: 227, y: 23.0}
   ],
-  hazards: [
-    {x: 158, y: 19.0, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 19.0, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Castello Svevo (1242)", text: "Costruito dall'imperatore Federico II. Salta lungo il fossato medievale minacciato da scarichi fognari.", icon: "walk"},
     {x: 43, end: 65, title: "L'Argano del Ponte Levatoio", text: "Gira la ruota d'acciaio dell'argano per far cadere il ponte levatoio e scavalcare la melma tossica!", icon: "sink"},
@@ -647,8 +632,8 @@ def get_level_6():
     S("gate-light", 142, 1.8, 25.5, "gate", {channel: "light-lock", h: 4}),
 
     S("dock-lantern-base", 149, 8.0, 21.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-clf1", 158, 4.0, 21.0, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-clf2", 165, 4.5, 21.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-falesia-span1", 158.0, 5.5, 21.0, "stone"),
+    S("plat-falesia-span2", 164.5, 6.5, 21.0, "stone"),
     S("plat-cove-crest", 172, 7.5, 21.2, "stone"),
     S("lift-winch-clf", 180, 3.6, 20.5, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l6", 184.2, 3.6, 21.8, "ledge"),
@@ -693,10 +678,7 @@ def get_level_6():
     {x: 130, y: 23.0}, {x: 140, y: 23.0}, {x: 150, y: 23.0}, {x: 173, y: 22.5},
     {x: 190, y: 23.5}, {x: 205, y: 24.5}, {x: 214, y: 25.0}, {x: 227, y: 25.5}
   ],
-  hazards: [
-    {x: 158, y: 21.0, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 21.0, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Capo Santa Croce", text: "Scogliere bianche a strapiombo e mare cristallino. Evita le voragini scoscese delle falesie.", icon: "walk"},
     {x: 43, end: 65, title: "L'Idrante Marino della Scogliera", text: "Apri l'idrante ad alta pressione per estinguere il rogo tossico di pneumatici e raffreddare la cengia!", icon: "sink"},
@@ -760,8 +742,8 @@ def get_level_7():
     S("gate-salt", 142, 1.8, 18.8, "gate", {channel: "salt-lock", h: 4}),
 
     S("dock-salina-export", 149, 8.0, 14.8, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-slt1", 158, 4.0, 14.4, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-slt2", 165, 4.5, 14.4, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-saline-span1", 158.0, 5.5, 14.4, "stone"),
+    S("plat-saline-span2", 164.5, 6.5, 14.4, "stone"),
     S("plat-salt-pans-dry", 172, 7.5, 14.2, "stone"),
     S("lift-winch-slt", 180, 3.6, 13.8, "lift", {moveY: 1.8, period: 4.0}),
     S("step-winch-reach-l7", 184.2, 3.6, 14.5, "ledge"),
@@ -806,10 +788,7 @@ def get_level_7():
     {x: 130, y: 16.0}, {x: 140, y: 16.0}, {x: 150, y: 16.0}, {x: 173, y: 15.5},
     {x: 190, y: 16.0}, {x: 205, y: 16.2}, {x: 214, y: 16.5}, {x: 227, y: 16.8}
   ],
-  hazards: [
-    {x: 158, y: 14.4, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 14.4, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Saline Regie di Augusta", text: "Vasche millenarie dove l'acqua del mare e il sole creano il sale. Salta tra gli argini di terra cotta!", icon: "walk"},
     {x: 43, end: 65, title: "La Paratoia d'Acqua Viva", text: "Apri la chiusa per far affluire acqua marina pulita: la melma scompare e il sale cristallizza in un ponte solido!", icon: "sink"},
@@ -873,8 +852,8 @@ def get_level_8():
     S("gate-vittoria", 142, 1.8, 20.5, "gate", {channel: "vittoria-lock", h: 4}),
 
     S("dock-artillery-court", 149, 8.0, 16.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-frt1", 158, 4.0, 16.0, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-frt2", 165, 4.5, 16.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-fort-span1", 158.0, 5.5, 16.0, "stone"),
+    S("plat-fort-span2", 164.5, 6.5, 16.0, "stone"),
     S("plat-powder-magazine", 172, 7.5, 16.2, "stone"),
     S("lift-winch-frt", 180, 3.6, 15.5, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l8", 184.2, 3.6, 16.5, "ledge"),
@@ -919,10 +898,7 @@ def get_level_8():
     {x: 130, y: 18.0}, {x: 140, y: 18.0}, {x: 150, y: 18.0}, {x: 173, y: 17.5},
     {x: 190, y: 18.0}, {x: 205, y: 18.5}, {x: 214, y: 18.5}, {x: 227, y: 18.8}
   ],
-  hazards: [
-    {x: 158, y: 16.0, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 16.0, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Forte Garcia & Forte Vittoria (1567)", text: "Le due fortezze navali spagnole a difesa della rada. Salta sui muraglioni cinquecenteschi!", icon: "walk"},
     {x: 43, end: 65, title: "L'Argano della Barriera Flottante", text: "Gira l'argano per tendere la barriera di panne anti-petrolio e creare un passaggio galleggiante sicuro!", icon: "sink"},
@@ -986,8 +962,8 @@ def get_level_9():
     S("gate-tauro", 142, 1.8, 24.2, "gate", {channel: "tauro-lock", h: 4}),
 
     S("dock-panoramic-orchard", 149, 8.0, 20.2, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-tauro1", 158, 4.0, 19.8, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-tauro2", 165, 4.5, 19.8, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-tauro-span1", 158.0, 5.5, 19.8, "stone"),
+    S("plat-tauro-span2", 164.5, 6.5, 19.8, "stone"),
     S("plat-monte-tauro-high", 172, 7.5, 20.0, "stone"),
     S("lift-winch-tauro", 180, 3.6, 19.2, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l9", 184.2, 3.6, 20.3, "ledge"),
@@ -1031,10 +1007,7 @@ def get_level_9():
     {x: 130, y: 21.8}, {x: 140, y: 21.8}, {x: 150, y: 21.8}, {x: 173, y: 21.5},
     {x: 190, y: 22.0}, {x: 205, y: 22.2}, {x: 214, y: 22.5}, {x: 227, y: 22.5}
   ],
-  hazards: [
-    {x: 158, y: 19.8, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 19.8, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Monte Tauro di Augusta", text: "Le colline che dominano l'istmo: salta tra i muretti a secco e le rocce calcaree!", icon: "walk"},
     {x: 43, end: 65, title: "La Cisterna Antincendio", text: "Apri la condotta dell'acqua per soffocare il rogo abusivo e far rinascere la terrazza di fiori selvatici!", icon: "sink"},
@@ -1098,8 +1071,8 @@ def get_level_10():
     S("gate-duomo-final", 142, 1.8, 25.0, "gate", {channel: "porta-lock", h: 4}),
 
     S("dock-piazza-duomo", 149, 8.0, 21.0, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
-    S("pulse-prt1", 158, 4.0, 20.6, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-prt2", 165, 4.5, 20.6, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-celebration-span1", 158.0, 5.5, 20.6, "stone"),
+    S("plat-celebration-span2", 164.5, 6.5, 20.6, "stone"),
     S("plat-celebration-promenade", 172, 7.5, 20.8, "stone"),
     S("lift-winch-prt", 180, 3.6, 20.2, "lift", {moveX: 2.4, period: 4.4}),
     S("step-winch-reach-l10", 184.2, 3.6, 21.2, "ledge"),
@@ -1147,10 +1120,7 @@ def get_level_10():
     {x: 130, y: 22.8}, {x: 140, y: 22.8}, {x: 150, y: 22.8}, {x: 173, y: 22.5},
     {x: 190, y: 23.0}, {x: 205, y: 23.5}, {x: 214, y: 23.8}, {x: 227, y: 24.0}
   ],
-  hazards: [
-    {x: 158, y: 20.6, w: 4.0, h: 0.5, kind: "pulse"},
-    {x: 164, y: 20.6, w: 4.0, h: 0.5, kind: "pulse"}
-  ],
+  hazards: [],
   hints: [
     {x: 0, end: 18, title: "Verso la Porta Spagnola", text: "L'istmo d'accesso all'isola: corri sopra i bastioni di San Giacomo verso la soglia monumentale del 1692!", icon: "walk"},
     {x: 43, end: 65, title: "Il Risveglio delle Radici Antiche", text: "Pianta il Germoglio Madre per liberare la forza verde: una gigantesca volta di Ficus crescera sopra le crepe!", icon: "sink"},
