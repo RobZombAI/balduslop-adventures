@@ -14,5 +14,13 @@ __pycache__/
 .DS_Store
 node_modules/
 scratch_*
-test_screen.png
 shot_*.png
+
+# Android build outputs & local properties
+*.apk
+android-app/.gradle/
+android-app/build/
+android-app/app/build/
+android-app/app/src/main/assets/
+android-app/local.properties
+
