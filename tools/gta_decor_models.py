@@ -43,6 +43,9 @@ def get_all_augusta_decor_models():
 }
 ,"palma-augusta"(t,e,n){
   const o=oo(e,n,7.5);
+  // Root flare base anchored into Sicilian soil
+  t.ball(1.4,0.4,1.4,"bark",o,0,0.2,0);
+  t.cylinder(0.7,0.35,"bark",o,0,0.18,0);
   // Curved ringed Mediterranean date palm trunk
   t.cylinder(0.42,4.5,"bark",o,0,2.25,0);
   for(let r=1;r<6;r++){
@@ -69,6 +72,9 @@ def get_all_augusta_decor_models():
 }
 ,"arancio-siciliano"(t,e,n){
   const o=oo(e,n,5.5);
+  // Root flare base anchored into Sicilian soil
+  t.ball(1.1,0.35,1.1,"bark",o,0,0.18,0);
+  t.cylinder(0.55,0.3,"bark",o,0,0.15,0);
   // Sicilian citrus / orange tree
   t.cylinder(0.35,2.6,"bark",o,0,1.3,0);
   t.cylinder(0.22,1.6,"bark",o,0.4,2.2,0.25);
@@ -89,6 +95,9 @@ def get_all_augusta_decor_models():
 }
 ,"olivo-secolare"(t,e,n){
   const o=oo(e,n,5.8);
+  // Gnarled root flare base anchored into rocky soil
+  t.ball(1.6,0.5,1.6,"bark",o,0,0.25,0);
+  t.cylinder(0.9,0.4,"bark",o,0,0.2,0);
   // Ancient gnarled Sicilian olive tree
   t.cylinder(0.58,2.4,"bark",o,0,1.2,0);
   t.cylinder(0.38,1.8,"bark",o,-0.35,2.1,0.25);
@@ -759,5 +768,75 @@ def get_all_augusta_decor_models():
   t.ball(0.4,0.15,0.3,"blueLight",o,-0.5,0.1,0.2);
   t.cylinder(0.12,0.5,"cream",o,0.3,0.1,-0.2);
   t.box(0.4,0.3,0.3,"orange",o,0,0.15,0.4);
+}
+,"fiume-petrolio-greggio"(t,e,n){
+  const o=oo(e,n,8.0);
+  t.box(8.0,0.35,3.6,"dark",o,0,0.18,0,0.1);
+  t.box(7.2,0.20,3.0,"dark",o,0,0.32,0);
+  t.ball(1.8,0.12,1.2,"orange",o,-2.0,0.38,0.4);
+  t.ball(1.5,0.10,1.0,"gold",o,1.8,0.38,-0.5);
+  t.ball(1.2,0.08,0.8,"blue",o,0,0.38,0.3);
+  t.ball(0.4,0.3,0.4,"dark",o,-1.2,0.45,-0.3);
+  t.ball(0.5,0.35,0.5,"dark",o,0.8,0.48,0.5);
+  t.ball(0.3,0.2,0.3,"dark",o,2.5,0.42,0.2);
+}
+,"colata-cemento-fresco"(t,e,n){
+  const o=oo(e,n,7.0);
+  t.box(7.0,0.45,3.4,"cream",o,0,0.22,0,0.15);
+  t.box(5.8,0.30,2.6,"cream",o,0.4,0.42,0);
+  t.box(7.2,0.6,0.15,"bark",o,0,0.3,1.7);
+  t.box(7.2,0.6,0.15,"bark",o,0,0.3,-1.7);
+  t.cylinder(0.12,1.2,"bark",o,-3.2,0.6,1.8);
+  t.cylinder(0.12,1.2,"bark",o,0,0.6,1.8);
+  t.cylinder(0.12,1.2,"bark",o,3.2,0.6,1.8);
+  t.ball(1.4,0.15,1.2,"dark",o,-1.5,0.48,0.2);
+  t.ball(1.6,0.15,1.3,"dark",o,1.6,0.48,-0.3);
+}
+,"rogo-tossico-pneumatici"(t,e,n){
+  const o=oo(e,n,6.0);
+  t.cylinder(1.2,0.5,"dark",o,-0.6,0.25,0);
+  t.cylinder(1.1,0.5,"dark",o,0.7,0.25,-0.4);
+  t.cylinder(1.0,0.45,"dark",o,0.2,0.6,0.2);
+  t.cylinder(0.9,0.45,"dark",o,-0.4,0.85,-0.2);
+  t.ball(1.6,1.8,1.4,"orange",o,0,1.5,0);
+  t.ball(1.2,1.5,1.0,"orangeLight",o,0.3,2.2,0.1);
+  t.ball(0.8,1.2,0.7,"gold",o,-0.2,2.6,-0.1);
+  t.ball(1.8,1.4,1.8,"dark",o,0.5,3.6,0.2);
+  t.ball(2.4,1.8,2.2,"dark",o,-0.4,4.8,-0.3);
+  t.ball(3.0,2.2,2.8,"dark",o,0.8,6.2,0.4);
+}
+,"barriera-panne-anti-petrolio"(t,e,n){
+  const o=oo(e,n,6.0);
+  for(let i=-2.4;i<=2.4;i+=1.2){
+    t.cylinder(0.35,1.1,"gold",o,i,0.35,0,0,0,Math.PI/2);
+    t.cylinder(0.08,0.2,"dark",o,i+0.6,0.35,0,0,0,Math.PI/2);
+  }
+  t.box(5.8,0.6,0.08,"dark",o,0,-0.1,0);
+}
+,"idrante-civico-acqua"(t,e,n){
+  const o=oo(e,n,3.0);
+  t.cylinder(0.45,0.2,"dark",o,0,0.1,0);
+  t.cylinder(0.32,1.6,"orange",o,0,0.9,0);
+  t.ball(0.38,0.32,0.38,"orange",o,0,1.75,0);
+  t.cylinder(0.12,0.25,"gold",o,0,1.95,0);
+  t.cylinder(0.18,0.35,"gold",o,0.35,1.1,0,0,0,Math.PI/2);
+  t.cylinder(0.18,0.35,"gold",o,-0.35,1.1,0,0,0,Math.PI/2);
+  t.cylinder(0.22,0.3,"gold",o,0,1.2,0.35,Math.PI/2,0,0);
+}
+,"fiume-fognatura-reflui"(t,e,n){
+  const o=oo(e,n,7.5);
+  t.box(7.5,0.4,3.2,"dark",o,0,0.2,0,0.1);
+  t.ball(1.6,0.12,1.2,"orangeLight",o,-1.8,0.36,0.3);
+  t.ball(2.0,0.14,1.4,"cream",o,1.2,0.38,-0.2);
+  t.ball(1.2,0.12,1.0,"cream",o,-0.2,0.40,0.5);
+}
+,"paratoia-idraulica-metallo"(t,e,n){
+  const o=oo(e,n,4.5);
+  t.box(0.3,4.2,0.4,"dark",o,-1.4,2.1,0);
+  t.box(0.3,4.2,0.4,"dark",o,1.4,2.1,0);
+  t.box(3.2,0.4,0.5,"dark",o,0,4.2,0);
+  t.box(2.6,2.2,0.18,"dark",o,0,1.3,0);
+  t.cylinder(0.12,3.4,"gold",o,0,2.6,0);
+  t.cylinder(0.55,0.14,"orange",o,0,4.4,0);
 }
 '''

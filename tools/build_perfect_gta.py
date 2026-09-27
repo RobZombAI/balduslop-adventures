@@ -91,14 +91,23 @@ function showLiberationToast(channel, levelName) {
     const msgs = {
       "garden-water": "🌿 OASI IRRIGATA! Le radici secolari bevono acqua pulita e aprono Piazza Duomo!",
       "ficus-water": "🌿 CATO D'ACQUA ROVESCIATO! L'acqua nutre il Ficus che cresce rigoglioso: attraversa la chioma verde sopra gli spuntoni!",
+      "sewer-purge": "🌊 BYPASS FOGNARIO APERTO! Le pompe idrovore aspirano i liquami reflui e sbloccano la chiatta di soccorso del Lungomare Rossini!",
       "dock-lock": "🌊 PARATIA MARINA APERTA! Drenaggio fognario completato sul Lungomare Rossini!",
+      "oil-quench": "🧯 FIUME DI PETROLIO DOMATO! La schiuma estingue il greggio infuocato e sblocca la passerella aerea della raffineria!",
       "ash-lock": "🌊 DEPURAZIONE AVVIATA! Filtri marini attivati contro gli scarichi abusivi nel Golfo Xifonio!",
+      "cement-divert": "🏗️ COLATA DI CEMENTO DEVIATA! La saracinesca devia la melma grigia e solleva i blocchi solidi nell'Hangar Dirigibili!",
       "flare-lock": "🏭 FILTRI PETROLCHIMICI ATTIVATI! Emissioni di benzene e fumi neri abbattuti dalla raffineria!",
+      "drawbridge-drop": "🏰 PONTE LEVATOIO ABBASSATO! Superato il fossato tossico per riconquistare il Castello Svevo di Federico II!",
       "hangar-lock": "🌿 BONIFICA IDROSCALO ATTIVATA! Riserva naturale protetta dall'incuria e dai rifiuti tossici!",
+      "quench-rogo": "💧 ROGO TOSSICO ESTINTO! L'idrante spegne la discarica di pneumatici sul Faro Santa Croce!",
       "castle-lock": "🏰 BASTIONI SVEVI LIBERATI! Stop agli scarichi abusivi attorno alla fortezza di Federico II!",
+      "sluice-flush": "🦩 CANALE SALMASTRO DEPURATO! La paratoia immette acqua marina limpida e crea il ponte cristallino nelle Saline Regie!",
       "light-lock": "💡 FARO SANTA CROCE ACCESO! Monitoraggio attivo contro le maree nere e sversamenti in mare!",
+      "boom-deploy": "⚓ BARRIERA ANTI-PETROLIO TESA! Le panne galleggianti bloccano la chiazza di greggio attorno a Forte Vittoria!",
       "salt-lock": "🦩 SALINE BONIFICATE! Acqua marina pura per i fenicotteri rosa e protezione delle oasi umide!",
+      "quench-forest": "🌸 INCENDIO BOSCHIVO SOFFOCATO! L'acqua della cisterna spegne il rogo di Monte Tauro e fa sbocciare una terrazza fiorita!",
       "vittoria-lock": "🏛️ FORTE VITTORIA PROTETTO! I guardiani rinascimentali salvati dal degrado industriale!",
+      "porta-utopia": "🌱 RISVEGLIO DELL'UTOPIA VERDE! Il fango industriale si trasforma in una maestosa volta di Ficus attraverso Porta Spagnola!",
       "porta-lock": "🌱 AUGUSTA RINASCE VERDE! UTOPIA ECOLOGICA: Alberi secolari, aria pulita e futuro sostenibile!"
     };
     const msg = msgs[channel] || "🌱 BONIFICA COMPLETATA! Un altro pericolo rimosso da Augusta!";
@@ -769,6 +778,12 @@ if target_activate in bundle:
     print("[✓] Hooked triggerAugustaLiberation in activate(e, n, o, i)!")
 else:
     print("[!] Warning: target_activate not found in bundle!")
+
+# 6b. Unlock all 10 chapters and expose window handles for testing and seamless player level selection
+bundle = bundle.replace('Wt=new m0e(me("world")', 'window.__WORLD__=Wt=new m0e(me("world")')
+bundle = bundle.replace('const Ade=10,sh=t=>!!te.labUnlocked||t<Ade&&!kn[t]?.hidden', 'window.__START_LEVEL__=nl;window.__GAME_TE__=te;window.__GAME_CE__=ce;const Ade=10,sh=t=>!0')
+bundle = bundle.replace('_u=t=>!!te.labUnlocked||t<Ade||!!kn[t]?.bench||bde(t-1)', '_u=t=>!0')
+print("[✓] Unlocked all 10 chapters & hooked window.__START_LEVEL__, window.__WORLD__!")
 
 # 7. Replace All 10 Levels with Handcrafted, Bug-Free, Tested Levels
 start_marker = "// --- AUGUSTA LEVELS (PROVINCIA DI SIRACUSA) ---"

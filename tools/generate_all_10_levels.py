@@ -1,1325 +1,1148 @@
 # tools/generate_all_10_levels.py
-"""
-Generates all 10 unique, authentic Augusta (SR) levels,
-custom 3D decor models, and integrates them into bundle/index-augusta-v2.js.
-"""
 
-import re
-import json
+def generate_file():
+    code = '''# tools/gta_all_10_levels.py
+"""
+10 Bespoke Handcrafted Levels for GTA: Giuseppe Taglia Alberi (Augusta)
+- 100% Grounded Trees (Zero Floating Trees, firmly rooted in Sicilian soil)
+- Flowing Active Fluids (Petroleum, Wet Cement, Sewage, Burning Landfills)
+- Dedicated Environmental Contraptions & Progressive Solutions
+- 10 Radically Differentiated Topographies & Layouts
+"""
 
 def get_level_1():
     return """const augustaL1 = yr({
   layoutVersion: 1,
-  name: "Il Polo Petrolchimico di Augusta",
-  short: "Petrolchimico",
-  label: "Ciminiere, torce e fumi industriali",
-  biome: "desert",
-  intro: "Benvenuto al polo petrolchimico di Augusta-Priolo. Tra ciminiere fumanti, valvole di pressione e tubature di greggio, scappa dalla raffineria prima che la pressione salga al massimo!",
-  sky: "#2d2016",
-  fog: "#453225",
-  spawn: {x: 1.5, y: 13},
-  end: 240,
+  name: "Salviamo il Verde di Augusta: I Giardini Pubblici",
+  short: "Villa Comunale",
+  label: "Ficus secolari, Duomo barocco e la rinascita verde",
+  biome: "citadel",
+  intro: "Benvenuto alla Villa Comunale di Augusta! Fondata nel 1850 sulla spianata di Piazza d'Armi, ospita i monumentali Ficus secolari minacciati da abbattimenti sconsiderati. Con la tua paletta e i germogli di Ficus, supera le motoseghe impazzite, disattiva le bolle di calore e raggiungi il sagrato barocco della Chiesa Madre per piantare il futuro verde di Augusta!",
+  sky: "#1c6498",
+  fog: "#3b82b0",
+  spawn: {x: 1.5, y: 13.0},
+  end: 245,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. Raffineria & Conduttura Greggio", landmark: "beacon"},
-    {x: 50, name: "2. Le Torce di Combustione (Flares)", landmark: "pulsedrum"},
-    {x: 105, name: "3. Pipe-Rack delle Tubature Aeree", landmark: "bannerarch"},
-    {x: 165, name: "4. Serbatoi di Stoccaggio Petrolio", landmark: "sandwheel"},
-    {x: 215, name: "5. Banchina di Scarico Raffineria", landmark: "bellgate"}
+    {x: -8, name: "1. L'Ingresso della Villa & I Viali Alberati", landmark: "beacon"},
+    {x: 48, name: "2. I Ficus Secolari (1850) & Il Cato d'Acqua", landmark: "pulsedrum"},
+    {x: 102, name: "3. Il Belvedere Panoramico sul Golfo Xifonio", landmark: "bannerarch"},
+    {x: 165, name: "4. Il Viale delle Palme & L'Arresto delle Motoseghe", landmark: "sandwheel"},
+    {x: 213, name: "5. Il Sagrato Barocco della Chiesa Madre", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 13, "stone", {landmark: "beacon"}),
-    S("lift-pipe1", 10, 3.6, 13.5, "lift", {moveY: 2.4, period: 4.0}),
-    S("plat-refinery", 15, 6.5, 14.5, "stone"),
-    S("step-valves", 23, 3.4, 15.6, "ledge"),
-    S("lift-worker", 28, 3.5, 14.8, "lift", {moveX: 2.8, period: 4.5}),
-    S("plat-conduit", 33, 7.5, 15.2, "stone"),
+    S("start", -8, 16, 13.0, "stone", {landmark: "beacon"}),
+    S("plat-ficus-step1", 6, 6.0, 13.6, "stone"),
+    S("plat-ficus-step2", 15, 6.5, 14.4, "stone"),
+    S("step-roots", 22, 3.5, 15.2, "ledge"),
+    S("lift-canopy", 28, 3.6, 14.8, "lift", {moveX: 2.5, period: 4.2}),
+    S("plat-avenue", 35, 8.0, 15.2, "stone"),
+    S("spring-branch1", 42, 2.0, 15.2, "spring"),
+    S("opt-sprout1", 42, 3.5, 18.2, "ledge", {optional: !0}),
     S("pit-spikes-1", 7, 38, 2.0, "stone", {spiked: !0}),
 
-    S("opt-pr1", 42, 3.5, 17.5, "ledge", {optional: !0}),
-    S("spring-pr1", 43, 2.0, 15.2, "spring"),
-    S("dock-flares", 48, 7, 15.2, "stone", {checkpoint: 50, depth: 22, landmark: "pulsedrum"}),
-    S("crumble-flare1", 57, 4.2, 14.8, "crumble"),
-    S("plat-steam", 63, 6, 14.2, "stone"),
-    S("ferry-slop", 71, 4.5, 13.8, "ferry", {travel: 18, speed: 3.2}),
-    S("plat-dockside", 91, 7, 13.8, "stone"),
+    S("dock-ficus-main", 48, 8.0, 15.2, "stone", {checkpoint: 50, depth: 22, landmark: "pulsedrum"}),
+    S("crumble-bark", 56, 4.0, 14.8, "crumble"),
+    S("plat-shaded", 63, 7.0, 14.2, "stone"),
+    S("switch-cato-rope", 65.5, 2.2, 14.35, "switch", {channel: "ficus-water", latch: !0}),
+    S("ficus-canopy-step1", 70.0, 5.0, 14.2, "timed", {channel: "ficus-water"}),
+    S("ficus-canopy-bridge", 76.0, 8.5, 14.4, "timed", {channel: "ficus-water"}),
+    S("ficus-canopy-step2", 85.5, 4.5, 14.0, "timed", {channel: "ficus-water"}),
+    S("plat-seawall", 91, 8.5, 13.8, "stone"),
     S("pit-spikes-2", 50, 52, 2.0, "stone", {spiked: !0}),
 
-    S("dock-piperack", 104, 7, 11.2, "stone", {checkpoint: 106, depth: 22, landmark: "bannerarch"}),
-    S("balance-tank1", 113, 7, 11.8, "balance"),
-    S("step-cross", 122, 3.8, 12.8, "ledge"),
-    S("step-pr2", 126, 3.2, 15.5, "ledge"),
-    S("balance-tank2", 128, 7.5, 13.8, "balance"),
-    S("opt-pr2", 133, 3.5, 18.5, "ledge", {optional: !0}),
-    S("lift-boiler", 138, 3.6, 13.5, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-valvefloor", 145, 22, 16.2, "stone", {landmark: "beacon"}),
-    S("switch-safety", 153, 2.2, 16.35, "switch", {channel: "flare-lock", latch: !0}),
-    S("gate-safety", 160, 1.8, 20.2, "gate", {channel: "flare-lock", h: 4}),
+    S("dock-belvedere", 102, 8.0, 11.2, "stone", {checkpoint: 104, depth: 22, landmark: "bannerarch"}),
+    S("balance-terrace", 111, 7.0, 11.8, "balance"),
+    S("step-parapet", 119, 3.8, 12.8, "ledge"),
+    S("step-baluster", 124, 3.2, 14.0, "ledge"),
+    S("balance-lookout", 130, 6.5, 14.8, "balance"),
+    S("lift-gulf", 137, 3.6, 14.5, "lift", {moveY: 2.0, period: 4.0}),
+    S("step-gulf-reach", 141.5, 3.8, 15.2, "ledge"),
+    S("plat-irrigation", 146, 27.0, 16.0, "stone"),
+    S("switch-water", 153, 2.2, 16.15, "switch", {channel: "garden-water", latch: !0}),
+    S("gate-duomo", 158, 1.8, 20.0, "gate", {channel: "garden-water", h: 4}),
 
-    S("dock-tanks", 165, 7, 16.2, "stone", {checkpoint: 167, depth: 22, landmark: "sandwheel"}),
-    S("pulse-pipe1", 174, 3.8, 15.6, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-pipe2", 180, 3.8, 15.6, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-tanker", 186, 6, 14.8, "stone"),
-    S("step-pr3", 197, 3.2, 18.2, "ledge"),
-    S("lift-chimney", 194, 3.6, 14.2, "lift", {moveX: 2.6, moveY: 1.8, period: 5.0}),
-    S("opt-pr3", 202, 3.5, 20.5, "ledge", {optional: !0}),
-    S("spring-pr3", 203, 2.0, 15.8, "spring"),
-    S("plat-dike", 201, 8, 15.8, "stone", {landmark: "sandwheel"}),
+    S("dock-palms", 165, 8.0, 16.0, "stone", {checkpoint: 167, depth: 22, landmark: "sandwheel"}),
+    S("pulse-stump1", 174, 3.8, 15.6, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-stump2", 180, 3.8, 15.6, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-fountain", 187, 7.0, 15.0, "stone"),
+    S("lift-pergola", 194, 3.6, 14.5, "lift", {moveX: 2.4, period: 4.5}),
+    S("spring-piazza", 200, 2.0, 15.8, "spring"),
+    S("plat-terrace-piazza", 204, 8.0, 16.0, "stone", {landmark: "sandwheel"}),
     S("pit-spikes-3", 167, 45, 4.0, "stone", {spiked: !0}),
 
-    S("dock-jetty", 213, 7, 15.8, "stone", {checkpoint: 215, depth: 22, landmark: "bellgate"}),
-    S("step-dock1", 222, 3.8, 16.8, "ledge"),
-    S("step-dock2", 228, 4.2, 17.8, "ledge"),
-    S("goal-production", 234, 14, 18.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 236})
+    S("dock-duomo-approach", 213, 8.0, 16.5, "stone", {checkpoint: 215, depth: 22, landmark: "bellgate"}),
+    S("step-duomo1", 221, 3.8, 17.2, "ledge"),
+    S("step-duomo2", 227, 4.0, 18.0, "ledge"),
+    S("step-duomo3", 231.5, 3.5, 18.4, "ledge"),
+    S("goal-duomo", 235.5, 16.0, 18.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 236})
+  ],
+      decor: [
+    {kind: "ficus-centenario", x: -4.0, y: 13.0, size: 14.0, z: -1.2},
+    {kind: "palma-augusta", x: 1.0, y: 13.0, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 8.5, y: 13.6, size: 5.5, z: -0.8},
+    {kind: "olivo-secolare", x: 18.0, y: 14.4, size: 6.5, z: -1.2},
+    {kind: "palma-augusta", x: 38.5, y: 15.2, size: 8.5, z: -1.0},
+    {kind: "ficus-centenario", x: 52.0, y: 15.2, size: 14.0, z: -1.5},
+    {kind: "tree-sapling", x: 66.5, y: 14.2, size: 3.8, z: -0.6},
+    {kind: "olivo-secolare", x: 94.5, y: 13.8, size: 7.0, z: -1.2},
+    {kind: "arancio-siciliano", x: 106.0, y: 11.2, size: 5.8, z: -0.8},
+    {kind: "palma-augusta", x: 151.0, y: 16.0, size: 9.0, z: -1.0},
+    {kind: "tree-sapling", x: 156.0, y: 16.0, size: 4.0, z: -0.6},
+    {kind: "ficus-centenario", x: 168.0, y: 16.0, size: 13.5, z: -1.5},
+    {kind: "arancio-siciliano", x: 190.5, y: 15.0, size: 6.0, z: -0.8},
+    {kind: "palma-augusta", x: 208.0, y: 16.0, size: 8.5, z: -1.0},
+    {kind: "olivo-secolare", x: 217.0, y: 16.5, size: 7.2, z: -1.2},
+    {kind: "ficus-rinascita", x: 238.0, y: 18.8, size: 6.5, z: -0.8},
+    {kind: "tree-sapling", x: 244.0, y: 18.8, size: 4.2, z: -0.6},
+    {kind: "cartello-salviamo-verde", x: -1.0, y: 13.0, size: 4.0, z: -1.8},
+    {kind: "panchina-villa", x: 2.0, y: 13.0, size: 3.0, z: -1.5},
+    {kind: "vaso-terracotta-agave", x: 17.0, y: 14.4, size: 2.2, z: -1.2},
+    {kind: "cato-carrucola-acqua", x: 65.0, y: 14.2, size: 7.0, z: -1.5},
+    {kind: "ficus-chioma-attraversabile", x: 76.0, y: 14.4, size: 13.5, z: -2.6},
+    {kind: "balustrata-xifonio", x: 106.0, y: 11.2, size: 4.5, z: -2.5},
+    {kind: "gozzo-xifonio", x: 118.0, y: 7.5, size: 5.5, z: -10.0},
+    {kind: "fountain-augusta", x: 190.0, y: 15.0, size: 4.0, z: -2.5},
+    {kind: "barocco-duomo", x: 235.0, y: 18.8, size: 18.0, z: -4.5},
+    {kind: "fumo-petrolchimico-nube", x: 120.0, y: 26.0, size: 14.0, z: -15.0}
+  ],
+  stamps: [{x: 42.0, y: 19.5}, {x: 130.0, y: 16.5}, {x: 204.0, y: 18.0}],
+  coins: [
+    {x: 2, y: 14.5}, {x: 8, y: 15.0}, {x: 16, y: 15.8}, {x: 24, y: 16.5},
+    {x: 35, y: 16.8}, {x: 49, y: 16.8}, {x: 63, y: 15.8}, {x: 72, y: 15.5},
+    {x: 79, y: 15.8}, {x: 91, y: 15.2}, {x: 103, y: 12.8}, {x: 112, y: 13.2},
+    {x: 121, y: 14.5}, {x: 131, y: 16.2}, {x: 146, y: 17.5}, {x: 155, y: 17.5},
+    {x: 167, y: 17.5}, {x: 187, y: 16.5}, {x: 205, y: 17.5}, {x: 222, y: 18.5},
+    {x: 228, y: 19.5}, {x: 236, y: 20.5}
   ],
   hazards: [
-    {x: 7, w: 38, y: 2.0},
-    {x: 50, w: 52, y: 2.0},
-    {x: 167, w: 45, y: 4.0}
+    {x: 56, y: 14.8, w: 4.0, h: 0.5, kind: "crumble"},
+    {x: 174, y: 15.6, w: 3.8, h: 0.5, kind: "pulse"},
+    {x: 180, y: 15.6, w: 3.8, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "pipe", x: 10, y: 13, size: 6, z: -3},
-    {kind: "pipe-elbow", x: 25, y: 13.5, size: 2.6, z: -3},
-    {kind: "pipe-arch", x: 48, y: 13.8, size: 10, z: -3.4},
-    {kind: "flare-stack", x: 54, y: 15.2, size: 12, z: -4},
-    {kind: "furnace", x: 60, y: 10, size: 6, z: -4},
-    {kind: "furnace-vent", x: 62, y: 14.5, size: 2.5, z: -5},
-    {kind: "smoke", x: 63, y: 16, size: 1.5, z: -4.5},
-    {kind: "valve", x: 72, y: 11.2, size: 1.55, z: -2.2},
-    {kind: "pipe", x: 80, y: 9, size: 6, z: -3},
-    {kind: "pipe", x: 110, y: 11, size: 6, z: -3},
-    {kind: "oil-tank", x: 120, y: 11.8, size: 5, z: -4},
-    {kind: "smoke", x: 123, y: 17, size: 1.5, z: -4.5},
-    {kind: "pipe-arch", x: 106, y: 11.2, size: 10, z: -3.4},
-    {kind: "scaffold", x: 134, y: 13.5, size: 3, z: -2.4},
-    {kind: "caged-lamp", x: 146, y: 16.2, size: 0.7, z: -1.6},
-    {kind: "pipe", x: 150, y: 16.2, size: 6, z: -3},
-    {kind: "oil-tank", x: 172, y: 16.2, size: 5.5, z: -4},
-    {kind: "pipe-arch", x: 168, y: 16.2, size: 10, z: -3.4},
-    {kind: "furnace", x: 185, y: 13, size: 6, z: -4},
-    {kind: "smoke", x: 188, y: 19, size: 1.5, z: -4.5},
-    {kind: "caged-lamp", x: 214, y: 15.8, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Fuga dal Petrolchimico", text: "Inizia la corsa tra gli impianti di Augusta! Salta sulle condutture di metallo con Spazio. Raccogli le gocce d'oro di carburante.", touchText: "Inizia la corsa tra gli impianti di Augusta! Usa il joystick e SALTA per superare le condutture."},
-    {x: 50, end: 65, icon: "sink", title: "Torce e Passerelle Fragili", text: "Le passerelle esposte al calore delle ciminiere si sgretolano: non fermarti troppo a lungo! Usa la molla di vapore per il timbro segreto."},
-    {x: 106, end: 125, icon: "knead", title: "Bilanciamento Cisterne", text: "Le piattaforme a bascula sopra i serbatoi oscillano con il tuo peso. Mantieni il baricentro!"},
-    {x: 150, end: 164, icon: "walk", title: "Valvola di Sicurezza", text: "Premi l'interruttore sulla passerella (camminandoci sopra o saltando) per abbassare la paratia tagliafuoco."},
-    {x: 167, end: 185, icon: "drop", title: "Valvole a Pressione", text: "Le piattaforme a vapore pulsano a intervalli regolari. Usa STOMP (S o tasto STOMP) per scendere rapidamente!", touchText: "Le piattaforme pulsano a intervalli regolari. Premi il tasto STOMP per scendere in picchiata!"},
-    {x: 215, end: 242, icon: "bell", title: "Banchina di Scarico", text: "Suona la Campana della Raffineria per completare la fuga dal Petrolchimico!"}
+    {x: 0, end: 18, title: "Villa Comunale di Augusta (1850)", text: "Fondata sulla spianata di Piazza d'Armi. I monumentali Ficus secolari proteggono la citta dalle isole di calore!", icon: "walk"},
+    {x: 48, end: 68, title: "Il Cato d'Acqua & Il Ficus", text: "In alto c'e un secchio d'acqua su carrucola! Tira la corda per innaffiare il Ficus e far crescere un ponte verde sopra gli spuntoni!", icon: "sink"},
+    {x: 102, end: 125, title: "Belvedere sul Golfo Xifonio", text: "Dalla balconata panoramica puoi ammirare il mare ionico e i gozzi tradizionali dei pescatori.", icon: "knead"},
+    {x: 145, end: 162, title: "Irrigazione Comunale", text: "Cammina sopra la valvola a terra per innaffiare i giardini e sbloccare la cancellata di Piazza Duomo!", icon: "walk"},
+    {x: 213, end: 242, title: "Chiesa Madre di Augusta (1769)", text: "Sei giunto al sagrato del Duomo barocco! Pianta il germoglio al centro della piazza per celebrare la rinascita!", icon: "bell"}
   ],
-  coins: [
-    {x: 6, y: 15.5}, {x: 10, y: 15.5}, {x: 17, y: 16.5}, {x: 19, y: 16.5},
-    {x: 24, y: 15}, {x: 29, y: 15.5}, {x: 37, y: 16}, {x: 39, y: 16},
-    {x: 56, y: 15}, {x: 62, y: 14.5}, {x: 68, y: 13.5},
-    {x: 76, y: 13.5}, {x: 82, y: 13.5}, {x: 88, y: 13.5}, {x: 95, y: 13.5},
-    {x: 115, y: 14}, {x: 118, y: 14}, {x: 124, y: 15},
-    {x: 130, y: 16}, {x: 134, y: 16}, {x: 147, y: 18}, {x: 150, y: 18},
-    {x: 176, y: 17.5}, {x: 182, y: 17.5}, {x: 188, y: 17},
-    {x: 196, y: 17}, {x: 204, y: 18}, {x: 224, y: 19}, {x: 230, y: 20},
-    {x: 236, y: 21}, {x: 239, y: 21}
-  ],
-  stamps: [
-    {x: 43.5, y: 19.5},
-    {x: 134.5, y: 20.5},
-    {x: 203.5, y: 22.5}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_2():
     return """const augustaL2 = yr({
   layoutVersion: 1,
-  name: "La Rada di Augusta & Pontili al Mercurio",
-  short: "Porto Mercurio",
-  label: "Pontili sospesi, chiatte industriali e acque scure",
+  name: "Lungomare Rossini & Il Diluvio Fognario",
+  short: "Lungomare Rossini",
+  label: "Tombini che esplodono, liquami in strada e crisi climatica",
   biome: "nightfall",
-  intro: "Sei fuggito dalla raffineria, ma ora devi attraversare la rada industriale di Augusta. Le acque sono sature di mercurio e cloro-soda: salta tra pontili di carico, chiatte a fune e imponenti gru navali!",
-  sky: "#131f2b",
-  fog: "#1f3142",
-  spawn: {x: 1.5, y: 11},
-  end: 240,
+  intro: "Le bombe d'acqua travolgono Augusta! La rete fognaria obsoleta cede e i tombini del lungomare Rossini saltano via sparando getti di liquami e melma. Salta sulle passerelle di soccorso e attiva il bypass idraulico per far salire la chiatta di salvataggio!",
+  sky: "#13222e",
+  fog: "#1f3445",
+  spawn: {x: 1.5, y: 9.0},
+  end: 242,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. Calata delle Navi Cisterna", landmark: "beacon"},
-    {x: 48, name: "2. Il Canale al Mercurio", landmark: "pulsedrum"},
-    {x: 102, name: "3. Gru Navali & Pontili Galleggianti", landmark: "bannerarch"},
-    {x: 162, name: "4. La Chiatta Mercantile Megara", landmark: "sandwheel"},
-    {x: 212, name: "5. Molo di Scarico Nord", landmark: "bellgate"}
+    {x: -8, name: "1. Il Molo di Banchina & I Tombini Saltati", landmark: "beacon"},
+    {x: 41, name: "2. La Stazione Idrovora & Il Torrente di Liquami", landmark: "pulsedrum"},
+    {x: 86, name: "3. Le Gru Portuali & I Pontili Galleggianti", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Molo delle Chiatte Mercantile", landmark: "sandwheel"},
+    {x: 205, name: "5. Faro del Molo Nord di Augusta", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 11, "stone", {landmark: "beacon"}),
-    S("step-pier1", 10, 4.2, 11.8, "ledge"),
-    S("plat-quay", 16, 7.5, 12.6, "stone"),
-    S("crane-lift1", 26, 3.8, 13.0, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-pierhead", 32, 6.5, 13.8, "stone"),
-    S("spring-port1", 41, 2.0, 13.8, "spring"),
-    S("opt-port1", 40, 3.6, 17.8, "ledge", {optional: !0}),
-    S("pit-mercury-1", 7, 40, 1.5, "stone", {spiked: !0}),
+    S("start", -8, 16, 9.0, "stone", {landmark: "beacon"}),
+    S("step-low-quay", 5, 5.5, 9.6, "stone"),
+    S("plat-breakwater1", 13, 6.5, 10.4, "stone"),
+    S("lift-crane-seawall", 20, 3.5, 10.8, "lift", {moveY: 2.0, period: 4.0}),
+    S("plat-quay-promenade", 27, 8.0, 11.5, "stone"),
+    S("spring-seawall", 34, 2.0, 11.5, "spring"),
+    S("opt-seawall", 34, 3.5, 15.5, "ledge", {optional: !0}),
+    S("pit-sewage-1", 3, 36, 2.0, "stone", {spiked: !0}),
 
-    S("dock-channel", 46, 7.5, 13.8, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("plat-gangway1", 56, 4.8, 13.2, "stone"),
-    S("ferry-mercury", 63, 5.5, 12.6, "ferry", {travel: 24, speed: 3.4}),
-    S("plat-crane-isle", 90, 8.0, 12.6, "stone"),
-    S("pit-mercury-2", 52, 48, 1.5, "stone", {spiked: !0}),
+    S("dock-pump-station", 41, 8.0, 12.0, "stone", {checkpoint: 43, depth: 22, landmark: "pulsedrum"}),
+    S("switch-bypass-sewer", 43.5, 2.2, 12.15, "switch", {channel: "sewer-purge", latch: !0}),
+    S("plat-sewage-span1", 49, 6.5, 11.8, "timed", {channel: "sewer-purge"}),
+    S("ferry-rescue-pier", 57.0, 9.0, 11.5, "timed", {channel: "sewer-purge"}),
+    S("plat-sewage-span2", 68.0, 6.5, 11.6, "timed", {channel: "sewer-purge"}),
+    S("plat-marina-pier", 76, 8.0, 12.0, "stone"),
+    S("pit-sewage-2", 44, 34, 2.0, "stone", {spiked: !0}),
 
-    S("dock-cranes", 100, 7.0, 12.6, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("crane-jib1", 109, 8.0, 13.2, "balance"),
-    S("step-trolley", 119, 3.8, 14.2, "ledge"),
-    S("step-port2", 125, 3.2, 16.8, "ledge"),
-    S("crane-jib2", 127, 8.0, 15.2, "balance"),
-    S("opt-port2", 133, 3.6, 20.0, "ledge", {optional: !0}),
-    S("lift-gantry", 138, 3.6, 14.8, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-dockgate-floor", 144, 22, 16.0, "stone", {landmark: "beacon"}),
-    S("switch-dockgate", 152, 2.2, 16.15, "switch", {channel: "dock-lock", latch: !0}),
-    S("gate-dock", 159, 1.8, 20.0, "gate", {channel: "dock-lock", h: 4}),
+    S("dock-crane-isle", 86, 8.0, 12.2, "stone", {checkpoint: 88, depth: 22, landmark: "bannerarch"}),
+    S("balance-crane-jib", 95, 7.5, 12.8, "balance"),
+    S("step-trolley", 103, 3.8, 13.6, "ledge"),
+    S("step-pierhead", 108, 3.5, 14.2, "ledge"),
+    S("balance-gantry", 114, 6.5, 14.5, "balance"),
+    S("lift-marina", 121, 3.6, 13.5, "lift", {moveX: 2.5, period: 4.2}),
+    S("plat-dockgate-floor", 126, 31.0, 13.5, "stone"),
+    S("switch-dockgate", 137, 2.2, 13.65, "switch", {channel: "dock-lock", latch: !0}),
+    S("gate-dock", 142, 1.8, 17.5, "gate", {channel: "dock-lock", h: 4}),
 
-    S("dock-barge", 163, 7.5, 16.0, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-wharf1", 173, 4.0, 15.4, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-wharf2", 179, 4.0, 15.4, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-tanker-deck", 185, 6.5, 14.6, "stone"),
-    S("step-port3", 196, 3.2, 17.8, "ledge"),
-    S("lift-winch", 193, 3.6, 14.0, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-port3", 201, 3.5, 20.2, "ledge", {optional: !0}),
-    S("spring-port3", 202, 2.0, 15.6, "spring"),
-    S("plat-seawall", 200, 8.5, 15.6, "stone", {landmark: "sandwheel"}),
-    S("pit-mercury-3", 168, 44, 2.5, "stone", {spiked: !0}),
+    S("dock-barge", 149, 8.0, 13.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-pier1", 158, 4.0, 13.0, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-pier2", 165, 4.5, 13.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-tanker-quay", 172, 7.5, 12.8, "stone"),
+    S("lift-winch-molo", 180, 3.6, 12.0, "lift", {moveY: 2.2, period: 4.2}),
+    S("step-winch-reach-l2", 184.2, 3.6, 12.6, "ledge"),
+    S("plat-outer-seawall", 189, 8.5, 13.2, "stone"),
+    S("step-outer-link", 197, 3.5, 13.5, "ledge"),
+    S("pit-sewage-3", 152, 48, 2.0, "stone", {spiked: !0}),
 
-    S("dock-exit", 212, 7.0, 15.6, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-rock1", 221, 3.8, 16.6, "ledge"),
-    S("step-rock2", 227, 4.2, 17.6, "ledge"),
-    S("goal-harbor", 233, 14, 18.6, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-molo-nord", 204, 8.0, 13.5, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-lantern1", 212, 3.8, 14.0, "ledge"),
+    S("step-lantern2", 218, 4.0, 14.5, "ledge"),
+    S("step-lantern3", 223.0, 4.0, 14.65, "ledge"),
+    S("goal-lungomare", 228.0, 17.0, 14.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "palma-augusta", x: -4.0, y: 9.0, size: 8.5, z: -1.0},
+    {kind: "palma-augusta", x: 1.0, y: 9.0, size: 8.5, z: -1.0},
+    {kind: "olivo-secolare", x: 7.8, y: 9.6, size: 6.2, z: -1.2},
+    {kind: "arancio-siciliano", x: 16.0, y: 10.4, size: 5.5, z: -0.8},
+    {kind: "palma-augusta", x: 31.0, y: 11.5, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 45.0, y: 12.0, size: 3.8, z: -0.6},
+    {kind: "olivo-secolare", x: 80.0, y: 12.0, size: 6.8, z: -1.2},
+    {kind: "palma-augusta", x: 90.0, y: 12.2, size: 9.0, z: -1.0},
+    {kind: "arancio-siciliano", x: 136.0, y: 13.5, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 145.0, y: 13.5, size: 4.0, z: -0.6},
+    {kind: "palma-augusta", x: 153.0, y: 13.5, size: 8.5, z: -1.0},
+    {kind: "olivo-secolare", x: 175.5, y: 12.8, size: 6.5, z: -1.2},
+    {kind: "tree-sapling", x: 193.0, y: 13.2, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 208.0, y: 13.5, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 14.8, size: 6.0, z: -0.8},
+    {kind: "arancio-siciliano", x: 239.0, y: 14.8, size: 5.5, z: -0.8},
+    {kind: "fiume-fognatura-reflui", x: 55.0, y: 6.0, size: 14.0, z: -2.0},
+    {kind: "scarico-fogna-liquami", x: 38.0, y: 11.5, size: 4.5, z: -2.0},
+    {kind: "sewer-manhole", x: 3.0, y: 9.6, size: 2.2, z: -1.2},
+    {kind: "pompa-idrovora", x: 42.0, y: 12.0, size: 2.8, z: -1.5},
+    {kind: "valvola-spurgo", x: 44.5, y: 12.0, size: 2.2, z: -1.0},
+    {kind: "gru-portuale-rossini", x: 88.0, y: 12.2, size: 16.0, z: -4.5},
+    {kind: "chiatta-megara", x: 152.0, y: 11.0, size: 13.0, z: -5.0},
+    {kind: "salvagente-rossini", x: 175.0, y: 12.8, size: 1.8, z: -1.2},
+    {kind: "rifiuti-plastica-costa", x: 16.0, y: 10.4, size: 4.0, z: -1.8},
+    {kind: "fumo-petrolchimico-nube", x: 100.0, y: 25.0, size: 16.0, z: -15.0}
+  ],
+  stamps: [{x: 34.0, y: 17.0}, {x: 114.0, y: 16.0}, {x: 189.0, y: 15.0}],
+  coins: [
+    {x: 2, y: 10.8}, {x: 8, y: 11.2}, {x: 15, y: 12.0}, {x: 28, y: 13.0},
+    {x: 42, y: 13.5}, {x: 52, y: 13.0}, {x: 62, y: 13.0}, {x: 77, y: 13.5},
+    {x: 87, y: 13.8}, {x: 96, y: 14.5}, {x: 104, y: 15.2}, {x: 115, y: 16.0},
+    {x: 128, y: 15.0}, {x: 138, y: 15.0}, {x: 150, y: 15.0}, {x: 173, y: 14.5},
+    {x: 190, y: 14.8}, {x: 205, y: 15.0}, {x: 214, y: 15.5}, {x: 227, y: 16.5}
   ],
   hazards: [
-    {x: 7, w: 40, y: 1.5},
-    {x: 52, w: 48, y: 1.5},
-    {x: 168, w: 44, y: 2.5}
+    {x: 158, y: 13.0, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 13.0, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "cargo-ship", x: 75, y: 8.5, size: 22, z: -14},
-    {kind: "crane-tower", x: 30, y: 13.8, size: 9, z: -3.5},
-    {kind: "crane-tower", x: 112, y: 12.6, size: 9.5, z: -3.5},
-    {kind: "hazard-barrel", x: 18, y: 12.6, size: 1.2, z: -1.2},
-    {kind: "hazard-barrel", x: 20, y: 12.6, size: 1.2, z: -1.0},
-    {kind: "caged-lamp", x: 16, y: 12.6, size: 0.7, z: -1.6},
-    {kind: "caged-lamp", x: 48, y: 13.8, size: 0.7, z: -1.6},
-    {kind: "scaffold", x: 56, y: 13.2, size: 3, z: -2.4},
-    {kind: "pipe-arch", x: 92, y: 12.6, size: 10, z: -3.4},
-    {kind: "caged-lamp", x: 102, y: 12.6, size: 0.7, z: -1.6},
-    {kind: "scaffold", x: 146, y: 16.0, size: 3, z: -2.4},
-    {kind: "caged-lamp", x: 164, y: 16.0, size: 0.7, z: -1.6},
-    {kind: "hazard-barrel", x: 186, y: 14.6, size: 1.2, z: -1.2},
-    {kind: "caged-lamp", x: 214, y: 15.6, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Rada di Augusta", text: "Salta tra i pontili della rada. Le acque scure sono piene di mercurio chimico: un solo tuffo è letale!", touchText: "Salta tra i pontili della rada con cautela: non cadere nelle acque al mercurio!"},
-    {x: 48, end: 66, icon: "knead", title: "La Chiatta Salmastra", text: "Sali sulla chiatta a fune: ti trasporterà automaticamente oltre il canale delle navi cisterna."},
-    {x: 102, end: 125, icon: "knead", title: "Bracci delle Gru Meccaniche", text: "Le travi delle gru portuali oscillano sotto il tuo peso. Mantieni l'equilibrio al centro!"},
-    {x: 146, end: 160, icon: "walk", title: "Chiusa del Molo", text: "Attiva l'interruttore metallico sul pontile per abbassare la pesante saracinesca d'ormeggio."},
-    {x: 212, end: 240, icon: "bell", title: "Faro del Molo Nord", text: "Suona la campana navale per uscire dalla rada di mercurio e raggiungere la costa!"}
+    {x: 0, end: 18, title: "Lungomare Rossini", text: "Le mareggiate e i tombini intasati allagano la strada! Salta lungo i blocchi frangiflutti della marina.", icon: "walk"},
+    {x: 41, end: 60, title: "Bypass Idraulico", text: "Attiva la valvola di scarico sulla stazione di pompaggio per deviare la piena di liquami e collegare il pontile di soccorso!", icon: "sink"},
+    {x: 86, end: 110, title: "Le Gru Meccaniche del Porto", text: "Cammina lungo i bracci metallici bilanciati per superare l'acqua alta.", icon: "knead"},
+    {x: 128, end: 146, title: "Paratoia di Drenaggio", text: "Apri la saracinesca per far defluire l'acqua piovana e liberare il molo nord.", icon: "walk"},
+    {x: 204, end: 238, title: "Faro del Molo Nord", text: "Raggiungi la lanterna portuale per mettere in salvo il lungomare e completare il livello!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 13.5}, {x: 12, y: 13.5}, {x: 18, y: 14.5}, {x: 21, y: 14.5},
-    {x: 28, y: 15.5}, {x: 34, y: 15.5}, {x: 41, y: 16.0}, {x: 58, y: 14.5},
-    {x: 68, y: 14.0}, {x: 74, y: 14.0}, {x: 80, y: 14.0}, {x: 86, y: 14.0},
-    {x: 104, y: 14.5}, {x: 111, y: 15.0}, {x: 115, y: 15.0}, {x: 121, y: 16.0},
-    {x: 129, y: 17.5}, {x: 147, y: 17.5}, {x: 154, y: 17.5}, {x: 166, y: 17.5},
-    {x: 175, y: 17.0}, {x: 181, y: 17.0}, {x: 187, y: 16.5}, {x: 195, y: 16.5},
-    {x: 204, y: 17.5}, {x: 223, y: 18.5}, {x: 229, y: 19.5}, {x: 235, y: 20.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 19.5},
-    {x: 134.5, y: 21.8},
-    {x: 202.5, y: 22.0}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_3():
     return """const augustaL3 = yr({
   layoutVersion: 1,
-  name: "La Penisola delle Ceneri di Pirite",
-  short: "Ceneri di Pirite",
-  label: "Montagne rosse, fumarole e scorie solforose",
-  biome: "desert",
-  intro: "La famigerata penisola delle ceneri di pirite: milioni di tonnellate di polvere rossa tossica e scorie ferrose affacciate sul mare. Le passerelle franano e dai crateri eruttano violenti geyser di vapore solforoso!",
-  sky: "#4a1810",
-  fog: "#682416",
-  spawn: {x: 1.5, y: 12},
+  name: "Il Polo Petrolchimico & Il Fiume di Greggio",
+  short: "Petrolchimico",
+  label: "Raffinerie, idrocarburi infuocati e bonifiche ambientali",
+  biome: "nightfall",
+  intro: "Il cuore industriale tra Augusta e Priolo: una distesa di cisterne, ciminiere fumanti e condotte ad alta pressione. Una falla in raffineria ha liberato un fiume di petrolio greggio infuocato! Aziona l'estintore schiumogeno per raffreddare la colata e abbassare la passerella sospesa!",
+  sky: "#25150f",
+  fog: "#442416",
+  spawn: {x: 1.5, y: 11.0},
   end: 240,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. I Gradoni di Cenere Rossa", landmark: "beacon"},
-    {x: 48, name: "2. Il Cratere Solforoso", landmark: "pulsedrum"},
-    {x: 102, name: "3. Fumarole & Geyser di Vapore", landmark: "bannerarch"},
-    {x: 162, name: "4. Scivoli di Scorie Tossiche", landmark: "sandwheel"},
-    {x: 212, name: "5. Il Belvedere sulle Colline Rosse", landmark: "bellgate"}
-  ],
-  winds: [
-    {x: 108, w: 6, y: 12, h: 10, dir: "up"}
+    {x: -8, name: "1. Il Collettore Petrolifero Principale", landmark: "beacon"},
+    {x: 43, name: "2. Il Fiume di Greggio & Gli Ugelli Antincendio", landmark: "pulsedrum"},
+    {x: 88, name: "3. La Colonna di Frazionamento Catalitico", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Parco Serbatoi di Stoccaggio", landmark: "sandwheel"},
+    {x: 204, name: "5. Torretta di Monitoraggio Emissioni", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 12, "stone", {landmark: "beacon"}),
-    S("step-pyrite1", 10, 4.0, 13.0, "ledge"),
-    S("plat-terrace1", 16, 7.0, 14.0, "stone"),
-    S("crumble-red1", 25, 4.2, 14.5, "crumble"),
-    S("plat-terrace2", 31, 7.5, 14.8, "stone"),
-    S("spring-ash1", 40, 2.0, 14.8, "spring"),
-    S("opt-ash1", 39, 3.6, 19.0, "ledge", {optional: !0}),
-    S("pit-ash-1", 7, 39, 2.0, "stone", {spiked: !0}),
+    S("start", -8, 16, 11.0, "stone", {landmark: "beacon"}),
+    S("step-pipeline1", 6, 5.0, 12.2, "stone"),
+    S("plat-manifold", 14, 6.5, 13.8, "stone"),
+    S("lift-cracker-climb", 22, 3.5, 14.5, "lift", {moveY: 2.4, period: 4.2}),
+    S("plat-distillation-deck", 29, 8.0, 16.5, "stone"),
+    S("spring-petrol", 36, 2.0, 16.5, "spring"),
+    S("opt-petrol", 36, 3.5, 20.5, "ledge", {optional: !0}),
+    S("pit-oil-1", 4, 35, 3.0, "stone", {spiked: !0}),
 
-    S("dock-crater", 46, 7.5, 14.8, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("crumble-crater1", 56, 4.2, 14.5, "crumble"),
-    S("crumble-crater2", 62, 4.2, 14.0, "crumble"),
-    S("plat-geyser-base", 68, 6.5, 13.6, "stone"),
-    S("lift-sulfur", 77, 3.8, 13.2, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-ridge", 83, 7.5, 13.6, "stone"),
-    S("pit-ash-2", 52, 48, 2.0, "stone", {spiked: !0}),
+    S("dock-quench-console", 43, 8.0, 17.0, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-foam-purge", 45.5, 2.2, 17.15, "switch", {channel: "oil-quench", latch: !0}),
+    S("plat-oil-bridge1", 51, 6.5, 17.0, "timed", {channel: "oil-quench"}),
+    S("plat-oil-catwalk", 59.5, 8.5, 17.2, "timed", {channel: "oil-quench"}),
+    S("plat-oil-bridge2", 69.5, 6.5, 17.0, "timed", {channel: "oil-quench"}),
+    S("plat-flare-terrace", 78, 8.0, 17.5, "stone"),
+    S("pit-oil-2", 46, 34, 3.0, "stone", {spiked: !0}),
 
-    S("dock-fumaroles", 100, 7.0, 13.6, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("geyser-vent", 108, 6.0, 12.0, "stone"),
-    S("step-ash2", 116, 3.8, 16.5, "ledge"),
-    S("crumble-hot1", 122, 4.2, 15.8, "crumble"),
-    S("balance-ash1", 128, 7.5, 15.0, "balance"),
-    S("opt-ash2", 134, 3.5, 19.8, "ledge", {optional: !0}),
-    S("lift-cinder", 138, 3.6, 14.5, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-ashgate-floor", 144, 22, 16.2, "stone", {landmark: "beacon"}),
-    S("switch-ashgate", 152, 2.2, 16.35, "switch", {channel: "ash-lock", latch: !0}),
-    S("gate-ash", 159, 1.8, 20.2, "gate", {channel: "ash-lock", h: 4}),
+    S("dock-cracking-tower", 88, 8.0, 18.0, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-pipe-rack", 97, 7.5, 19.2, "balance"),
+    S("step-fractionator", 105, 3.8, 20.4, "ledge"),
+    S("step-exhaust", 110, 3.5, 21.2, "ledge"),
+    S("balance-chimney-gantry", 116, 6.5, 21.8, "balance"),
+    S("lift-high-tower", 123, 3.6, 21.0, "lift", {moveY: 2.2, period: 4.2}),
+    S("plat-flaregate-floor", 126, 31.0, 22.0, "stone"),
+    S("switch-flaregate", 137, 2.2, 22.15, "switch", {channel: "flare-lock", latch: !0}),
+    S("gate-flare", 142, 1.8, 26.0, "gate", {channel: "flare-lock", h: 4}),
 
-    S("dock-slags", 163, 7.5, 16.2, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-steam1", 173, 4.0, 15.6, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-steam2", 179, 4.0, 15.6, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-slag-dike", 185, 6.5, 15.0, "stone"),
-    S("step-ash3", 196, 3.2, 18.2, "ledge"),
-    S("lift-pyramid", 193, 3.6, 14.4, "lift", {moveX: 2.8, moveY: 1.8, period: 5.0}),
-    S("opt-ash3", 201, 3.5, 20.5, "ledge", {optional: !0}),
-    S("spring-ash3", 202, 2.0, 15.8, "spring"),
-    S("plat-redhill", 200, 8.5, 15.8, "stone", {landmark: "sandwheel"}),
-    S("pit-ash-3", 168, 44, 3.0, "stone", {spiked: !0}),
+    S("dock-tankfarm", 149, 8.0, 22.0, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-ref1", 158, 4.0, 21.4, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-ref2", 165, 4.5, 21.4, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-tank-top", 172, 7.5, 21.0, "stone"),
+    S("lift-winch-ref", 180, 3.6, 20.0, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l3", 184.2, 3.6, 20.8, "ledge"),
+    S("plat-refinery-crest", 189, 8.5, 21.5, "stone"),
+    S("step-ref-link", 197, 3.5, 22.0, "ledge"),
+    S("pit-oil-3", 152, 48, 3.0, "stone", {spiked: !0}),
 
-    S("dock-belvedere", 212, 7.0, 15.8, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-cinder1", 221, 3.8, 16.8, "ledge"),
-    S("step-cinder2", 227, 4.2, 17.8, "ledge"),
-    S("goal-pyrite", 233, 14, 18.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-ref-exit", 204, 8.0, 22.5, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-station1", 212, 3.8, 23.0, "ledge"),
+    S("step-station2", 218, 4.0, 23.5, "ledge"),
+    S("step-station3", 223.0, 4.0, 23.65, "ledge"),
+    S("goal-refinery", 228.0, 17.0, 23.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "olivo-secolare", x: -4.0, y: 11.0, size: 7.0, z: -1.2},
+    {kind: "tree-sapling", x: 2.0, y: 11.0, size: 4.0, z: -0.6},
+    {kind: "olivo-secolare", x: 8.5, y: 12.2, size: 6.5, z: -1.2},
+    {kind: "arancio-siciliano", x: 17.0, y: 13.8, size: 5.5, z: -0.8},
+    {kind: "tree-sapling", x: 33.0, y: 16.5, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 48.5, y: 17.0, size: 8.5, z: -1.0},
+    {kind: "olivo-secolare", x: 82.0, y: 17.5, size: 7.0, z: -1.2},
+    {kind: "arancio-siciliano", x: 92.0, y: 18.0, size: 5.8, z: -0.8},
+    {kind: "palma-augusta", x: 136.0, y: 22.0, size: 9.0, z: -1.0},
+    {kind: "tree-sapling", x: 145.0, y: 22.0, size: 4.0, z: -0.6},
+    {kind: "olivo-secolare", x: 153.0, y: 22.0, size: 6.8, z: -1.2},
+    {kind: "arancio-siciliano", x: 175.5, y: 21.0, size: 6.0, z: -0.8},
+    {kind: "palma-augusta", x: 193.0, y: 21.5, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 208.0, y: 22.5, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 233.0, y: 23.8, size: 4.2, z: -0.6},
+    {kind: "olivo-secolare", x: 239.0, y: 23.8, size: 7.0, z: -1.2},
+    {kind: "fiume-petrolio-greggio", x: 60.0, y: 4.5, size: 14.0, z: -2.0},
+    {kind: "fusto-tossico-sversato", x: 33.0, y: 16.5, size: 3.0, z: -1.2},
+    {kind: "traliccio-tubi", x: 17.0, y: 13.8, size: 8.0, z: -3.0},
+    {kind: "oil-tank", x: 82.0, y: 17.5, size: 14.0, z: -6.0},
+    {kind: "ciminiera-fumo-animata", x: 105.0, y: 20.0, size: 22.0, z: -16.0},
+    {kind: "torcia-petrolchimico-fiamma", x: 165.0, y: 21.0, size: 24.0, z: -18.0}
+  ],
+  stamps: [{x: 36.0, y: 22.0}, {x: 116.0, y: 23.5}, {x: 189.0, y: 23.0}],
+  coins: [
+    {x: 2, y: 12.5}, {x: 9, y: 14.0}, {x: 17, y: 15.5}, {x: 30, y: 18.0},
+    {x: 44, y: 18.5}, {x: 54, y: 18.5}, {x: 64, y: 18.8}, {x: 79, y: 19.0},
+    {x: 89, y: 19.5}, {x: 98, y: 20.8}, {x: 106, y: 21.8}, {x: 117, y: 23.2},
+    {x: 130, y: 23.5}, {x: 140, y: 23.5}, {x: 150, y: 23.5}, {x: 173, y: 22.5},
+    {x: 190, y: 23.0}, {x: 205, y: 24.0}, {x: 214, y: 24.5}, {x: 227, y: 25.0}
   ],
   hazards: [
-    {x: 7, w: 39, y: 2.0},
-    {x: 52, w: 48, y: 2.0},
-    {x: 168, w: 44, y: 3.0}
+    {x: 158, y: 21.4, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 21.4, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "boulder", x: 18, y: 14.0, size: 2.5, z: -1.5},
-    {kind: "pebbles", x: 22, y: 14.0, size: 1.5, z: 1.0},
-    {kind: "hazard-barrel", x: 34, y: 14.8, size: 1.2, z: -1.2},
-    {kind: "cactus-opuntia", x: 48, y: 14.8, size: 2.2, z: -1.5},
-    {kind: "smoke", x: 50, y: 16.0, size: 1.5, z: -4.0},
-    {kind: "smoke", x: 70, y: 15.0, size: 2.0, z: -3.5},
-    {kind: "furnace-vent", x: 72, y: 13.6, size: 2.5, z: -5.0},
-    {kind: "hazard-barrel", x: 86, y: 13.6, size: 1.2, z: -1.0},
-    {kind: "boulder", x: 104, y: 13.6, size: 3.0, z: -2.0},
-    {kind: "smoke", x: 110, y: 16.0, size: 2.5, z: -3.0},
-    {kind: "cactus-opuntia", x: 146, y: 16.2, size: 2.2, z: -1.5},
-    {kind: "caged-lamp", x: 165, y: 16.2, size: 0.7, z: -1.6},
-    {kind: "hazard-barrel", x: 186, y: 15.0, size: 1.2, z: -1.2},
-    {kind: "boulder", x: 204, y: 15.8, size: 2.8, z: -1.5},
-    {kind: "cactus-opuntia", x: 214, y: 15.8, size: 2.2, z: -1.5}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Ceneri di Pirite", text: "Le colline rosse sono friabili: molte piattaforme crollano appena ci poggi i piedi. Muoviti senza esitazione!"},
-    {x: 48, end: 68, icon: "sink", title: "Passerelle Franabili", text: "Le ceneri cedono sotto il tuo peso. Corri e salta rapidamente tra i gradoni di pirite."},
-    {x: 102, end: 120, icon: "updraft", title: "Geyser di Vapore Solforoso", text: "Entra nella colonna di fumo del geyser: la violenta corrente calda ti sparerà in alto verso la cima!"},
-    {x: 146, end: 160, icon: "walk", title: "Saracinesca Solforosa", text: "Premi l'interruttore sulla passerella per sbloccare la paratia antiriflusso."},
-    {x: 212, end: 240, icon: "bell", title: "Belvedere sulle Montagne Rosse", text: "Suona la campana di vetta per completare la traversata delle ceneri tossiche!"}
+    {x: 0, end: 18, title: "Polo Petrolchimico di Augusta", text: "Condotte industriali e vapori acri: salta sulle travi metalliche ed evita i gocciolamenti di idrocarburi!", icon: "walk"},
+    {x: 43, end: 65, title: "Il Fiume di Greggio Infuocato", text: "Attiva l'erogatore di schiuma antincendio per estinguere le fiamme e distendere la passerella aerea!", icon: "sink"},
+    {x: 88, end: 115, title: "Torre di Frazionamento", text: "Scala le scalette della colonna petrolchimica per raggiungere i camminamenti superiori.", icon: "knead"},
+    {x: 128, end: 146, title: "Valvola di Sfogo Gas", text: "Scarica la pressione delle condotte per sbloccare la paratia verso il parco serbatoi.", icon: "walk"},
+    {x: 204, end: 238, title: "Stazione di Controllo Emissioni", text: "Attiva la campana per inviare i rilievi sulle emissioni ed esigere le bonifiche industriali!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 14.5}, {x: 12, y: 14.5}, {x: 18, y: 15.5}, {x: 22, y: 15.5},
-    {x: 27, y: 16.0}, {x: 33, y: 16.0}, {x: 40, y: 16.5}, {x: 58, y: 15.5},
-    {x: 64, y: 15.0}, {x: 70, y: 15.0}, {x: 79, y: 15.0}, {x: 85, y: 15.0},
-    {x: 104, y: 15.0}, {x: 110, y: 18.0}, {x: 112, y: 20.0}, {x: 118, y: 18.0},
-    {x: 124, y: 17.5}, {x: 130, y: 17.0}, {x: 148, y: 17.5}, {x: 154, y: 17.5},
-    {x: 166, y: 17.5}, {x: 175, y: 17.0}, {x: 181, y: 17.0}, {x: 187, y: 16.5},
-    {x: 195, y: 16.5}, {x: 204, y: 17.5}, {x: 223, y: 18.5}, {x: 229, y: 19.5}, {x: 235, y: 20.5}
-  ],
-  stamps: [
-    {x: 40.0, y: 20.5},
-    {x: 135.5, y: 21.5},
-    {x: 202.5, y: 22.2}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_4():
     return """const augustaL4 = yr({
   layoutVersion: 1,
-  name: "Le Condotte Fognarie & Canali Industriali",
-  short: "Fognature",
-  label: "Collettori sotterranei, saracinesche e reflui chimici",
-  biome: "cave",
-  intro: "Scendi nel ventre sotterraneo di Augusta: un labirinto di collettori in cemento armato e condotte di scarico chimico. Le chiuse idrauliche funzionano a tempo e la melma verde è altamente corrosiva!",
-  sky: "#0a120e",
-  fog: "#12241a",
-  spawn: {x: 1.5, y: 10},
-  end: 240,
+  name: "Hangar Dirigibili & La Colata di Cemento",
+  short: "Hangar Dirigibili",
+  label: "Capolavoro in cemento armato del 1917 e macerie tossiche",
+  biome: "nightfall",
+  intro: "L'incredibile Hangar per Dirigibili del 1917: una meraviglia ingegneristica con 105 metri di campata parabolica in cemento armato. Dai silos abbandonati cola una melma di cemento fresco che blocca il varco centrale! Aziona la leva di deviazione per far indurire i piloni di pietra e salire in cima all'arco!",
+  sky: "#18202b",
+  fog: "#283444",
+  spawn: {x: 1.5, y: 12.0},
+  end: 244,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. Il Collettore Principale", landmark: "beacon"},
-    {x: 48, name: "2. Le Chiuse a Paratia Temporizzata", landmark: "pulsedrum"},
-    {x: 102, name: "3. La Vasca di Decantazione Melme", landmark: "bannerarch"},
-    {x: 162, name: "4. Sifone di Scarico a Mare", landmark: "sandwheel"},
-    {x: 212, name: "5. Lo Sbocco Fognario Costiero", landmark: "bellgate"}
+    {x: -8, name: "1. Il Portale Est dell'Idroscalo & Le Cave", landmark: "beacon"},
+    {x: 43, name: "2. La Colata di Cemento & La Paratoia Idraulica", landmark: "pulsedrum"},
+    {x: 88, name: "3. La Volta Parabolica in Calcestruzzo", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Colmo Superiore dell'Hangar", landmark: "sandwheel"},
+    {x: 204, name: "5. Piattaforma di Bonifica delle Amianto", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 10, "stone", {landmark: "beacon"}),
-    S("step-sewer1", 10, 4.0, 11.0, "ledge"),
-    S("plat-collector", 16, 7.5, 11.8, "stone"),
-    S("lift-effluent", 26, 3.8, 12.0, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-pipewalk", 32, 6.5, 12.8, "stone"),
-    S("spring-sewer1", 41, 2.0, 12.8, "spring"),
-    S("opt-sewer1", 40, 3.6, 16.8, "ledge", {optional: !0}),
-    S("pit-sludge-1", 7, 40, 1.0, "stone", {spiked: !0}),
+    S("start", -8, 16, 12.0, "stone", {landmark: "beacon"}),
+    S("step-quarry1", 6, 5.5, 13.0, "stone"),
+    S("plat-quarry2", 14, 6.5, 14.4, "stone"),
+    S("lift-silo-crane", 22, 3.5, 15.2, "lift", {moveY: 2.2, period: 4.2}),
+    S("plat-mixer-hopper", 29, 8.0, 16.8, "stone"),
+    S("spring-cement", 36, 2.0, 16.8, "spring"),
+    S("opt-cement", 36, 3.5, 21.0, "ledge", {optional: !0}),
+    S("pit-cement-1", 4, 35, 4.0, "stone", {spiked: !0}),
 
-    S("dock-sluice", 46, 7.5, 12.8, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("plat-conduit-floor", 56, 18, 13.0, "stone"),
-    S("switch-timed1", 62, 2.2, 13.15, "switch", {channel: "timed-sluice", duration: 8}),
-    S("gate-sluice1", 71, 1.8, 17.0, "gate", {channel: "timed-sluice", h: 4}),
-    S("plat-overflow", 76, 7.5, 13.0, "stone"),
-    S("lift-sump", 86, 3.8, 12.5, "lift", {moveX: 2.8, period: 4.5}),
-    S("plat-settling", 92, 7.5, 12.5, "stone"),
-    S("pit-sludge-2", 52, 48, 1.0, "stone", {spiked: !0}),
+    S("dock-divert-console", 43, 8.0, 17.4, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-cement-divert", 45.5, 2.2, 17.55, "switch", {channel: "cement-divert", latch: !0}),
+    S("plat-cemento-step1", 51, 6.5, 17.5, "timed", {channel: "cement-divert"}),
+    S("plat-cemento-solido", 60, 8.0, 17.8, "timed", {channel: "cement-divert"}),
+    S("plat-cemento-step2", 69.5, 6.5, 18.0, "timed", {channel: "cement-divert"}),
+    S("plat-hangar-portal", 78, 8.0, 18.5, "stone"),
+    S("pit-cement-2", 46, 34, 4.0, "stone", {spiked: !0}),
 
-    S("dock-basin", 100, 7.0, 12.5, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("balance-sewer1", 109, 8.0, 13.0, "balance"),
-    S("step-grate1", 119, 3.8, 14.0, "ledge"),
-    S("step-sewer2", 125, 3.2, 16.6, "ledge"),
-    S("balance-sewer2", 127, 8.0, 14.8, "balance"),
-    S("opt-sewer2", 133, 3.6, 19.6, "ledge", {optional: !0}),
-    S("lift-screen", 138, 3.6, 14.2, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-sewergate-floor", 144, 22, 15.5, "stone", {landmark: "beacon"}),
-    S("switch-sewergate", 152, 2.2, 15.65, "switch", {channel: "sewer-lock", latch: !0}),
-    S("gate-sewer", 159, 1.8, 19.5, "gate", {channel: "sewer-lock", h: 4}),
+    S("dock-parabola-base", 88, 8.0, 19.5, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-vault-rib1", 97, 7.5, 21.2, "balance"),
+    S("step-vault-girder1", 105, 3.8, 22.8, "ledge"),
+    S("step-vault-girder2", 110, 3.5, 24.2, "ledge"),
+    S("balance-vault-rib2", 116, 6.5, 25.5, "balance"),
+    S("lift-vault-zenith", 123, 3.6, 25.0, "lift", {moveY: 2.2, period: 4.2}),
+    S("plat-hangargate-floor", 126, 31.0, 26.5, "stone"),
+    S("switch-hangargate", 137, 2.2, 26.65, "switch", {channel: "hangar-lock", latch: !0}),
+    S("gate-hangar", 142, 1.8, 30.5, "gate", {channel: "hangar-lock", h: 4}),
 
-    S("dock-siphon", 163, 7.5, 15.5, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-sewer1", 173, 4.0, 14.8, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-sewer2", 179, 4.0, 14.8, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-outfall", 185, 6.5, 14.0, "stone"),
-    S("step-sewer3", 196, 3.2, 17.2, "ledge"),
-    S("lift-culvert", 193, 3.6, 13.5, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-sewer3", 201, 3.5, 19.5, "ledge", {optional: !0}),
-    S("spring-sewer3", 202, 2.0, 15.0, "spring"),
-    S("plat-coast-drain", 200, 8.5, 15.0, "stone", {landmark: "sandwheel"}),
-    S("pit-sludge-3", 168, 44, 2.0, "stone", {spiked: !0}),
+    S("dock-hangar-ridge", 149, 8.0, 26.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-hang1", 158, 4.0, 25.8, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-hang2", 165, 4.5, 25.2, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-hangar-descend", 172, 7.5, 24.5, "stone"),
+    S("lift-winch-hang", 180, 3.6, 23.5, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l4", 184.2, 3.6, 24.2, "ledge"),
+    S("plat-decontam-yard", 189, 8.5, 24.8, "stone"),
+    S("step-hang-link", 197, 3.5, 25.5, "ledge"),
+    S("pit-cement-3", 152, 48, 8.0, "stone", {spiked: !0}),
 
-    S("dock-outlet", 212, 7.0, 15.0, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-out1", 221, 3.8, 16.0, "ledge"),
-    S("step-out2", 227, 4.2, 17.0, "ledge"),
-    S("goal-sewer", 233, 14, 18.0, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-hang-exit", 204, 8.0, 26.0, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-crown1", 212, 3.8, 26.8, "ledge"),
+    S("step-crown2", 218, 4.0, 27.4, "ledge"),
+    S("step-crown3", 223.0, 4.0, 27.6, "ledge"),
+    S("goal-hangar", 228.0, 17.0, 27.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "olivo-secolare", x: -4.0, y: 12.0, size: 7.2, z: -1.2},
+    {kind: "palma-augusta", x: 2.0, y: 12.0, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 8.5, y: 13.0, size: 5.5, z: -0.8},
+    {kind: "olivo-secolare", x: 17.0, y: 14.4, size: 6.8, z: -1.2},
+    {kind: "tree-sapling", x: 33.0, y: 16.8, size: 4.0, z: -0.6},
+    {kind: "palma-augusta", x: 48.5, y: 17.4, size: 9.0, z: -1.0},
+    {kind: "olivo-secolare", x: 82.0, y: 18.5, size: 7.0, z: -1.2},
+    {kind: "arancio-siciliano", x: 92.0, y: 19.5, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 136.0, y: 26.5, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 145.0, y: 26.5, size: 9.0, z: -1.0},
+    {kind: "olivo-secolare", x: 153.0, y: 26.5, size: 7.0, z: -1.2},
+    {kind: "tree-sapling", x: 175.5, y: 24.5, size: 4.0, z: -0.6},
+    {kind: "arancio-siciliano", x: 193.0, y: 24.8, size: 6.0, z: -0.8},
+    {kind: "palma-augusta", x: 208.0, y: 26.0, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 27.8, size: 6.2, z: -0.8},
+    {kind: "tree-sapling", x: 239.0, y: 27.8, size: 4.0, z: -0.6},
+    {kind: "colata-cemento-fresco", x: 60.0, y: 6.0, size: 14.0, z: -2.0},
+    {kind: "hangar-arch", x: 10.0, y: 12.0, size: 28.0, z: -5.0},
+    {kind: "hangar-arch", x: 100.0, y: 18.0, size: 30.0, z: -5.0},
+    {kind: "dirigibile-relique", x: 50.0, y: 20.0, size: 16.0, z: -4.0},
+    {kind: "cartello-bonifica", x: 17.0, y: 14.4, size: 3.0, z: -1.2},
+    {kind: "pannello-amianto", x: 33.0, y: 16.8, size: 3.0, z: -1.4},
+    {kind: "bidone-decontaminazione", x: 92.0, y: 19.5, size: 2.5, z: -1.2},
+    {kind: "faro-cantiere", x: 153.0, y: 26.5, size: 3.5, z: -1.5}
+  ],
+  stamps: [{x: 36.0, y: 22.5}, {x: 116.0, y: 27.0}, {x: 189.0, y: 26.5}],
+  coins: [
+    {x: 2, y: 13.5}, {x: 9, y: 14.5}, {x: 17, y: 16.0}, {x: 30, y: 18.5},
+    {x: 44, y: 19.0}, {x: 54, y: 19.0}, {x: 64, y: 19.5}, {x: 79, y: 20.0},
+    {x: 89, y: 21.0}, {x: 98, y: 22.8}, {x: 106, y: 24.2}, {x: 117, y: 27.0},
+    {x: 130, y: 28.0}, {x: 140, y: 28.0}, {x: 150, y: 28.0}, {x: 173, y: 26.0},
+    {x: 190, y: 26.5}, {x: 205, y: 27.5}, {x: 214, y: 28.0}, {x: 227, y: 29.0}
   ],
   hazards: [
-    {x: 7, w: 40, y: 1.0},
-    {x: 52, w: 48, y: 1.0},
-    {x: 168, w: 44, y: 2.0}
+    {x: 158, y: 25.8, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 25.2, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "pipe", x: 10, y: 10, size: 6, z: -3},
-    {kind: "pipe-arch", x: 18, y: 11.8, size: 10, z: -3.4},
-    {kind: "caged-lamp", x: 16, y: 11.8, size: 0.7, z: -1.6},
-    {kind: "hazard-barrel", x: 34, y: 12.8, size: 1.2, z: -1.2},
-    {kind: "valve", x: 48, y: 12.8, size: 1.55, z: -2.2},
-    {kind: "pipe-elbow", x: 60, y: 13.0, size: 2.6, z: -3},
-    {kind: "pipe", x: 74, y: 13.0, size: 6, z: -3},
-    {kind: "caged-lamp", x: 92, y: 12.5, size: 0.7, z: -1.6},
-    {kind: "pipe-arch", x: 106, y: 12.5, size: 10, z: -3.4},
-    {kind: "shelf", x: 120, y: 11.0, size: 4, z: 2.5},
-    {kind: "hazard-barrel", x: 146, y: 15.5, size: 1.2, z: -1.2},
-    {kind: "caged-lamp", x: 164, y: 15.5, size: 0.7, z: -1.6},
-    {kind: "pipe", x: 186, y: 14.0, size: 6, z: -3},
-    {kind: "valve", x: 202, y: 15.0, size: 1.55, z: -2.2},
-    {kind: "caged-lamp", x: 214, y: 15.0, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Condotte Fognarie", text: "Sei nei canali di scolo sotterranei di Augusta. Le acque melmose sul fondo sono cariche di scarti chimici!"},
-    {x: 48, end: 68, icon: "timer", title: "Chiusa a Tempo", text: "Premi l'interruttore della paratia: hai 8 secondi per superare la porta prima che si richiuda!"},
-    {x: 102, end: 125, icon: "knead", title: "Vasche di Decantazione", text: "Le griglie metalliche oscillano sotto il flusso dei reflui. Salta con ritmo regolare."},
-    {x: 146, end: 160, icon: "walk", title: "Valvola del Collettore", text: "Premi la valvola sulla passerella per abbassare la grata di sicurezza."},
-    {x: 212, end: 240, icon: "bell", title: "Sbocco Costiero", text: "Suona la campana dello sbocco a mare per riemergere alla luce del sole!"}
+    {x: 0, end: 18, title: "Hangar Dirigibili (1917)", text: "Monumento mondiale di architettura in cemento armato. Evita le onduline deteriorate e sali verso la volta!", icon: "walk"},
+    {x: 43, end: 65, title: "La Colata di Cemento Fresco", text: "Tira la leva idraulica per deviare il flusso di malta e far sollevare i blocchi di pietra portante!", icon: "sink"},
+    {x: 88, end: 115, title: "La Centina Parabolica", text: "Segui la curva dell'arco a 25 metri d'altezza: mantieni il baricentro sui bordi!", icon: "knead"},
+    {x: 128, end: 146, title: "Serranda di Ventilazione", text: "Sblocca l'argano dell'Hangar per aprire il varco sul colmo superiore della struttura.", icon: "walk"},
+    {x: 204, end: 238, title: "Colmo dell'Hangar", text: "Suona la campana della bonifica: questo monumento merita restauro e rinascita verde!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 12.5}, {x: 12, y: 12.5}, {x: 18, y: 13.5}, {x: 22, y: 13.5},
-    {x: 28, y: 14.5}, {x: 34, y: 14.5}, {x: 41, y: 15.0}, {x: 58, y: 14.5},
-    {x: 64, y: 14.5}, {x: 70, y: 14.5}, {x: 78, y: 14.5}, {x: 88, y: 14.0},
-    {x: 104, y: 14.0}, {x: 111, y: 14.5}, {x: 115, y: 14.5}, {x: 121, y: 15.5},
-    {x: 129, y: 16.5}, {x: 147, y: 17.0}, {x: 154, y: 17.0}, {x: 166, y: 17.0},
-    {x: 175, y: 16.5}, {x: 181, y: 16.5}, {x: 187, y: 16.0}, {x: 195, y: 16.0},
-    {x: 204, y: 17.0}, {x: 223, y: 17.5}, {x: 229, y: 18.5}, {x: 235, y: 19.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 18.5},
-    {x: 134.5, y: 21.2},
-    {x: 202.5, y: 21.5}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_5():
     return """const augustaL5 = yr({
   layoutVersion: 1,
-  name: "L'Hangar Dirigibili di Augusta (Monumento 1917)",
-  short: "Hangar Dirigibili",
-  label: "La monumentale cattedrale di cemento armato (1917)",
-  biome: "citadel",
-  intro: "Il monumento futurista più spettacolare di Sicilia: l'imponente Hangar Dirigibili del 1917 in cemento armato, alto quasi 40 metri! Arrampicati tra gli archi parabolici, i boschi di eucalipti e le grandiose capriate sospese nel vuoto!",
-  sky: "#453625",
-  fog: "#604b34",
-  spawn: {x: 1.5, y: 12},
-  end: 240,
+  name: "Il Castello Svevo & Il Fossato di Liquami",
+  short: "Castello Svevo",
+  label: "Fortezza federiciana del 1242 tra crepe, sterpaglie e promesse",
+  biome: "nightfall",
+  intro: "Voluto da Federico II di Svevia nel 1242 sulla punta estrema dell'isola: una roccaforte assediata da sversamenti fognari abusivi che hanno riempito il fossato di melma tossica. Aziona l'argano antico per abbassare il massiccio ponte levatoio in legno ed espugnare il mastio imperiale!",
+  sky: "#261a1d",
+  fog: "#3c252a",
+  spawn: {x: 1.5, y: 11.0},
+  end: 242,
   previousDistance: 1100,
-  cameraY: 4,
+  cameraY: 2,
   sections: [
-    {x: -8, name: "1. Il Bosco di Eucalipti dell'Hangar", landmark: "beacon"},
-    {x: 48, name: "2. Contrafforti & Pilastri Parabolici", landmark: "pulsedrum"},
-    {x: 102, name: "3. La Scalata della Grande Navata", landmark: "bannerarch"},
-    {x: 162, name: "4. Capriate del Tetto Sospese nel Vuoto", landmark: "sandwheel"},
-    {x: 212, name: "5. La Passerella di Vedetta Aerea", landmark: "bellgate"}
+    {x: -8, name: "1. Il Rivellino & I Bastioni Esterni", landmark: "beacon"},
+    {x: 43, name: "2. Il Fossato Tossico & L'Argano del Ponte Levatoio", landmark: "pulsedrum"},
+    {x: 88, name: "3. La Cortina Muraria Sveva & I Merli Ghibellini", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Cortile delle Armature & I Cannoni", landmark: "sandwheel"},
+    {x: 204, name: "5. Mastio Imperiale di Federico II", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 12, "stone", {landmark: "beacon"}),
-    S("step-hangar1", 10, 4.2, 13.0, "ledge"),
-    S("plat-eucalyptus", 16, 7.5, 14.2, "stone"),
-    S("lift-mast", 26, 3.8, 15.0, "lift", {moveY: 3.2, period: 4.5}),
-    S("plat-buttress1", 32, 6.5, 16.5, "stone"),
-    S("spring-hangar1", 41, 2.0, 16.5, "spring"),
-    S("opt-hangar1", 40, 3.6, 21.0, "ledge", {optional: !0}),
-    S("pit-hangar-1", 7, 40, 3.0, "stone", {spiked: !0}),
+    S("start", -8, 16, 11.0, "stone", {landmark: "beacon"}),
+    S("step-barbican1", 6, 5.5, 12.0, "stone"),
+    S("plat-counterscarp", 14, 6.5, 13.0, "stone"),
+    S("lift-moat-crane", 22, 3.5, 13.5, "lift", {moveY: 2.0, period: 4.0}),
+    S("plat-moat-edge", 29, 8.0, 14.5, "stone"),
+    S("spring-castle", 36, 2.0, 14.5, "spring"),
+    S("opt-castle", 36, 3.5, 18.5, "ledge", {optional: !0}),
+    S("pit-moat-1", 4, 35, 2.0, "stone", {spiked: !0}),
 
-    S("dock-archbase", 46, 7.5, 16.5, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("step-arch1", 56, 4.0, 18.2, "ledge"),
-    S("step-arch2", 62, 4.0, 20.0, "ledge"),
-    S("plat-archbeam", 68, 7.5, 21.5, "stone"),
-    S("lift-gantry-hangar", 78, 3.8, 22.0, "lift", {moveY: 3.0, period: 4.2}),
-    S("plat-vault-floor", 84, 8.0, 23.5, "stone"),
-    S("pit-hangar-2", 52, 48, 4.0, "stone", {spiked: !0}),
+    S("dock-winch-station", 43, 8.0, 14.8, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-drawbridge-winch", 45.5, 2.2, 14.95, "switch", {channel: "drawbridge-drop", latch: !0}),
+    S("plat-moat-step1", 51, 6.5, 14.5, "timed", {channel: "drawbridge-drop"}),
+    S("plat-drawbridge-lowered", 60, 8.5, 14.6, "timed", {channel: "drawbridge-drop"}),
+    S("plat-moat-step2", 69.5, 6.5, 14.5, "timed", {channel: "drawbridge-drop"}),
+    S("plat-gatehouse-sill", 78, 8.0, 15.0, "stone"),
+    S("pit-moat-2", 46, 34, 2.0, "stone", {spiked: !0}),
 
-    S("dock-nave", 100, 7.0, 23.5, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("balance-truss1", 109, 8.0, 24.5, "balance"),
-    S("step-girder", 119, 3.8, 25.8, "ledge"),
-    S("step-hangar2", 125, 3.2, 28.5, "ledge"),
-    S("balance-truss2", 127, 8.0, 26.8, "balance"),
-    S("opt-hangar2", 133, 3.6, 31.5, "ledge", {optional: !0}),
-    S("lift-winch-hangar", 138, 3.6, 26.5, "lift", {moveY: 3.0, period: 4.0}),
-    S("plat-skygate-floor", 144, 22, 28.0, "stone", {landmark: "beacon"}),
-    S("switch-hangargate", 152, 2.2, 28.15, "switch", {channel: "hangar-lock", latch: !0}),
-    S("gate-hangar", 159, 1.8, 32.0, "gate", {channel: "hangar-lock", h: 4}),
+    S("dock-inner-gate", 88, 8.0, 15.5, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-rampart-walk", 97, 7.5, 16.4, "balance"),
+    S("step-merlon-flight1", 105, 3.8, 17.4, "ledge"),
+    S("step-merlon-flight2", 110, 3.5, 18.2, "ledge"),
+    S("balance-curtain-wall", 116, 6.5, 18.8, "balance"),
+    S("lift-castle-tower", 123, 3.6, 18.5, "lift", {moveY: 2.0, period: 4.2}),
+    S("plat-castlegate-floor", 126, 31.0, 19.5, "stone"),
+    S("switch-castlegate", 137, 2.2, 19.65, "switch", {channel: "castle-lock", latch: !0}),
+    S("gate-castle", 142, 1.8, 23.5, "gate", {channel: "castle-lock", h: 4}),
 
-    S("dock-roof", 163, 7.5, 28.0, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-roof1", 173, 4.0, 27.2, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-roof2", 179, 4.0, 27.2, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-crown", 185, 6.5, 26.5, "stone"),
-    S("step-hangar3", 196, 3.2, 29.8, "ledge"),
-    S("lift-apex", 193, 3.6, 26.0, "lift", {moveX: 2.8, moveY: 2.0, period: 4.8}),
-    S("opt-hangar3", 201, 3.5, 32.5, "ledge", {optional: !0}),
-    S("spring-hangar3", 202, 2.0, 27.5, "spring"),
-    S("plat-walkway", 200, 8.5, 27.5, "stone", {landmark: "sandwheel"}),
-    S("pit-hangar-3", 168, 44, 8.0, "stone", {spiked: !0}),
+    S("dock-courtyard-svevo", 149, 8.0, 19.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-cas1", 158, 4.0, 19.0, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-cas2", 165, 4.5, 19.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-bastion-terrace", 172, 7.5, 18.8, "stone"),
+    S("lift-winch-cas", 180, 3.6, 18.0, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l5", 184.2, 3.6, 19.2, "ledge"),
+    S("plat-keep-base", 189, 8.5, 19.8, "stone"),
+    S("step-keep-link", 197, 3.5, 20.4, "ledge"),
+    S("pit-moat-3", 152, 48, 4.0, "stone", {spiked: !0}),
 
-    S("dock-aerie", 212, 7.0, 27.5, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-tower1", 221, 3.8, 28.8, "ledge"),
-    S("step-tower2", 227, 4.2, 30.0, "ledge"),
-    S("goal-hangar", 233, 14, 31.2, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-keep-entrance", 204, 8.0, 20.8, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-mastio1", 212, 3.8, 21.2, "ledge"),
+    S("step-mastio2", 218, 4.0, 21.6, "ledge"),
+    S("step-mastio3", 223.0, 4.0, 21.7, "ledge"),
+    S("goal-castle", 228.0, 17.0, 21.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "ficus-centenario", x: -4.0, y: 11.0, size: 13.0, z: -1.5},
+    {kind: "palma-augusta", x: 2.0, y: 11.0, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 8.5, y: 12.0, size: 5.5, z: -0.8},
+    {kind: "olivo-secolare", x: 17.0, y: 13.0, size: 6.8, z: -1.2},
+    {kind: "palma-augusta", x: 33.0, y: 14.5, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 48.5, y: 14.8, size: 4.0, z: -0.6},
+    {kind: "olivo-secolare", x: 82.0, y: 15.0, size: 7.0, z: -1.2},
+    {kind: "palma-augusta", x: 92.0, y: 15.5, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 136.0, y: 19.5, size: 4.0, z: -0.6},
+    {kind: "arancio-siciliano", x: 145.0, y: 19.5, size: 6.0, z: -0.8},
+    {kind: "olivo-secolare", x: 153.0, y: 19.5, size: 7.0, z: -1.2},
+    {kind: "arancio-siciliano", x: 175.5, y: 18.8, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 193.0, y: 19.8, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 208.0, y: 20.8, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 21.8, size: 6.5, z: -0.8},
+    {kind: "olivo-secolare", x: 239.0, y: 21.8, size: 7.2, z: -1.2},
+    {kind: "fiume-fognatura-reflui", x: 60.0, y: 3.0, size: 14.0, z: -2.0},
+    {kind: "torre-castello-svevo", x: 88.0, y: 15.5, size: 18.0, z: -4.5},
+    {kind: "armi-medievali-rastrelliera", x: 33.0, y: 14.5, size: 3.2, z: -1.2},
+    {kind: "argano-ponte-levatoio", x: 44.0, y: 14.8, size: 3.5, z: -1.5},
+    {kind: "portone-ferro-svevo", x: 142.0, y: 19.5, size: 4.5, z: -2.0},
+    {kind: "stemma-federico-aquila", x: 208.0, y: 20.8, size: 3.5, z: -1.5}
+  ],
+  stamps: [{x: 36.0, y: 20.0}, {x: 116.0, y: 20.5}, {x: 189.0, y: 21.5}],
+  coins: [
+    {x: 2, y: 12.5}, {x: 9, y: 13.5}, {x: 17, y: 14.5}, {x: 30, y: 16.0},
+    {x: 44, y: 16.5}, {x: 54, y: 16.0}, {x: 64, y: 16.2}, {x: 79, y: 16.5},
+    {x: 89, y: 17.0}, {x: 98, y: 18.0}, {x: 106, y: 19.0}, {x: 117, y: 20.5},
+    {x: 130, y: 21.0}, {x: 140, y: 21.0}, {x: 150, y: 21.0}, {x: 173, y: 20.5},
+    {x: 190, y: 21.5}, {x: 205, y: 22.0}, {x: 214, y: 22.5}, {x: 227, y: 23.0}
   ],
   hazards: [
-    {x: 7, w: 40, y: 3.0},
-    {x: 52, w: 48, y: 4.0},
-    {x: 168, w: 44, y: 8.0}
+    {x: 158, y: 19.0, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 19.0, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "tree", x: 12, y: 12.0, size: 4.5, z: -2.5},
-    {kind: "tree", x: 22, y: 12.0, size: 5.0, z: -3.0},
-    {kind: "hangar-arch", x: 50, y: 16.5, size: 14.0, z: -4.0},
-    {kind: "scaffold", x: 32, y: 16.5, size: 3.5, z: -2.4},
-    {kind: "caged-lamp", x: 48, y: 16.5, size: 0.7, z: -1.6},
-    {kind: "hangar-arch", x: 104, y: 23.5, size: 14.0, z: -4.0},
-    {kind: "scaffold", x: 86, y: 23.5, size: 3.5, z: -2.4},
-    {kind: "caged-lamp", x: 102, y: 23.5, size: 0.7, z: -1.6},
-    {kind: "hangar-arch", x: 166, y: 28.0, size: 14.0, z: -4.0},
-    {kind: "scaffold", x: 146, y: 28.0, size: 3.5, z: -2.4},
-    {kind: "caged-lamp", x: 164, y: 28.0, size: 0.7, z: -1.6},
-    {kind: "banner", x: 188, y: 29.0, size: 2.5, z: -2.4},
-    {kind: "caged-lamp", x: 214, y: 27.5, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Hangar Dirigibili (1917)", text: "Inizia la grande scalata dell'Hangar! Arrampicati sui contrafforti in cemento armato fino alla sommità delle capriate."},
-    {x: 48, end: 68, icon: "knead", title: "Archi Parabolici", text: "Gli archi alti 40 metri sfidano la gravità: usa le travi inclinate per salire a grandi altezze."},
-    {x: 102, end: 125, icon: "knead", title: "Capriate del Tetto", text: "Sei a 25 metri d'altezza! Mantieni l'equilibrio sulle travi a traliccio sopra il vuoto."},
-    {x: 146, end: 160, icon: "walk", title: "Cancello delle Capriate", text: "Premi l'interruttore sulla passerella d'acciaio per sbloccare la paratia sommitale."},
-    {x: 212, end: 240, icon: "bell", title: "Campana dei Dirigibili", text: "Suona la campana storica dell'aeroporto per celebrare la scalata del monumento d'Augusta!"}
+    {x: 0, end: 18, title: "Castello Svevo (1242)", text: "Costruito dall'imperatore Federico II. Salta lungo il fossato medievale minacciato da scarichi fognari.", icon: "walk"},
+    {x: 43, end: 65, title: "L'Argano del Ponte Levatoio", text: "Gira la ruota d'acciaio dell'argano per far cadere il ponte levatoio e scavalcare la melma tossica!", icon: "sink"},
+    {x: 88, end: 115, title: "Camminamento di Ronda", text: "Avanza sui merli ghibellini in pietra calcarea: mantieni l'equilibrio con il vento ionico.", icon: "knead"},
+    {x: 128, end: 146, title: "L'Erpice Spagnolo", text: "Solleva la grata di ferro per entrare nel cortile d'armi della fortezza imperiale.", icon: "walk"},
+    {x: 204, end: 238, title: "Mastio di Federico II", text: "Suona la campana storica del castello per chiederne la riapertura al pubblico e la tutela!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 14.0}, {x: 12, y: 14.0}, {x: 18, y: 15.5}, {x: 22, y: 15.5},
-    {x: 28, y: 17.5}, {x: 34, y: 18.0}, {x: 41, y: 18.5}, {x: 58, y: 19.5},
-    {x: 64, y: 21.0}, {x: 70, y: 22.5}, {x: 80, y: 24.5}, {x: 86, y: 25.0},
-    {x: 104, y: 25.5}, {x: 111, y: 26.5}, {x: 115, y: 26.5}, {x: 121, y: 27.5},
-    {x: 129, y: 29.0}, {x: 147, y: 29.5}, {x: 154, y: 29.5}, {x: 166, y: 29.5},
-    {x: 175, y: 29.0}, {x: 181, y: 28.5}, {x: 187, y: 28.0}, {x: 195, y: 28.0},
-    {x: 204, y: 29.5}, {x: 223, y: 30.5}, {x: 229, y: 31.5}, {x: 235, y: 32.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 22.5},
-    {x: 134.5, y: 33.0},
-    {x: 202.5, y: 34.0}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_6():
     return """const augustaL6 = yr({
   layoutVersion: 1,
-  name: "Il Castello Svevo di Augusta (Forte Hohenstaufen)",
-  short: "Castello Svevo",
-  label: "Mura normanno-sveve, prigioni borboniche e fossati",
-  biome: "cave",
-  intro: "La titanica fortezza fondata da Federico II nel 1232 sull'estremità nord dell'isola: mura ciclopiche in pietra lavica e calcare siracusano, ex carcere borbonico e cortili d'armi affacciati sul mare!",
-  sky: "#202630",
-  fog: "#303946",
-  spawn: {x: 1.5, y: 11},
+  name: "Capo Santa Croce & Il Rogo Tossico sulla Scogliera",
+  short: "Capo Santa Croce",
+  label: "Faro bianco, falesie calcaree e le praterie sottomarine",
+  biome: "citadel",
+  intro: "Le falesie calcaree a picco sul mare aperto di Capo Santa Croce: un paradiso naturale assediato da un rogo tossico di copertoni e plastiche abbandonate. Usa l'idrante marino per domare l'incendio, raffreddare la scogliera e salire verso il faro storico!",
+  sky: "#10263e",
+  fog: "#1b3b5c",
+  spawn: {x: 1.5, y: 12.0},
   end: 240,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. Il Rivellino & Fossato Svevo", landmark: "beacon"},
-    {x: 48, name: "2. Corte delle Prigioni Borboniche", landmark: "pulsedrum"},
-    {x: 102, name: "3. Camminamento di Ronda dei Cavalieri", landmark: "bannerarch"},
-    {x: 162, name: "4. Torre Ottagonale di Federico II", landmark: "sandwheel"},
-    {x: 212, name: "5. I Bastioni d'Artiglieria sul Mare", landmark: "bellgate"}
+    {x: -8, name: "1. Il Sentiero delle Falesie Bianche", landmark: "beacon"},
+    {x: 43, name: "2. Il Rogo Tossico & La Pompa Idrica Marina", landmark: "pulsedrum"},
+    {x: 88, name: "3. Lo Scoglio Isolato & La Salita al Faro", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Piazzale del Semaforo Marittimo", landmark: "sandwheel"},
+    {x: 204, name: "5. La Lanterna Storica di Capo Santa Croce", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 11, "stone", {landmark: "beacon"}),
-    S("step-svevo1", 10, 4.0, 11.8, "ledge"),
-    S("plat-barbican", 16, 7.5, 12.6, "stone"),
-    S("lift-portcullis", 26, 3.8, 13.0, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-rampart1", 32, 6.5, 13.8, "stone"),
-    S("spring-castle1", 41, 2.0, 13.8, "spring"),
-    S("opt-castle1", 40, 3.6, 17.8, "ledge", {optional: !0}),
-    S("pit-moat-1", 7, 40, 1.5, "stone", {spiked: !0}),
+    S("start", -8, 16, 12.0, "stone", {landmark: "beacon"}),
+    S("step-cliff-path1", 6, 5.5, 10.5, "stone"),
+    S("plat-sea-stack", 14, 6.5, 8.8, "stone"),
+    S("lift-reef-funicular", 22, 3.5, 9.5, "lift", {moveY: 2.2, period: 4.0}),
+    S("plat-headland-ledge", 29, 8.0, 11.8, "stone"),
+    S("spring-cliff", 36, 2.0, 11.8, "spring"),
+    S("opt-cliff", 36, 3.5, 16.0, "ledge", {optional: !0}),
+    S("pit-cliff-1", 4, 35, 2.0, "stone", {spiked: !0}),
 
-    S("dock-prison", 46, 7.5, 13.8, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("step-cell1", 56, 4.2, 14.5, "ledge"),
-    S("plat-courtyard", 62, 7.5, 15.0, "stone"),
-    S("lift-chains", 72, 3.8, 14.5, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-dungeon-exit", 78, 8.0, 14.5, "stone"),
-    S("step-svevo2", 88, 4.0, 15.6, "ledge"),
-    S("plat-tower-base", 94, 7.0, 15.6, "stone"),
-    S("pit-moat-2", 52, 48, 2.0, "stone", {spiked: !0}),
+    S("dock-hydrant-post", 43, 8.0, 12.8, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-cliff-hydrant", 45.5, 2.2, 12.95, "switch", {channel: "quench-rogo", latch: !0}),
+    S("plat-cliff-step1", 51, 6.5, 13.0, "timed", {channel: "quench-rogo"}),
+    S("plat-quenched-shelf", 60, 8.5, 13.2, "timed", {channel: "quench-rogo"}),
+    S("plat-cliff-step2", 69.5, 6.5, 13.5, "timed", {channel: "quench-rogo"}),
+    S("plat-faro-lower-terrace", 78, 8.0, 14.5, "stone"),
+    S("pit-cliff-2", 46, 34, 2.0, "stone", {spiked: !0}),
 
-    S("dock-rampart", 100, 7.0, 15.6, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("balance-drawbridge1", 109, 8.0, 16.2, "balance"),
-    S("step-merlon1", 119, 3.8, 17.2, "ledge"),
-    S("step-castle2", 125, 3.2, 19.8, "ledge"),
-    S("balance-drawbridge2", 127, 8.0, 18.2, "balance"),
-    S("opt-castle2", 133, 3.6, 22.8, "ledge", {optional: !0}),
-    S("lift-keep", 138, 3.6, 17.5, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-castlegate-floor", 144, 22, 18.8, "stone", {landmark: "beacon"}),
-    S("switch-castlegate", 152, 2.2, 18.95, "switch", {channel: "castle-lock", latch: !0}),
-    S("gate-castle", 159, 1.8, 22.8, "gate", {channel: "castle-lock", h: 4}),
+    S("dock-faro-spur", 88, 8.0, 15.5, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-cliff-ridge", 97, 7.5, 17.0, "balance"),
+    S("step-faro-ramp1", 105, 3.8, 18.2, "ledge"),
+    S("step-faro-ramp2", 110, 3.5, 19.4, "ledge"),
+    S("balance-faro-balcony", 116, 6.5, 20.5, "balance"),
+    S("lift-faro-zenith", 123, 3.6, 20.0, "lift", {moveY: 2.2, period: 4.2}),
+    S("plat-lightgate-floor", 126, 31.0, 21.5, "stone"),
+    S("switch-lightgate", 137, 2.2, 21.65, "switch", {channel: "light-lock", latch: !0}),
+    S("gate-light", 142, 1.8, 25.5, "gate", {channel: "light-lock", h: 4}),
 
-    S("dock-keep", 163, 7.5, 18.8, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-keep1", 173, 4.0, 18.2, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-keep2", 179, 4.0, 18.2, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-battery", 185, 6.5, 17.4, "stone"),
-    S("step-castle3", 196, 3.2, 20.6, "ledge"),
-    S("lift-turret", 193, 3.6, 16.8, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-castle3", 201, 3.5, 23.0, "ledge", {optional: !0}),
-    S("spring-castle3", 202, 2.0, 18.4, "spring"),
-    S("plat-seawall-castle", 200, 8.5, 18.4, "stone", {landmark: "sandwheel"}),
-    S("pit-moat-3", 168, 44, 5.0, "stone", {spiked: !0}),
+    S("dock-lantern-base", 149, 8.0, 21.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-clf1", 158, 4.0, 21.0, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-clf2", 165, 4.5, 21.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-cove-crest", 172, 7.5, 21.2, "stone"),
+    S("lift-winch-clf", 180, 3.6, 20.5, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l6", 184.2, 3.6, 21.8, "ledge"),
+    S("plat-faro-high-rock", 189, 8.5, 22.2, "stone"),
+    S("step-lantern-link", 197, 3.5, 22.8, "ledge"),
+    S("pit-cliff-3", 152, 48, 5.0, "stone", {spiked: !0}),
 
-    S("dock-citadel-exit", 212, 7.0, 18.4, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-bastion1", 221, 3.8, 19.4, "ledge"),
-    S("step-bastion2", 227, 4.2, 20.4, "ledge"),
-    S("goal-castle", 233, 14, 21.4, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-clf-exit", 204, 8.0, 23.2, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-faro1", 212, 3.8, 23.8, "ledge"),
+    S("step-faro2", 218, 4.0, 24.2, "ledge"),
+    S("step-faro3", 223.0, 4.0, 24.35, "ledge"),
+    S("goal-lighthouse", 228.0, 17.0, 24.5, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "ficus-centenario", x: -4.0, y: 12.0, size: 13.5, z: -1.5},
+    {kind: "palma-augusta", x: 2.0, y: 12.0, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 8.5, y: 10.5, size: 3.8, z: -0.6},
+    {kind: "olivo-secolare", x: 17.0, y: 8.8, size: 6.8, z: -1.2},
+    {kind: "palma-augusta", x: 33.0, y: 11.8, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 48.5, y: 12.8, size: 4.0, z: -0.6},
+    {kind: "olivo-secolare", x: 82.0, y: 14.5, size: 7.0, z: -1.2},
+    {kind: "palma-augusta", x: 92.0, y: 15.5, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 136.0, y: 21.5, size: 4.0, z: -0.6},
+    {kind: "arancio-siciliano", x: 145.0, y: 21.5, size: 6.0, z: -0.8},
+    {kind: "olivo-secolare", x: 153.0, y: 21.5, size: 7.0, z: -1.2},
+    {kind: "olivo-secolare", x: 175.5, y: 21.2, size: 6.8, z: -1.2},
+    {kind: "tree-sapling", x: 193.0, y: 22.2, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 208.0, y: 23.2, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 24.5, size: 6.5, z: -0.8},
+    {kind: "tree-sapling", x: 239.0, y: 24.5, size: 4.0, z: -0.6},
+    {kind: "rogo-tossico-pneumatici", x: 60.0, y: 3.5, size: 14.0, z: -2.0},
+    {kind: "idrante-civico-acqua", x: 44.0, y: 12.8, size: 2.8, z: -1.2},
+    {kind: "catasta-pneumatici", x: 33.0, y: 11.8, size: 3.5, z: -1.2},
+    {kind: "faro-capo-croce-torre", x: 153.0, y: 21.5, size: 16.0, z: -4.5},
+    {kind: "scogliera-calcarea", x: 88.0, y: 15.5, size: 10.0, z: -3.0}
+  ],
+  stamps: [{x: 36.0, y: 17.5}, {x: 116.0, y: 22.0}, {x: 189.0, y: 23.5}],
+  coins: [
+    {x: 2, y: 13.0}, {x: 8, y: 11.8}, {x: 16, y: 10.2}, {x: 30, y: 13.2},
+    {x: 44, y: 14.0}, {x: 54, y: 14.5}, {x: 64, y: 14.8}, {x: 79, y: 16.0},
+    {x: 89, y: 17.0}, {x: 98, y: 18.5}, {x: 106, y: 19.8}, {x: 117, y: 22.0},
+    {x: 130, y: 23.0}, {x: 140, y: 23.0}, {x: 150, y: 23.0}, {x: 173, y: 22.5},
+    {x: 190, y: 23.5}, {x: 205, y: 24.5}, {x: 214, y: 25.0}, {x: 227, y: 25.5}
   ],
   hazards: [
-    {x: 7, w: 40, y: 1.5},
-    {x: 52, w: 48, y: 2.0},
-    {x: 168, w: 44, y: 5.0}
+    {x: 158, y: 21.0, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 21.0, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "spanish-bastion", x: 20, y: 12.6, size: 6.0, z: -2.5},
-    {kind: "torch", x: 16, y: 13.0, size: 0.8, z: -1.0},
-    {kind: "caged-lamp", x: 34, y: 13.8, size: 0.7, z: -1.6},
-    {kind: "banner", x: 48, y: 14.5, size: 2.4, z: -2.4},
-    {kind: "spanish-bastion", x: 74, y: 15.0, size: 6.5, z: -2.5},
-    {kind: "doorway", x: 80, y: 14.5, size: 3.5, z: -2.0},
-    {kind: "torch", x: 92, y: 16.0, size: 0.8, z: -1.0},
-    {kind: "spanish-bastion", x: 114, y: 16.2, size: 7.0, z: -3.0},
-    {kind: "banner", x: 146, y: 19.5, size: 2.4, z: -2.4},
-    {kind: "spanish-bastion", x: 174, y: 18.8, size: 7.0, z: -3.0},
-    {kind: "torch", x: 186, y: 18.0, size: 0.8, z: -1.0},
-    {kind: "caged-lamp", x: 214, y: 18.4, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Castello Svevo (1232)", text: "Esplora la monumentale fortezza di Federico II. Attento ai fossati con spuntoni e alle merlature di pietra lavica!"},
-    {x: 48, end: 68, icon: "knead", title: "Prigioni Borboniche", text: "Attraversa il cortile dell'antico bagno penale. Salta sui montacarichi a catena per salire ai camminamenti."},
-    {x: 102, end: 125, icon: "knead", title: "Ponti Levatoi Medievali", text: "Le passerelle in legno e ferro oscillano sotto il tuo peso. Mantieni il baricentro al centro."},
-    {x: 146, end: 160, icon: "walk", title: "Saracinesca Reale", text: "Premi il meccanismo dell'argano sulla passerella per sollevare la grata di ferro."},
-    {x: 212, end: 240, icon: "bell", title: "Cannoniere Sveve", text: "Suona la campana di vedetta del forte per liberare le prigioni di Federico II!"}
+    {x: 0, end: 18, title: "Capo Santa Croce", text: "Scogliere bianche a strapiombo e mare cristallino. Evita le voragini scoscese delle falesie.", icon: "walk"},
+    {x: 43, end: 65, title: "L'Idrante Marino della Scogliera", text: "Apri l'idrante ad alta pressione per estinguere il rogo tossico di pneumatici e raffreddare la cengia!", icon: "sink"},
+    {x: 88, end: 115, title: "Sentiero della Lanterna", text: "Salta tra i faraglioni calcarei per iniziare la salita verso il promontorio del faro.", icon: "knead"},
+    {x: 128, end: 146, title: "Cancello del Semaforo Marittimo", text: "Attiva l'interruttore della stazione di vedetta per sbloccare l'ingresso alla torre.", icon: "walk"},
+    {x: 204, end: 238, title: "Lanterna di Capo Santa Croce", text: "Accendi la luce del faro per proteggere le rotte ioniche e salvaguardare le praterie di Posidonia!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 13.5}, {x: 12, y: 13.5}, {x: 18, y: 14.5}, {x: 22, y: 14.5},
-    {x: 28, y: 15.5}, {x: 34, y: 15.5}, {x: 41, y: 16.0}, {x: 58, y: 16.5},
-    {x: 64, y: 17.0}, {x: 74, y: 16.5}, {x: 80, y: 16.5}, {x: 90, y: 17.5},
-    {x: 104, y: 17.5}, {x: 111, y: 18.0}, {x: 115, y: 18.0}, {x: 121, y: 19.0},
-    {x: 129, y: 20.5}, {x: 147, y: 20.5}, {x: 154, y: 20.5}, {x: 166, y: 20.5},
-    {x: 175, y: 20.0}, {x: 181, y: 20.0}, {x: 187, y: 19.5}, {x: 195, y: 19.5},
-    {x: 204, y: 20.5}, {x: 223, y: 21.5}, {x: 229, y: 22.5}, {x: 235, y: 23.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 19.8},
-    {x: 134.5, y: 24.5},
-    {x: 202.5, y: 25.0}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_7():
     return """const augustaL7 = yr({
   layoutVersion: 1,
-  name: "Faro Santa Croce & Le Falesie di Brucoli",
-  short: "Faro S. Croce",
-  label: "Scogliere bianche, mare Ionio e vista sul vulcano Etna",
+  name: "Le Saline Regie & I Fenicotteri Rosa",
+  short: "Saline Regie",
+  label: "Oasi di biodiversità, piramidi di sale e mulini a vento",
   biome: "nightfall",
-  intro: "La punta più spettacolare della costa augustana: il faro ottagonale di Santa Croce a picco sulle scogliere calcaree bianche di Brucoli, con i bunker della Seconda Guerra Mondiale e la magnifica vista sul vulcano Etna!",
-  sky: "#1a3450",
-  fog: "#284c72",
-  spawn: {x: 1.5, y: 12},
-  end: 240,
+  intro: "Le antiche Saline Regie di Augusta: una riserva umida di immenso valore dove nidificano i fenicotteri rosa. Purtroppo un ristagno di fango tossico e liquami ha ostruito il canale d'alimentazione. Aziona la paratoia borbonica per immettere acqua marina pura, cristallizzare il sale e formare un ponte bianco!",
+  sky: "#241829",
+  fog: "#3c243d",
+  spawn: {x: 1.5, y: 10.0},
+  end: 242,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. I Sentieri Costieri di Brucoli", landmark: "beacon"},
-    {x: 48, name: "2. Le Falesie Bianche a Strapiombo", landmark: "pulsedrum"},
-    {x: 102, name: "3. La Casamatta del Bunker Costiero", landmark: "bannerarch"},
-    {x: 162, name: "4. Scogliera del Faro di Santa Croce", landmark: "sandwheel"},
-    {x: 212, name: "5. La Lanterna Ottagonale del Faro", landmark: "bellgate"}
+    {x: -8, name: "1. Gli Argini di Cristallizzazione & Le Vasche", landmark: "beacon"},
+    {x: 43, name: "2. Il Canale Intasato & La Grande Paratoia", landmark: "pulsedrum"},
+    {x: 88, name: "3. I Mulini a Vento di Macinazione", landmark: "bannerarch"},
+    {x: 149, name: "4. I Monti di Sale Marino Puro", landmark: "sandwheel"},
+    {x: 204, name: "5. Il Casotto Storico dei Salinai", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 12, "stone", {landmark: "beacon"}),
-    S("step-cliff1", 10, 4.0, 12.8, "ledge"),
-    S("plat-falesia1", 16, 7.5, 13.6, "stone"),
-    S("lift-gull", 26, 3.8, 14.0, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-falesia2", 32, 6.5, 14.8, "stone"),
-    S("spring-cliff1", 41, 2.0, 14.8, "spring"),
-    S("opt-cliff1", 40, 3.6, 18.8, "ledge", {optional: !0}),
-    S("pit-sea-1", 7, 40, 2.0, "stone", {spiked: !0}),
+    S("start", -8, 16, 10.0, "stone", {landmark: "beacon"}),
+    S("step-levee1", 6, 5.5, 10.5, "stone"),
+    S("plat-salt-basin1", 14, 6.5, 11.0, "stone"),
+    S("lift-windmill-paddle", 22, 3.5, 11.2, "lift", {moveY: 1.8, period: 3.8}),
+    S("plat-crystallizer", 29, 8.0, 11.5, "stone"),
+    S("spring-salt", 36, 2.0, 11.5, "spring"),
+    S("opt-salt", 36, 3.5, 15.5, "ledge", {optional: !0}),
+    S("pit-salt-1", 4, 35, 2.0, "stone", {spiked: !0}),
 
-    S("dock-falesie", 46, 7.5, 14.8, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("step-ledge1", 56, 4.2, 15.5, "ledge"),
-    S("plat-bunker-access", 62, 7.5, 16.0, "stone"),
-    S("lift-marine", 72, 3.8, 15.5, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-pillbox", 78, 8.0, 15.5, "stone"),
-    S("step-cliff2", 88, 4.0, 16.6, "ledge"),
-    S("plat-reef", 94, 7.0, 16.6, "stone"),
-    S("pit-sea-2", 52, 48, 2.5, "stone", {spiked: !0}),
+    S("dock-sluice-station", 43, 8.0, 12.0, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-salina-sluice", 45.5, 2.2, 12.15, "switch", {channel: "sluice-flush", latch: !0}),
+    S("plat-salt-step1", 51, 6.5, 11.8, "timed", {channel: "sluice-flush"}),
+    S("plat-salt-crystal-bridge", 60, 8.5, 11.8, "timed", {channel: "sluice-flush"}),
+    S("plat-salt-step2", 69.5, 6.5, 11.8, "timed", {channel: "sluice-flush"}),
+    S("plat-pyramid-field", 78, 8.0, 12.2, "stone"),
+    S("pit-salt-2", 46, 34, 2.0, "stone", {spiked: !0}),
 
-    S("dock-bunker", 100, 7.0, 16.6, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("balance-cliff1", 109, 8.0, 17.2, "balance"),
-    S("step-promontory", 119, 3.8, 18.2, "ledge"),
-    S("step-cliff3", 125, 3.2, 20.8, "ledge"),
-    S("balance-cliff2", 127, 8.0, 19.2, "balance"),
-    S("opt-cliff2", 133, 3.6, 23.8, "ledge", {optional: !0}),
-    S("lift-lighthouse-rock", 138, 3.6, 18.5, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-lightgate-floor", 144, 22, 19.8, "stone", {landmark: "beacon"}),
-    S("switch-lightgate", 152, 2.2, 19.95, "switch", {channel: "light-lock", latch: !0}),
-    S("gate-light", 159, 1.8, 23.8, "gate", {channel: "light-lock", h: 4}),
+    S("dock-windmill-isle", 88, 8.0, 12.6, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-windmill-sail", 97, 7.5, 13.2, "balance"),
+    S("step-salt-dike1", 105, 3.8, 13.8, "ledge"),
+    S("step-salt-dike2", 110, 3.5, 14.4, "ledge"),
+    S("balance-wooden-trough", 116, 6.5, 14.8, "balance"),
+    S("lift-salina-levee", 123, 3.6, 14.2, "lift", {moveX: 2.4, period: 4.2}),
+    S("plat-saltgate-floor", 126, 31.0, 14.8, "stone"),
+    S("switch-saltgate", 137, 2.2, 14.95, "switch", {channel: "salt-lock", latch: !0}),
+    S("gate-salt", 142, 1.8, 18.8, "gate", {channel: "salt-lock", h: 4}),
 
-    S("dock-lighthouse", 163, 7.5, 19.8, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-light1", 173, 4.0, 19.2, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-light2", 179, 4.0, 19.2, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-lantern-base", 185, 6.5, 18.4, "stone"),
-    S("step-cliff4", 196, 3.2, 21.6, "ledge"),
-    S("lift-beacon-lamp", 193, 3.6, 17.8, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-cliff3", 201, 3.5, 24.0, "ledge", {optional: !0}),
-    S("spring-cliff3", 202, 2.0, 19.4, "spring"),
-    S("plat-faro-deck", 200, 8.5, 19.4, "stone", {landmark: "sandwheel"}),
-    S("pit-sea-3", 168, 44, 5.0, "stone", {spiked: !0}),
+    S("dock-salina-export", 149, 8.0, 14.8, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-slt1", 158, 4.0, 14.4, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-slt2", 165, 4.5, 14.4, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-salt-pans-dry", 172, 7.5, 14.2, "stone"),
+    S("lift-winch-slt", 180, 3.6, 13.8, "lift", {moveY: 1.8, period: 4.0}),
+    S("step-winch-reach-l7", 184.2, 3.6, 14.5, "ledge"),
+    S("plat-flamingo-dike", 189, 8.5, 14.8, "stone"),
+    S("step-mill-link", 197, 3.5, 15.0, "ledge"),
+    S("pit-salt-3", 152, 48, 3.0, "stone", {spiked: !0}),
 
-    S("dock-faro-exit", 212, 7.0, 19.4, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-croce1", 221, 3.8, 20.4, "ledge"),
-    S("step-croce2", 227, 4.2, 21.4, "ledge"),
-    S("goal-santacroce", 233, 14, 22.4, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-slt-exit", 204, 8.0, 15.0, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-salinaro1", 212, 3.8, 15.2, "ledge"),
+    S("step-salinaro2", 218, 4.0, 15.4, "ledge"),
+    S("step-salinaro3", 223.0, 4.0, 15.45, "ledge"),
+    S("goal-salina", 228.0, 17.0, 15.5, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "palma-augusta", x: -4.0, y: 10.0, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 2.0, y: 10.0, size: 5.5, z: -0.8},
+    {kind: "olivo-secolare", x: 8.5, y: 10.5, size: 6.2, z: -1.2},
+    {kind: "tree-sapling", x: 17.0, y: 11.0, size: 3.8, z: -0.6},
+    {kind: "palma-augusta", x: 33.0, y: 11.5, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 48.5, y: 12.0, size: 5.8, z: -0.8},
+    {kind: "olivo-secolare", x: 82.0, y: 12.2, size: 7.0, z: -1.2},
+    {kind: "palma-augusta", x: 92.0, y: 12.6, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 136.0, y: 14.8, size: 4.0, z: -0.6},
+    {kind: "arancio-siciliano", x: 145.0, y: 14.8, size: 6.0, z: -0.8},
+    {kind: "olivo-secolare", x: 153.0, y: 14.8, size: 7.0, z: -1.2},
+    {kind: "arancio-siciliano", x: 175.5, y: 14.2, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 193.0, y: 14.8, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 208.0, y: 15.0, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 15.5, size: 6.5, z: -0.8},
+    {kind: "tree-sapling", x: 239.0, y: 15.5, size: 4.0, z: -0.6},
+    {kind: "fiume-fognatura-reflui", x: 60.0, y: 3.0, size: 14.0, z: -2.0},
+    {kind: "paratoia-idraulica-metallo", x: 44.0, y: 12.0, size: 3.2, z: -1.2},
+    {kind: "piramide-sale-bianco", x: 82.0, y: 12.2, size: 4.5, z: -1.8},
+    {kind: "mulino-salina-pale", x: 88.0, y: 12.6, size: 14.0, z: -4.5},
+    {kind: "fenicottero-saline", x: 193.0, y: 14.8, size: 3.0, z: -1.5}
+  ],
+  stamps: [{x: 36.0, y: 17.0}, {x: 116.0, y: 16.5}, {x: 189.0, y: 16.5}],
+  coins: [
+    {x: 2, y: 11.5}, {x: 8, y: 11.8}, {x: 16, y: 12.2}, {x: 30, y: 13.0},
+    {x: 44, y: 13.5}, {x: 54, y: 13.2}, {x: 64, y: 13.2}, {x: 79, y: 13.5},
+    {x: 89, y: 14.0}, {x: 98, y: 14.8}, {x: 106, y: 15.2}, {x: 117, y: 16.0},
+    {x: 130, y: 16.0}, {x: 140, y: 16.0}, {x: 150, y: 16.0}, {x: 173, y: 15.5},
+    {x: 190, y: 16.0}, {x: 205, y: 16.2}, {x: 214, y: 16.5}, {x: 227, y: 16.8}
   ],
   hazards: [
-    {x: 7, w: 40, y: 2.0},
-    {x: 52, w: 48, y: 2.5},
-    {x: 168, w: 44, y: 5.0}
+    {x: 158, y: 14.4, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 14.4, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "etna-silhouette", x: 120, y: 22.0, size: 24.0, z: -20.0},
-    {kind: "lighthouse-tower", x: 174, y: 19.8, size: 9.5, z: -3.5},
-    {kind: "bunker", x: 74, y: 15.5, size: 3.5, z: -2.0},
-    {kind: "cactus-opuntia", x: 18, y: 13.6, size: 2.2, z: -1.5},
-    {kind: "boulder", x: 34, y: 14.8, size: 2.5, z: -1.5},
-    {kind: "pebbles", x: 48, y: 14.8, size: 1.5, z: 1.0},
-    {kind: "cactus-opuntia", x: 92, y: 16.6, size: 2.2, z: -1.5},
-    {kind: "caged-lamp", x: 102, y: 16.6, size: 0.7, z: -1.6},
-    {kind: "boulder", x: 146, y: 19.8, size: 2.8, z: -1.5},
-    {kind: "caged-lamp", x: 164, y: 19.8, size: 0.7, z: -1.6},
-    {kind: "cactus-opuntia", x: 202, y: 19.4, size: 2.2, z: -1.5},
-    {kind: "caged-lamp", x: 214, y: 19.4, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Falesie di Brucoli", text: "Ammira le scogliere a strapiombo sul mar Ionio e i fichi d'india. Salta tra le falesie calcaree bianche!"},
-    {x: 48, end: 68, icon: "knead", title: "Casamatta della 2ª GM", text: "Supera il vecchio bunker militare costiero affacciato sul golfo. La vista dell'Etna è spettacolare!"},
-    {x: 102, end: 125, icon: "knead", title: "Il Faro di Santa Croce", text: "In lontananza svetta il faro ottagonale bianco e nero. Mantieni l'equilibrio sugli scogli esposti al vento."},
-    {x: 146, end: 160, icon: "walk", title: "Chiusa del Faro", text: "Attiva l'interruttore sulla passerella di pietra per aprire la saracinesca della lanterna."},
-    {x: 212, end: 240, icon: "bell", title: "Campana della Lanterna", text: "Suona la campana di Santa Croce davanti allo spettacolo del mare e del vulcano Etna!"}
+    {x: 0, end: 18, title: "Saline Regie di Augusta", text: "Vasche millenarie dove l'acqua del mare e il sole creano il sale. Salta tra gli argini di terra cotta!", icon: "walk"},
+    {x: 43, end: 65, title: "La Paratoia d'Acqua Viva", text: "Apri la chiusa per far affluire acqua marina pulita: la melma scompare e il sale cristallizza in un ponte solido!", icon: "sink"},
+    {x: 88, end: 115, title: "I Mulini a Vento Salinari", text: "Le pale di legno azionavano le viti elicoidali per sollevare l'acqua salmastra tra i bacini.", icon: "knead"},
+    {x: 128, end: 146, title: "Chiusa delle Acque Madri", text: "Regola il deflusso salino per raggiungere i candidi monti di sale pronto al raccolto.", icon: "walk"},
+    {x: 204, end: 238, title: "Casotto dei Salinai", text: "Suona la campana storica per proteggere i fenicotteri rosa e valorizzare questo tesoro paesaggistico!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 14.5}, {x: 12, y: 14.5}, {x: 18, y: 15.5}, {x: 22, y: 15.5},
-    {x: 28, y: 16.5}, {x: 34, y: 16.5}, {x: 41, y: 17.0}, {x: 58, y: 17.5},
-    {x: 64, y: 18.0}, {x: 74, y: 17.5}, {x: 80, y: 17.5}, {x: 90, y: 18.5},
-    {x: 104, y: 18.5}, {x: 111, y: 19.0}, {x: 115, y: 19.0}, {x: 121, y: 20.0},
-    {x: 129, y: 21.5}, {x: 147, y: 21.5}, {x: 154, y: 21.5}, {x: 166, y: 21.5},
-    {x: 175, y: 21.0}, {x: 181, y: 21.0}, {x: 187, y: 20.5}, {x: 195, y: 20.5},
-    {x: 204, y: 21.5}, {x: 223, y: 22.5}, {x: 229, y: 23.5}, {x: 235, y: 24.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 20.8},
-    {x: 134.5, y: 25.5},
-    {x: 202.5, y: 26.0}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_8():
     return """const augustaL8 = yr({
   layoutVersion: 1,
-  name: "Le Antiche Saline Regina di Augusta",
-  short: "Saline Regina",
-  label: "Bacini rosa, croste di sale e mulini a vento salinari",
-  biome: "citadel",
-  intro: "Le storiche Saline Regina di Augusta: una scacchiera di canali d'acqua rosa e argini di terra scura. Le croste di sale bianco cristallizzato si spaccano sotto i piedi e i mulini a vento salinari azionano grandi piattaforme orbitanti!",
-  sky: "#5a2838",
-  fog: "#783648",
-  spawn: {x: 1.5, y: 11},
+  name: "Forte Vittoria & La Chiazza di Petrolio nella Rada",
+  short: "Forte Vittoria",
+  label: "Fortificazioni rinascimentali del 1567 in mezzo al porto industriale",
+  biome: "nightfall",
+  intro: "Eretto nel 1567 dal vicere spagnolo Garcia de Toledo: un forte marittimo gemello isolato in mezzo alle acque della rada megarese, oggi circondato da una pericolosa chiazza di greggio scaricato illegalmente. Aziona l'argano navale per tendere la barriera galleggiante anti-petrolio e camminare sulle panne protettive!",
+  sky: "#15202c",
+  fog: "#253344",
+  spawn: {x: 1.5, y: 9.0},
   end: 240,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. Le Vasche di Decantazione Regina", landmark: "beacon"},
-    {x: 48, name: "2. Gli Argini dei Canali Salmastri", landmark: "pulsedrum"},
-    {x: 102, name: "3. Le Piramidi di Sale Marino", landmark: "bannerarch"},
-    {x: 162, name: "4. Il Mulino Salinaro Tradizionale", landmark: "sandwheel"},
-    {x: 212, name: "5. Il Pontile del Magazzino del Sale", landmark: "bellgate"}
+    {x: -8, name: "1. Il Pontile di Partenza di Forte Garcia", landmark: "beacon"},
+    {x: 43, name: "2. La Chiazza di Greggio & L'Argano della Barriera", landmark: "pulsedrum"},
+    {x: 88, name: "3. La Banchina a Mare di Forte Vittoria", landmark: "bannerarch"},
+    {x: 149, name: "4. La Batteria Principale dei Cannoni Borbonici", landmark: "sandwheel"},
+    {x: 204, name: "5. Mastio d'Avvistamento Spagnolo", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 11, "stone", {landmark: "beacon"}),
-    S("step-salt1", 10, 4.0, 11.8, "ledge"),
-    S("plat-salina1", 16, 7.5, 12.6, "stone"),
-    S("crumble-salt1", 25, 4.2, 13.0, "crumble"),
-    S("plat-salina2", 31, 7.5, 13.4, "stone"),
-    S("spring-salt1", 40, 2.0, 13.4, "spring"),
-    S("opt-salt1", 39, 3.6, 17.4, "ledge", {optional: !0}),
-    S("pit-brine-1", 7, 39, 1.5, "stone", {spiked: !0}),
+    S("start", -8, 16, 9.0, "stone", {landmark: "beacon"}),
+    S("step-garcia-mole", 6, 5.5, 9.8, "stone"),
+    S("plat-garcia-battery", 14, 6.5, 10.6, "stone"),
+    S("lift-launch-deck", 22, 3.5, 11.0, "lift", {moveY: 2.0, period: 4.0}),
+    S("plat-chain-capstan", 29, 8.0, 11.8, "stone"),
+    S("spring-fort", 36, 2.0, 11.8, "spring"),
+    S("opt-fort", 36, 3.5, 15.8, "ledge", {optional: !0}),
+    S("pit-fort-1", 4, 35, 2.0, "stone", {spiked: !0}),
 
-    S("dock-dikes", 46, 7.5, 13.4, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("crumble-salt2", 56, 4.2, 13.2, "crumble"),
-    S("crumble-salt3", 62, 4.2, 13.0, "crumble"),
-    S("plat-sluice-base", 68, 6.5, 12.8, "stone"),
-    S("lift-brine", 77, 3.8, 12.5, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-saltpyramid1", 83, 7.5, 12.8, "stone"),
-    S("pit-brine-2", 52, 48, 1.5, "stone", {spiked: !0}),
+    S("dock-boom-winch", 43, 8.0, 12.2, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-boom-winch", 45.5, 2.2, 12.35, "switch", {channel: "boom-deploy", latch: !0}),
+    S("plat-boom-step1", 51, 6.5, 11.5, "timed", {channel: "boom-deploy"}),
+    S("plat-containment-boom", 60, 8.5, 11.5, "timed", {channel: "boom-deploy"}),
+    S("plat-boom-step2", 69.5, 6.5, 11.6, "timed", {channel: "boom-deploy"}),
+    S("plat-vittoria-watergate", 78, 8.0, 12.5, "stone"),
+    S("pit-fort-2", 46, 34, 2.0, "stone", {spiked: !0}),
 
-    S("dock-pyramids", 100, 7.0, 12.8, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("orbit-windmill1", 112, 4.0, 14.5, "orbit", {moveX: 3.2, moveY: 2.6, period: 5.5}),
-    S("step-salt2", 120, 3.8, 15.5, "ledge"),
-    S("step-salina2", 126, 3.2, 18.2, "ledge"),
-    S("balance-salt1", 128, 7.5, 16.5, "balance"),
-    S("opt-salt2", 134, 3.5, 21.2, "ledge", {optional: !0}),
-    S("lift-crystal", 138, 3.6, 16.0, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-saltgate-floor", 144, 22, 17.2, "stone", {landmark: "beacon"}),
-    S("switch-saltgate", 152, 2.2, 17.35, "switch", {channel: "salt-lock", latch: !0}),
-    S("gate-salt", 159, 1.8, 21.2, "gate", {channel: "salt-lock", h: 4}),
+    S("dock-vittoria-pier", 88, 8.0, 13.0, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-sentry-walk", 97, 7.5, 13.8, "balance"),
+    S("step-rampart-stair1", 105, 3.8, 14.6, "ledge"),
+    S("step-rampart-stair2", 110, 3.5, 15.4, "ledge"),
+    S("balance-cannoneer-deck", 116, 6.5, 16.0, "balance"),
+    S("lift-fort-hoist", 123, 3.6, 15.5, "lift", {moveY: 2.0, period: 4.2}),
+    S("plat-vittoriagate-floor", 126, 31.0, 16.5, "stone"),
+    S("switch-vittoriagate", 137, 2.2, 16.65, "switch", {channel: "vittoria-lock", latch: !0}),
+    S("gate-vittoria", 142, 1.8, 20.5, "gate", {channel: "vittoria-lock", h: 4}),
 
-    S("dock-mill", 163, 7.5, 17.2, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-salt1", 173, 4.0, 16.6, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-salt2", 179, 4.0, 16.6, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-wharf-salt", 185, 6.5, 15.8, "stone"),
-    S("step-salina3", 196, 3.2, 19.0, "ledge"),
-    S("lift-pan", 193, 3.6, 15.2, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-salt3", 201, 3.5, 21.4, "ledge", {optional: !0}),
-    S("spring-salt3", 202, 2.0, 16.8, "spring"),
-    S("plat-depot", 200, 8.5, 16.8, "stone", {landmark: "sandwheel"}),
-    S("pit-brine-3", 168, 44, 3.0, "stone", {spiked: !0}),
+    S("dock-artillery-court", 149, 8.0, 16.5, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-frt1", 158, 4.0, 16.0, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-frt2", 165, 4.5, 16.0, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-powder-magazine", 172, 7.5, 16.2, "stone"),
+    S("lift-winch-frt", 180, 3.6, 15.5, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l8", 184.2, 3.6, 16.5, "ledge"),
+    S("plat-vittoria-keep", 189, 8.5, 16.8, "stone"),
+    S("step-keep-link2", 197, 3.5, 17.2, "ledge"),
+    S("pit-fort-3", 152, 48, 3.0, "stone", {spiked: !0}),
 
-    S("dock-salina-exit", 212, 7.0, 16.8, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-pan1", 221, 3.8, 17.8, "ledge"),
-    S("step-pan2", 227, 4.2, 18.8, "ledge"),
-    S("goal-saline", 233, 14, 19.8, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-frt-exit", 204, 8.0, 17.2, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-guard1", 212, 3.8, 17.4, "ledge"),
+    S("step-guard2", 218, 4.0, 17.5, "ledge"),
+    S("step-guard3", 223.0, 4.0, 17.5, "ledge"),
+    S("goal-vittoria", 228.0, 17.0, 17.5, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "palma-augusta", x: -4.0, y: 9.0, size: 8.5, z: -1.0},
+    {kind: "olivo-secolare", x: 2.0, y: 9.0, size: 6.5, z: -1.2},
+    {kind: "tree-sapling", x: 8.5, y: 9.8, size: 3.8, z: -0.6},
+    {kind: "olivo-secolare", x: 17.0, y: 10.6, size: 6.8, z: -1.2},
+    {kind: "palma-augusta", x: 33.0, y: 11.8, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 48.5, y: 12.2, size: 4.0, z: -0.6},
+    {kind: "olivo-secolare", x: 82.0, y: 12.5, size: 7.0, z: -1.2},
+    {kind: "palma-augusta", x: 92.0, y: 13.0, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 136.0, y: 16.5, size: 4.0, z: -0.6},
+    {kind: "arancio-siciliano", x: 145.0, y: 16.5, size: 6.0, z: -0.8},
+    {kind: "olivo-secolare", x: 153.0, y: 16.5, size: 7.0, z: -1.2},
+    {kind: "olivo-secolare", x: 175.5, y: 16.2, size: 6.8, z: -1.2},
+    {kind: "tree-sapling", x: 193.0, y: 16.8, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 208.0, y: 17.2, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 17.5, size: 6.5, z: -0.8},
+    {kind: "olivo-secolare", x: 239.0, y: 17.5, size: 7.2, z: -1.2},
+    {kind: "fiume-petrolio-greggio", x: 60.0, y: 3.0, size: 14.0, z: -2.0},
+    {kind: "barriera-panne-anti-petrolio", x: 60.0, y: 12.2, size: 14.0, z: -1.5},
+    {kind: "argano-cavo-barriera", x: 44.0, y: 12.2, size: 3.2, z: -1.2},
+    {kind: "cannone-spagnolo-bronzo", x: 17.0, y: 10.6, size: 3.5, z: -1.2},
+    {kind: "torre-forte-vittoria", x: 153.0, y: 16.5, size: 18.0, z: -4.5}
+  ],
+  stamps: [{x: 36.0, y: 17.0}, {x: 116.0, y: 17.5}, {x: 189.0, y: 18.5}],
+  coins: [
+    {x: 2, y: 10.5}, {x: 8, y: 11.2}, {x: 16, y: 12.0}, {x: 30, y: 13.2},
+    {x: 44, y: 13.8}, {x: 54, y: 13.0}, {x: 64, y: 13.0}, {x: 79, y: 14.0},
+    {x: 89, y: 14.5}, {x: 98, y: 15.2}, {x: 106, y: 16.0}, {x: 117, y: 17.5},
+    {x: 130, y: 18.0}, {x: 140, y: 18.0}, {x: 150, y: 18.0}, {x: 173, y: 17.5},
+    {x: 190, y: 18.0}, {x: 205, y: 18.5}, {x: 214, y: 18.5}, {x: 227, y: 18.8}
   ],
   hazards: [
-    {x: 7, w: 39, y: 1.5},
-    {x: 52, w: 48, y: 1.5},
-    {x: 168, w: 44, y: 3.0}
+    {x: 158, y: 16.0, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 16.0, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "salt-pyramid", x: 20, y: 12.6, size: 4.0, z: -2.0},
-    {kind: "salt-pyramid", x: 86, y: 12.8, size: 4.5, z: -2.2},
-    {kind: "salt-windmill", x: 110, y: 13.5, size: 5.5, z: -3.0},
-    {kind: "salt-pyramid", x: 148, y: 17.2, size: 4.0, z: -2.0},
-    {kind: "salt-windmill", x: 170, y: 17.2, size: 5.5, z: -3.0},
-    {kind: "caged-lamp", x: 16, y: 12.6, size: 0.7, z: -1.6},
-    {kind: "caged-lamp", x: 48, y: 13.4, size: 0.7, z: -1.6},
-    {kind: "scaffold", x: 74, y: 12.8, size: 3.0, z: -2.4},
-    {kind: "banner", x: 102, y: 14.5, size: 2.4, z: -2.4},
-    {kind: "caged-lamp", x: 165, y: 17.2, size: 0.7, z: -1.6},
-    {kind: "salt-pyramid", x: 202, y: 16.8, size: 4.0, z: -2.0},
-    {kind: "caged-lamp", x: 214, y: 16.8, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Le Saline Regina", text: "Cammina tra i bacini di evaporazione del sale marino. Le croste bianche sono fragili e si rompono sotto i piedi!"},
-    {x: 48, end: 68, icon: "sink", title: "Croste di Sale Fragili", text: "Le passerelle di sale cristallino cedono se ti fermi troppo a lungo: salta con decisione."},
-    {x: 102, end: 125, icon: "knead", title: "Le Pale del Mulino Salinaro", text: "Salta sulla piattaforma orbitante che gira insieme alle pale del mulino a vento per attraversare il grande bacino."},
-    {x: 146, end: 160, icon: "walk", title: "Chiusa delle Saline", text: "Premi l'interruttore salinaro per aprire la paratoia che regola l'acqua rosa."},
-    {x: 212, end: 240, icon: "bell", title: "Campana del Magazzino del Sale", text: "Suona la campana per completare la traversata delle splendide Saline di Augusta!"}
+    {x: 0, end: 18, title: "Forte Garcia & Forte Vittoria (1567)", text: "Le due fortezze navali spagnole a difesa della rada. Salta sui muraglioni cinquecenteschi!", icon: "walk"},
+    {x: 43, end: 65, title: "L'Argano della Barriera Flottante", text: "Gira l'argano per tendere la barriera di panne anti-petrolio e creare un passaggio galleggiante sicuro!", icon: "sink"},
+    {x: 88, end: 115, title: "Piattaforma dell'Artiglieria", text: "Sali la rampa in pietra d'Istria verso i bastioni armati di cannoni borbonici.", icon: "knead"},
+    {x: 128, end: 146, title: "Cancello delle Polveri", text: "Aziona la saracinesca dell'armeria per accedere al mastio superiore di Forte Vittoria.", icon: "walk"},
+    {x: 204, end: 238, title: "Mastio di Forte Vittoria", text: "Suona la campana storica dell'isola-fortezza per salvaguardare questo capolavoro rinascimentale!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 13.5}, {x: 12, y: 13.5}, {x: 18, y: 14.5}, {x: 22, y: 14.5},
-    {x: 28, y: 15.0}, {x: 34, y: 15.0}, {x: 41, y: 15.5}, {x: 58, y: 14.5},
-    {x: 64, y: 14.0}, {x: 74, y: 14.0}, {x: 80, y: 14.0}, {x: 90, y: 14.5},
-    {x: 104, y: 14.5}, {x: 111, y: 16.5}, {x: 115, y: 16.5}, {x: 121, y: 17.5},
-    {x: 129, y: 18.5}, {x: 147, y: 19.0}, {x: 154, y: 19.0}, {x: 166, y: 19.0},
-    {x: 175, y: 18.5}, {x: 181, y: 18.5}, {x: 187, y: 17.5}, {x: 195, y: 17.5},
-    {x: 204, y: 18.5}, {x: 223, y: 19.5}, {x: 229, y: 20.5}, {x: 235, y: 21.5}
-  ],
-  stamps: [
-    {x: 40.0, y: 19.0},
-    {x: 135.5, y: 23.0},
-    {x: 202.5, y: 23.2}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_9():
     return """const augustaL9 = yr({
   layoutVersion: 1,
-  name: "I Forti Spagnoli della Rada (Garcia & Vittoria)",
-  short: "Forti Spagnoli",
-  label: "Fortezze gemelle (1567), onde in tempesta e catene navali",
+  name: "Macchia Mediterranea & La Discarica a Monte Tauro",
+  short: "Monte Tauro",
+  label: "Colline calcaree, roghi abusivi e la rinascita della macchia",
   biome: "nightfall",
-  intro: "Le due fortezze gemelle del 1567 edificate dal viceré Garcia de Toledo su due isolotti sperduti al centro del golfo di Augusta. Una tempesta notturna scuote la rada: supera i marosi, i cannoni e la gigantesca catena navale di ferro!",
-  sky: "#0d141e",
-  fog: "#14202e",
-  spawn: {x: 1.5, y: 12},
-  end: 240,
+  intro: "Le colline calcaree di Monte Tauro: una terrazza naturale sopra i due seni di mare d'Augusta, soffocata da una discarica abusiva che ha preso fuoco minacciando la macchia mediterranea. Aziona la valvola della cisterna forestale per inondare il crinale, domare il rogo e far sbocciare una terrazza fiorita!",
+  sky: "#221815",
+  fog: "#3a251f",
+  spawn: {x: 1.5, y: 11.5},
+  end: 242,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. Lo Scoglio di Forte Garcia", landmark: "beacon"},
-    {x: 48, name: "2. I Bastioni ad Asso di Picche", landmark: "pulsedrum"},
-    {x: 102, name: "3. La Catena di Sbarramento Navale", landmark: "bannerarch"},
-    {x: 162, name: "4. I Marosi del Forte Vittoria", landmark: "sandwheel"},
-    {x: 212, name: "5. La Terrazza delle Polveriere & Bracieri", landmark: "bellgate"}
+    {x: -8, name: "1. Il Sentiero tra gli Ulivi & I Muretti a Secco", landmark: "beacon"},
+    {x: 43, name: "2. Il Vallone del Rogo Tossico & La Cisterna", landmark: "pulsedrum"},
+    {x: 88, name: "3. La Cima Rocciosa di Monte Tauro", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Frutteto Panoramico sul Golfo", landmark: "sandwheel"},
+    {x: 204, name: "5. Il Belvedere sulle Due Rade d'Augusta", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 12, "stone", {landmark: "beacon"}),
-    S("step-garcia1", 10, 4.0, 12.8, "ledge"),
-    S("plat-bastion-garcia", 16, 7.5, 13.6, "stone"),
-    S("lift-rigging", 26, 3.8, 14.0, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-rampart-garcia", 32, 6.5, 14.8, "stone"),
-    S("spring-fort1", 41, 2.0, 14.8, "spring"),
-    S("opt-fort1", 40, 3.6, 18.8, "ledge", {optional: !0}),
-    S("pit-storm-1", 7, 40, 2.0, "stone", {spiked: !0}),
+    S("start", -8, 16, 11.5, "stone", {landmark: "beacon"}),
+    S("step-scrub1", 6, 5.5, 12.8, "stone"),
+    S("plat-olive-grove", 14, 6.5, 14.0, "stone"),
+    S("lift-terrace-funicular", 22, 3.5, 14.6, "lift", {moveY: 2.2, period: 4.2}),
+    S("plat-drystone-wall", 29, 8.0, 15.6, "stone"),
+    S("spring-scrub", 36, 2.0, 15.6, "spring"),
+    S("opt-scrub", 36, 3.5, 19.8, "ledge", {optional: !0}),
+    S("pit-fire-1", 4, 35, 4.0, "stone", {spiked: !0}),
 
-    S("dock-garcia-battery", 46, 7.5, 14.8, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("step-rampart1", 56, 4.2, 15.5, "ledge"),
-    S("plat-chain-base", 62, 7.5, 16.0, "stone"),
-    S("lift-pulley", 72, 3.8, 15.5, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-chain-tower", 78, 8.0, 15.5, "stone"),
-    S("step-garcia2", 88, 4.0, 16.6, "ledge"),
-    S("plat-reef-fort", 94, 7.0, 16.6, "stone"),
-    S("pit-storm-2", 52, 48, 2.5, "stone", {spiked: !0}),
+    S("dock-cistern-station", 43, 8.0, 16.2, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-forest-cistern", 45.5, 2.2, 16.35, "switch", {channel: "quench-forest", latch: !0}),
+    S("plat-forest-step1", 51, 6.5, 15.8, "timed", {channel: "quench-forest"}),
+    S("plat-flowering-terrace", 60, 8.5, 15.8, "timed", {channel: "quench-forest"}),
+    S("plat-forest-step2", 69.5, 6.5, 16.0, "timed", {channel: "quench-forest"}),
+    S("plat-carob-slope", 78, 8.0, 16.8, "stone"),
+    S("pit-fire-2", 46, 34, 4.0, "stone", {spiked: !0}),
 
-    S("dock-ironchain", 100, 7.0, 16.6, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("balance-chain1", 109, 8.0, 17.2, "balance"),
-    S("step-ironlink", 119, 3.8, 18.2, "ledge"),
-    S("step-fort2", 125, 3.2, 20.8, "ledge"),
-    S("balance-chain2", 127, 8.0, 19.2, "balance"),
-    S("opt-fort2", 133, 3.6, 23.8, "ledge", {optional: !0}),
-    S("lift-cannon-hoist", 138, 3.6, 18.5, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-vittoriagate-floor", 144, 22, 19.8, "stone", {landmark: "beacon"}),
-    S("switch-vittoriagate", 152, 2.2, 19.95, "switch", {channel: "vittoria-lock", latch: !0}),
-    S("gate-vittoria", 159, 1.8, 23.8, "gate", {channel: "vittoria-lock", h: 4}),
+    S("dock-tauro-crag", 88, 8.0, 17.2, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-limestone-crest", 97, 7.5, 18.0, "balance"),
+    S("step-crag1", 105, 3.8, 18.8, "ledge"),
+    S("step-crag2", 110, 3.5, 19.4, "ledge"),
+    S("balance-hillside-walk", 116, 6.5, 19.8, "balance"),
+    S("lift-tauro-lift", 123, 3.6, 19.5, "lift", {moveY: 2.0, period: 4.2}),
+    S("plat-taurogate-floor", 126, 31.0, 20.2, "stone"),
+    S("switch-taurogate", 137, 2.2, 20.35, "switch", {channel: "tauro-lock", latch: !0}),
+    S("gate-tauro", 142, 1.8, 24.2, "gate", {channel: "tauro-lock", h: 4}),
 
-    S("dock-vittoria", 163, 7.5, 19.8, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-vittoria1", 173, 4.0, 19.2, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-vittoria2", 179, 4.0, 19.2, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-vittoria-dike", 185, 6.5, 18.4, "stone"),
-    S("step-fort3", 196, 3.2, 21.6, "ledge"),
-    S("lift-beacon-fort", 193, 3.6, 17.8, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-fort3", 201, 3.5, 24.0, "ledge", {optional: !0}),
-    S("spring-fort3", 202, 2.0, 19.4, "spring"),
-    S("plat-vittoria-crest", 200, 8.5, 19.4, "stone", {landmark: "sandwheel"}),
-    S("pit-storm-3", 168, 44, 5.0, "stone", {spiked: !0}),
+    S("dock-panoramic-orchard", 149, 8.0, 20.2, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-tauro1", 158, 4.0, 19.8, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-tauro2", 165, 4.5, 19.8, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-monte-tauro-high", 172, 7.5, 20.0, "stone"),
+    S("lift-winch-tauro", 180, 3.6, 19.2, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l9", 184.2, 3.6, 20.3, "ledge"),
+    S("plat-tauro-lookout", 189, 8.5, 20.6, "stone"),
+    S("step-belvedere-link", 197, 3.5, 20.8, "ledge"),
+    S("pit-fire-3", 152, 48, 6.0, "stone", {spiked: !0}),
 
-    S("dock-fort-exit", 212, 7.0, 19.4, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-garcia-end1", 221, 3.8, 20.4, "ledge"),
-    S("step-garcia-end2", 227, 4.2, 21.4, "ledge"),
-    S("goal-forts", 233, 14, 22.4, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-tauro-exit", 204, 8.0, 20.8, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-summit1", 212, 3.8, 21.0, "ledge"),
+    S("step-summit2", 218, 4.0, 21.0, "ledge"),
+    S("step-summit3", 223.0, 4.0, 21.0, "ledge"),
+    S("goal-tauro", 228.0, 17.0, 21.0, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "ficus-centenario", x: -4.0, y: 11.5, size: 13.5, z: -1.5},
+    {kind: "palma-augusta", x: 2.0, y: 11.5, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 8.5, y: 12.8, size: 5.5, z: -0.8},
+    {kind: "olivo-secolare", x: 17.0, y: 14.0, size: 6.8, z: -1.2},
+    {kind: "tree-sapling", x: 33.0, y: 15.6, size: 4.0, z: -0.6},
+    {kind: "palma-augusta", x: 48.5, y: 16.2, size: 8.5, z: -1.0},
+    {kind: "olivo-secolare", x: 82.0, y: 16.8, size: 7.0, z: -1.2},
+    {kind: "arancio-siciliano", x: 92.0, y: 17.2, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 136.0, y: 20.2, size: 4.0, z: -0.6},
+    {kind: "olivo-secolare", x: 145.0, y: 20.2, size: 7.0, z: -1.2},
+    {kind: "palma-augusta", x: 153.0, y: 20.2, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 175.5, y: 20.0, size: 6.0, z: -0.8},
+    {kind: "tree-sapling", x: 193.0, y: 20.6, size: 4.2, z: -0.6},
+    {kind: "palma-augusta", x: 208.0, y: 20.8, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 233.0, y: 21.0, size: 6.5, z: -0.8},
+    {kind: "olivo-secolare", x: 239.0, y: 21.0, size: 7.2, z: -1.2},
+    {kind: "rogo-tossico-pneumatici", x: 60.0, y: 5.0, size: 14.0, z: -2.0},
+    {kind: "idrante-civico-acqua", x: 44.0, y: 16.2, size: 2.8, z: -1.2},
+    {kind: "muretto-secco-siciliano", x: 33.0, y: 15.6, size: 3.5, z: -1.2},
+    {kind: "veduta-golfo-augusta", x: 153.0, y: 20.2, size: 16.0, z: -5.0}
+  ],
+  stamps: [{x: 36.0, y: 21.0}, {x: 116.0, y: 21.5}, {x: 189.0, y: 22.0}],
+  coins: [
+    {x: 2, y: 13.0}, {x: 9, y: 14.2}, {x: 17, y: 15.5}, {x: 30, y: 17.0},
+    {x: 44, y: 17.8}, {x: 54, y: 17.2}, {x: 64, y: 17.2}, {x: 79, y: 18.0},
+    {x: 89, y: 18.5}, {x: 98, y: 19.5}, {x: 106, y: 20.2}, {x: 117, y: 21.5},
+    {x: 130, y: 21.8}, {x: 140, y: 21.8}, {x: 150, y: 21.8}, {x: 173, y: 21.5},
+    {x: 190, y: 22.0}, {x: 205, y: 22.2}, {x: 214, y: 22.5}, {x: 227, y: 22.5}
   ],
   hazards: [
-    {x: 7, w: 40, y: 2.0},
-    {x: 52, w: 48, y: 2.5},
-    {x: 168, w: 44, y: 5.0}
+    {x: 158, y: 19.8, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 19.8, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "spanish-bastion", x: 22, y: 13.6, size: 7.0, z: -3.0},
-    {kind: "torch", x: 18, y: 14.0, size: 0.8, z: -1.0},
-    {kind: "caged-lamp", x: 34, y: 14.8, size: 0.7, z: -1.6},
-    {kind: "spanish-bastion", x: 74, y: 15.5, size: 7.5, z: -3.0},
-    {kind: "banner", x: 48, y: 15.5, size: 2.4, z: -2.4},
-    {kind: "torch", x: 80, y: 16.5, size: 0.8, z: -1.0},
-    {kind: "spanish-bastion", x: 114, y: 17.2, size: 8.0, z: -3.5},
-    {kind: "cargo-ship", x: 120, y: 10.0, size: 20.0, z: -18.0},
-    {kind: "caged-lamp", x: 102, y: 16.6, size: 0.7, z: -1.6},
-    {kind: "spanish-bastion", x: 174, y: 19.8, size: 7.5, z: -3.0},
-    {kind: "torch", x: 186, y: 19.2, size: 0.8, z: -1.0},
-    {kind: "caged-lamp", x: 214, y: 19.4, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Forte Garcia (1567)", text: "Sei sull'isolotto fortificato di Forte Garcia nel cuore della rada. Una tempesta notturna alza onde minacciose!"},
-    {x: 48, end: 68, icon: "knead", title: "I Bastioni ad Asso di Picche", text: "Le mura cinquecentesche resistono ai marosi. Sali sui cannoni per raggiungere la torre della catena navale."},
-    {x: 102, end: 125, icon: "knead", title: "La Catena di Sbarramento", text: "In bilico sulla colossale catena di ferro che chiudeva il porto di Augusta ai pirati e alle navi nemiche!"},
-    {x: 146, end: 160, icon: "walk", title: "Portone di Forte Vittoria", text: "Premi il dispositivo a leva sulla passerella per aprire la pesante porta ferrata del Forte Vittoria."},
-    {x: 212, end: 240, icon: "bell", title: "Campana delle Fortezze", text: "Suona la campana di Forte Vittoria per completare l'epica traversata notturna delle fortezze gemelle!"}
+    {x: 0, end: 18, title: "Monte Tauro di Augusta", text: "Le colline che dominano l'istmo: salta tra i muretti a secco e le rocce calcaree!", icon: "walk"},
+    {x: 43, end: 65, title: "La Cisterna Antincendio", text: "Apri la condotta dell'acqua per soffocare il rogo abusivo e far rinascere la terrazza di fiori selvatici!", icon: "sink"},
+    {x: 88, end: 115, title: "Cresta di Monte Tauro", text: "Avanza sul crinale roccioso tra macchia mediterranea, agavi e carrubi secolari.", icon: "knead"},
+    {x: 128, end: 146, title: "Cancello del Frutteto", text: "Apri il varco verso i terrazzamenti di agrumi per iniziare la discesa verso la citta.", icon: "walk"},
+    {x: 204, end: 238, title: "Belvedere di Monte Tauro", text: "Suona la campana sul punto piu alto: Augusta è circondata dal mare e merita di risplendere nel verde!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 14.5}, {x: 12, y: 14.5}, {x: 18, y: 15.5}, {x: 22, y: 15.5},
-    {x: 28, y: 16.5}, {x: 34, y: 16.5}, {x: 41, y: 17.0}, {x: 58, y: 17.5},
-    {x: 64, y: 18.0}, {x: 74, y: 17.5}, {x: 80, y: 17.5}, {x: 90, y: 18.5},
-    {x: 104, y: 18.5}, {x: 111, y: 19.0}, {x: 115, y: 19.0}, {x: 121, y: 20.0},
-    {x: 129, y: 21.5}, {x: 147, y: 21.5}, {x: 154, y: 21.5}, {x: 166, y: 21.5},
-    {x: 175, y: 21.0}, {x: 181, y: 21.0}, {x: 187, y: 20.5}, {x: 195, y: 20.5},
-    {x: 204, y: 21.5}, {x: 223, y: 22.5}, {x: 229, y: 23.5}, {x: 235, y: 24.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 20.8},
-    {x: 134.5, y: 25.5},
-    {x: 202.5, y: 26.0}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
 def get_level_10():
     return """const augustaL10 = yr({
   layoutVersion: 1,
-  name: "La Porta Spagnola & Il Taglio dell'Isola",
+  name: "Porta Spagnola & La Grande Rinascita Verde",
   short: "Porta Spagnola",
-  label: "Il gran finale: centro storico, tetti barocchi e la fuga trionfale!",
-  biome: "desert",
-  intro: "Il gran finale di Augusta Slop Adventures! Corri sui tetti e balconi barocchi dell'Isola di Augusta, supera il fossato salmastro del Taglio dell'Isola, varca l'arco trionfale della monumentale Porta Spagnola del 1699 e suona la Campana della Libertà!",
-  sky: "#4e381c",
-  fog: "#6c4e28",
-  spawn: {x: 1.5, y: 12},
-  end: 240,
+  label: "La porta barocca del 1692, la differenziata e il trionfo ecologico",
+  biome: "citadel",
+  intro: "Il gran finale di Augusta! Ai piedi dell'iconica Porta Spagnola del 1692, la vecchia statale asfaltata è spaccata e trasuda scorie chimiche. Pianta il Germoglio Madre al centro della breccia: l'antica rete di radici si risvegliera all'istante, spalancando una gigantesca volta di Ficus vivente che ti guidera fino al Duomo per celebrare il trionfo verde di Augusta!",
+  sky: "#1872b2",
+  fog: "#4ba4e0",
+  spawn: {x: 1.5, y: 12.0},
+  end: 245,
   previousDistance: 1100,
   cameraY: 2,
   sections: [
-    {x: -8, name: "1. I Tetti Barocchi dell'Isola", landmark: "beacon"},
-    {x: 48, name: "2. I Vicoli della Città Vecchia", landmark: "pulsedrum"},
-    {x: 102, name: "3. Il Fossato del Taglio dell'Isola", landmark: "bannerarch"},
-    {x: 162, name: "4. L'Arco della Porta Spagnola (1699)", landmark: "sandwheel"},
-    {x: 212, name: "5. La Campana della Libertà di Augusta", landmark: "bellgate"}
+    {x: -8, name: "1. Il Viadotto dell'Istmo & I Bastioni di San Giacomo", landmark: "beacon"},
+    {x: 43, name: "2. La Fessura di Asfalto & Il Germoglio Madre", landmark: "pulsedrum"},
+    {x: 88, name: "3. La Soglia Monumentale di Porta Spagnola (1692)", landmark: "bannerarch"},
+    {x: 149, name: "4. Il Viale Trionfale della Rinascita Ecologica", landmark: "sandwheel"},
+    {x: 204, name: "5. L'Arco di Trionfo Verde in Piazza Duomo", landmark: "bellgate"}
   ],
   platforms: [
-    S("start", -8, 16, 12, "stone", {landmark: "beacon"}),
-    S("step-roof1", 10, 4.0, 13.0, "ledge"),
-    S("plat-palazzo1", 16, 7.5, 14.0, "stone"),
-    S("lift-balcony", 26, 3.8, 14.5, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-terrazza1", 32, 6.5, 15.5, "stone"),
-    S("spring-finale1", 41, 2.0, 15.5, "spring"),
-    S("opt-finale1", 40, 3.6, 19.8, "ledge", {optional: !0}),
-    S("pit-alley-1", 7, 40, 2.0, "stone", {spiked: !0}),
+    S("start", -8, 16, 12.0, "stone", {landmark: "beacon"}),
+    S("step-isthmus-road", 6, 5.5, 13.0, "stone"),
+    S("plat-spanish-causeway", 14, 6.5, 14.0, "stone"),
+    S("lift-isthmus-gantry", 22, 3.5, 14.5, "lift", {moveY: 2.0, period: 4.0}),
+    S("plat-bastion-san-giacomo", 29, 8.0, 15.5, "stone"),
+    S("spring-porta", 36, 2.0, 15.5, "spring"),
+    S("opt-porta", 36, 3.5, 19.5, "ledge", {optional: !0}),
+    S("pit-tar-1", 4, 35, 4.0, "stone", {spiked: !0}),
 
-    S("dock-alleys", 46, 7.5, 15.5, "stone", {checkpoint: 48, depth: 22, landmark: "pulsedrum"}),
-    S("step-cornice1", 56, 4.2, 16.2, "ledge"),
-    S("plat-piazza", 62, 7.5, 16.8, "stone"),
-    S("lift-pulley-city", 72, 3.8, 16.2, "lift", {moveY: 2.8, period: 4.2}),
-    S("plat-bridgehead", 78, 8.0, 16.2, "stone"),
-    S("step-roof2", 88, 4.0, 17.5, "ledge"),
-    S("plat-moat-edge", 94, 7.0, 17.5, "stone"),
-    S("pit-moat-cut", 52, 48, 2.5, "stone", {spiked: !0}),
+    S("dock-sprout-pedestal", 43, 8.0, 16.0, "stone", {checkpoint: 45, depth: 22, landmark: "pulsedrum"}),
+    S("switch-master-sprout", 45.5, 2.2, 16.15, "switch", {channel: "porta-utopia", latch: !0}),
+    S("plat-canopy-step1", 51, 6.5, 16.0, "timed", {channel: "porta-utopia"}),
+    S("plat-living-canopy", 60, 8.5, 16.2, "timed", {channel: "porta-utopia"}),
+    S("plat-canopy-step2", 69.5, 6.5, 16.5, "timed", {channel: "porta-utopia"}),
+    S("plat-porta-threshold", 78, 8.0, 17.0, "stone"),
+    S("pit-tar-2", 46, 34, 4.0, "stone", {spiked: !0}),
 
-    S("dock-cut", 100, 7.0, 17.5, "stone", {checkpoint: 102, depth: 22, landmark: "bannerarch"}),
-    S("balance-span1", 109, 8.0, 18.2, "balance"),
-    S("step-drawbridge", 119, 3.8, 19.2, "ledge"),
-    S("step-finale2", 125, 3.2, 21.8, "ledge"),
-    S("balance-span2", 127, 8.0, 20.2, "balance"),
-    S("opt-finale2", 133, 3.6, 24.8, "ledge", {optional: !0}),
-    S("lift-triumphal", 138, 3.6, 19.5, "lift", {moveY: 2.6, period: 4.0}),
-    S("plat-portagate-floor", 144, 22, 20.8, "stone", {landmark: "beacon"}),
-    S("switch-portagate", 152, 2.2, 20.95, "switch", {channel: "porta-lock", latch: !0}),
-    S("gate-porta", 159, 1.8, 24.8, "gate", {channel: "porta-lock", h: 4}),
+    S("dock-porta-spagnola", 88, 8.0, 17.5, "stone", {checkpoint: 90, depth: 22, landmark: "bannerarch"}),
+    S("balance-triumphal-walk", 97, 7.5, 18.2, "balance"),
+    S("step-principe-stair1", 105, 3.8, 19.0, "ledge"),
+    S("step-principe-stair2", 110, 3.5, 19.8, "ledge"),
+    S("balance-hanging-gardens", 116, 6.5, 20.4, "balance"),
+    S("lift-duomo-ascent", 123, 3.6, 20.0, "lift", {moveY: 2.0, period: 4.2}),
+    S("plat-duomogate-floor", 126, 31.0, 21.0, "stone"),
+    S("switch-duomogate", 137, 2.2, 21.15, "switch", {channel: "porta-lock", latch: !0}),
+    S("gate-duomo-final", 142, 1.8, 25.0, "gate", {channel: "porta-lock", h: 4}),
 
-    S("dock-porta-arch", 163, 7.5, 20.8, "stone", {checkpoint: 165, depth: 22, landmark: "sandwheel"}),
-    S("pulse-porta1", 173, 4.0, 20.2, "pulse", {period: 4.2, phase: 0}),
-    S("pulse-porta2", 179, 4.0, 20.2, "pulse", {period: 4.2, phase: 0.5}),
-    S("plat-triumphal-way", 185, 6.5, 19.5, "stone"),
-    S("step-finale3", 196, 3.2, 22.8, "ledge"),
-    S("lift-victory-belfry", 193, 3.6, 19.0, "lift", {moveX: 2.8, moveY: 1.8, period: 4.8}),
-    S("opt-finale3", 201, 3.5, 25.0, "ledge", {optional: !0}),
-    S("spring-finale3", 202, 2.0, 20.5, "spring"),
-    S("plat-belvedere-augusta", 200, 8.5, 20.5, "stone", {landmark: "sandwheel"}),
-    S("pit-finale-3", 168, 44, 6.0, "stone", {spiked: !0}),
+    S("dock-piazza-duomo", 149, 8.0, 21.0, "stone", {checkpoint: 151, depth: 22, landmark: "sandwheel"}),
+    S("pulse-prt1", 158, 4.0, 20.6, "pulse", {period: 4.2, phase: 0}),
+    S("pulse-prt2", 165, 4.5, 20.6, "pulse", {period: 4.2, phase: 0.5}),
+    S("plat-celebration-promenade", 172, 7.5, 20.8, "stone"),
+    S("lift-winch-prt", 180, 3.6, 20.2, "lift", {moveX: 2.4, period: 4.4}),
+    S("step-winch-reach-l10", 184.2, 3.6, 21.2, "ledge"),
+    S("plat-cathedral-parvis", 189, 8.5, 21.5, "stone"),
+    S("step-parvis-link", 197, 3.5, 22.0, "ledge"),
+    S("pit-tar-3", 152, 48, 5.0, "stone", {spiked: !0}),
 
-    S("dock-liberty", 212, 7.0, 20.5, "stone", {checkpoint: 214, depth: 22, landmark: "bellgate"}),
-    S("step-liberty1", 221, 3.8, 21.5, "ledge"),
-    S("step-liberty2", 227, 4.2, 22.5, "ledge"),
-    S("goal-liberty", 233, 14, 23.5, "stone", {landmark: "bellgate", goal: !0, checkpoint: 235})
+    S("dock-prt-exit", 204, 8.0, 22.2, "stone", {checkpoint: 206, depth: 22, landmark: "bellgate"}),
+    S("step-altar1", 212, 3.8, 22.4, "ledge"),
+    S("step-altar2", 218, 4.0, 22.5, "ledge"),
+    S("step-altar3", 223.0, 4.0, 22.5, "ledge"),
+    S("goal-duomo-finale", 228.0, 17.0, 22.5, "stone", {landmark: "bellgate", goal: !0, checkpoint: 231})
+  ],
+      decor: [
+    {kind: "ficus-centenario", x: -4.0, y: 12.0, size: 14.0, z: -1.5},
+    {kind: "palma-augusta", x: 2.0, y: 12.0, size: 8.5, z: -1.0},
+    {kind: "arancio-siciliano", x: 8.5, y: 13.0, size: 5.5, z: -0.8},
+    {kind: "olivo-secolare", x: 17.0, y: 14.0, size: 6.8, z: -1.2},
+    {kind: "palma-augusta", x: 33.0, y: 15.5, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 48.5, y: 16.0, size: 4.0, z: -0.6},
+    {kind: "ficus-centenario", x: 82.0, y: 17.0, size: 13.5, z: -1.5},
+    {kind: "palma-augusta", x: 92.0, y: 17.5, size: 8.5, z: -1.0},
+    {kind: "tree-sapling", x: 136.0, y: 21.0, size: 4.0, z: -0.6},
+    {kind: "arancio-siciliano", x: 145.0, y: 21.0, size: 6.0, z: -0.8},
+    {kind: "ficus-centenario", x: 153.0, y: 21.0, size: 13.5, z: -1.5},
+    {kind: "arancio-siciliano", x: 175.5, y: 20.8, size: 6.0, z: -0.8},
+    {kind: "palma-augusta", x: 193.0, y: 21.5, size: 8.5, z: -1.0},
+    {kind: "ficus-rinascita", x: 208.0, y: 22.2, size: 6.5, z: -0.8},
+    {kind: "tree-sapling", x: 233.0, y: 22.5, size: 4.5, z: -0.6},
+    {kind: "ficus-centenario", x: 239.0, y: 22.5, size: 15.0, z: -1.5},
+    {kind: "fiume-petrolio-greggio", x: 60.0, y: 5.0, size: 12.0, z: -2.0},
+    {kind: "ficus-chioma-attraversabile", x: 60.0, y: 16.2, size: 15.0, z: -2.8},
+    {kind: "porta-spagnola", x: 88.0, y: 17.5, size: 12.0, z: -3.5},
+    {kind: "arco-trionfale-verde", x: 132.0, y: 21.0, size: 10.0, z: -2.5},
+    {kind: "barocco-duomo", x: 231.0, y: 22.5, size: 20.0, z: -5.0},
+    {kind: "vaso-caltagirone", x: 17.0, y: 14.0, size: 3.0, z: -1.2},
+    {kind: "palina-raccolta-differenziata", x: 33.0, y: 15.5, size: 2.2, z: -1.0},
+    {kind: "fountain-augusta", x: 175.5, y: 20.8, size: 4.5, z: -2.5}
+  ],
+  stamps: [{x: 36.0, y: 21.0}, {x: 116.0, y: 22.0}, {x: 189.0, y: 23.0}],
+  coins: [
+    {x: 2, y: 13.5}, {x: 9, y: 14.5}, {x: 17, y: 15.5}, {x: 30, y: 17.0},
+    {x: 44, y: 17.8}, {x: 54, y: 17.8}, {x: 64, y: 18.0}, {x: 79, y: 18.8},
+    {x: 89, y: 19.5}, {x: 98, y: 20.2}, {x: 106, y: 21.0}, {x: 117, y: 22.5},
+    {x: 130, y: 22.8}, {x: 140, y: 22.8}, {x: 150, y: 22.8}, {x: 173, y: 22.5},
+    {x: 190, y: 23.0}, {x: 205, y: 23.5}, {x: 214, y: 23.8}, {x: 227, y: 24.0}
   ],
   hazards: [
-    {x: 7, w: 40, y: 2.0},
-    {x: 52, w: 48, y: 2.5},
-    {x: 168, w: 44, y: 6.0}
+    {x: 158, y: 20.6, w: 4.0, h: 0.5, kind: "pulse"},
+    {x: 164, y: 20.6, w: 4.0, h: 0.5, kind: "pulse"}
   ],
-  decor: [
-    {kind: "porta-spagnola", x: 160, y: 20.8, size: 10.0, z: -3.0},
-    {kind: "spanish-bastion", x: 80, y: 16.2, size: 7.0, z: -3.0},
-    {kind: "banner", x: 18, y: 16.0, size: 2.5, z: -2.4},
-    {kind: "banner", x: 48, y: 17.5, size: 2.5, z: -2.4},
-    {kind: "caged-lamp", x: 34, y: 15.5, size: 0.7, z: -1.6},
-    {kind: "caged-lamp", x: 94, y: 17.5, size: 0.7, z: -1.6},
-    {kind: "caged-lamp", x: 102, y: 17.5, size: 0.7, z: -1.6},
-    {kind: "banner", x: 146, y: 22.0, size: 2.5, z: -2.4},
-    {kind: "cactus-opuntia", x: 186, y: 19.5, size: 2.2, z: -1.5},
-    {kind: "banner", x: 202, y: 22.0, size: 2.5, z: -2.4},
-    {kind: "caged-lamp", x: 214, y: 20.5, size: 0.7, z: -1.6}
-  ],
-  shaping: [],
   hints: [
-    {x: 0, end: 14, icon: "walk", title: "Centro Storico di Augusta", text: "Corri sui tetti barocchi dell'Isola! Salta tra terrazze e cornicioni dorati dal sole siciliano."},
-    {x: 48, end: 68, icon: "knead", title: "I Vicoli dell'Isola", text: "Attraversa le piazze della città vecchia. Preparati a scavalcare il canale del Taglio dell'Isola!"},
-    {x: 102, end: 125, icon: "knead", title: "Il Taglio dell'Isola", text: "Il fossato che separa Augusta dalla terraferma: salta sul ponte levatoio basculante sopra il canale."},
-    {x: 146, end: 160, icon: "walk", title: "La Porta Spagnola (1699)", text: "Premi il verricello per aprire la monumentale Porta Spagnola sormontata dall'aquila asburgica!"},
-    {x: 212, end: 240, icon: "bell", title: "La Campana della Libertà", text: "Salta e suona la Campana d'Oro della Libertà per celebrare il trionfo e la salvezza di Augusta!"}
+    {x: 0, end: 18, title: "Verso la Porta Spagnola", text: "L'istmo d'accesso all'isola: corri sopra i bastioni di San Giacomo verso la soglia monumentale del 1692!", icon: "walk"},
+    {x: 43, end: 65, title: "Il Risveglio delle Radici Antiche", text: "Pianta il Germoglio Madre per liberare la forza verde: una gigantesca volta di Ficus crescera sopra le crepe!", icon: "sink"},
+    {x: 88, end: 115, title: "Porta Spagnola (1692)", text: "Varca l'arco trionfale barocco con lo stemma di Carlo II e il vicere Benavides.", icon: "knead"},
+    {x: 128, end: 146, title: "La Rinascita Ecologica", text: "Attiva la stazione verde per spalancare l'accesso finale al Duomo di Piazza Santa Maria.", icon: "walk"},
+    {x: 204, end: 238, title: "Piazza Duomo: Trionfo Verde", text: "Suona la campana della rinascita! Augusta trionfa sul degrado e riparte dalla sua storia e dal suo verde!", icon: "bell"}
   ],
-  coins: [
-    {x: 8, y: 14.5}, {x: 12, y: 14.5}, {x: 18, y: 15.5}, {x: 22, y: 15.5},
-    {x: 28, y: 17.0}, {x: 34, y: 17.0}, {x: 41, y: 18.0}, {x: 58, y: 18.0},
-    {x: 64, y: 18.5}, {x: 74, y: 18.0}, {x: 80, y: 18.0}, {x: 90, y: 19.5},
-    {x: 104, y: 19.5}, {x: 111, y: 20.0}, {x: 115, y: 20.0}, {x: 121, y: 21.0},
-    {x: 129, y: 22.5}, {x: 147, y: 22.5}, {x: 154, y: 22.5}, {x: 166, y: 22.5},
-    {x: 175, y: 22.0}, {x: 181, y: 22.0}, {x: 187, y: 21.5}, {x: 195, y: 21.5},
-    {x: 204, y: 22.5}, {x: 223, y: 23.5}, {x: 229, y: 24.5}, {x: 235, y: 25.5}
-  ],
-  stamps: [
-    {x: 41.0, y: 21.8},
-    {x: 134.5, y: 26.5},
-    {x: 202.5, y: 27.0}
-  ],
-  enemies: [],
-  crushers: []
+  shaping: [], enemies: [], crushers: []
 });"""
 
-def get_3d_decor_builders():
-    return """
-,"oil-tank"(t,e,n){
-  const o=oo(e,n,5.0);
-  t.cylinder(2.2,3.6,"dark",o,0,1.8,0);
-  t.ball(2.2,0.7,2.2,"orange",o,0,3.6,0);
-  t.cylinder(2.35,0.14,"orangeLight",o,0,1.2,0);
-  t.cylinder(2.35,0.14,"orangeLight",o,0,2.4,0);
-  t.cylinder(0.18,4.0,"dark",o,1.8,2.0,0);
-}
-,"flare-stack"(t,e,n){
-  const o=oo(e,n,12.0);
-  t.cylinder(0.35,10,"dark",o,0,5,0);
-  for(let y of[2,4,6,8])t.box(1.2,0.15,1.2,"orange",o,0,y,0);
-  t.cylinder(0.65,0.7,"orange",o,0,10.2,0);
-  t.ball(0.75,1.5,0.75,"gold",o,0,11.2,0);
-  t.ball(0.45,1.0,0.45,"orangeLight",o,0,12.0,0);
-  t.ball(0.9,0.8,0.9,"dark",o,0.2,13.0,0);
-}
-,"crane-tower"(t,e,n){
-  const o=oo(e,n,9.0);
-  t.box(0.9,8,0.9,"orange",o,0,4,0);
-  t.box(1.8,1.4,1.5,"dark",o,0.3,7.8,0);
-  t.box(8.5,0.6,0.7,"orange",o,2.5,8.4,0);
-  t.box(2.0,1.5,1.2,"terrain",o,-2.4,8.4,0);
-  t.cylinder(0.06,3.6,"rope",o,4.5,6.2,0);
-  t.box(0.5,0.5,0.5,"dark",o,4.5,4.2,0);
-}
-,"hangar-arch"(t,e,n){
-  const o=oo(e,n,14.0);
-  t.box(1.2,7.5,1.6,"cream",o,-6,3.75,0,0.15);
-  t.box(1.2,7.5,1.6,"cream",o,6,3.75,0,0.15);
-  t.box(1.0,6,1.4,"cream",o,-4.2,9.5,0,0.15);
-  t.box(1.0,6,1.4,"cream",o,4.2,9.5,0,0.15);
-  t.box(5,1.2,1.4,"cream",o,0,13,0,0.15);
-  t.box(11,0.35,0.8,"terrain2",o,0,6,0);
-  t.box(8,0.35,0.8,"terrain2",o,0,9.8,0);
-}
-,"spanish-bastion"(t,e,n){
-  const o=oo(e,n,6.0);
-  t.box(7.5,5,2.4,"terrain",o,0,2.5,0,0.2);
-  t.box(1.2,1.1,1.2,"terrain2",o,-2.8,5.4,0.6);
-  t.box(1.2,1.1,1.2,"terrain2",o,0,5.4,0.6);
-  t.box(1.2,1.1,1.2,"terrain2",o,2.8,5.4,0.6);
-  t.cylinder(0.3,2.6,"dark",o,-1.4,5.2,1.1);
-  t.box(1.0,1.3,0.25,"gold",o,0,3.2,1.25);
-}
-,"salt-pyramid"(t,e,n){
-  const o=oo(e,n,4.0);
-  t.box(5.5,1.1,4.2,"cream",o,0,0.55,0,0.2);
-  t.box(3.8,1.1,2.9,"cream",o,0,1.65,0,0.2);
-  t.ball(1.5,1.2,1.3,"cream",o,0,2.6,0);
-}
-,"salt-windmill"(t,e,n){
-  const o=oo(e,n,5.5);
-  t.cylinder(1.3,4.2,"cream",o,0,2.1,0);
-  t.cylinder(1.5,1.1,"rope",o,0,4.8,0);
-  t.ball(0.45,0.45,0.45,"dark",o,0,4.4,1.4);
-  t.box(0.22,4.4,0.08,"rope",o,0,4.4,1.5);
-  t.box(4.0,0.22,0.08,"rope",o,0,4.4,1.5);
-}
-,"lighthouse-tower"(t,e,n){
-  const o=oo(e,n,9.5);
-  t.cylinder(1.7,3.0,"cream",o,0,1.5,0);
-  t.cylinder(1.5,2.0,"dark",o,0,4.0,0);
-  t.cylinder(1.3,2.8,"cream",o,0,6.4,0);
-  t.cylinder(1.8,0.3,"dark",o,0,8.0,0);
-  t.cylinder(1.1,1.5,"gold",o,0,8.9,0);
-  t.ball(1.2,0.6,1.2,"foliage",o,0,9.9,0);
-}
-,"cargo-ship"(t,e,n){
-  const o=oo(e,n,18.0);
-  t.box(22,4.2,3.8,"dark",o,0,2.1,0);
-  t.box(4.5,3.8,3.2,"orange",o,12,2.3,0);
-  t.box(5.5,3.8,3.0,"cream",o,-7,5.8,0);
-  t.cylinder(0.28,14,"orangeLight",o,2,4.5,0);
-  t.cylinder(0.8,2.2,"orange",o,-9,8.5,0);
-}
-,"porta-spagnola"(t,e,n){
-  const o=oo(e,n,10.0);
-  t.box(2.0,7.0,2.2,"cream",o,-3.5,3.5,0,0.15);
-  t.box(2.0,7.0,2.2,"cream",o,3.5,3.5,0,0.15);
-  t.box(5.8,1.5,2.0,"cream",o,0,6.6,0,0.15);
-  t.box(3.0,2.0,0.7,"terrain2",o,0,8.3,0,0.2);
-  t.box(4.5,0.28,0.18,"dark",o,0,4.8,0);
-}
-,"hazard-barrel"(t,e,n){
-  const o=oo(e,n,1.2);
-  t.cylinder(0.46,1.1,"orange",o,0,0.55,0);
-  t.cylinder(0.5,0.08,"dark",o,0,1.1,0);
-  t.cylinder(0.48,0.2,"gold",o,0,0.55,0);
-}
-,"bunker"(t,e,n){
-  const o=oo(e,n,3.5);
-  t.box(4.2,2.0,3.2,"terrain2",o,0,1.0,0,0.25);
-  t.box(3.0,0.3,0.9,"dark",o,0,1.3,1.3);
-  t.box(4.8,0.45,3.8,"terrain",o,0,2.2,0,0.2);
-}
-,"cactus-opuntia"(t,e,n){
-  const o=oo(e,n,2.2);
-  t.ball(0.65,0.85,0.18,"foliage",o,0,0.8,0);
-  t.ball(0.55,0.65,0.16,"foliage",o,0.55,1.4,0.1);
-  t.ball(0.5,0.6,0.16,"foliage",o,-0.38,1.6,-0.1);
-  t.ball(0.12,0.16,0.12,"orange",o,0.75,2.0,0.1);
-  t.ball(0.12,0.16,0.12,"orange",o,-0.45,2.1,-0.1);
-}
-,"etna-silhouette"(t,e,n){
-  const o=oo(e,n,24.0);
-  t.cylinder(18,10,"terrain",o,0,5,0);
-  t.ball(6,2.6,6,"cream",o,0,10.2,0);
-  t.ball(3.0,2.2,3.0,"cream",o,1.2,12.5,0);
-}"""
-
-def main():
-    print("Reading bundle/index-augusta-v2.js...")
-    with open("bundle/index-augusta-v2.js", "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # 1. Replace the level definitions block
-    start_marker = "// --- AUGUSTA LEVELS (PROVINCIA DI SIRACUSA) ---"
-    end_marker = "const Sc=[augustaL1,augustaL2,augustaL3,augustaL4,augustaL5]"
-    
-    start_pos = content.find(start_marker)
-    end_pos = content.find(end_marker)
-    if start_pos == -1 or end_pos == -1:
-        raise Exception(f"Markers not found: start_pos={start_pos}, end_pos={end_pos}")
-
-    new_levels_code = f"""{start_marker}
-{get_level_1()}
-
-{get_level_2()}
-
-{get_level_3()}
-
-{get_level_4()}
-
-{get_level_5()}
-
-{get_level_6()}
-
-{get_level_7()}
-
-{get_level_8()}
-
-{get_level_9()}
-
-{get_level_10()}
-
-"""
-    new_sc_code = "const Sc=[augustaL1,augustaL2,augustaL3,augustaL4,augustaL5,augustaL6,augustaL7,augustaL8,augustaL9,augustaL10]"
-
-    content = content[:start_pos] + new_levels_code + new_sc_code + content[end_pos + len(end_marker):]
-    print("Levels 1-10 and Sc list replaced successfully!")
-
-    # 2. Inject custom 3D decor builders into _D
-    d_end_marker = "castle(t,e,n){sx(t,e,0,0,0,n)}};function kre"
-    d_end_pos = content.find(d_end_marker)
-    if d_end_pos == -1:
-        raise Exception("Marker for _D end not found!")
-    
-    inject_pos = d_end_pos + len("castle(t,e,n){sx(t,e,0,0,0,n)}")
-    decor_code = get_3d_decor_builders()
-    content = content[:inject_pos] + decor_code + content[inject_pos:]
-    print("Custom 3D decor models injected into _D successfully!")
-
-    # 3. Update chapter count limit Ade = 5 to Ade = 10
-    ade_marker = "const Ade=5,"
-    ade_pos = content.find(ade_marker)
-    if ade_pos != -1:
-        content = content[:ade_pos] + "const Ade=10," + content[ade_pos + len(ade_marker):]
-        print("Updated Ade=10 (unlocked all 10 chapters)!")
-    else:
-        print("Warning: Ade=5 marker not found, checking alternatives...")
-
-    with open("bundle/index-augusta-v2.js", "w", encoding="utf-8") as f:
-        f.write(content)
-    print("Saved updated bundle/index-augusta-v2.js!")
+def get_all_levels():
+    return "\\n\\n".join([
+        get_level_1(), get_level_2(), get_level_3(), get_level_4(),
+        get_level_5(), get_level_6(), get_level_7(), get_level_8(),
+        get_level_9(), get_level_10()
+    ])
+'''
+    with open("tools/gta_all_10_levels.py", "w", encoding="utf-8") as f:
+        f.write(code)
+    print("Regenerated tools/gta_all_10_levels.py with gate continuity!")
 
 if __name__ == "__main__":
-    main()
+    generate_file()
