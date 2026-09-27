@@ -18,6 +18,7 @@ shot_*.png
 
 # Android build outputs & local properties
 *.apk
+*.idsig
 android-app/.gradle/
 android-app/build/
 android-app/app/build/

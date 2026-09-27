@@ -11,9 +11,22 @@ os.makedirs(www_dir, exist_ok=True)
 os.makedirs(os.path.join(www_dir, "bundle"), exist_ok=True)
 os.makedirs(os.path.join(www_dir, "assets"), exist_ok=True)
 
-# 1. Copy bundle files
+# Remove any old duplicate assets folder in root of app assets
+dst_root = os.path.join(app_assets, "assets")
+if os.path.exists(dst_root):
+    print("Removing legacy duplicate assets folder in Android assets root...")
+    shutil.rmtree(dst_root, ignore_errors=True)
+
+# 1. Copy bundle files (excluding unused alternative index bundles)
 print("Copying bundle files...")
+unused_bundles = {"index-augusta.js", "index-augusta-v2.js", "index-B9TPSTBI.js", "index-CzjHjcy4.js"}
+for old_bundle in unused_bundles:
+    old_path = os.path.join(www_dir, "bundle", old_bundle)
+    if os.path.exists(old_path):
+        os.remove(old_path)
 for item in os.listdir("bundle"):
+    if item in unused_bundles:
+        continue
     src = os.path.join("bundle", item)
     dst = os.path.join(www_dir, "bundle", item)
     if os.path.isfile(src):
@@ -24,18 +37,6 @@ print("Copying 3D assets to www/assets...")
 for item in os.listdir("assets"):
     src = os.path.join("assets", item)
     dst = os.path.join(www_dir, "assets", item)
-    if os.path.isdir(src):
-        shutil.copytree(src, dst, dirs_exist_ok=True)
-    elif os.path.isfile(src):
-        shutil.copy2(src, dst)
-
-# Also duplicate to app_assets/assets as safety fallback for "../assets/" requests
-print("Creating root assets fallback in Android assets...")
-dst_root = os.path.join(app_assets, "assets")
-os.makedirs(dst_root, exist_ok=True)
-for item in os.listdir("assets"):
-    src = os.path.join("assets", item)
-    dst = os.path.join(dst_root, item)
     if os.path.isdir(src):
         shutil.copytree(src, dst, dirs_exist_ok=True)
     elif os.path.isfile(src):
@@ -60,6 +61,8 @@ html = html.replace("../bundle/", "./bundle/")
 html = html.replace("../assets/", "./assets/")
 # Adapt switch link for local acqua directory in Android
 html = html.replace('href="../acqua/index.html"', 'href="./acqua/index.html"')
+# Strip crossorigin attributes
+html = html.replace(' crossorigin', '')
 # Remove other external web links in standalone app
 html = html.replace('<a href="../augusta/index.html"', '<a href="#" style="display:none;"')
 html = html.replace('<a href="../index.html"', '<a href="#" style="display:none;"')
@@ -75,6 +78,8 @@ if os.path.exists(js_file):
         js = f.read()
     js = js.replace('"../assets/completion/', '"./assets/completion/')
     js = js.replace('"../assets/third-party-licenses.txt"', '"./assets/third-party-licenses.txt"')
+    js = js.replace('"../assets/"', '"./assets/"')
+    js = js.replace("'../assets/'", "'./assets/'")
     with open(js_file, "w", encoding="utf-8") as f:
         f.write(js)
 

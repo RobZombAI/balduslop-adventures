@@ -29,16 +29,16 @@ class MainActivity : Activity() {
         // Keep screen on during gameplay
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        // Hide navigation and status bars for full immersion
-        hideSystemUI()
-
         webView = WebView(this)
         setContentView(webView)
 
+        // Hide navigation and status bars for full immersion (after setContentView)
+        hideSystemUI()
+
         configureWebView()
 
-        // Load local offline assets
-        webView.loadUrl("file:///android_asset/www/index.html")
+        // Load local offline assets via secure virtual domain (no CORS or origin:null limitations)
+        webView.loadUrl("https://appassets.androidplatform.net/assets/www/index.html")
 
         // Handle back button smoothly (pause or open dialog instead of quitting abruptly)
         setupBackHandler()
@@ -52,6 +52,10 @@ class MainActivity : Activity() {
         settings.databaseEnabled = true
         settings.allowFileAccess = true
         settings.allowContentAccess = true
+        @Suppress("DEPRECATION")
+        settings.allowFileAccessFromFileURLs = true
+        @Suppress("DEPRECATION")
+        settings.allowUniversalAccessFromFileURLs = true
         settings.mediaPlaybackRequiresUserGesture = false
         settings.cacheMode = WebSettings.LOAD_DEFAULT
         settings.loadsImagesAutomatically = true
@@ -65,6 +69,10 @@ class MainActivity : Activity() {
         webView.isVerticalScrollBarEnabled = false
         webView.isHorizontalScrollBarEnabled = false
 
+        val assetLoader = androidx.webkit.WebViewAssetLoader.Builder()
+            .addPathHandler("/assets/", androidx.webkit.WebViewAssetLoader.AssetsPathHandler(this))
+            .build()
+
         webView.webChromeClient = object : WebChromeClient() {
             override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
                 Log.d(TAG, "[WebView Console] ${consoleMessage.message()} -- line ${consoleMessage.lineNumber()} of ${consoleMessage.sourceId()}")
@@ -73,6 +81,33 @@ class MainActivity : Activity() {
         }
 
         webView.webViewClient = object : WebViewClient() {
+            override fun shouldInterceptRequest(
+                view: WebView,
+                request: WebResourceRequest
+            ): WebResourceResponse? {
+                val urlStr = request.url.toString()
+                if (urlStr.contains("/assets/assets/")) {
+                    val fixedPath = "www/" + urlStr.substringAfter("/assets/")
+                    try {
+                        val stream = assets.open(fixedPath)
+                        val mimeType = when {
+                            urlStr.endsWith(".glb") -> "model/gltf-binary"
+                            urlStr.endsWith(".js") -> "application/javascript"
+                            urlStr.endsWith(".css") -> "text/css"
+                            urlStr.endsWith(".png") -> "image/png"
+                            urlStr.endsWith(".webp") -> "image/webp"
+                            urlStr.endsWith(".mp3") -> "audio/mpeg"
+                            urlStr.endsWith(".wav") -> "audio/wav"
+                            else -> "application/octet-stream"
+                        }
+                        return WebResourceResponse(mimeType, "UTF-8", stream)
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Failed fallback asset $fixedPath: ${e.message}")
+                    }
+                }
+                return assetLoader.shouldInterceptRequest(request.url)
+            }
+
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 return false
             }
@@ -134,21 +169,25 @@ class MainActivity : Activity() {
     }
 
     private fun hideSystemUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.let { controller ->
-                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                window.decorView.windowInsetsController?.let { controller ->
+                    controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                    controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                }
+            } else {
+                @Suppress("DEPRECATION")
+                window.decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                )
             }
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN
-            )
+        } catch (e: Exception) {
+            Log.w(TAG, "hideSystemUI non-fatal error: ${e.message}")
         }
     }
 }
