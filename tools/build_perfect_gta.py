@@ -814,7 +814,7 @@ new_l1 = '''function l1(t){
   if(t.kind==="wall")return j3(t)?{x:t.x,w:t.w,top:t.y,bottom:t.y-X3(t)}:null;
   if(t.kind==="fold"&&c9(t))return mL(t);
   if(t.kind==="gate")return(t.open>0)?null:{x:t.x,w:t.w,top:t.y,bottom:t.y-(t.h||10)};
-  if(t.kind==="switch"||t.kind==="hazard"||t.spiked)return null;
+  if(t.kind==="switch"||t.kind==="hazard"||t.spiked||["ledge","pulse","spring","crumble","clay"].includes(t.kind))return null;
   const th=Number.isFinite(t.h)&&t.h>0?t.h:(Number.isFinite(t.thickness)&&t.thickness>0?t.thickness:0.65);
   return{x:t.x,w:t.w,top:t.y,bottom:t.y-th}
 }'''
@@ -829,7 +829,7 @@ new_ceil = '''for(const B of i.platforms){
   const T=l1(B);
   if(!T||!(o.x+ht.radius>T.x+0.04&&o.x-ht.radius<T.x+T.w-0.04))continue;
   const L=T.bottom;
-  if(o.vy>0&&(x+ht.height<=L+0.18||(o.y+ht.height>=L&&o.y<T.top-0.2))){
+  if(o.vy>0&&x+ht.height<=L+0.08&&o.y+ht.height>=L&&o.y<T.top-0.1){
     o.y=L-ht.height;
     o.vy=Math.min(0,-0.6);
     o.springing=!1;
