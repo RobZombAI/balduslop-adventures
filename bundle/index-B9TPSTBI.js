@@ -415,6 +415,8 @@ const Sc=[BQ,DQ,cerignolaL1,bauxiteL1,castelL1,QC,TT,IQ],OR=[YQ],W9=[hT,fT,EQ],d
   if(lvlId.includes("canyon")) patchKey = "canyon";
   else if(lvlId.includes("cavern") || lvlId.includes("ember")) patchKey = "caverns";
   else if(lvlId.includes("cerignola")) patchKey = "cerignola";
+  else if(lvlId.includes("bauxite")) patchKey = "bauxite";
+  else if(lvlId.includes("castel")) patchKey = "castel";
   else if(lvlId.includes("wildwood") || lvlId.includes("breathing")) patchKey = "wildwood";
   else if(lvlId.includes("quarter") || lvlId.includes("hanging")) patchKey = "hanging";
   else if(lvlId.includes("dream") || lvlId.includes("soft")) patchKey = "dream";
@@ -428,16 +430,38 @@ const Sc=[BQ,DQ,cerignolaL1,bauxiteL1,castelL1,QC,TT,IQ],OR=[YQ],W9=[hT,fT,EQ],d
       S_fix("sand-step-2",162.5,2.4,14.0,"stone"),
       S_fix("arch-bridge",238.0,3.5,27.0,"stone"),
       S_fix("cave-step",312.5,2.8,42.1,"stone"),
+      S_fix("bell-lower-recovery",370.0,14.0,5.0,"stone"),
+      S_fix("bell-stair-up",376.0,4.5,7.8,"ledge"),
+      S_fix("bell-approach-floor",380.0,16.0,10.2,"stone"),
       S_fix("bell-safety-plaza",398.0,16.0,10.2,"stone")
     ],
     caverns:[
-      S_fix("heart-wheel-landing",170.5,3.2,8.0,"stone"),
+      S_fix("ferry-bridge-step",124.5,3.5,3.0,"stone"),
+      S_fix("heart-boarding-step",162.5,2.5,1.0,"ledge"),
+      S_fix("heart-wheel-landing",174.0,5.5,10.0,"ledge"),
+      S_fix("heart-wheel-bridge",180.5,4.5,10.0,"ledge"),
+      S_fix("sluice-approach-bridge",211.5,8.0,0.5,"ledge"),
+      S_fix("sluice-climb-step1",231.0,3.0,7.5,"ledge"),
+      S_fix("sluice-climb-step2",234.5,3.0,10.2,"ledge"),
+      S_fix("sluice-exit-ledge",245.5,4.5,10.5,"ledge"),
+      S_fix("sluice-exit-step2",250.0,4.5,6.5,"ledge"),
+      S_fix("gallery-mid-step",269.5,3.2,1.8,"stone"),
+      S_fix("spill-stair-1",322.0,2.8,3.2,"ledge"),
+      S_fix("spill-stair-2",324.0,2.8,6.2,"ledge"),
+      S_fix("spark-gate-step",39.5,3.5,4.0,"ledge"),
       S_fix("spill-safety-plaza",359.0,12.0,6.7,"stone")
     ],
-    cerignola:[],
+    cerignola:[
+      S_fix("fosse-safety-floor",24.0,14.0,12.0,"stone")
+    ],
+    bauxite:[],
+    castel:[],
     wildwood:[
+      S_fix("fd-rstep-mid",171.0,2.6,33.6,"ledge"),
+      S_fix("fd-shelf-step",188.5,2.6,35.8,"ledge"),
       S_fix("cw-swing-mid",310.5,3.6,42.5,"ledge"),
-      S_fix("ra-safety-canopy",388.0,14.0,41.0,"ledge")
+      S_fix("ra-safety-canopy",388.0,14.0,41.0,"ledge"),
+      S_fix("ra-wind-step",424.0,3.5,39.0,"ledge")
     ],
     hanging:[
       S_fix("roof-step-1",16.5,2.4,6.2,"ledge"),
@@ -445,6 +469,7 @@ const Sc=[BQ,DQ,cerignolaL1,bauxiteL1,castelL1,QC,TT,IQ],OR=[YQ],W9=[hT,fT,EQ],d
       S_fix("roof-landing",27.5,2.5,8.2,"ledge"),
       S_fix("court-step",73.0,2.4,8.2,"ledge"),
       S_fix("draught-mid",85.5,2.4,13.8,"ledge"),
+      S_fix("awning-mid-step",130.5,2.6,18.0,"ledge"),
       S_fix("laundry-stair-1",141.5,2.6,24.8,"ledge"),
       S_fix("laundry-stair-2",143.8,2.2,26.5,"ledge"),
       S_fix("laundry-eaves",147.5,3.0,27.9,"ledge"),
@@ -501,7 +526,8 @@ const Sc=[BQ,DQ,cerignolaL1,bauxiteL1,castelL1,QC,TT,IQ],OR=[YQ],W9=[hT,fT,EQ],d
       S_fix("room-teacup-bridge",432.0,9.0,4.0,"ledge"),
       S_fix("room-table-step",447.0,3.5,3.8,"ledge"),
       S_fix("room-shaft-floor",458.0,20.0,2.0,"ledge"),
-      S_fix("room-tower-step-1",463.5,2.6,14.5,"ledge"),
+      S_fix("room-tower-step-1",466.0,2.6,14.5,"ledge"),
+      S_fix("room-tower-step-1b",468.2,2.8,17.0,"ledge"),
       S_fix("room-tower-step-2",470.5,2.8,19.5,"ledge"),
       S_fix("room-tower-step-3",471.5,2.8,22.0,"ledge"),
       S_fix("room-descent-step-1",476.5,3.0,18.0,"ledge"),
@@ -542,6 +568,15 @@ const Sc=[BQ,DQ,cerignolaL1,bauxiteL1,castelL1,QC,TT,IQ],OR=[YQ],W9=[hT,fT,EQ],d
       n.platforms.push(p);
       existingMap.set(p.id,n.platforms.length-1);
     }
+  }
+  if(patchKey==="caverns"){
+    const c12=n.platforms.find(p=>p.id==="clay-12");if(c12){c12.kind="ledge";c12.y=10.0;c12.w=4.5;}
+    const c11=n.platforms.find(p=>p.id==="clay-11-copy-1-copy-1");if(c11){c11.kind="ledge";c11.y=10.5;}
+    const hr=n.platforms.find(p=>p.id==="heart-relay");if(hr){hr.y=10.2;hr.baseY=10.2;hr.w=2.2;}
+    const c14=n.platforms.find(p=>p.id==="clay-14");if(c14){c14.kind="stone";}
+  }
+  if(patchKey==="cerignola"){
+    const sp=n.platforms.find(p=>p.id==="spring-grano-duro");if(sp){sp.x=30.5;sp.w=4.5;sp.y=14.8;}
   }
   if(patchKey==="wildwood"){
     const gsa1=n.platforms.find(p=>p.id==="gs-a1");if(gsa1){gsa1.w=3.6;gsa1.duty=0.88;}
