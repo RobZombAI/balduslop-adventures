@@ -33,70 +33,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="BalduSlop Adventures">
   <link rel="preload" href="./bundle/logo-C8LjbK78.webp" as="image">
-  <script type="module" crossorigin src="./bundle/index-B9TPSTBI.js?v=20260930-all6levels-bugfix"></script>
+  <script type="module" crossorigin src="./bundle/index-B9TPSTBI.js?v=20260930-reordered-v1"></script>
   <link rel="stylesheet" crossorigin href="./bundle/index-DjewJEKc.css">
 
   <style>
-    .game-switch-nav {
-      position: fixed;
-      top: max(16px, env(safe-area-inset-top));
-      right: max(16px, env(safe-area-inset-right));
-      z-index: 100;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    body:not(.is-menu) .game-switch-nav {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-8px);
-    }
-    .game-switch-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      background: #fdf6ea;
-      background-image: linear-gradient(180deg, #ffffff 0%, #faedd8 100%);
-      border: 2px solid #ecd8bf;
-      border-radius: 999px;
-      box-shadow: 0 4px 0 #c7a888, 0 8px 20px rgba(80, 48, 20, 0.22);
-      color: #553315;
-      text-decoration: none;
-      font-family: system-ui, -apple-system, sans-serif;
-      font-weight: 700;
-      font-size: 13.5px;
-      letter-spacing: -0.01em;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-    }
-    .game-switch-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 0 #c7a888, 0 12px 24px rgba(80, 48, 20, 0.28);
-      filter: brightness(1.03);
-    }
-    .game-switch-link:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 0 #c7a888, 0 4px 10px rgba(80, 48, 20, 0.2);
-    }
-    .switch-badge {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      padding: 2px 7px;
-      border-radius: 6px;
-      background: #e28038;
-      color: #fff;
-      text-transform: uppercase;
-    }
-    .game-switch-link.active-baldu .switch-badge {
-      background: #2b7bb9;
-    }
-    @media (max-width: 600px) {
-      .switch-badge { display: none; }
-      .game-switch-link { font-size: 12px; padding: 6px 12px; }
-    }
-  
-    /* Cerignola Moral Box in BalduSlop */
+    /* Moral Box in BalduSlop */
     .augusta-moral-box {
       grid-column: 1 / 2;
       margin: 8px 0 0 0;
@@ -160,28 +101,6 @@
 </head>
 <body class="is-menu">
 
-  <nav class="game-switch-nav" aria-label="Game version switcher">
-    <a href="https://github.com/RobZombAI/balduslop-adventures/releases/download/v1.0.0/GTA-Giuseppe-Taglia-Alberi.apk" class="game-switch-link" title="Scarica l'app Android APK ufficiale">
-      <span class="switch-badge" style="background:#16a34a">ANDROID</span>
-      <span class="switch-title">📱 Scarica APK</span>
-    </a>
-    <a href="./acqua/" class="game-switch-link" title="Gioca a L'Oro Blu di Augusta: Pipe Flow & Dossier Ceccarelli">
-      <span class="switch-badge" style="background:#0284c7">PUZZLE PIPE</span>
-      <span class="switch-title">💧 L'Oro Blu</span>
-    </a>
-    <a href="./cerignola/" class="game-switch-link" title="Gioca a Cerignola: La Città di Baldu (Portavalori, Auto Cannibalizzate, Pusher)">
-      <span class="switch-badge" style="background:#eab308;color:#000;">NUOVO LIVELLO</span>
-      <span class="switch-title">🌾 Cerignola</span>
-    </a>
-    <a href="./gta/" class="game-switch-link" title="Gioca a GTA: Giuseppe Taglia Alberi (Edizione Ecologica)">
-      <span class="switch-badge" style="background:#2d8a4e">NUOVO GIOCO</span>
-      <span class="switch-title">🌳 GTA Giuseppe</span>
-    </a>
-    <a href="./augusta/" class="game-switch-link" title="Gioca ad Augusta Slop Adventures (Petrolchimico, Porto, Discariche)">
-      <span class="switch-title">🏭 Augusta (SR)</span>
-    </a>
-  </nav>
-
   <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none">
     <defs>
       <filter id="clay-logo-orange" color-interpolation-filters="sRGB"><feColorMatrix id="clay-logo-pigment" type="matrix"/></filter>
@@ -213,11 +132,10 @@
       <p id="title-scene-status" class="title-scene-status" role="status">Shaping the canyon…</p>
       <header class="title-brand">
         <h1><img class="title-logo" src="./bundle/logo-C8LjbK78.webp" alt="BalduSlop Adventures" width="1404" height="506" fetchpriority="high"></h1>
-        <p id="title-tagline">Esplora i mondi d'argilla &bull; Capitolo 3: Cerignola (La Città di Baldu)</p>
+        <p id="title-tagline">Esplora i meravigliosi mondi d'argilla con Baldu</p>
       </header>
       <nav class="title-actions" aria-label="Main menu">
         <button id="play" class="title-button title-play"><i data-lucide="play" aria-hidden="true"></i><span id="play-label">Play</span></button>
-        <button id="play-cerignola" class="title-button" onclick="if(window.__START_LEVEL__)window.__START_LEVEL__(2);else location.href='./?level=cerignola'" style="background:linear-gradient(180deg,#fef08a 0%,#eab308 100%);color:#422006;border:2px solid #ca8a04;font-weight:800;"><i data-lucide="map-pin" aria-hidden="true"></i><span>🌾 Capitolo 3: Cerignola</span></button>
         <button id="chapters" class="title-button"><i data-lucide="map" aria-hidden="true"></i><span>Chapters</span></button>
         <button id="settings" class="title-button"><i data-lucide="settings" aria-hidden="true"></i><span>Settings</span></button>
       </nav>
