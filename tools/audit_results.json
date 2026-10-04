@@ -1,0 +1,1071 @@
+[
+  {
+    "index": 0,
+    "name": "The Sunbaked Canyon",
+    "short": "Sunbaked Canyon",
+    "biome": "desert",
+    "spawn": {
+      "x": 1.5,
+      "y": 13
+    },
+    "bell": {
+      "id": "bell-roof",
+      "x": 392,
+      "y": 10.2
+    },
+    "platformCount": 73,
+    "walkableCount": 66,
+    "deadGates": [],
+    "deadLifts": [],
+    "badCrushers": [],
+    "badEnemies": [],
+    "jumpIssuesCount": 5,
+    "jumpIssues": [
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "pocket-clay",
+          "kind": "clay",
+          "x": 101.3,
+          "y": 6.2,
+          "right": 109.89999999999999
+        },
+        "to": {
+          "id": "pocket-landing",
+          "kind": "stone",
+          "x": 118.5,
+          "y": 9.4,
+          "left": 114.75
+        },
+        "dy": "3.20",
+        "gap": "4.85",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "clay-7",
+          "kind": "clay",
+          "x": 157.25,
+          "y": 13,
+          "right": 159.875
+        },
+        "to": {
+          "id": "sand5-copy-1-copy-1",
+          "kind": "crumble",
+          "x": 164.5,
+          "y": 16,
+          "left": 163
+        },
+        "dy": "3.00",
+        "gap": "3.13",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "arch-entry",
+          "kind": "stone",
+          "x": 230,
+          "y": 26.6,
+          "right": 236.5
+        },
+        "to": {
+          "id": "arch-shelf",
+          "kind": "ledge",
+          "x": 244.75,
+          "y": 27.75,
+          "left": 242.75
+        },
+        "dy": "1.15",
+        "gap": "6.25",
+        "maxAllowedD": "5.11"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "pillar",
+          "kind": "wall",
+          "x": 309,
+          "y": 40,
+          "right": 310.5
+        },
+        "to": {
+          "id": "cave-lip",
+          "kind": "wall",
+          "x": 317,
+          "y": 44.25,
+          "left": 312.875
+        },
+        "dy": "4.25",
+        "gap": "2.38",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "zip-trolley",
+          "kind": "zip",
+          "x": 331.5,
+          "y": 34.6,
+          "right": 332.8
+        },
+        "to": {
+          "id": "bell-roof",
+          "kind": "stone",
+          "x": 392,
+          "y": 10.2,
+          "left": 384.5
+        },
+        "dy": "-24.40",
+        "gap": "51.70",
+        "maxAllowedD": "12.40"
+      }
+    ]
+  },
+  {
+    "index": 1,
+    "name": "The Ember Caverns",
+    "short": "Ember Caverns",
+    "biome": "cave",
+    "spawn": {
+      "x": 1.5,
+      "y": 0
+    },
+    "bell": {
+      "id": "ember-bell",
+      "x": 322,
+      "y": 0
+    },
+    "platformCount": 137,
+    "walkableCount": 131,
+    "deadGates": [],
+    "deadLifts": [],
+    "badCrushers": [
+      {
+        "x": 111,
+        "y": 5.2,
+        "w": 2,
+        "period": 5.4,
+        "floorY": 0,
+        "range": 4.55,
+        "holdChannel": "press-a",
+        "baseY": 5.2,
+        "prevY": 5.2,
+        "cycleTime": 0,
+        "state": "rest",
+        "warning": 0,
+        "held": false,
+        "didImpact": false,
+        "supportId": null,
+        "bottomY": 0.65
+      },
+      {
+        "x": 122,
+        "y": 5.2,
+        "w": 2,
+        "period": 5.4,
+        "phase": 3.141592653589793,
+        "floorY": 0,
+        "range": 4.55,
+        "holdChannel": "press-a",
+        "baseY": 5.2,
+        "prevY": 5.2,
+        "cycleTime": 0,
+        "state": "rest",
+        "warning": 0,
+        "held": false,
+        "didImpact": false,
+        "supportId": null,
+        "bottomY": 0.65
+      },
+      {
+        "x": 128,
+        "y": 5.25,
+        "w": 2,
+        "period": 5.4,
+        "phase": 3.141592653589793,
+        "floorY": 0,
+        "range": 4.55,
+        "holdChannel": "press-a",
+        "baseY": 5.25,
+        "prevY": 5.25,
+        "cycleTime": 0,
+        "state": "rest",
+        "warning": 0,
+        "held": false,
+        "didImpact": false,
+        "supportId": null,
+        "bottomY": 0.65
+      }
+    ],
+    "badEnemies": [],
+    "jumpIssuesCount": 8,
+    "jumpIssues": [
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "clay-8",
+          "kind": "stone",
+          "x": -8.5,
+          "y": 14,
+          "right": 0.5
+        },
+        "to": {
+          "id": "clay-7-copy-1",
+          "kind": "wall",
+          "x": 37.25,
+          "y": 19.75,
+          "left": 5.25
+        },
+        "dy": "5.75",
+        "gap": "4.75",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "clay-1-copy-1",
+          "kind": "crumble",
+          "x": 14.75,
+          "y": 7,
+          "right": 15.75
+        },
+        "to": {
+          "id": "clay-7",
+          "kind": "wall",
+          "x": 23.75,
+          "y": 19.75,
+          "left": 16.25
+        },
+        "dy": "12.75",
+        "gap": "0.50",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "spark-relay",
+          "kind": "switch",
+          "x": 32,
+          "y": 7.43,
+          "right": 32.9
+        },
+        "to": {
+          "id": "clay-2",
+          "kind": "crumble",
+          "x": 44.5,
+          "y": 0.5,
+          "left": 43.375
+        },
+        "dy": "-6.93",
+        "gap": "10.48",
+        "maxAllowedD": "8.55"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "clay-2-copy-1-copy-1-copy-1",
+          "kind": "crumble",
+          "x": 56.25,
+          "y": -1.75,
+          "right": 57.375
+        },
+        "to": {
+          "id": "clay-22",
+          "kind": "crumble",
+          "x": 70.25,
+          "y": -3.5,
+          "left": 69.375
+        },
+        "dy": "-1.75",
+        "gap": "12.00",
+        "maxAllowedD": "6.72"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "clay-3-copy-1",
+          "kind": "crumble",
+          "x": 118,
+          "y": 4.75,
+          "right": 119
+        },
+        "to": {
+          "id": "clay-6-copy-1",
+          "kind": "wall",
+          "x": 128.75,
+          "y": 19,
+          "left": 123.25
+        },
+        "dy": "14.25",
+        "gap": "4.25",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "clay-5-copy-1-copy-1-copy-1-copy-1-copy-1",
+          "kind": "crumble",
+          "x": 144.25,
+          "y": 15,
+          "right": 145.375
+        },
+        "to": {
+          "id": "heart-boarding",
+          "kind": "ledge",
+          "x": 158.75,
+          "y": 0.75,
+          "left": 156.75
+        },
+        "dy": "-14.25",
+        "gap": "11.38",
+        "maxAllowedD": "10.41"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "clay-14-copy-1-copy-1",
+          "kind": "crumble",
+          "x": 195.25,
+          "y": 7.5,
+          "right": 197.25
+        },
+        "to": {
+          "id": "sluice-hatch",
+          "kind": "ledge",
+          "x": 208,
+          "y": 0,
+          "left": 206.875
+        },
+        "dy": "-7.50",
+        "gap": "9.63",
+        "maxAllowedD": "8.72"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "sluice-balcony",
+          "kind": "ledge",
+          "x": 225,
+          "y": 5,
+          "right": 229
+        },
+        "to": {
+          "id": "clay-14-copy-1-copy-1-copy-1-copy-1-copy-1-copy-2-copy-1",
+          "kind": "crumble",
+          "x": 230.75,
+          "y": 9,
+          "left": 229.375
+        },
+        "dy": "4.00",
+        "gap": "0.38",
+        "maxAllowedH": "2.58"
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "name": "Cerignola: La Città di Baldu — Tra Fosse Granarie e Duomo Tonti",
+    "short": "Cerignola",
+    "biome": "desert",
+    "spawn": {
+      "x": 1.5,
+      "y": 13
+    },
+    "bell": "NO_BELL_PLATFORM",
+    "platformCount": 40,
+    "walkableCount": 36,
+    "deadGates": [],
+    "deadLifts": [],
+    "badCrushers": [],
+    "badEnemies": [],
+    "jumpIssuesCount": 2,
+    "jumpIssues": [
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "step-trave-capannone",
+          "kind": "ledge",
+          "x": 141.5,
+          "y": 15.2,
+          "right": 143.4
+        },
+        "to": {
+          "id": "switch-posto-blocco",
+          "kind": "switch",
+          "x": 153,
+          "y": 16.15,
+          "left": 151.9
+        },
+        "dy": "0.95",
+        "gap": "8.50",
+        "maxAllowedD": "5.26"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "switch-posto-blocco",
+          "kind": "switch",
+          "x": 153,
+          "y": 16.15,
+          "right": 154.1
+        },
+        "to": {
+          "id": "dock-vicoli-spaccio",
+          "kind": "stone",
+          "x": 165,
+          "y": 16,
+          "left": 161
+        },
+        "dy": "-0.15",
+        "gap": "6.90",
+        "maxAllowedD": "5.94"
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "name": "The Breathing Wildwood",
+    "short": "Breathing Wildwood",
+    "biome": "forest",
+    "spawn": {
+      "x": 1.5,
+      "y": 0
+    },
+    "bell": {
+      "id": "heart-bell",
+      "x": 428,
+      "y": 41
+    },
+    "platformCount": 101,
+    "walkableCount": 99,
+    "deadGates": [],
+    "deadLifts": [],
+    "badCrushers": [],
+    "badEnemies": [],
+    "jumpIssuesCount": 6,
+    "jumpIssues": [
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "bh-in",
+          "kind": "stone",
+          "x": 44,
+          "y": 7,
+          "right": 52
+        },
+        "to": {
+          "id": "bh-shelf1",
+          "kind": "ledge",
+          "x": 55,
+          "y": 12.6,
+          "left": 52.5
+        },
+        "dy": "5.60",
+        "gap": "0.50",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "fd-rstep1",
+          "kind": "ledge",
+          "x": 168,
+          "y": 31.4,
+          "right": 168.7
+        },
+        "to": {
+          "id": "fd-grey",
+          "kind": "crumble",
+          "x": 173,
+          "y": 35.8,
+          "left": 171.2
+        },
+        "dy": "4.40",
+        "gap": "2.50",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "fd-lever",
+          "kind": "counter",
+          "x": 185.5,
+          "y": 33.9,
+          "right": 188.25
+        },
+        "to": {
+          "id": "fd-shelf",
+          "kind": "ledge",
+          "x": 191.5,
+          "y": 37.7,
+          "left": 189
+        },
+        "dy": "3.80",
+        "gap": "0.75",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "br-crown-2",
+          "kind": "ledge",
+          "x": 256,
+          "y": 31.6,
+          "right": 257.6
+        },
+        "to": {
+          "id": "br-crown-3",
+          "kind": "ledge",
+          "x": 260.5,
+          "y": 37.4,
+          "left": 259
+        },
+        "dy": "5.80",
+        "gap": "1.40",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "ra-zip",
+          "kind": "zip",
+          "x": 384.7,
+          "y": 54.1,
+          "right": 386
+        },
+        "to": {
+          "id": "clay-1-copy-2",
+          "kind": "crumble",
+          "x": 411,
+          "y": 38.5,
+          "left": 409.625
+        },
+        "dy": "-15.60",
+        "gap": "23.63",
+        "maxAllowedD": "10.70"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "mother-arena",
+          "kind": "stone",
+          "x": 442,
+          "y": 41,
+          "right": 461
+        },
+        "to": {
+          "id": "mother-bell",
+          "kind": "ledge",
+          "x": 480,
+          "y": 41,
+          "left": 475
+        },
+        "dy": "0.00",
+        "gap": "14.00",
+        "maxAllowedD": "5.86"
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "name": "The Hanging Quarter",
+    "short": "Hanging Quarter",
+    "biome": "citadel",
+    "spawn": {
+      "x": 4.75,
+      "y": 0
+    },
+    "bell": {
+      "id": "bell-court",
+      "x": 266.5,
+      "y": 35.6
+    },
+    "platformCount": 60,
+    "walkableCount": 59,
+    "deadGates": [],
+    "deadLifts": [],
+    "badCrushers": [],
+    "badEnemies": [],
+    "jumpIssuesCount": 7,
+    "jumpIssues": [
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "roof1",
+          "kind": "stone",
+          "x": 14.55,
+          "y": 3.9,
+          "right": 18.8
+        },
+        "to": {
+          "id": "roof-ramp",
+          "kind": "clay",
+          "x": 23.05,
+          "y": 9.23,
+          "left": 21.55
+        },
+        "dy": "5.33",
+        "gap": "2.75",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "counter1",
+          "kind": "counter",
+          "x": 69,
+          "y": 6.2,
+          "right": 71
+        },
+        "to": {
+          "id": "court-roof",
+          "kind": "stone",
+          "x": 75,
+          "y": 10.2,
+          "left": 72
+        },
+        "dy": "4.00",
+        "gap": "1.00",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "garden",
+          "kind": "stone",
+          "x": 101,
+          "y": 15,
+          "right": 106
+        },
+        "to": {
+          "id": "clay-4",
+          "kind": "crumble",
+          "x": 108.75,
+          "y": 27.25,
+          "left": 107.25
+        },
+        "dy": "12.25",
+        "gap": "1.25",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "stair-dock",
+          "kind": "stone",
+          "x": 138.5,
+          "y": 22.6,
+          "right": 141.25
+        },
+        "to": {
+          "id": "laundry-wall",
+          "kind": "clay",
+          "x": 144,
+          "y": 27.9,
+          "left": 142.775
+        },
+        "dy": "5.30",
+        "gap": "1.53",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "counter2",
+          "kind": "counter",
+          "x": 230.5,
+          "y": 27.8,
+          "right": 232.3
+        },
+        "to": {
+          "id": "gallery-low",
+          "kind": "stone",
+          "x": 236.5,
+          "y": 30.4,
+          "left": 233.5
+        },
+        "dy": "2.60",
+        "gap": "1.20",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "counter3",
+          "kind": "counter",
+          "x": 260.5,
+          "y": 32.2,
+          "right": 262.3
+        },
+        "to": {
+          "id": "bell-court",
+          "kind": "stone",
+          "x": 266.5,
+          "y": 35.6,
+          "left": 263.5
+        },
+        "dy": "3.40",
+        "gap": "1.20",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "belfry-crown",
+          "kind": "ledge",
+          "x": 293,
+          "y": 44.2,
+          "right": 294.3
+        },
+        "to": {
+          "id": "belfry-span",
+          "kind": "clay",
+          "x": 295.6,
+          "y": 48.5,
+          "left": 294.65000000000003
+        },
+        "dy": "4.30",
+        "gap": "0.35",
+        "maxAllowedH": "2.58"
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "name": "The Soft Dream",
+    "short": "Soft Dream",
+    "biome": "dream",
+    "spawn": {
+      "x": 1.5,
+      "y": 0
+    },
+    "bell": "NO_BELL_PLATFORM",
+    "platformCount": 133,
+    "walkableCount": 126,
+    "deadGates": [],
+    "deadLifts": [],
+    "badCrushers": [
+      {
+        "x": 323.5,
+        "w": 1.6,
+        "y": 5.6,
+        "period": 5.4,
+        "floorY": 0,
+        "range": 4.95,
+        "baseY": 5.6,
+        "prevY": 5.6,
+        "cycleTime": 0,
+        "state": "rest",
+        "warning": 0,
+        "held": false,
+        "didImpact": false,
+        "supportId": null,
+        "bottomY": 0.65
+      },
+      {
+        "x": 326.5,
+        "w": 1.6,
+        "y": 5.6,
+        "period": 5.4,
+        "phase": 3.1416,
+        "floorY": 0,
+        "range": 4.95,
+        "baseY": 5.6,
+        "prevY": 5.6,
+        "cycleTime": 0,
+        "state": "rest",
+        "warning": 0,
+        "held": false,
+        "didImpact": false,
+        "supportId": null,
+        "bottomY": 0.65
+      }
+    ],
+    "badEnemies": [],
+    "jumpIssuesCount": 14,
+    "jumpIssues": [
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "start",
+          "kind": "stone",
+          "x": -8,
+          "y": 0,
+          "right": -2
+        },
+        "to": {
+          "id": "garden-step-1",
+          "kind": "stone",
+          "x": 6,
+          "y": 0.8,
+          "left": 4
+        },
+        "dy": "0.80",
+        "gap": "6.00",
+        "maxAllowedD": "5.36"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "garden-bed-pad",
+          "kind": "ledge",
+          "x": 83.5,
+          "y": 2.25,
+          "right": 84.625
+        },
+        "to": {
+          "id": "folding-entry",
+          "kind": "stone",
+          "x": 97,
+          "y": 0,
+          "left": 93
+        },
+        "dy": "-2.25",
+        "gap": "8.38",
+        "maxAllowedD": "6.94"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "folding-step",
+          "kind": "counter",
+          "x": 156.5,
+          "y": 0,
+          "right": 157.7
+        },
+        "to": {
+          "id": "folding-high",
+          "kind": "ledge",
+          "x": 160.5,
+          "y": 4.2,
+          "left": 158.5
+        },
+        "dy": "4.20",
+        "gap": "0.80",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "folding-wall-land",
+          "kind": "stone",
+          "x": 190.25,
+          "y": 4,
+          "right": 192.625
+        },
+        "to": {
+          "id": "folding-ceiling",
+          "kind": "clay",
+          "x": 195,
+          "y": 11.2,
+          "left": 193.5
+        },
+        "dy": "7.20",
+        "gap": "0.88",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "VERY_TIGHT",
+        "from": {
+          "id": "corridor-entry",
+          "kind": "stone",
+          "x": 282,
+          "y": 0,
+          "right": 286
+        },
+        "to": {
+          "id": "corridor-pillar-1",
+          "kind": "wall",
+          "x": 291.5,
+          "y": 2,
+          "left": 290.3
+        },
+        "dy": "2.00",
+        "gap": "4.30",
+        "maxAllowedD": "4.32"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "corridor-pillar-3",
+          "kind": "wall",
+          "x": 300.5,
+          "y": 2,
+          "right": 301.7
+        },
+        "to": {
+          "id": "corridor-throat",
+          "kind": "wall",
+          "x": 313,
+          "y": 7,
+          "left": 310.5
+        },
+        "dy": "5.00",
+        "gap": "8.80",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "VERY_TIGHT",
+        "from": {
+          "id": "corridor-floor-2",
+          "kind": "stone",
+          "x": 320,
+          "y": 0,
+          "right": 324
+        },
+        "to": {
+          "id": "corridor-floor-3",
+          "kind": "stone",
+          "x": 333,
+          "y": 0,
+          "left": 329.5
+        },
+        "dy": "0.00",
+        "gap": "5.50",
+        "maxAllowedD": "5.86"
+      },
+      {
+        "type": "VERY_TIGHT",
+        "from": {
+          "id": "room-entry",
+          "kind": "stone",
+          "x": 365,
+          "y": 0,
+          "right": 369
+        },
+        "to": {
+          "id": "room-rung",
+          "kind": "ledge",
+          "x": 374.5,
+          "y": 1.6,
+          "left": 373.5
+        },
+        "dy": "1.60",
+        "gap": "4.50",
+        "maxAllowedD": "4.73"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "room-s4",
+          "kind": "ledge",
+          "x": 465.5,
+          "y": 12.8,
+          "right": 466.7
+        },
+        "to": {
+          "id": "room-s7",
+          "kind": "crumble",
+          "x": 469,
+          "y": 21,
+          "left": 467.8
+        },
+        "dy": "8.20",
+        "gap": "1.10",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "room-d1",
+          "kind": "ledge",
+          "x": 477.5,
+          "y": 7.8,
+          "right": 478.7
+        },
+        "to": {
+          "id": "room-landing-4",
+          "kind": "ledge",
+          "x": 480.5,
+          "y": 11.4,
+          "left": 479.25
+        },
+        "dy": "3.60",
+        "gap": "0.55",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "VERY_TIGHT",
+        "from": {
+          "id": "knot-entry",
+          "kind": "stone",
+          "x": 485,
+          "y": 0,
+          "right": 489
+        },
+        "to": {
+          "id": "knot-slab",
+          "kind": "ledge",
+          "x": 495,
+          "y": 1.4,
+          "left": 493.4
+        },
+        "dy": "1.40",
+        "gap": "4.40",
+        "maxAllowedD": "4.91"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "knot-strand-a",
+          "kind": "clay",
+          "x": 512.5,
+          "y": 10.2,
+          "right": 513.6
+        },
+        "to": {
+          "id": "knot-fruit",
+          "kind": "dome",
+          "x": 523.25,
+          "y": 14.25,
+          "left": 521.25
+        },
+        "dy": "4.05",
+        "gap": "7.65",
+        "maxAllowedH": "2.58"
+      },
+      {
+        "type": "TOO_FAR",
+        "from": {
+          "id": "knot-crumb-2",
+          "kind": "crumble",
+          "x": 529.5,
+          "y": 5.2,
+          "right": 530.7
+        },
+        "to": {
+          "id": "knot-mobile",
+          "kind": "orbit",
+          "x": 535.9,
+          "y": 7.6,
+          "left": 534.6
+        },
+        "dy": "2.40",
+        "gap": "3.90",
+        "maxAllowedD": "3.70"
+      },
+      {
+        "type": "TOO_HIGH",
+        "from": {
+          "id": "knot-mobile",
+          "kind": "orbit",
+          "x": 535.9,
+          "y": 7.6,
+          "right": 537.1999999999999
+        },
+        "to": {
+          "id": "knot-stand-b",
+          "kind": "stone",
+          "x": 538.5,
+          "y": 10.2,
+          "left": 537.2
+        },
+        "dy": "2.60",
+        "gap": "0.00",
+        "maxAllowedH": "2.58"
+      }
+    ]
+  }
+]

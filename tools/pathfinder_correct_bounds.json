@@ -1,0 +1,434 @@
+[
+  {
+    "idx": 0,
+    "name": "The Sunbaked Canyon",
+    "short": "Sunbaked Canyon",
+    "totalWalkable": 78,
+    "reachableCount": 77,
+    "isGoalReachable": true,
+    "startPlat": {
+      "id": "start",
+      "x": -8,
+      "right": 10,
+      "y": 13
+    },
+    "goalPlat": {
+      "id": "bell-roof",
+      "x": 392,
+      "right": 416,
+      "y": 10.2
+    },
+    "furthestReached": {
+      "id": "bell-roof",
+      "x": 392,
+      "right": 416,
+      "y": 10.2
+    },
+    "firstUnreached": {
+      "id": "pocket-perch",
+      "x": 108.7,
+      "right": 111.3,
+      "y": 10.6,
+      "gapFromFurthest": -307.3,
+      "dyFromFurthest": 0.40000000000000036
+    },
+    "unreachableList": [
+      {
+        "id": "pocket-perch",
+        "x": 108.7,
+        "right": 111.3,
+        "y": 10.6,
+        "kind": "ledge"
+      }
+    ]
+  },
+  {
+    "idx": 1,
+    "name": "The Ember Caverns",
+    "short": "Ember Caverns",
+    "totalWalkable": 136,
+    "reachableCount": 127,
+    "isGoalReachable": true,
+    "startPlat": {
+      "id": "start",
+      "x": -8,
+      "right": 18,
+      "y": 0
+    },
+    "goalPlat": {
+      "id": "spill-goal",
+      "x": 356.7,
+      "right": 372.7,
+      "y": 6.7
+    },
+    "furthestReached": {
+      "id": "spill-goal",
+      "x": 356.7,
+      "right": 372.7,
+      "y": 6.7
+    },
+    "firstUnreached": {
+      "id": "clay-8",
+      "x": -8.5,
+      "right": 9.5,
+      "y": 14,
+      "gapFromFurthest": -381.2,
+      "dyFromFurthest": 7.3
+    },
+    "unreachableList": [
+      {
+        "id": "clay-8",
+        "x": -8.5,
+        "right": 9.5,
+        "y": 14,
+        "kind": "stone"
+      },
+      {
+        "id": "clay-11",
+        "x": 191.5,
+        "right": 195.5,
+        "y": 26.75,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-24",
+        "x": 286,
+        "right": 289,
+        "y": 12.75,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-26",
+        "x": 296,
+        "right": 305,
+        "y": 31.75,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-31",
+        "x": 305,
+        "right": 320.75,
+        "y": 31,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-25",
+        "x": 320.75,
+        "right": 324,
+        "y": 31,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-25-copy-1",
+        "x": 323.25,
+        "right": 325.75,
+        "y": 31,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-28-copy-1",
+        "x": 349,
+        "right": 353.75,
+        "y": 22.5,
+        "kind": "wall"
+      },
+      {
+        "id": "clay-28",
+        "x": 349.5,
+        "right": 352.75,
+        "y": 15.5,
+        "kind": "wall"
+      }
+    ]
+  },
+  {
+    "idx": 2,
+    "name": "Cerignola: La Città di Baldu — Tra Fosse Granarie e Duomo Tonti",
+    "short": "Cerignola",
+    "totalWalkable": 38,
+    "reachableCount": 38,
+    "isGoalReachable": true,
+    "startPlat": {
+      "id": "start",
+      "x": -8,
+      "right": 8,
+      "y": 13
+    },
+    "goalPlat": {
+      "id": "goal-duomo-tonti",
+      "x": 236.5,
+      "right": 258.5,
+      "y": 18.8
+    },
+    "furthestReached": {
+      "id": "goal-duomo-tonti",
+      "x": 236.5,
+      "right": 258.5,
+      "y": 18.8
+    },
+    "firstUnreached": null,
+    "unreachableList": []
+  },
+  {
+    "idx": 3,
+    "name": "The Breathing Wildwood",
+    "short": "Breathing Wildwood",
+    "totalWalkable": 107,
+    "reachableCount": 98,
+    "isGoalReachable": true,
+    "startPlat": {
+      "id": "start",
+      "x": -8,
+      "right": 8,
+      "y": 0
+    },
+    "goalPlat": {
+      "id": "mother-bell",
+      "x": 480,
+      "right": 496,
+      "y": 41
+    },
+    "furthestReached": {
+      "id": "mother-bell",
+      "x": 480,
+      "right": 496,
+      "y": 41
+    },
+    "firstUnreached": {
+      "id": "fd-ledge2",
+      "x": 167,
+      "right": 171,
+      "y": 37.2,
+      "gapFromFurthest": -329,
+      "dyFromFurthest": -3.799999999999997
+    },
+    "unreachableList": [
+      {
+        "id": "fd-ledge2",
+        "x": 167,
+        "right": 171,
+        "y": 37.2,
+        "kind": "ledge"
+      },
+      {
+        "id": "fd-grey",
+        "x": 173,
+        "right": 176.6,
+        "y": 35.8,
+        "kind": "crumble"
+      },
+      {
+        "id": "fd-shelf",
+        "x": 191.5,
+        "right": 196.5,
+        "y": 37.7,
+        "kind": "ledge"
+      },
+      {
+        "id": "fd-c2",
+        "x": 191.5,
+        "right": 193.7,
+        "y": 42.25,
+        "kind": "crumble"
+      },
+      {
+        "id": "fd-c1",
+        "x": 196.25,
+        "right": 198.85,
+        "y": 40,
+        "kind": "crumble"
+      },
+      {
+        "id": "fd-c2-copy-1",
+        "x": 196.75,
+        "right": 198.95,
+        "y": 44,
+        "kind": "crumble"
+      },
+      {
+        "id": "fd-crumb1",
+        "x": 199,
+        "right": 202.2,
+        "y": 35.6,
+        "kind": "crumble"
+      },
+      {
+        "id": "fd-perch",
+        "x": 200.75,
+        "right": 203.35,
+        "y": 46.25,
+        "kind": "ledge"
+      },
+      {
+        "id": "fd-crumb2",
+        "x": 203.4,
+        "right": 205.8,
+        "y": 32.6,
+        "kind": "crumble"
+      }
+    ]
+  },
+  {
+    "idx": 4,
+    "name": "The Hanging Quarter",
+    "short": "Hanging Quarter",
+    "totalWalkable": 71,
+    "reachableCount": 68,
+    "isGoalReachable": true,
+    "startPlat": {
+      "id": "start",
+      "x": -8,
+      "right": 10,
+      "y": 0
+    },
+    "goalPlat": {
+      "id": "sky-bell",
+      "x": 297.5,
+      "right": 319.5,
+      "y": 44.2
+    },
+    "furthestReached": {
+      "id": "sky-bell",
+      "x": 297.5,
+      "right": 319.5,
+      "y": 44.2
+    },
+    "firstUnreached": {
+      "id": "clay-4",
+      "x": 108.75,
+      "right": 111.75,
+      "y": 27.25,
+      "gapFromFurthest": -210.75,
+      "dyFromFurthest": -16.950000000000003
+    },
+    "unreachableList": [
+      {
+        "id": "clay-4",
+        "x": 108.75,
+        "right": 111.75,
+        "y": 27.25,
+        "kind": "crumble"
+      },
+      {
+        "id": "clay-3-copy-1",
+        "x": 114.83541265381143,
+        "right": 118.83541265381143,
+        "y": 31.137189707302728,
+        "kind": "orbit"
+      },
+      {
+        "id": "belfry-span",
+        "x": 295.6,
+        "right": 297.5,
+        "y": 48.5,
+        "kind": "clay"
+      }
+    ]
+  },
+  {
+    "idx": 5,
+    "name": "The Soft Dream",
+    "short": "Soft Dream",
+    "totalWalkable": 153,
+    "reachableCount": 143,
+    "isGoalReachable": true,
+    "startPlat": {
+      "id": "start",
+      "x": -8,
+      "right": 4,
+      "y": 0
+    },
+    "goalPlat": {
+      "id": "knot-wake",
+      "x": 577,
+      "right": 599,
+      "y": 0
+    },
+    "furthestReached": {
+      "id": "knot-wake",
+      "x": 577,
+      "right": 599,
+      "y": 0
+    },
+    "firstUnreached": {
+      "id": "folding-cast-lintel",
+      "x": 134.9,
+      "right": 136.1,
+      "y": 16,
+      "gapFromFurthest": -464.1,
+      "dyFromFurthest": 16
+    },
+    "unreachableList": [
+      {
+        "id": "folding-cast-lintel",
+        "x": 134.9,
+        "right": 136.1,
+        "y": 16,
+        "kind": "wall"
+      },
+      {
+        "id": "folding-ceiling",
+        "x": 195,
+        "right": 198,
+        "y": 11.2,
+        "kind": "clay"
+      },
+      {
+        "id": "folding-shelf",
+        "x": 201,
+        "right": 203.5,
+        "y": 6,
+        "kind": "ledge"
+      },
+      {
+        "id": "orchard-trunk",
+        "x": 250.25,
+        "right": 252.65,
+        "y": 16.25,
+        "kind": "wall"
+      },
+      {
+        "id": "corridor-throat",
+        "x": 313,
+        "right": 318,
+        "y": 7,
+        "kind": "wall"
+      },
+      {
+        "id": "corridor-squeeze",
+        "x": 356.8,
+        "right": 360.2,
+        "y": 11,
+        "kind": "wall"
+      },
+      {
+        "id": "room-doll-wall",
+        "x": 449,
+        "right": 450.2,
+        "y": 20,
+        "kind": "wall"
+      },
+      {
+        "id": "knot-strand-a",
+        "x": 512.5,
+        "right": 514.7,
+        "y": 10.2,
+        "kind": "clay"
+      },
+      {
+        "id": "knot-fruit",
+        "x": 523.25,
+        "right": 527.25,
+        "y": 14.25,
+        "kind": "dome"
+      },
+      {
+        "id": "knot-strand-b",
+        "x": 541.1,
+        "right": 543.5,
+        "y": 15.6,
+        "kind": "clay"
+      }
+    ]
+  }
+]

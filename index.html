@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#e64e1e">
   <meta name="description" content="BalduSlop Adventures: Un platform 3D d'avventura realizzato interamente in plastilina stop-motion. Gioca gratis nel browser su PC e mobile con Baldu!">
   <title>BalduSlop Adventures</title>
@@ -33,10 +33,17 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="BalduSlop Adventures">
   <link rel="preload" href="./bundle/logo-C8LjbK78.webp" as="image">
-  <script type="module" crossorigin src="./bundle/index-B9TPSTBI.js?v=20260930-all8levels-verified-v2"></script>
+  <script type="module" crossorigin src="./bundle/index-B9TPSTBI.js?v=20261004-aaa-release-v3"></script>
   <link rel="stylesheet" crossorigin href="./bundle/index-DjewJEKc.css">
 
   <style>
+    html, body {
+      touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
     /* Moral Box in BalduSlop */
     .augusta-moral-box {
       grid-column: 1 / 2;
